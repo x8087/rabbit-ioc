@@ -1,22 +1,22 @@
 namespace com 
 {
-    export abstract class JTAbstractTimer extends JTEventDispatcher implements JTITimerTask
+    export abstract class JTAbstractTimer extends JTEventDispatcher implements JTITimerTask, JTITimer
     {
-        private _delay:number = 0;
-        private _interval:number = 0;
-        private _totalCount:number = 0;
-        private _currentCount:number = 0;
+        protected _delay:number = 0;
+        protected _interval:number = 0;
+        protected _totalCount:number = 0;
+        protected _currentCount:number = 0;
         constructor(interval:number = 0, loop:number = 0)
         {
             super();
             this.setup(interval, loop);
         }
 
-        protected setup(interval:number, loop:number = 0):void
+        public setup(interval:number, loop:number = 0):void
         {
             this.reset();
-            this._interval = interval;
             this._totalCount = loop;
+            this._interval = interval;
         }
 
         public reset():void
@@ -55,8 +55,8 @@ namespace com
             }
             if (this._currentCount >= this._totalCount && this._totalCount != 0)
             {
-                    this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE);
                     this.stop();
+                    this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE);
             }
         }
 
@@ -88,6 +88,12 @@ namespace com
         public set interval(value:number)
         {
             this._interval = value;
+        }
+
+        recycle() 
+        {
+            this.removes();
+            this._currentCount = this._delay = this._interval = this._totalCount = 0;
         }
     }
 }

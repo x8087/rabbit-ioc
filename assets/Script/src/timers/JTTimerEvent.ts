@@ -4,6 +4,6 @@ namespace com
     {
         public static TIMER:string = "timer";
 
-        public static TIMER_COMPLETE:string = "timer_complete";
+        public static TIMER_COMPLETE:string = "timerComplete";
     }
 }
