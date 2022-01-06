@@ -2,10 +2,9 @@ namespace com
 {
     export class JTAverageTimer extends JTAbstractTimer
     {
-        constructor()
+        constructor(interval:number = 0, loop:number = 0)
         {
-            super();
+            super(interval, loop);
         }
-
     }
 }
