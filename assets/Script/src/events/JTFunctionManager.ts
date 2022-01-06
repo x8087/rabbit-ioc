@@ -98,7 +98,7 @@ namespace com
                     }
                 });
                 this._eventMap[key] = null;
-                delete this._eventMap[key]
+                delete this._eventMap[key];
             }
         }
 

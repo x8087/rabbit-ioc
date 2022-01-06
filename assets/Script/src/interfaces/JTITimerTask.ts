@@ -8,6 +8,8 @@ namespace com
 
         interval:number;
 
+        running:boolean;
+
         updateTick(tick:number):void;
 
     }

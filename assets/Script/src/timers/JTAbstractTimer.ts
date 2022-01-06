@@ -2,10 +2,11 @@ namespace com
 {
     export abstract class JTAbstractTimer extends JTEventDispatcher implements JTITimerTask, JTITimer
     {
-        protected _delay:number = 0;
+        protected _currentTick:number = 0;
         protected _interval:number = 0;
         protected _totalCount:number = 0;
         protected _currentCount:number = 0;
+        protected _running:boolean = false;
         constructor(interval:number = 0, loop:number = 0)
         {
             super();
@@ -26,37 +27,37 @@ namespace com
 
         public start():void
         {
-
+             this._running = true;
+             JTTimerTool.defaultTimer.addTimerTask(this);
         }
 
         public stop():void
         {
-
+            this._running = false;
         }
 
         public updateTick(tick:number):void
         {
-            this._delay += tick - this._interval; //叠加延迟
-            let delayCount:number = Math.floor(this._delay / this._interval);//取最小延迟次数
-            this._currentCount ++;
-            this.dispatchEvent(JTTimerEvent.TIMER);
-            if (delayCount > 0) //延迟次数
+            this._currentTick += tick; //叠加时间
+            let count:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
+            if (count > 0) //延迟次数
             {
-                this._delay -= this._interval * delayCount;
-                if (this._currentCount + delayCount >= this._totalCount && this._totalCount != 0)
+                let nowCount:number = this._currentCount + count;
+                if (nowCount >= this._totalCount && this._totalCount != 0)
                 {
-                    delayCount = this._totalCount - this._currentCount;
+                    count = this._totalCount - this._currentCount;
                 }
-                for (let i:number = 0; i < delayCount; i++)
+                for (let i:number = 0; i < count; i++)
                 {
                     this._currentCount ++;
+                    this._currentTick -= this._interval;
                     this.dispatchEvent(JTTimerEvent.TIMER);
                 }
             }
             if (this._currentCount >= this._totalCount && this._totalCount != 0)
             {
-                    this.stop();
-                    this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE);
+                this.stop();
+                this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE);
             }
         }
 
@@ -90,10 +91,15 @@ namespace com
             this._interval = value;
         }
 
+        public get running():boolean
+        {
+            return this._running;
+        }
+
         recycle() 
         {
             this.removes();
-            this._currentCount = this._delay = this._interval = this._totalCount = 0;
+            this._currentCount = this._currentTick = this._interval = this._totalCount = 0;
         }
     }
 }
