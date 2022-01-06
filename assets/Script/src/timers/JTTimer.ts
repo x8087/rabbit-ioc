@@ -19,7 +19,8 @@ namespace com
 
         public static put(timer:JTITimer):void
         {
-                this._pool.put(timer);
+            JTTimerTool.defaultTimer.removeTask(timer as any);
+            this._pool.put(timer as JTITimer);
         }
     }
 

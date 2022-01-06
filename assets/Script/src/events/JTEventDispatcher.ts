@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTEventDispatcher implements JTIPoolObject
+    export class JTEventDispatcher implements JTIPoolObject, JTIEventDispatcher
     {
         protected  _eventMap:Object = {}
         constructor()

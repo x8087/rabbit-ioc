@@ -51,24 +51,19 @@ namespace com
                 {
                     this._currentCount ++;
                     this._currentTick -= this._interval;
-                    this.dispatchEvent(JTTimerEvent.TIMER);
+                    this.dispatchEvent(JTTimerEvent.TIMER, this);
                 }
             }
             if (this._currentCount >= this._totalCount && this._totalCount != 0)
             {
                 this.stop();
-                this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE);
+                this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE, this);
             }
         }
 
         public get totalCount():number
         {
             return this._totalCount;
-        }
-
-        public set totalCount(value:number)
-        {
-            this._totalCount = value;
         }
 
         public get currentCount():number
@@ -100,6 +95,7 @@ namespace com
         {
             this.removes();
             this._currentCount = this._currentTick = this._interval = this._totalCount = 0;
+            this._running = false;
         }
     }
 }

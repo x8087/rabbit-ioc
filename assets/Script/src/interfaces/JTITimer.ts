@@ -1,12 +1,14 @@
 namespace com 
 {
-    export interface JTITimer extends JTIPoolObject
+    export interface JTITimer extends JTIPoolObject, JTIEventDispatcher
     {
         currentCount:number;
 
         totalCount:number;
 
         interval:number;
+
+        running:boolean;
 
         start():void;
 

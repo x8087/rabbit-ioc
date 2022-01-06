@@ -37,11 +37,12 @@ namespace com
             if (this._pause) return;
             let nowTime:number = JTTimeUtils.runnbleTime;
             let tick:number = nowTime - this._currentTime;
-            this.syncTaskTick(tick);
+            this.syncTasksTick(tick);
             this.updateTasks();
+            this._currentTime = nowTime;
         }
 
-        protected syncTaskTick(tick:number):void
+        protected syncTasksTick(tick:number):void
         {
             let total:number = this._tasks.length;
             for (let i:number = 0; i < total; i++)
