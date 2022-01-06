@@ -1,0 +1,62 @@
+// {
+//   "compilerOptions": {
+//     "module": "amd",
+//     "lib": [ "es2015", "es2017", "dom"  ],
+//     "target": "es6",
+//     "skipLibCheck": true,
+//     "outFile": "./common.js",
+//     "declaration": true,
+//     "sourceMap": false,
+//     "removeComments": true
+//   },
+//   "include": [
+//     "assets/script/src"
+//   ],
+//   "exclude": [
+//     "node_modules"
+//   ]
+// }
+
+{
+  "compilerOptions": {
+    "module": "amd",
+    "lib": [ "dom", "es5", "es2015.promise" ],
+    "target": "es5",
+    "skipLibCheck": true,
+    "outFile": "./common.js",
+    "declaration": true,
+    "sourceMap": false,
+    "removeComments": true
+  },
+  "include": [
+    "assets/script/src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+// {
+//   "compilerOptions": {
+//     "module": "amd",
+//     "lib": [ "es2015", "es2017", "dom"  ],
+//     "target": "es6",
+//     "skipLibCheck": true,
+//     "outFile": "./common.js",
+//     "declaration": true,
+//     "sourceMap": false,
+//     "removeComments": true,
+//     "experimentalDecorators": true,
+//     "forceConsistentCasingInFileNames": true
+//   },
+//   "include": [
+//     "**/*",
+//     "assets/script/src"
+//   ],
+//   "exclude": [
+//     "node_modules"
+//   ]
+// ,
+//   "files": [
+//     "libs/Bar.ts",
+// ]
+// }
