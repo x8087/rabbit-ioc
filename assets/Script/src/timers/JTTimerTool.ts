@@ -78,5 +78,13 @@ namespace com
             if (index != -1) return;
             this._tasks.splice(index, 1);
         }
+
+        public put(task:JTITimerTask):void
+        {
+            let index:number = this._tasks.indexOf(task);
+            if (index != -1) return;
+            this._tasks.splice(index, 1);
+            JTPool.instance(task["constructor"]).put(task as any);
+        }
     }
 }
