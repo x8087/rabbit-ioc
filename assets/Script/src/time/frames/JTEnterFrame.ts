@@ -1,7 +1,7 @@
 namespace com 
 {
     //传统帧事件
-    export class JTEnterFrame extends JTTaskTimer implements JTIFrameTimer
+    export class JTEnterFrame extends JTTaskTimer implements JTIEnterFrame
     {
         protected _frameRate:number = 0;
         protected _loop:number = 0;

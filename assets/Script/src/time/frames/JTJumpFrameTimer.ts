@@ -3,9 +3,9 @@ namespace com
     export class JTJumpFrame extends JTEnterFrame
     {
         private _delayFrames:number = 0;
-        constructor(frameRate:number = 60)
+        constructor(frameRate:number, totalFrames:number, loop:number = 0)
         {
-            super(1000 / frameRate, 0, 0);
+            super(frameRate, totalFrames, loop);
         }
 
         public get delaysFrame():number
@@ -75,11 +75,10 @@ namespace com
             }
         }
       
-        private static _pool:JTIPool = JTPool.instance(JTJumpFrame);
 
         public static create(interval:number, loop:number):JTITimer
         {
-            let timer:JTITimer = this._pool.get() as JTITimer;
+            let timer:JTITimer = JTPool.instance(JTJumpFrame).get() as JTITimer;
             timer.setup(interval, loop);
             return timer;
         } 
@@ -87,7 +86,7 @@ namespace com
         public static put(timer:JTITimer):void
         {
             JTTimerTool.defaultTimer.removeTask(timer as any);
-            this._pool.put(timer as JTITimer);
+            JTPool.instance(JTJumpFrame).put(timer as JTITimer);
         }
     }
 

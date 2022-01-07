@@ -1,6 +1,6 @@
 namespace com 
 {
-    export interface JTIFrameTimer extends JTIPoolObject, JTIEventDispatcher
+    export interface JTIEnterFrame extends JTIPoolObject, JTIEventDispatcher
     {
         currentFrame:number;
 
@@ -21,6 +21,5 @@ namespace com
         stop():void;
 
         reset():void;
-
     }
 }

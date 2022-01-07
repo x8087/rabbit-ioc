@@ -30,6 +30,6 @@ gulp.task("copy", () => {
 gulp.task('build', gulp.series(
     gulp.parallel('buildJs'),
     gulp.parallel('buildDts'),
-    gulp.parallel('copy')
+    // gulp.parallel('copy')
 )
 )

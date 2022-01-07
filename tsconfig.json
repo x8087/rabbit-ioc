@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": [ "es2015", "es2017", "dom" ],
+    "module": "amd",
+    "lib": [ "dom", "es5", "es2015.promise" ],
     "target": "es5",
-    "experimentalDecorators": true,
     "skipLibCheck": true,
-    "outDir": "temp/vscode-dist",
-    "forceConsistentCasingInFileNames": true
+    "outFile": "./common.js",
+    "declaration": true,
+    "sourceMap": false,
+    "removeComments": true
   },
+  "include": [
+    "assets/script/src"
+  ],
   "exclude": [
-    "node_modules",
-    "library",
-    "local",
-    "temp",
-    "build",
-    "settings"
+    "node_modules"
   ]
 }
