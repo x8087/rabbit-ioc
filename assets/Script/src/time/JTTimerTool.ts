@@ -15,6 +15,9 @@ namespace com
         public static NORMAL_RATE:string = "normal_rate";
         public static SLOWY_RATE:string = "slowy_rate";
 
+        public static FAST_FRAME_RATE:number = 120;
+        public static NORMAL_FRAME_RATE:number = 60;
+        public static SLOWY_FRAME_RATE:number = 30;
 
         constructor()
         {
@@ -31,17 +34,17 @@ namespace com
             {
                 case this.FAST_RATE:
                 {
-                    this._frameRate = 120;
+                    this._frameRate = this.FAST_FRAME_RATE;
                     break;
                 }
                 case this.NORMAL_RATE:
                 {
-                    this._frameRate = 60;
+                    this._frameRate = this.NORMAL_FRAME_RATE;
                     break;
                 }
                 case this.SLOWY_RATE:
                 {
-                    this._frameRate = 30;
+                    this._frameRate = this.SLOWY_FRAME_RATE;
                     break;
                 }
             }
