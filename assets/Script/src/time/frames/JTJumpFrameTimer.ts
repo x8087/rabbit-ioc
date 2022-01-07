@@ -16,17 +16,62 @@ namespace com
         public updateTick(tick:number):void
         {
             this._currentTick += tick; //叠加时间
-            let frame:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
-            if (frame > 0) //延迟次数
+            let times:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
+            this._delayFrames = 0;
+            if (times > 1) //延迟帧数逻辑处理
             {
-                let nowFrames:number = this._currentTimes + frame;
-                if (nowFrames >= this._totalTimes && this._totalTimes != 0)
+                this._delayFrames = times - 1;
+                let nowTimes:number = this._currentTimes + times;
+                let delayLoops:number = Math.floor(nowTimes / this._totalTimes);
+                this._loopTimes += delayLoops;
+                if (this._loop == 0) this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
+                else
                 {
-                    frame = this._totalTimes - this._currentTimes;
+                    if (this._loopTimes >= this._loop)
+                    {
+                        this._loopTimes = this._loop;
+                        this._currentTimes = this._totalTimes;//当循环次数为0是，跳转到最后一帧数
+                    }
+                    else  this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
                 }
-                this._currentTimes += frame;
-                this._currentTick -= this._interval * frame;
+                this.dispatchEvent(JTTimeEvent.JUMP_FRAME, this);
                 this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
+                delayLoops >= 1 && this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
+                if (this._loopTimes >= this._loop && this._loop != 0)
+                {
+                    this._currentTick = 0;
+                    this._running = false;
+                    this.dispatchEvent(JTTimeEvent.ENTER_COMPLETE, this);
+                }
+                else
+                {
+                    this._currentTick = this._currentTick % this._interval;//重新更新时间节点
+                }
+            }   
+            else if (times == 1) //正常帧数无需跳帧数
+            {
+                this._currentTimes ++;
+                this._currentTick -= this._interval;
+                this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
+                if (this._currentTimes >= this._totalTimes)
+                {
+                    this._loopTimes ++;
+                    if (this._loop == 0)this._currentTimes = 0;
+                    else
+                    {
+                        if (this._loopTimes >= this._loop && this._loop != 0)
+                        {
+                            this._running = false;
+                            this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
+                            this.dispatchEvent(JTTimeEvent.ENTER_COMPLETE, this);
+                        }
+                        else
+                        {
+                            this._currentTimes = 0;
+                            this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
+                        }
+                    }
+                    }
             }
         }
       

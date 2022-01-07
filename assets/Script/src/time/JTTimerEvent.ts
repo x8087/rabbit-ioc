@@ -8,6 +8,10 @@ namespace com
 
         public static ENTER_FRAME:string = "enterFrame";
 
+        public static ENTER_COMPLETE:string = "enterComplete";
+
+        public static ENTER_LAST_FRAME:string = "enterLastFrame";
+
         public static JUMP_FRAME:string = "jumpFrame";
     }
 }

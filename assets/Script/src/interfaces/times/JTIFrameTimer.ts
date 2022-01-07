@@ -12,7 +12,11 @@ namespace com
 
         loop:number;
 
-        play(frameRate:number, loop:number):void;
+        currentLoop:number;
+
+        setup(frameRate:number, totalFrames:number, loop:number):void;
+
+        play(frameRate:number, totalFrames:number, loop:number):void;
 
         stop():void;
 

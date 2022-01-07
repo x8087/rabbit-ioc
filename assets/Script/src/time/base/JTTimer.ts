@@ -14,11 +14,6 @@ namespace com
             this._interval = interval;
         }
 
-        public reset():void
-        {
-            this._currentTimes = 0;
-        }
-
         public start():void
         {
              this._running = true;
