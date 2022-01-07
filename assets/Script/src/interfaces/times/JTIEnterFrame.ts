@@ -14,9 +14,9 @@ namespace com
 
         currentLoop:number;
 
-        setup(frameRate:number, totalFrames:number, loop:number):void;
+        setup(totalFrames:number, loop:number, frameRate:number):void;
 
-        play(frameRate:number, totalFrames:number, loop:number):void;
+        play(totalFrames:number, loop:number, frameRate:number):void;
 
         stop():void;
 

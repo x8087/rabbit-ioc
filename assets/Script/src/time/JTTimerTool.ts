@@ -8,6 +8,13 @@ namespace com
         private _pause:boolean = false;
         private _tasks:JTITaskTimer[] = null;
         private _currentTime:number = 0;
+        private static _frameRate:number = 0;
+        private static _frameRateTime:number = 0;
+
+        public static FAST_RATE:string = "fast_rate";
+        public static NORMAL_RATE:string = "normal_rate";
+        public static SLOWY_RATE:string = "slowy_rate";
+
 
         constructor()
         {
@@ -15,11 +22,43 @@ namespace com
         }
 
 
-        public static initialize():void
+        public static launch(rate:string = "normal_rate"):void
         {
             this.logicTimer = new JTTimerTool();
             this.defaultTimer = new JTTimerTool();
             this.animationTimer = new JTTimerTool();
+            switch(rate)
+            {
+                case this.FAST_RATE:
+                {
+                    this._frameRate = 120;
+                    break;
+                }
+                case this.NORMAL_RATE:
+                {
+                    this._frameRate = 60;
+                    break;
+                }
+                case this.SLOWY_RATE:
+                {
+                    this._frameRate = 30;
+                    break;
+                }
+            }
+        }
+
+        public static get frameRate():number
+        {
+             return this._frameRate;
+        }
+
+        public static get frameRateTime():number
+        {
+            if (this._frameRateTime == 0)
+            {
+                this._frameRateTime = 1000 / this._frameRate;
+            }
+            return this._frameRateTime;
         }
 
         public stop():void

@@ -6,10 +6,9 @@ namespace com
         protected _frameRate:number = 0;
         protected _loop:number = 0;
         protected _loopTimes:number = 0;
-        constructor(frameRate:number, totalFrames:number, loop:number = 0)
+        constructor()
         {
-            super(1000 / frameRate, totalFrames);
-            this.setup(frameRate, totalFrames, loop);
+            super(0, 0);
         }
 
         public get loop():number
@@ -22,7 +21,7 @@ namespace com
             return this._frameRate;
         }
 
-        public setup(frameRate:number, totalFrames:number, loop:number = 1):void
+        public setup(totalFrames:number, loop:number = 0, frameRate:number = 60):void
         {
             this._loopTimes = 0;
             this._loop = loop;
@@ -31,7 +30,7 @@ namespace com
             this._interval = 1000 / frameRate;
         }
 
-        public play(frameRate:number, totalFrames:number, loop:number = 1):void
+        public play(totalFrames:number, loop:number = 0, frameRate:number = 60):void
         {
             this._running = true;
             this.setup(frameRate, totalFrames, loop);
