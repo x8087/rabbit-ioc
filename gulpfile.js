@@ -4,6 +4,7 @@ const minify = require('gulp-minify');
 const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json');
 const inject = require('gulp-inject-string');
+const babel = require("gulp-babel");
 
 gulp.task('buildJs', () => {
     return tsProject.src()
@@ -11,6 +12,7 @@ gulp.task('buildJs', () => {
         .js.pipe(inject.replace('var com;', ''))
         .pipe(inject.prepend('window.com = {};\nwindow.c = window.com;\n'))
         .pipe(inject.replace('var __extends', 'window.__extends'))
+        // .pipe(babel())
         // .pipe(minify({ ext: { min: ".min.js" } }))
         .pipe(gulp.dest('D:/IMChats/IMClient/IMChat/assets/Script/libs'));
 })

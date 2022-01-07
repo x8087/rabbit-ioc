@@ -33,7 +33,7 @@ namespace com
         public play(totalFrames:number, loop:number = 0, frameRate:number = 60):void
         {
             this._running = true;
-            this.setup(frameRate, totalFrames, loop);
+            this.setup(totalFrames, loop, frameRate);
             JTTimerTool.animationTimer.addTask(this);//加入到动画对列里
         }
 

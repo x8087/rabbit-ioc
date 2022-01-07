@@ -5,5 +5,7 @@ namespace com
        frames:any[];
         
        createFrames:JTCommand;
+
+       currentItem:any;
     }
 }

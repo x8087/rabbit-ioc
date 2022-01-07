@@ -1,11 +1,12 @@
 namespace com
 {
-    export class JTLogger
+    export class JTLogger 
     {
         private static LOG_INFO:string = "[INFO] :";
         private static LOG_ASSET:string = "[ASSET] :";
         private static LOG_DEBUG:string = "[DEBUG] :";
         private static LOG_ERROR:string = "[ERROR] :";
+
         public static info(...msgs):void
         {
             let content:string = "";
