@@ -1,13 +1,21 @@
 namespace com 
 {
     //
-    export class JTScheduleTimer extends JTAbstractTimer
+    export class JTScheduleTimer extends JTTimeTask
     {
         private _dataList:any[] = null;
         constructor(interval:number = 0, dataList:any[])
         {
             super(interval, dataList.length);
             this._dataList = dataList;
+        }
+
+        
+        public setup(interval:number):void
+        {
+            this.reset();
+            this._totalCount = this._dataList.length;
+            this._interval = interval;
         }
 
         public get currentItem():any

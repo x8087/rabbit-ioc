@@ -3,8 +3,10 @@ namespace com
     export class JTTimerTool
     {
         public static defaultTimer:JTTimerTool = null;
+        public static animationTimer:JTTimerTool = null;
+        public static logicTimer:JTTimerTool = null;
         private _pause:boolean = false;
-        private _tasks:JTITimerTask[] = null;
+        private _tasks:JTITimeTask[] = null;
         private _currentTime:number = 0;
 
         constructor()
@@ -16,12 +18,21 @@ namespace com
         public static initialize():void
         {
             this.defaultTimer = new JTTimerTool();
+            this.animationTimer = new JTTimerTool();
+            this.logicTimer = new JTTimerTool();
         }
 
         public stop():void
         {
             this._pause = true;
             this._currentTime = 0;
+        }
+
+        public static actives():void
+        {
+            this.defaultTimer.active();
+            this.animationTimer.active();
+            this.logicTimer.active();
         }
 
         /**
@@ -47,7 +58,7 @@ namespace com
             let total:number = this._tasks.length;
             for (let i:number = 0; i < total; i++)
             {
-                let task:JTITimerTask = this._tasks[i];
+                let task:JTITimeTask = this._tasks[i];
                 task.running && task.updateTick(tick);
             }
         }
@@ -56,7 +67,7 @@ namespace com
         {
             for (let i:number = 0; i < this._tasks.length; i++)
             {
-                let task:JTITimerTask = this._tasks[i];
+                let task:JTITimeTask = this._tasks[i];
                 if (!task.running)
                 {
                     this._tasks.splice(i, 1);
@@ -65,21 +76,21 @@ namespace com
             }
         }
 
-        public addTimerTask(task:JTITimerTask):void
+        public addTimerTask(task:JTITimeTask):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;
             this._tasks.push(task);
         }
 
-        public removeTask(task:JTITimerTask):void
+        public removeTask(task:JTITimeTask):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;
             this._tasks.splice(index, 1);
         }
 
-        public put(task:JTITimerTask):void
+        public put(task:JTITimeTask):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;

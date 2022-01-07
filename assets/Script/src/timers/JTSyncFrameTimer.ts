@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTSyncFrameTimer extends JTAbstractTimer
+    export class JTSyncFrameTimer extends JTTimeTask
     {
         constructor(interval:number = 0, loop:number = 0)
         {

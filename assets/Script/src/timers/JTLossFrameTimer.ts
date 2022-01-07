@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTLossFrameTimer extends JTAbstractTimer
+    export class JTLossFrameTimer extends JTTimeTask
     {
         constructor(interval:number = 0, loop:number = 0)
         {

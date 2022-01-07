@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTOptimizeTimer extends JTAbstractTimer
+    export class JTOptimizeTimer extends JTTimeTask
     {
         constructor(interval:number = 0, loop:number = 0)
         {

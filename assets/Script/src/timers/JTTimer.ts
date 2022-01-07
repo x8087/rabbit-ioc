@@ -1,12 +1,28 @@
 namespace com 
 {
-    export class JTTimer extends JTAbstractTimer
+    export class JTTimer extends JTTimeTask implements JTITimer
     {
         constructor(interval:number = 0, loop:number = 0)
         {
-            super();
-            this.setup(interval, loop);
+            super(interval, loop);
         }
+
+        public reset():void
+        {
+            this._currentCount = 0;
+        }
+
+        public start():void
+        {
+             this._running = true;
+             JTTimerTool.defaultTimer.addTimerTask(this);
+        }
+
+        public stop():void
+        {
+            this._running = false;
+        }
+
       
         private static _pool:JTIPool = JTPool.instance(JTTimer);
 

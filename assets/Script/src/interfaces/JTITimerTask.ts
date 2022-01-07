@@ -1,6 +1,6 @@
 namespace com 
 {
-    export interface JTITimerTask  
+    export interface JTITimeTask  
     {
         updateTick(tick:number):void;
         running:boolean;
