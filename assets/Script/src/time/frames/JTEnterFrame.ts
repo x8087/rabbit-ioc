@@ -4,10 +4,18 @@ namespace com
     export class JTEnterFrame extends JTTaskTimer implements JTIFrameTimer
     {
         private _frameRate:number = 0;
-        constructor(frameRate:number = 0)
+        private _loop:number = 0;
+        constructor(frameRate:number, totalFrames:number, loop:number = 0)
         {
             super(1000 / frameRate, 0);
+            this._loop = loop;
+            this._totalTimes = totalFrames;
             this._frameRate = frameRate;
+        }
+
+        public get loop():number
+        {
+            return this._loop;
         }
 
         public get frameRate():number
@@ -15,9 +23,18 @@ namespace com
             return this._frameRate;
         }
 
-        public play():void
+        public setup(frameRate:number, totalFrames:number, loop:number = 0):void
+        {
+            this._loop = loop;
+            this._frameRate = frameRate;
+            this._totalTimes = totalFrames;
+            this._interval = 1000 / 60;
+        }
+
+        public play(frameRate:number, totalFrames:number, loop:number = 0):void
         {
             this._running = true;
+            this.setup(frameRate, totalFrames, loop);
             JTTimerTool.animationTimer.addTask(this);//加入到动画对列里
         }
 

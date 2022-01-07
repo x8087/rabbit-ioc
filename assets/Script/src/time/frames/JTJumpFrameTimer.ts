@@ -5,7 +5,7 @@ namespace com
         private _delayFrames:number = 0;
         constructor(frameRate:number = 60)
         {
-            super(1000 / frameRate);
+            super(1000 / frameRate, 0, 0);
         }
 
         public get delaysFrame():number

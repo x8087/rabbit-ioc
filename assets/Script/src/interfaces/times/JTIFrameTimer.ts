@@ -10,6 +10,8 @@ namespace com
 
         running:boolean;
 
+        loop:number;
+
         play(frameRate:number, loop:number):void;
 
         stop():void;
