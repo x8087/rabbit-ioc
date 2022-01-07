@@ -1,7 +1,6 @@
 namespace com 
 {
-    //
-    export class JTScheduleTimer extends JTTimeTask
+    export class JTScheduleTimer extends JTTimer implements JTIScheduleTimer
     {
         private _dataList:any[] = null;
         constructor(interval:number = 0, dataList:any[])
@@ -14,7 +13,7 @@ namespace com
         public setup(interval:number):void
         {
             this.reset();
-            this._totalCount = this._dataList.length;
+            this._totalTimes = this._dataList.length;
             this._interval = interval;
         }
 
@@ -32,12 +31,10 @@ namespace com
             super.recycle();
             this._dataList = null;
         }
-
-        private static _pool:JTIPool = JTPool.instance(JTScheduleTimer);
-
-        public static create(interval:number, loop:number):JTITimer
+ 
+        public static create(interval:number, loop:number):JTIScheduleTimer
         {
-            let timer:JTITimer = this._pool.get() as JTITimer;
+            let timer:JTIScheduleTimer = JTPool.instance(JTScheduleTimer).get() as JTIScheduleTimer;
             timer.setup(interval, loop);
             return timer;
         } 
@@ -45,7 +42,7 @@ namespace com
         public static put(timer:JTITimer):void
         {
             JTTimerTool.defaultTimer.removeTask(timer as any);
-            this._pool.put(timer as JTITimer);
+            JTPool.instance(JTScheduleTimer).put(timer as JTScheduleTimer);
         }
     }
 }

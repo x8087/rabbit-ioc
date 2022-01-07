@@ -6,7 +6,7 @@ namespace com
         public static animationTimer:JTTimerTool = null;
         public static logicTimer:JTTimerTool = null;
         private _pause:boolean = false;
-        private _tasks:JTITimeTask[] = null;
+        private _tasks:JTITaskTimer[] = null;
         private _currentTime:number = 0;
 
         constructor()
@@ -17,9 +17,9 @@ namespace com
 
         public static initialize():void
         {
+            this.logicTimer = new JTTimerTool();
             this.defaultTimer = new JTTimerTool();
             this.animationTimer = new JTTimerTool();
-            this.logicTimer = new JTTimerTool();
         }
 
         public stop():void
@@ -58,7 +58,7 @@ namespace com
             let total:number = this._tasks.length;
             for (let i:number = 0; i < total; i++)
             {
-                let task:JTITimeTask = this._tasks[i];
+                let task:JTITaskTimer = this._tasks[i];
                 task.running && task.updateTick(tick);
             }
         }
@@ -67,7 +67,7 @@ namespace com
         {
             for (let i:number = 0; i < this._tasks.length; i++)
             {
-                let task:JTITimeTask = this._tasks[i];
+                let task:JTITaskTimer = this._tasks[i];
                 if (!task.running)
                 {
                     this._tasks.splice(i, 1);
@@ -76,21 +76,21 @@ namespace com
             }
         }
 
-        public addTimerTask(task:JTITimeTask):void
+        public addTask(task:JTITaskTimer):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;
             this._tasks.push(task);
         }
 
-        public removeTask(task:JTITimeTask):void
+        public removeTask(task:JTITaskTimer):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;
             this._tasks.splice(index, 1);
         }
 
-        public put(task:JTITimeTask):void
+        public put(task:JTITaskTimer):void
         {
             let index:number = this._tasks.indexOf(task);
             if (index != -1) return;

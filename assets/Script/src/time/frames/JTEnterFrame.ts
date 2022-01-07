@@ -1,12 +1,12 @@
 namespace com 
 {
-    export class JTFrameTimer extends JTTimeTask
+    //传统帧事件
+    export class JTEnterFrame extends JTTaskTimer implements JTIFrameTimer
     {
         private _frameRate:number = 0;
-
-        constructor(frameRate:number = 0, loop:number = 0)
+        constructor(frameRate:number = 0)
         {
-            super(1000 / frameRate, loop);
+            super(1000 / frameRate, 0);
             this._frameRate = frameRate;
         }
 
@@ -18,7 +18,7 @@ namespace com
         public play():void
         {
             this._running = true;
-            JTTimerTool.animationTimer.addTimerTask(this);
+            JTTimerTool.animationTimer.addTask(this);//加入到动画对列里
         }
 
         public stop():void
@@ -31,28 +31,32 @@ namespace com
             this._running = false; 
         }
 
+        public get currentFrame():number
+        {
+            return this._currentTimes;
+        }
+
+        public get totalFrame():number
+        {
+            return this._totalTimes;
+        }
+
         public updateTick(tick:number):void
         {
             this._currentTick += tick; //叠加时间
             let count:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
             if (count > 0) //延迟次数
             {
-                let nowCount:number = this._currentCount + count;
-                if (nowCount >= this._totalCount && this._totalCount != 0)
-                {
-                    count = this._totalCount - this._currentCount;
-                }
                 for (let i:number = 0; i < count; i++)
                 {
-                    this._currentCount ++;
+                    this._currentTimes ++;
                     this._currentTick -= this._interval;
-                    this.dispatchEvent(JTTimerEvent.TIMER, this);
+                    this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
                 }
             }
-            if (this._currentCount >= this._totalCount && this._totalCount != 0)
+            if (this._currentTimes >= this._totalTimes && this._totalTimes != 0)
             {
-                this.stop();
-                this.dispatchEvent(JTTimerEvent.TIMER_COMPLETE, this);
+                 this._currentTimes = 0;
             }
         }
       

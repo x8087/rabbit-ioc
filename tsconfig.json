@@ -1,62 +1,19 @@
-// {
-//   "compilerOptions": {
-//     "module": "amd",
-//     "lib": [ "es2015", "es2017", "dom"  ],
-//     "target": "es6",
-//     "skipLibCheck": true,
-//     "outFile": "./common.js",
-//     "declaration": true,
-//     "sourceMap": false,
-//     "removeComments": true
-//   },
-//   "include": [
-//     "assets/script/src"
-//   ],
-//   "exclude": [
-//     "node_modules"
-//   ]
-// }
-
 {
   "compilerOptions": {
-    "module": "amd",
-    "lib": [ "dom", "es5", "es2015.promise" ],
+    "module": "commonjs",
+    "lib": [ "es2015", "es2017", "dom" ],
     "target": "es5",
+    "experimentalDecorators": true,
     "skipLibCheck": true,
-    "outFile": "./common.js",
-    "declaration": true,
-    "sourceMap": false,
-    "removeComments": true
+    "outDir": "temp/vscode-dist",
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "assets/script/src"
-  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "library",
+    "local",
+    "temp",
+    "build",
+    "settings"
   ]
 }
-// {
-//   "compilerOptions": {
-//     "module": "amd",
-//     "lib": [ "es2015", "es2017", "dom"  ],
-//     "target": "es6",
-//     "skipLibCheck": true,
-//     "outFile": "./common.js",
-//     "declaration": true,
-//     "sourceMap": false,
-//     "removeComments": true,
-//     "experimentalDecorators": true,
-//     "forceConsistentCasingInFileNames": true
-//   },
-//   "include": [
-//     "**/*",
-//     "assets/script/src"
-//   ],
-//   "exclude": [
-//     "node_modules"
-//   ]
-// ,
-//   "files": [
-//     "libs/Bar.ts",
-// ]
-// }

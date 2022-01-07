@@ -1,11 +1,10 @@
 namespace com 
 {
-    export class JTLossFrameTimer extends JTTimeTask
+    export class JTLossFrameTimer extends JTEnterFrame
     {
         constructor(interval:number = 0, loop:number = 0)
         {
-            super();
-            this.setup(interval, loop);
+            super(interval, loop);
         }
       
         private static _pool:JTIPool = JTPool.instance(JTLossFrameTimer);
