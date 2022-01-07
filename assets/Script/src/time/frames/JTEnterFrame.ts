@@ -107,17 +107,16 @@ namespace com
             }
         }
 
-        public static create(frameRate:number, totalFrames:number, loop:number):JTITimer
+        public static create():JTIEnterFrame
         {
-            let timer:JTITimer = JTPool.instance(JTEnterFrame).get() as JTITimer;
-            timer.setup(frameRate, loop);
+            let timer:JTIEnterFrame = JTPool.instance(JTEnterFrame).get() as JTIEnterFrame;
             return timer;
         } 
 
-        public static put(timer:JTITimer):void
+        public static put(timer:JTIEnterFrame):void
         {
             JTTimerTool.defaultTimer.removeTask(timer as any);
-            JTPool.instance(JTEnterFrame).put(timer as JTITimer);
+            JTPool.instance(JTEnterFrame).put(timer as JTIEnterFrame);
         }
     }
 

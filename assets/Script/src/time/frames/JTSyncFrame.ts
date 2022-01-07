@@ -1,30 +1,60 @@
 namespace com 
 {
-    export class JTJumpFrame extends JTEnterFrame
+    /***
+     * 跳帧-又称帧同步
+     * 不管系统是否出现延迟，使用JTSyncFrame都将算出最新动画帧数索引
+        let syncFrame:c.JTISyncFrame = c.JTSyncFrame.create();
+        syncFrame.addEventListener(c.JTTimeEvent.ENTER_FRAME, this.onEnterFrameHandler, this);
+        syncFrame.addEventListener(c.JTTimeEvent.SYNC_FRAME, this.onSyncFrame, this);
+        syncFrame.addEventListener(c.JTTimeEvent.ENTER_LAST_FRAME, this.onEnterFrameHandler, this);
+        syncFrame.addEventListener(c.JTTimeEvent.ENTER_COMPLETE, this.onEnterFrameHandler, this);
+        syncFrame.play(10, 10, 0);
+   }
+
+   protected onSyncFrame(enterFrame:c.JTISyncFrame): void
+   {
+       c.JTLogger.info("jumpFrame for : " + enterFrame.jumpFrame);
+   }
+    
+
+    protected onEnterFrameHandler(enterFrame:c.JTIEnterFrame): void
     {
-        private _delayFrames:number = 0;
+        c.JTLogger.info("currentFrame for : " + enterFrame.currentFrame);
+    }
+
+        
+     ***/
+    export class JTSyncFrame extends JTEnterFrame implements JTISyncFrame
+    {
+        private _jumpFrame:number = 0;
         constructor(frameRate:number, totalFrames:number, loop:number = 0)
         {
             super(frameRate, totalFrames, loop);
         }
 
-        public get delaysFrame():number
+        /**
+         * 获取当前跳了多帧数
+         */
+        public get jumpFrame():number
         {
-             return this._delayFrames;
+             return this._jumpFrame;
         }
 
         public updateTick(tick:number):void
         {
             this._currentTick += tick; //叠加时间
             let times:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
-            this._delayFrames = 0;
+            this._jumpFrame = 0;
             if (times > 1) //延迟帧数逻辑处理
             {
-                this._delayFrames = times - 1;
+                this._jumpFrame = times - 1;
                 let nowTimes:number = this._currentTimes + times;
                 let delayLoops:number = Math.floor(nowTimes / this._totalTimes);
                 this._loopTimes += delayLoops;
-                if (this._loop == 0) this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
+                if (this._loop == 0) 
+                {
+                    this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
+                }
                 else
                 {
                     if (this._loopTimes >= this._loop)
@@ -34,7 +64,7 @@ namespace com
                     }
                     else  this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
                 }
-                this.dispatchEvent(JTTimeEvent.JUMP_FRAME, this);
+                this.dispatchEvent(JTTimeEvent.SYNC_FRAME, this);
                 this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
                 delayLoops >= 1 && this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
                 if (this._loopTimes >= this._loop && this._loop != 0)
@@ -71,22 +101,21 @@ namespace com
                             this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
                         }
                     }
-                    }
+                }
             }
         }
       
 
-        public static create(interval:number, loop:number):JTITimer
+        public static create():JTISyncFrame
         {
-            let timer:JTITimer = JTPool.instance(JTJumpFrame).get() as JTITimer;
-            timer.setup(interval, loop);
+            let timer:JTISyncFrame = JTPool.instance(JTSyncFrame).get() as JTISyncFrame;
             return timer;
         } 
 
-        public static put(timer:JTITimer):void
+        public static put(timer:JTISyncFrame):void
         {
             JTTimerTool.defaultTimer.removeTask(timer as any);
-            JTPool.instance(JTJumpFrame).put(timer as JTITimer);
+            JTPool.instance(JTSyncFrame).put(timer as JTISyncFrame);
         }
     }
 

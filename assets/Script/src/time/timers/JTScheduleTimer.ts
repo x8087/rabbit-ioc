@@ -9,7 +9,6 @@ namespace com
             this._dataList = dataList;
         }
 
-        
         public setup(interval:number):void
         {
             this.reset();
