@@ -24,7 +24,7 @@ namespace com
                 if (this._clsMap[this.PROTOCOL_MANAGER] == null) this.defaultRegisterClassAlias();
                 JTCommand.initialize();
                 JTSendPackage.initialize();
-                JTJSONPackage.initialize();
+                JTReceivePackage.initialize();
                 JTSingleManager.initialize();
                 
             }

@@ -13,7 +13,7 @@ namespace com
             // let protocol:number = data["protocol"];
             // JTFunctionManager.execute(protocol.toString(), data["content"]);
             // JTLogger.info("[ReceiveMessage] protocol: " + protocol,  "    content:  " + JSON.stringify(data["content"]));
-            return  JTJSONPackage.read(receiveMessage);
+            return  JTReceivePackage.read(receiveMessage);
         }
 
         public readComplete(receivePackage:JTIReceivePackage):void

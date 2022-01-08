@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTPanel extends JTComponent
+    export class JTPanel<T extends fgui.GComponent> extends JTComponent<T>
     {
         constructor()
         {

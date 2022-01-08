@@ -1,7 +1,7 @@
  
 namespace com 
 {
-    export class JTJSONPackage implements JTIReceivePackage
+    export class JTReceivePackage implements JTIReceivePackage
     {
         private _content:Object = null;
         private _data:Object = null;
@@ -56,19 +56,19 @@ namespace com
 
         public static initialize():void
         {
-            if(!this._pool)this._pool = this._pool = JTPool.instance(JTJSONPackage)
+            if(!this._pool)this._pool = this._pool = JTPool.instance(JTReceivePackage)
         }
 
         private static _pool:JTIPool = null;
 
-        public static read(data:any):JTJSONPackage
+        public static read(data:any):JTReceivePackage
         {
-            var receivePackage:JTJSONPackage = this._pool.get() as JTJSONPackage;
+            var receivePackage:JTReceivePackage = this._pool.get() as JTReceivePackage;
             receivePackage.readPackage(data)
             return receivePackage;
         }
 
-        public static put(receivePackage:JTJSONPackage):void
+        public static put(receivePackage:JTReceivePackage):void
         {
             this._pool.put(receivePackage as JTIPoolObject);
         }

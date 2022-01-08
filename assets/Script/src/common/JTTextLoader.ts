@@ -1,20 +1,20 @@
 namespace com
 {
-    export class JTTextLoader
+    export class JTTextLoader<T extends JTBaseTemplate> implements JTITextLoader<T>
     {
          private static _dataMap:Object = {};
          private _url:string = null;
-         private _class:any = null;
+         private _cls:any = null;
          private _urlLoader:JTURLLoader = null;
          private _dataMap:Object = {};
          private _values:any[] = [];
-         private _datas:any = null;
+         private _content:string = null;
          
          constructor(url:string, cls:any, datas?:any)
          {
              this._url = url;
-             this._class = cls;
-             this._datas = datas;
+             this._cls = cls;
+         
              if (datas)
              {
 
@@ -38,6 +38,7 @@ namespace com
 
          private parseStr(data:string):void
          {
+            this._content = this._dataMap[this._url] = data;
             let list:string[] = data.split('\n').join("").split("\r");
             let head:string = list.shift();
             let propertys:string[] = head.split('\t');
@@ -47,7 +48,7 @@ namespace com
                 let line:string = list[i];
                 let values:string[] = line.split("\t");
                 if (values.length < propertys.length) continue; //清除尾部空白数据
-                let template:JTBaseTemplate = new this._class();
+                let template:T = new this._cls();
                 if (!keys)keys = Object.keys(template);
                 for (let j:number = 0; j < keys.length; j++)//验证属性值是否匹配
                 {
@@ -57,7 +58,7 @@ namespace com
                         let index:number = keys.indexOf(property);
                         if (index == -1)
                         {
-                            JTLogger.info("[JTTextLoader.parseStr] cls " +  this._class + " template cant find the key:  " + property);
+                            JTLogger.info("[JTTextLoader.parseStr] cls " +  this._cls + " template cant find the key:  " + property);
                             continue
                         }
                     }
@@ -92,6 +93,8 @@ namespace com
                 buffer.pos = 0;
                 let content:string = buffer.readUTFBytes(buffer.bytesAvailable);
                 this.parseStr(content);
+                this._urlLoader.recycle();
+                this._urlLoader = null;
          }
 
          private onloadError(data:any):void
@@ -99,7 +102,7 @@ namespace com
             JTLogger.error("[JTTextLoader.load]  load text data error! the url : " + this._url);
          }
 
-         public toValues<T extends JTBaseTemplate>():T[]
+         public toValues():T[]
          {
              let list:T[] = [];
              let totalCount:number = this._values.length;
@@ -111,9 +114,19 @@ namespace com
              return list;
          }
 
-         public toValue<T extends JTBaseTemplate>(key:string):T
+         public toValue(key:string):T
          {
               return this._dataMap[key];
+         }
+
+         public toMap():Object
+         {
+             return this._dataMap;
+         }
+
+         public get content():string
+         {
+             return this._content;
          }
     }
 }
