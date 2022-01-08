@@ -58,6 +58,18 @@ module com
 			return __class;
 		}
 
+		public static bindTemplate(cls:any, parameters:any):JTClassAlias
+		{
+			let name:string = cls.name;
+			let __class:JTClassAlias = this._bindedMap[name];
+			if (!__class)
+			{
+				__class = new JTConfigurationAlisa(cls, parameters);
+				this._bindedMap[name] = __class;
+			}
+			return __class;
+		}
+
 		public static getClassAlisa(cls:any):JTClassAlias
 		{
 			let name:string = cls.name;

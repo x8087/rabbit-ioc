@@ -15,8 +15,8 @@ namespace com
 
         public readComplete(receivePackage:JTIReceivePackage):void
         {
-               let downProtocol:JTIProtocol = JTSingleManager.instance.protocolManager.downProtocol;
-               let errorMessageCls:any = JTApplication.getClass(JTApplication.SHOW_ERROR_MESSAGE);
+               let downProtocol:JTIProtocol = JTApplication.getObject(JTApplication.PROTOCOL_MANAGER).downProtocol;
+               let protocolErrorMsg:JTProtocolErrorMsg = JTApplication.getObject(JTApplication.SHOW_ERROR_MESSAGE);
                let protocol:number = receivePackage["protocol"];
                let protocolItem:JTItemProtocol= downProtocol.getProtocol(protocol);
                if (!protocolItem)
@@ -27,7 +27,7 @@ namespace com
                {
                    downProtocol.execute(receivePackage.content);
                }
-               if (errorMessageCls.checkPackageStatus(receivePackage))
+               if (protocolErrorMsg.checkPackageStatus(receivePackage))
                {
                     JTFunctionManager.execute(protocol.toString(), receivePackage.content);
                     JTLogger.info("[receivePackage.read] DownProtocol: " + protocol,  "    content:  " + JSON.stringify(receivePackage["content"]));
@@ -35,7 +35,7 @@ namespace com
                else
                {
 
-                    errorMessageCls.showErrorMessage(receivePackage);
+                    protocolErrorMsg.showErrorMessage(receivePackage);
                     JTLogger.info("[receivePackage.read] protocol: " + protocol,  "    errorCode:  " + receivePackage.errorCode);
                }
         }

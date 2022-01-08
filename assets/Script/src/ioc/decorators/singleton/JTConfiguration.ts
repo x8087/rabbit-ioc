@@ -17,7 +17,7 @@ module com
         {
 			if (descripter) 
             {
-				 injectGetterSetter(cls, target, property, descripter);
+				//  injectGetterSetter(cls, target, property, descripter);
 			}
 			else 
             {
@@ -26,53 +26,31 @@ module com
 		}
 	}
 
-    /**
-	 * 对getter/setter方法进行注入
-	 * @param key 
-	 * @param taget 
-	 * @param attrName 
-	 * @param descripter 
-	 */
-	export function injectGetterSetter(parameter:any, target:any, propertyName:string, descripter:any) 
-    {
-	// 	let k: string = injectionAttrKey + attrName;
-	// 	// 注册需要注入的属性名/存取器器名
-	// 	InjectionBinder.instance.registerInjection(target, attrName);
-	// 	descripter.get = function () 
-    //     {
-	// 		let v = this[k];
-	// 		if (v === null || v === undefined) 
-    //         {
-	// 			let info:InjectionBindInfo = InjectionBinder.instance.bind(key);
-	// 			v = this[attrName] = info.getInstance();
-	// 			info = null;
-	// 		}
-	// 		return v;
-	// 	};
-	// 	descripter.set = function (v) 
-    //     {
-	// 		// 先将新值引用计数+1
-	// 		// 如果先减旧值计数，可能触发其析构
-	// 		if (v) 
-    //         {
-	// 			addRefCount(v)
-	// 		}
-
-	// 		// 再将原来的值的引用计数-1
-	// 		let oldV = this[k];
-	// 		if (oldV) 
-    //         {
-	// 			addRefCount(oldV, -1);
-	// 		}
-
-	// 		this[k] = v;
-	// 	}
-	// }
-    }
-	 
-	export function loadConfiguration(parameter:string | Function, target: any, propertyName:string, data:any) 
+	export function loadConfiguration(cls:any, target:any, property:string, parameters:any) 
 	{
-		
+		let key:string = JTDecoratorUtils.registerClassAlias(target, property);
+		Object.defineProperty(target, property, 
+		{
+			get: function () 
+			{
+				let val = this[key];
+				if (val === null || val === undefined) 
+				{
+					let _class:JTClassAlias = JTDecoratorUtils.bindTemplate(cls, parameters);
+					val = this[property] = _class.instance;
+					_class = null;
+				}
+				return val;
+			},
+			set: function (val) 
+			{
+				let oldVal:any = this[key];
+				if (val === oldVal) return;
+				this[key] = val;
+			},
+			enumerable: true,
+			configurable: true
+		});
 	}
 }
 
