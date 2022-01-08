@@ -7,19 +7,21 @@ module com
 {
     /**
 	 * 注入装饰器
-	 * @param ctr 
+	 * @param parameter 
+	 * @param type JTTextLoader.LOAD_DEFAULT,{url:c:1.txt, JTConfigTemplate};
+	 * 			   JTTextLoader.LOAD_PARSE {type:JTTextLoader.PARSE_ZIP | JTTextLoader.PARSE_BINARY | JTTextLoader.PARSE_STRING, data:content, JTConfigTemplate}; 
 	 */
-	export function inject(controller: Function | string) 
+	export function Configuration(cls:Function, parameters:object):Function
     {
-		return function (target: any, attrName: string, descripter?: any) 
+		return function (target:any, propertyName:string, descripter?:any) 
         {
 			if (descripter) 
             {
-				injectGetterSetter(controller, target, attrName, descripter);
+				 injectGetterSetter(cls, target, propertyName, descripter);
 			}
 			else 
             {
-				//  doInjectAttr(controller, target, attrName);
+				 loadConfiguration(cls, target, propertyName, parameters);
 			}
 		}
 	}
@@ -31,7 +33,7 @@ module com
 	 * @param attrName 
 	 * @param descripter 
 	 */
-	export function injectGetterSetter(key:any, target:any, attrName: string, descripter: any) 
+	export function injectGetterSetter(parameter:any, target:any, propertyName:string, descripter:any) 
     {
 	// 	let k: string = injectionAttrKey + attrName;
 	// 	// 注册需要注入的属性名/存取器器名
@@ -68,4 +70,11 @@ module com
 	// }
     }
 	 
+	export function loadConfiguration(parameter:string | Function, target: any, propertyName:string, data:any) 
+	{
+		
+	}
 }
+
+
+

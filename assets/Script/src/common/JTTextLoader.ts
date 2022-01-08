@@ -1,44 +1,67 @@
 namespace com
 {
-    export class JTTextLoader<T extends JTBaseTemplate> implements JTITextLoader<T>
+    export class JTTextLoader
     {
          private static _dataMap:Object = {};
          private _url:string = null;
-         private _cls:any = null;
+         private _class:any = null;
          private _urlLoader:JTURLLoader = null;
          private _dataMap:Object = {};
          private _values:any[] = [];
-         private _content:string = null;
+         private _datas:any = null;
+
+         /**
+          * 字符串解析方式
+          */
+         public static PARSE_STRING:string = "String";
+        /**
+          * 二进制流解析方式
+          */
+         public static PARSE_BINARY:string = "Binary";
+        /**
+          * ZIP包解析方式
+          */
+         public static PARSE_ZIP:string = "Zip";
+
+        /**
+         * 默认加载方法
+         */
+         public static LOAD_DEFAULT:string = "load"; 
+         /**
+          * 已加载完成-需要调用解析模式即可
+          */
+         public static LOADED_PARSE:string = "loaded";
          
-         constructor(url:string, cls:any, datas?:any)
+         constructor(url?:string, cls?:any)
          {
-             this._url = url;
-             this._cls = cls;
-         
-             if (datas)
-             {
-
-                 if (typeof datas == 'string')//字符串数据
-                 {
-                        this.parseStr(datas);
-                 }
-                 else //二进制数据
-                 {
-
-                 }
-             }
-             else
-             {
-                 this._urlLoader = new JTURLLoader();
-                 this._urlLoader.addEventListener(JTURLLoader.ERROR, this.onloadError, this);
-                 this._urlLoader.addEventListener(JTURLLoader.COMPLETE, this.onloadComplete, this);
-                 this._urlLoader.send(url, null, "get", JTURLLoader.BUFFER);
-             }
+             if (!url || !cls)return;
+             this.load(url, cls);
          }
 
-         private parseStr(data:string):void
+         public load(url:string, cls:any):void
          {
-            this._content = this._dataMap[this._url] = data;
+                this._url = url;
+                this._class = cls;
+                this._urlLoader = new JTURLLoader();
+                this._urlLoader.addEventListener(JTURLLoader.ERROR, this.onloadError, this);
+                this._urlLoader.addEventListener(JTURLLoader.COMPLETE, this.onloadComplete, this);
+                this._urlLoader.send(url, null, "get", JTURLLoader.BUFFER);
+         }
+
+         public parseZip(data:any, cls:any):void
+         {
+            this._class = cls;
+         }
+         
+         public parseBinary(data:any, cls:any):void
+         {
+            this._class = cls;
+         }
+
+         public parseStr(data:string, cls:any):void
+         {
+            this._datas = data;
+            this._class = cls;
             let list:string[] = data.split('\n').join("").split("\r");
             let head:string = list.shift();
             let propertys:string[] = head.split('\t');
@@ -48,7 +71,7 @@ namespace com
                 let line:string = list[i];
                 let values:string[] = line.split("\t");
                 if (values.length < propertys.length) continue; //清除尾部空白数据
-                let template:T = new this._cls();
+                let template:JTBaseTemplate = new this._class();
                 if (!keys)keys = Object.keys(template);
                 for (let j:number = 0; j < keys.length; j++)//验证属性值是否匹配
                 {
@@ -58,7 +81,7 @@ namespace com
                         let index:number = keys.indexOf(property);
                         if (index == -1)
                         {
-                            JTLogger.info("[JTTextLoader.parseStr] cls " +  this._cls + " template cant find the key:  " + property);
+                            JTLogger.info("[JTTextLoader.parseStr] cls " +  this._class + " template cant find the key:  " + property);
                             continue
                         }
                     }
@@ -92,9 +115,7 @@ namespace com
                 let buffer:JTBuffer = new JTBuffer(data);
                 buffer.pos = 0;
                 let content:string = buffer.readUTFBytes(buffer.bytesAvailable);
-                this.parseStr(content);
-                this._urlLoader.recycle();
-                this._urlLoader = null;
+                this.parseStr(content, this._class);
          }
 
          private onloadError(data:any):void
@@ -102,7 +123,7 @@ namespace com
             JTLogger.error("[JTTextLoader.load]  load text data error! the url : " + this._url);
          }
 
-         public toValues():T[]
+         public toValues<T extends JTBaseTemplate>():T[]
          {
              let list:T[] = [];
              let totalCount:number = this._values.length;
@@ -114,19 +135,9 @@ namespace com
              return list;
          }
 
-         public toValue(key:string):T
+         public toValue<T extends JTBaseTemplate>(key:string):T
          {
               return this._dataMap[key];
-         }
-
-         public toMap():Object
-         {
-             return this._dataMap;
-         }
-
-         public get content():string
-         {
-             return this._content;
          }
     }
 }
