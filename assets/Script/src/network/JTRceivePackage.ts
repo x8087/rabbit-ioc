@@ -58,7 +58,7 @@ namespace com
         {
             if(!this._pool)this._pool = this._pool = JTPool.instance(JTReceivePackage)
         }
-
+        // @com.SingletonPool(JTPool, JTReceivePackage)
         private static _pool:JTIPool = null;
 
         public static read(data:any):JTReceivePackage

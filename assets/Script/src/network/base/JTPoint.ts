@@ -35,7 +35,7 @@ namespace com
         {
             if(!this._pool)this._pool = this._pool = JTPool.instance(JTPoint)
         }
-
+   
         private static _pool:JTIPool = null;
 
         public static create():JTPoint

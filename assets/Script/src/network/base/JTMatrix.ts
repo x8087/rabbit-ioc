@@ -413,7 +413,7 @@ namespace com
         {
             if(!this._pool)this._pool = this._pool = JTPool.instance(JTMatrix)
         }
-
+        // @com.SingletonPool(JTPool, JTMatrix)
         private static _pool:JTIPool = null;
 
         public static create():JTMatrix

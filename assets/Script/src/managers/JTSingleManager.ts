@@ -4,6 +4,7 @@ namespace com
         {
                 public static instance:JTSingleManager = null;
 
+                // @SingletonClass(JTPool, JTCommand)
                 public protocolManager:JTProtocolItemManager = null;
 
                 constructor()

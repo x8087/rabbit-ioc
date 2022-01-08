@@ -12,7 +12,7 @@ gulp.task('buildJs', () => {
         .js.pipe(inject.replace('var com;', ''))
         .pipe(inject.prepend('window.com = {};\nwindow.c = window.com;\n'))
         .pipe(inject.replace('var __extends', 'window.__extends'))
-        // .pipe(babel())
+        .pipe(babel())
         // .pipe(minify({ ext: { min: ".min.js" } }))
         .pipe(gulp.dest('D:/IMChats/IMClient/IMChat/assets/Script/libs'));
 })

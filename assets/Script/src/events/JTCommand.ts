@@ -84,9 +84,11 @@ namespace com
             {
                 if(!this._pool)
                 {
-                        this._pool = this._pool = JTPool.instance(JTCommand);
+                    this._pool = this._pool = JTPool.instance(JTCommand);
                 }
             }
+            
+            // @com.SingletonPool(JTPool, JTCommand)
             private static _pool:JTIPool = null;
             public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
             {

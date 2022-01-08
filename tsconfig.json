@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
     "module": "amd",
-    "lib": [ "dom", "es5", "es2015.promise" ],
     "target": "es5",
     "skipLibCheck": true,
     "outFile": "./common.js",
     "declaration": true,
     "sourceMap": false,
-    "removeComments": true
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "lib": 
+    [
+      "es2015", "es2017", "dom"
+    ]
   },
   "include": [
     "assets/script/src"

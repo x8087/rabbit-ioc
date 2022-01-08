@@ -3,37 +3,33 @@
 */
 module com 
 {
-	export class JTClassAlias implements JTIPoolObject
+	export class JTSingletonClassAlias extends JTClassAlias
 	{
-		private _cls:any = null;
-		private _instance:any = null;
 		private _referenceMap:{[className:string]:string} = null;
 		private _referenceCount:number = 0;
 		private _destroyed:boolean = false;
 
-		public static CLASS_NAME:string = "__ClassName";
-
 		constructor(cls:any, destroyed:boolean = false)
 		{
-			this._cls = cls;
+			super(cls);
 			this._destroyed = destroyed;
 			this._referenceMap = {};
 		}
 
 		public recycle() 
 		{
-			
+			super.recycle();
 		}
 
-		public bind(target:any, property:string):void
-		{
-			let __ClassName:string = target[JTClassAlias.CLASS_NAME];
-			if (!__ClassName) target[JTClassAlias.CLASS_NAME] = target.name;
-			if (!this._referenceMap[__ClassName])
-			{
-				this._referenceMap[__ClassName] = property;
-			}
-		}
+		// public bind(target:any, property:string):void
+		// {
+		// 	let __ClassName:string = target[JTSingletonClass.CLASS_NAME];
+		// 	if (!__ClassName) target[JTSingletonClass.CLASS_NAME] = target.name;
+		// 	if (!this._referenceMap[__ClassName])
+		// 	{
+		// 		this._referenceMap[__ClassName] = property;
+		// 	}
+		// }
 
 		/**
 		 * 建立引用关系
