@@ -13,15 +13,15 @@ module com
 	 */
 	export function Configuration(cls:Function, parameters:object):Function
     {
-		return function (target:any, propertyName:string, descripter?:any) 
+		return function (target:any, property:string, descripter?:any) 
         {
 			if (descripter) 
             {
-				 injectGetterSetter(cls, target, propertyName, descripter);
+				 injectGetterSetter(cls, target, property, descripter);
 			}
 			else 
             {
-				 loadConfiguration(cls, target, propertyName, parameters);
+				 loadConfiguration(cls, target, property, parameters);
 			}
 		}
 	}

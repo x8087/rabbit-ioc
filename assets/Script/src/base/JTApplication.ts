@@ -2,7 +2,7 @@ namespace com
 {
     export class JTApplication
     {
-            private static _clsMap:Object = {};
+            private static _clsMap:{[name:string]:string} = {};
 
             public static  PROTOCOL_MANAGER:string = "PROTOCOL_MANAGER";
             public static  SHOW_ERROR_MESSAGE:string = "SHOW_ERROR_MESSAGE_CLS";
