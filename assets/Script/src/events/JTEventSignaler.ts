@@ -11,6 +11,7 @@ namespace com
                 constructor()
                 {
                         this.injectEventMap();
+                        this.injectFunctionMap();
                 }
 
                 recycle() 
@@ -23,11 +24,14 @@ namespace com
 		//提前注入该对象的方法，可能导致指针异常
                 protected injectEventMap():void
                 {
-                        if (!this._eventMap)
-                        {
-                                this._eventMap = {}
-                                this._functionMap = {};
-                        }
+                        if (!this._eventMap)this._eventMap = {}
+                       
+                }
+
+                protected injectFunctionMap():void
+                {
+                        if (!this._functionMap)this._functionMap = {}
+                       
                 }
 
                 public addEventListener(key:any, method:Function, caller:any, once?:boolean):void

@@ -12,11 +12,12 @@ namespace com
         public writeComplete(data:any):void
         {
             let message:any = JSON.parse(data);
-            let upProtocol:JTIProtocol = JTApplication.getObject(JTApplication.PROTOCOL_MANAGER).upProtocol;
-            let protocolItem:JTItemProtocol= upProtocol.getProtocol(message.protocol);
-            if (protocolItem.isWaiting)
+            let protocolManager:JTProtocolItemManager = JTApplication.getObject(JTApplication.PROTOCOL);
+            let protocolUp:JTIProtocol = protocolManager.protocolUp;
+            let itemProtocol:JTItemProtocol= protocolUp.getProtocol(message.protocol);
+            if (itemProtocol && itemProtocol.isWaiting)
             {
-                upProtocol.execute(message);
+                protocolUp.execute(message);
             }
             JTLogger.info("[sendPackage.send] : UpProtocol:  " + message.protocol,  "   content: " + JSON.stringify(message.content));
         }

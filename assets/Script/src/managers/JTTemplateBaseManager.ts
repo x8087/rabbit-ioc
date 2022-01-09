@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTTemplateBaseManager extends JTDataInfoManager
+    export abstract class JTTemplateBaseManager extends JTExtensionClass
     {
         public _configMap:{[url:string]: any} = {}
         constructor()
@@ -8,7 +8,9 @@ namespace com
             super();
         }
 
-        public load():void
+        public abstract updateConfigs(configs:any[]):void;
+
+        public build():void
         {
 
         }

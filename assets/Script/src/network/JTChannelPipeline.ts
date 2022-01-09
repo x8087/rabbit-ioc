@@ -17,7 +17,7 @@
             return this._channel;
         }
 
-        public addAdapter(type:string, channelAdapter:JTChannelAdapter):JTChannelPipeline
+        public childOption(type:string, channelAdapter:JTChannelAdapter):JTChannelPipeline
         {
             channelAdapter.bind(this._channel);
             channelAdapter.channelActive();
@@ -25,7 +25,7 @@
             return this;
         }
 
-        public getAdapter(type:string):JTChannelAdapter
+        public getOption(type:string):JTChannelAdapter
         {
             return this._pipelineMap[type];
         }
@@ -34,6 +34,11 @@
         {
             this._channel.reload();
             this._channel.connect(host, port);
+        }
+
+        public get channel():JTIChannel
+        {
+            return this._channel;
         }
     }
 }

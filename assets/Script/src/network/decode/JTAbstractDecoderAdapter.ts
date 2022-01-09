@@ -15,17 +15,18 @@ namespace com
 
         public readComplete(receivePackage:JTIReceivePackage):void
         {
-               let downProtocol:JTIProtocol = JTApplication.getObject(JTApplication.PROTOCOL_MANAGER).downProtocol;
-               let protocolErrorMsg:JTProtocolErrorMsg = JTApplication.getObject(JTApplication.SHOW_ERROR_MESSAGE);
-               let protocol:number = receivePackage["protocol"];
-               let protocolItem:JTItemProtocol= downProtocol.getProtocol(protocol);
-               if (!protocolItem)
+               let protocolManager:JTProtocolItemManager = JTApplication.getObject(JTApplication.PROTOCOL);
+               let protocolDown:JTIProtocol = protocolManager.protocolDown;
+               let protocolErrorMsg:JTProtocolErrorMsg = JTApplication.getObject(JTApplication.ERROR_MESSAGE);
+               let protocol:number = receivePackage.protocol;
+               let itemProtocol:JTItemProtocol= protocolDown.getProtocol(protocol);
+               if (!itemProtocol)
                {
                     JTLogger.debug("[receivePackage.read] the downProcotol cant register protocol: " + protocol);
                }
-               if (protocolItem && protocolItem.isWaiting)
+               if (itemProtocol && itemProtocol.isWaiting)
                {
-                   downProtocol.execute(receivePackage.content);
+                   protocolDown.execute(receivePackage.content);
                }
                if (protocolErrorMsg.checkPackageStatus(receivePackage))
                {

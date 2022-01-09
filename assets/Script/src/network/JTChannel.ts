@@ -14,7 +14,12 @@ namespace com
         constructor(cls:any)
         {
             super();
-            this._cls = cls;
+
+            if (cls)this._cls = cls;
+            else
+            {
+                this._cls = this instanceof JTWebSocketChannel ? JTWebSocket : JTHttpRequest;
+            }
         }
 
         abstract flush():void
@@ -33,9 +38,9 @@ namespace com
 
         public reload():void 
         {
-            this._encoder = this._pipeline.getAdapter(JTChannelAdapter.ENCODE) as JTAbstractEncoderAdapter;
-            this._decoder = this._pipeline.getAdapter(JTChannelAdapter.DECODE) as JTAbstractDecoderAdapter;
-            this._idleState = this._pipeline.getAdapter(JTChannelAdapter.IDLE) as JTAbstractIdleStateAdapter;
+            this._encoder = this._pipeline.getOption(JTChannelAdapter.ENCODE) as JTAbstractEncoderAdapter;
+            this._decoder = this._pipeline.getOption(JTChannelAdapter.DECODE) as JTAbstractDecoderAdapter;
+            this._idleState = this._pipeline.getOption(JTChannelAdapter.IDLE) as JTAbstractIdleStateAdapter;
         }
 
         public bind(channelPipeline:JTIChannelPipeline):void

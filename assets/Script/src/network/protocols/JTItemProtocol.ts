@@ -3,7 +3,7 @@ namespace com
     export class JTItemProtocol
     {
          private _isWaiting:boolean = false;
-         private _isEncrypt:boolean = false;
+         private _securityOption:string = null;
          private _protocol:number = 0;
 
          constructor(protocol:number)
@@ -11,16 +11,16 @@ namespace com
             this._protocol = protocol;
          }
 
-         public setup(isWaiting:boolean, isEncrypt:boolean):void
+         public setup(isWaiting:boolean, security?:string):void
          {
-            this._isEncrypt = isEncrypt;
+            this._securityOption = security;
             this._isWaiting = isWaiting;
          }
 
-         public static create(protocol:number, isWaiting:boolean, isEncrypt:boolean):JTItemProtocol
+         public static create(protocol:number, isWaiting:boolean, security?:string):JTItemProtocol
          {
                var item:JTItemProtocol = new JTItemProtocol(protocol);
-               item.setup(isWaiting, isEncrypt);
+               item.setup(isWaiting, security);
                return item;
          }
 
@@ -29,9 +29,9 @@ namespace com
              return this._protocol;
          }
 
-         public get isEncrypt():boolean
+         public get securityOption():string
          {
-             return this._isEncrypt;
+             return this._securityOption;
          }
 
          public get isWaiting():boolean

@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTLayerManager
+    export class JTLayerManager extends JTExtensionClass
     {
         public static LAYER_TIPS: string = "layer_tips";
         public static LAYER_SCENE: string = "layer_scene";
@@ -12,11 +12,11 @@ namespace com
 
         constructor(stage:fgui.GRoot)
         {
+            super();
             this._stage = stage;
-            this.buildLayers();
         }
 
-        protected buildLayers():void
+        public build():void
         {
             this.createLayer(JTLayerManager.LAYER_SCENE);
             this.createLayer(JTLayerManager.LAYER_POPUP);

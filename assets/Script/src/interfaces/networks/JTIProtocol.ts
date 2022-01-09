@@ -8,7 +8,7 @@ namespace com
 
         build():void;
 
-        registerProtocol(protocol:number, waiting:boolean, encrypt:boolean):void;
+        registerProtocol(protocol:number, waiting:boolean, encrypt?:string):void;
 
         getProtocol(protocol:number):JTItemProtocol;
 

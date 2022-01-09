@@ -1,24 +1,23 @@
 namespace com 
 {
-    export class JTSceneManager
+    export class JTSceneManager extends JTExtensionClass
     {
-        private static _layerManager:JTLayerManager = null;
-        
         private static _stage:fgui.GRoot = null;
 
-
-        public static initialize():void
+        constructor()
         {
-            if (!this._stage) 
-            {
-                this._stage = fgui.GRoot.create();
-                this._layerManager = new JTLayerManager(this._stage);
-            }
+            super();
+        }
+
+        public build():void 
+        {
+            
         }
 
         public static get stage():fgui.GRoot 
         {
             return this._stage;
         }
+
     }
 }

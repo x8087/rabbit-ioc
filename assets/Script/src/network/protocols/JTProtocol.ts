@@ -31,9 +31,9 @@ namespace com
          * @param waiting 是否显示隐藏通信转圈
          * @param encrypt 是否显示加解密的转圈
          */
-        public registerProtocol(protocol:number, waiting:boolean, encrypt:boolean):void 
+        public registerProtocol(protocol:number, waiting:boolean, security?:string):void 
         {
-               this._protocolMap[protocol] = JTItemProtocol.create(protocol, waiting, encrypt)
+               this._protocolMap[protocol] = JTItemProtocol.create(protocol, waiting, security)
                waiting && this._protocols.push(protocol);
         }
 

@@ -45,7 +45,7 @@ module com
 				else if (loadedType == JTTextLoader.LOADED_PARSE) //已经加载完成，仅解析数据
 				{
 					let name:string = this._parameter["name"];
-					let templateManager:JTTemplateBaseManager =  JTApplication.getObject(JTApplication.TEMPLATE_MANAGER);
+					let templateManager:JTTemplateBaseManager =  JTApplication.getObject(JTApplication.TEMPLATE);
 					let data:any = templateManager.getValue(name);
 					let type:string = this._parameter["parseType"];
 					switch(type)

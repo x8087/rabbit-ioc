@@ -16,8 +16,9 @@ module com
     {
 		return function (target:any, property:string, descripter?:any) 
         {
-				let dispatcher:JTEventDispatcher = target;
-				dispatcher.addEventListener(eventType, target[property], target);
+				let signaler:JTEventSignaler = target;
+				signaler["injectEventMap"]();//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
+				signaler.addEventListener(eventType, target[property], target);
 		}
 	}
 }
