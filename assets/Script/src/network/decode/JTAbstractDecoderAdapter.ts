@@ -35,7 +35,6 @@ namespace com
                }
                else
                {
-
                     protocolErrorMsg.showErrorMessage(receivePackage);
                     JTLogger.info("[receivePackage.read] protocol: " + protocol,  "    errorCode:  " + receivePackage.errorCode);
                }
