@@ -11,6 +11,7 @@ gulp.task('buildJs', () => {
         .pipe(tsProject())
         .js.pipe(inject.replace('var com;', ''))
         .pipe(inject.prepend('window.com = {};\nwindow.c = window.com;\n'))
+        // .pipe(inject.prepend('window.inject = null'))
         .pipe(inject.replace('var __extends', 'window.__extends'))
         // .pipe(babel())
         // .pipe(minify({ ext: { min: ".min.js" } }))

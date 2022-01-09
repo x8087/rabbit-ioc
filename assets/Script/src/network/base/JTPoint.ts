@@ -31,21 +31,24 @@ namespace com
             return this;
         }
 
-        public static initialize():void
+        public static get pool():JTIPool
         {
-            if(!this._pool)this._pool = this._pool = JTPool.instance(JTPoint)
+            if(!this._pool)
+            {
+                this._pool = JTPool.instance(JTPoint);
+            }
+            return this._pool;
         }
-   
         private static _pool:JTIPool = null;
 
         public static create():JTPoint
         {
-            return this._pool.get() as JTPoint;
+            return this.pool.get() as JTPoint;
         }
 
         public static put(point:JTPoint):void
         {
-            this._pool.put(point as JTIPoolObject);
+            this.pool.put(point as JTIPoolObject);
         }
 
         /**

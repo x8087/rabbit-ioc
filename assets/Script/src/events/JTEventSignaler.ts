@@ -5,10 +5,12 @@ namespace com
          */
         export class JTEventSignaler
         {
-                private _eventMap:Object = {};
-                private _functionMap:Object = {};
+                protected _eventMap:Object = null;
+                protected _functionMap:{[key:number]: any} = null;
+
                 constructor()
                 {
+                        this.injectEventMap();
                 }
 
                 recycle() 
@@ -17,9 +19,20 @@ namespace com
                         this.removeFunctions();
                 }
 
+                //由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
+		//提前注入该对象的方法，可能导致指针异常
+                protected injectEventMap():void
+                {
+                        if (!this._eventMap)
+                        {
+                                this._eventMap = {}
+                                this._functionMap = {};
+                        }
+                }
+
                 public addEventListener(key:any, method:Function, caller:any, once?:boolean):void
                 {
-                        let flag:Boolean = key in this._eventMap;
+                        let flag:Boolean = this._eventMap[key]
                         if (!flag)
                         {
                                 this._eventMap[key] = method;
@@ -53,7 +66,7 @@ namespace com
 
                 public registerFunction(key:any, method:Function, caller:any, once?:boolean):void
                 {
-                        let flag:Boolean = key in this._functionMap;
+                        let flag:boolean =  this._functionMap[key] ;
                         if (!flag)
                         {
                                 this._functionMap[key] = method;

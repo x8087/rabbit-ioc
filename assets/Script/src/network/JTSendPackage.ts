@@ -50,23 +50,27 @@ namespace com
             this._data = {};
         }
 
-        public static initialize():void
+        public static get pool():JTIPool
         {
-            if(!this._pool)this._pool = this._pool = JTPool.instance(JTSendPackage)
+            if(!this._pool)
+            {
+                this._pool = JTPool.instance(JTSendPackage);
+            }
+            return this._pool;
         }
-
+        
         private static _pool:JTIPool = null;
 
         public static begin():JTSendPackage
         {
-            var sendPackage:JTSendPackage = this._pool.get() as JTSendPackage;
+            var sendPackage:JTSendPackage = this.pool.get() as JTSendPackage;
             sendPackage.setup(JTSession.socketChannel);
             return sendPackage;
         }
 
         public static put(sendPackage:JTSendPackage):void
         {
-            this._pool.put(sendPackage as JTIPoolObject);
+            this.pool.put(sendPackage as JTIPoolObject);
         }
     }
 }

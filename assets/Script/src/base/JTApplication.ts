@@ -26,16 +26,14 @@ namespace com
             this.registerClassAlias(JTApplication.TEMPLATE_MANAGER, JTTemplateBaseManager);
         }
 
-        public registerClassAlias(key:string, runCls:any):void
+        public registerClassAlias(key:string, runClass:any):void
         {
-            JTApplication.extensionMap[key] = runCls
+            JTApplication.extensionMap[key] = runClass
         }
 
         public static launch():void
         {
-            JTCommand.initialize();
-            JTSendPackage.initialize();
-            JTReceivePackage.initialize();
+     
         }
 
         public getClass(key:string):any
@@ -48,6 +46,9 @@ namespace com
             return this.extensionMap[key];
         }
 
+        /**
+         * 此方法需要重写
+         */
         public static get instance():JTApplication
         {
             return null;

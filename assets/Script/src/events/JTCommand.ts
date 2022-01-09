@@ -80,26 +80,26 @@ namespace com
                 return this._once;
             }
 
-            public static initialize():void
+            public static get pool():JTIPool
             {
                 if(!this._pool)
                 {
-                    this._pool = this._pool = JTPool.instance(JTCommand);
+                    this._pool = JTPool.instance(JTCommand);
                 }
+                return this._pool;
             }
             
-            // @com.SingletonPool(JTPool, JTCommand)
             private static _pool:JTIPool = null;
             public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
             {
-                var command:JTCommand = this._pool.get() as JTCommand;
+                var command:JTCommand = this.pool.get() as JTCommand;
                 command.setTo(caller, method, args, once);
                 return command;
             }
 
             public static put(command:JTCommand):void
             {
-                this._pool.put(command)
+                this.pool.put(command)
             }
     }
 }

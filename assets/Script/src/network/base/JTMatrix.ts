@@ -409,21 +409,24 @@ namespace com
             this.identity();
         }
 
-        public static initialize():void
+        public static get pool():JTIPool
         {
-            if(!this._pool)this._pool = this._pool = JTPool.instance(JTMatrix)
+            if(!this._pool)
+            {
+                this._pool = JTPool.instance(JTMatrix);
+            }
+            return this._pool;
         }
-        // @com.SingletonPool(JTPool, JTMatrix)
         private static _pool:JTIPool = null;
 
         public static create():JTMatrix
         {
-            return this._pool.get() as JTMatrix;
+            return this.pool.get() as JTMatrix;
         }
 
         public static put(point:JTMatrix):void
         {
-            this._pool.put(point as JTIPoolObject);
+            this.pool.put(point as JTIPoolObject);
         }
     }
 }

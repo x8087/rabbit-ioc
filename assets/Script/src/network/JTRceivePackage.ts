@@ -54,23 +54,26 @@ namespace com
             this._data = null;
         }
 
-        public static initialize():void
+        public static get pool():JTIPool
         {
-            if(!this._pool)this._pool = this._pool = JTPool.instance(JTReceivePackage)
+            if(!this._pool)
+            {
+                this._pool = JTPool.instance(JTReceivePackage);
+            }
+            return this._pool;
         }
-        // @com.SingletonPool(JTPool, JTReceivePackage)
         private static _pool:JTIPool = null;
 
         public static read(data:any):JTReceivePackage
         {
-            var receivePackage:JTReceivePackage = this._pool.get() as JTReceivePackage;
+            var receivePackage:JTReceivePackage = this.pool.get() as JTReceivePackage;
             receivePackage.readPackage(data)
             return receivePackage;
         }
 
         public static put(receivePackage:JTReceivePackage):void
         {
-            this._pool.put(receivePackage as JTIPoolObject);
+            this.pool.put(receivePackage as JTIPoolObject);
         }
     }
 }
