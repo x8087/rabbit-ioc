@@ -2,7 +2,7 @@ namespace com
 {
     export abstract class JTApplication extends JTEventSignaler implements JTIOption
     {
-        protected static extensionMap:{[name:string]:any} = {};
+        protected static _classMap:{[name:string]:any} = {};
 
         public static PROTOCOL:string = "ProtocolManager";
 
@@ -34,7 +34,7 @@ namespace com
 
         protected builds():void
         {
-            let extensionMap:Object = JTApplication.extensionMap;
+            let extensionMap:Object = JTApplication._classMap;
             for (var key in extensionMap)
             {
                 let _class:JTExtensionClass = extensionMap[key];
@@ -76,20 +76,20 @@ namespace com
             templateManager.updateConfigs(resources);
         } 
 
-        public registerClassAlias(key:string, runClass:any):JTIOption
+        public registerClassAlias(key:string, extendsClass:any):JTIOption
         {
-            JTApplication.extensionMap[key] = runClass
+            JTApplication._classMap[key] = extendsClass
             return this;
         }
 
         public getObject(key:string):any
         {
-            return JTApplication.extensionMap[key];
+            return JTApplication._classMap[key];
         }
 
-        public static getObject(key:string):any
+        public static getExtendItem(key:string):any
         {
-            return this.extensionMap[key];
+            return this._classMap[key];
         }
     }
 }

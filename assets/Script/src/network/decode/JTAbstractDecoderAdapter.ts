@@ -15,9 +15,9 @@ namespace com
 
         public readComplete(receivePackage:JTIReceivePackage):void
         {
-               let protocolManager:JTProtocolItemManager = JTApplication.getObject(JTApplication.PROTOCOL);
+               let protocolManager:JTProtocolItemManager = JTApplication.getExtendItem(JTApplication.PROTOCOL);
                let protocolDown:JTIProtocol = protocolManager.protocolDown;
-               let protocolErrorMsg:JTProtocolErrorMsg = JTApplication.getObject(JTApplication.ERROR_MESSAGE);
+               let protocolErrorMsg:JTProtocolErrorMsg = JTApplication.getExtendItem(JTApplication.ERROR_MESSAGE);
                let protocol:number = receivePackage.protocol;
                let itemProtocol:JTItemProtocol= protocolDown.getProtocol(protocol);
                if (!itemProtocol)
