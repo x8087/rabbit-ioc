@@ -10,6 +10,8 @@ namespace com
 
         public static TEMPLATE:string = "TemplateManager";
 
+        public static MAPPING:string = "Mapping";
+
         public static SCENE:string = "Scene";
 
         public static LAYER:string = "Layer";
@@ -27,7 +29,7 @@ namespace com
         {
             super();
         }
-        public option(type: string, _extension: JTIExtensionClass): JTIChildOption 
+        public option(type: string, _extension: JTIClassExtension): JTIChildOption 
         {
             return this.registerClassAlias(type, _extension) as JTIChildOption
         }
@@ -37,7 +39,7 @@ namespace com
             let extensionMap:Object = JTApplication._classMap;
             for (var key in extensionMap)
             {
-                let _class:JTExtensionClass = extensionMap[key];
+                let _class:JTClassExtension = extensionMap[key];
                 _class.build();
             }
         }

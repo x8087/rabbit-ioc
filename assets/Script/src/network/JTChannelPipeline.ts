@@ -3,7 +3,7 @@
     export class JTChannelPipeline extends JTEventDispatcher implements JTIChannelPipeline
     {
         private _channel:JTIChannel = null;
-        private _pipelineMap:Object = {};
+        private _pipelineMap:{[type:string]: JTIChannelAdapter} = {};
         constructor()
         {
             super();
@@ -17,15 +17,15 @@
             return this._channel;
         }
 
-        public childOption(type:string, channelAdapter:JTChannelAdapter):JTChannelPipeline
+        public childOption(type:string, channelAdapter:JTIChannelAdapter):JTChannelPipeline
         {
-            channelAdapter.bind(this._channel);
+            channelAdapter.bind(this);
             channelAdapter.channelActive();
             this._pipelineMap[type] =  channelAdapter;
             return this;
         }
 
-        public getOption(type:string):JTChannelAdapter
+        public getOption(type:string):JTIChannelAdapter
         {
             return this._pipelineMap[type];
         }

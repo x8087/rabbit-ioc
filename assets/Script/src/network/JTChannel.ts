@@ -10,7 +10,7 @@ namespace com
         protected _pipeline:JTIChannelPipeline = null;
         protected _encoder:JTIEncoderAdapter = null;
         protected _decoder:JTIDecoderAdapter = null;
-        protected _idleState:JTChannelAdapter = null;
+        protected _idleState:JTIChannelAdapter = null;
         constructor(cls:any)
         {
             super();

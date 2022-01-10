@@ -1,10 +1,10 @@
 namespace com 
 {
-    export class JTProtocolItemManager extends JTExtensionClass
+    export class JTProtocolItemManager extends JTClassExtension
     {
         public protocolUp:JTIProtocol = null;
 
-        public protocolDown:JTIProtocol = null;
+        public downProtocol:JTIProtocol = null;
 
         constructor()
         {
@@ -24,7 +24,7 @@ namespace com
          */
         public registerDownProtocol(protocol:number, waiting:boolean, security?:string):void
         {
-                this.protocolDown.registerProtocol(protocol, waiting, security)
+                this.downProtocol.registerProtocol(protocol, waiting, security)
         }
 
         
@@ -42,7 +42,7 @@ namespace com
         public bind(classUp:any, classDown:any):void
         {
                 this.protocolUp = new classUp();
-                this.protocolDown = new classDown();
+                this.downProtocol = new classDown();
         }
         
     }

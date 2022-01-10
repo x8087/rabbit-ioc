@@ -1,6 +1,7 @@
+///<reference path="../run/JTClassExtension.ts"/>
 namespace com 
 {
-    export class JTLayerManager extends JTExtensionClass
+    export class JTLayerManager extends JTClassExtension
     {
         public static LAYER_TIPS: string = "layer_tips";
         public static LAYER_SCENE: string = "layer_scene";

@@ -1,3 +1,4 @@
+///<reference path="../../events/JTEventDispatcher.ts"/>
 namespace com 
 {
     export class JTFuturePipeline extends JTEventDispatcher

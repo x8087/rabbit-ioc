@@ -8,7 +8,7 @@ namespace com
 
           bind(channel:JTIChannel):JTIChannel
 
-          getOption(type:string):JTChannelAdapter
+          getOption(type:string):JTIChannelAdapter
 
           launch(host:string, port:number):void
      

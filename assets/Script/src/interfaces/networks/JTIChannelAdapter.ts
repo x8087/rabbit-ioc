@@ -6,7 +6,9 @@ namespace com
 
         channelActive():void;
         
-        bind(channel:JTIChannel):void
+        bind(channelPipeline:JTIChannelPipeline):void
+
+        getOption(type:string):JTIChannelAdapter
        
     }
 }

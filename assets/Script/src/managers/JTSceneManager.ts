@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTSceneManager extends JTExtensionClass
+    export class JTSceneManager extends JTClassExtension
     {
         private static _stage:fgui.GRoot = null;
 
