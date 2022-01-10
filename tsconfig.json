@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "amd",
-    "target": "es5",
+    "target": "es6",
     "skipLibCheck": true,
     "outFile": "./common.js",
     "declaration": true,

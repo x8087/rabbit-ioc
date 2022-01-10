@@ -4,7 +4,7 @@
 */
 namespace com
 {
-    class JTCachePool<T extends JTIPoolObject> extends JTPool<T>
+    export class JTCachePool<T extends JTIPoolObject> extends JTPool<T>
     {
         protected _references:T[] = null;
         constructor(cls:any)

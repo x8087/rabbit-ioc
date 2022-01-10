@@ -12,6 +12,6 @@ namespace com
 
         public static ENTER_LAST_FRAME:string = "enterLastFrame";
 
-        public static SYNC_FRAME:string = "syncFrame";
+        public static JUMP_FRAME:string = "jumpFrame";
     }
 }

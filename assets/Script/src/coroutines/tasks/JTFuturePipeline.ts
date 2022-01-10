@@ -2,7 +2,7 @@ namespace com
 {
     export class JTFuturePipeline extends JTEventDispatcher
     {
-        protected _locker:JTLocker = null;
+        protected _counter:JTCounter = JTCounter.create();
         protected _tasks:JTITaskExecutor[] = null;
         protected _factroy:JTIFactory = null;
         protected _itemProvider:JTEvent = null;
@@ -14,7 +14,7 @@ namespace com
         {
             super();
             this._totalCount = totalCount;
-            this._locker = new JTLocker();
+            // this._counter = JTCounter.create();
         }
 
         /***
@@ -26,14 +26,17 @@ namespace com
             while(this._tasks.length)
             {
                 let task:JTITaskExecutor = this._tasks.shift();
-                task.relevance(this._locker, this._currentCount);
+                task.relevance(this._counter, this._currentCount);
                 task.execute();
-                await this._locker.lock();
+                await this._counter.lock();
                 this._currentCount ++;
                 this.dispatchEvent(JTTaskEvent.TASK_PROGRESS, this);
                 task.recycle();
             }
-            this.dispatchEvent(JTTaskEvent.TASK_COMPLETE, this);
+            if (this._counter.completed)
+            {
+                this.dispatchEvent(JTTaskEvent.TASK_COMPLETE, this);
+            }
         }   
         
         private createTasks(): JTITaskExecutor[] 

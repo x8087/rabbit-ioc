@@ -4,7 +4,7 @@ namespace com
     {
         public abstract execute():Promise<any>;
 
-        recycle() 
+        public recycle() 
         {
         }
     }
