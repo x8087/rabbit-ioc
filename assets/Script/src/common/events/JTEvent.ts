@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTCommand implements JTIPoolObject
+    export class JTEvent implements JTIPoolObject
     {
         private _caller:any = null;
         private _method:Function = null;
@@ -12,7 +12,7 @@ namespace com
             this._caller = this._method = this._args = null;
         }
 
-        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
+        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
         {
             this._caller =caller;
             this._method = method;
@@ -24,7 +24,7 @@ namespace com
         /**
         *执行处理器。
         */
-        public run():void
+        public run():any
         {
             if (this._method == null) return null;
             var result=this._method.apply(this._caller, this._args);
@@ -51,7 +51,7 @@ namespace com
             /**
             *清理对象引用。
             */
-            public clear():JTCommand
+            public clear():JTEvent
             {
                 this._method = this._args = this._caller = null;
                 return this;
@@ -84,20 +84,20 @@ namespace com
             {
                 if(!this._pool)
                 {
-                    this._pool = JTPool.instance(JTCommand);
+                    this._pool = JTPool.instance(JTEvent);
                 }
                 return this._pool;
             }
             
             private static _pool:JTIPool = null;
-            public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
+            public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
             {
-                var command:JTCommand = this.pool.get() as JTCommand;
+                var command:JTEvent = this.pool.get() as JTEvent;
                 command.setTo(caller, method, args, once);
                 return command;
             }
 
-            public static put(command:JTCommand):void
+            public static put(command:JTEvent):void
             {
                 this.pool.put(command)
             }

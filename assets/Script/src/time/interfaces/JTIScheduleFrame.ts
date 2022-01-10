@@ -4,7 +4,7 @@ namespace com
     {
        frames:any[];
         
-       createFrames:JTCommand;
+       createFrames:JTEvent;
 
        currentItem:any;
     }

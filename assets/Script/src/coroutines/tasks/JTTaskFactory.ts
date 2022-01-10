@@ -1,0 +1,7 @@
+namespace com 
+{
+    export abstract class JTTaskFactory implements JTIFactory
+    {
+        public abstract produce():JTITaskExecutor;
+    }   
+}

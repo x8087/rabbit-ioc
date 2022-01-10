@@ -1,27 +1,27 @@
 namespace com 
 {
-    export class JTEventManager
+    export class JTEventDispatcher implements JTIPoolObject, JTIEventDispatcher
     {
-        protected static _eventMap:Object = {}
+        protected  _eventMap:Object = {}
         constructor()
         {
         }
 
-        public static recycle() 
+        recycle() 
         {
             this.removes();
         }
 
-        public static addEventListener(key:any, method:Function, caller:any, once?:boolean):void
+        public addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTEvent[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
                 {
                     if (element && element.method == method && element.caller == caller)
                     {
-                        JTLogger.info("[JTFunctionManager.registerFunction] The key"+ key +" function already registered ");
+                        // JTLogger.info("[JTFunctionManager.registerFunction] The key"+ key +" function already registered ");
                         return ;
                     }
                 });
@@ -31,13 +31,13 @@ namespace com
                 list = [];
                 this._eventMap[key] = list;
             }
-            var command:JTCommand = JTCommand.create(caller, method, null, once);
+            var command:JTEvent = JTEvent.create(caller, method, null, once);
             list.push(command);
         }
 
-        public static dispatchEvent(key:any, args?:any):void
+        public dispatchEvent(key:any, args?:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTEvent[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -51,13 +51,13 @@ namespace com
             }
             else
             {
-                JTLogger.info("[JTFunctionManager.execute] Cant find the function by key : " + key);
+                // JTLogger.info("[JTFunctionManager.execute] Cant find the function by key : " + key);
             }
         }
 
-        public static removeEventListener(key:any, method:Function, caller:any):void
+        public removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTEvent[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -71,9 +71,9 @@ namespace com
             }
         }
 
-        public static removeEvents(key:any):void
+        public removeEvents(key:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTEvent[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -88,15 +88,15 @@ namespace com
             }
         }
 
-        protected static delete(list:JTCommand[], command:JTCommand):void
+        protected delete(list:JTEvent[], command:JTEvent):void
         {
                 var index:number = list.indexOf(command);
-                var removes:JTCommand[] = list.splice(index, 1);
+                var removes:JTEvent[] = list.splice(index, 1);
                 removes.shift();
-                JTCommand.put(command);
+                JTEvent.put(command);
         }
 
-        protected static removes() 
+        protected removes() 
         {
             // this._eventMap.forEach((value, key)=>{
             //         this.removeEvents(key);
