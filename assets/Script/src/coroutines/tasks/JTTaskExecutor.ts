@@ -2,16 +2,26 @@ namespace com
 {
     export abstract class JTTaskExecutor extends JTTask implements JTITaskExecutor
     {
-        protected _locker:JTLocker = null;
+        private _counter:JTCounter = null;
 
-        public relevance(locker: JTLocker): void 
+        public relevance(counter: JTCounter): void 
         {
-            this._locker = locker;
+            this._counter = counter;
+        }
+
+        protected release():void
+        {
+            this._counter && this._counter.release();
+        }
+
+        protected kill():void
+        {
+            this._counter && this._counter.kill();
         }
 
         recycle() 
         {
-            this._locker = null;
+            this._counter = null;
         }
     }
 }

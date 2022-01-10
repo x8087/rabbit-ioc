@@ -8,13 +8,10 @@ namespace com
         protected _itemProvider:JTEvent = null;
         protected _itemRender:JTEvent = null;
 
-        protected _totalCount:number = 0;
-        protected _currentCount:number = 0;
         constructor(totalCount:number)
         {
             super();
-            this._totalCount = totalCount;
-            // this._counter = JTCounter.create();
+            this._counter.setTotalCount(totalCount);
         }
 
         /***
@@ -26,10 +23,9 @@ namespace com
             while(this._tasks.length)
             {
                 let task:JTITaskExecutor = this._tasks.shift();
-                task.relevance(this._counter, this._currentCount);
+                task.relevance(this._counter);
                 task.execute();
                 await this._counter.lock();
-                this._currentCount ++;
                 this.dispatchEvent(JTTaskEvent.TASK_PROGRESS, this);
                 task.recycle();
             }
@@ -41,10 +37,11 @@ namespace com
         
         private createTasks(): JTITaskExecutor[] 
         {
-            let taskList:JTITaskExecutor[] = []
+            let taskList:JTITaskExecutor[] = [];
+            let totalCount:number = this._counter.totalCount;
             if (this._itemRender)
             {
-                    for (let i:number = 0; i < this._totalCount; i++)
+                    for (let i:number = 0; i < totalCount; i++)
                     {
                         let task:JTITaskExecutor = this._itemRender.run();
                         taskList.push(task);
@@ -52,15 +49,15 @@ namespace com
             }
             else if (this._itemProvider)
             {
-                for (let i:number = 0; i < this._totalCount; i++)
+                for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._itemProvider.runWith([i, this._totalCount]);
+                    let task:JTITaskExecutor = this._itemProvider.runWith([i, totalCount]);
                     taskList.push(task);
                 }
             }
             else if (this._factroy)
             {
-                for (let i:number = 0; i < this._totalCount; i++)
+                for (let i:number = 0; i < totalCount; i++)
                 {
                     let task:JTITaskExecutor = this._factroy.produce();
                     taskList.push(task);
@@ -71,17 +68,12 @@ namespace com
 
         public get totalCount():number
         {
-            return this._totalCount;
+            return this._counter.totalCount;
         }
 
         public set factory(value:JTIFactory)
         {
             this._factroy = value;
-        }
-
-        public get currentCount():number
-        {
-            return this._currentCount;
         }
 
         public set itemRender(value:JTEvent)
@@ -96,7 +88,7 @@ namespace com
 
         public get progress():number
         {
-            return parseFloat((this._currentCount / this._totalCount).toFixed(2));
+            return this._counter.progress;
         }
     }
 }

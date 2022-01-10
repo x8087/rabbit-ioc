@@ -2,33 +2,43 @@ namespace com
 {
     export class JTCounter extends JTLocker
     {
+        /*
+        *失败次数
+        */
         private _failCount:number = 0;
+        /*
+        *成功次数
+        */
         private _succeedCount:number = 0;
+
+        /*
+        *已经完成的次数
+        */
+        private _lockedCount:number = 0;
+
         private _totalCount:number = 0;
-        private _lockCount:number = 0;
-        constructor(totalCount:number)
+        constructor()
         {
             super();
-            this._totalCount = totalCount;
         }
 
-        public lock():Promise<any>
+        public setTotalCount(totalCount:number):void
         {
-            if (this._locker) return this._locker; //注意，当前正使用锁时，如果没有调用release 时不能再使用lock()方法
-            this._lockCount ++;
-            return this._locker;
+            this._totalCount = totalCount;
         }
 
         public release():void
         {
             super.release();
             this._succeedCount ++;
+            this._lockedCount ++;
         }
 
         public kill():void
         {
             super.kill();
             this._failCount ++;
+            this._lockedCount ++;
         }
 
         public get totalCount():number
@@ -60,14 +70,19 @@ namespace com
             }
         }
 
-        public get lockCount():number
+        public get lockedCount():number
         {
-            return this._lockCount;
+            return this._lockedCount;
         }
 
         public static create():JTCounter
         {
             return JTPool.instance(JTCounter).get() as JTCounter;
+        }
+
+        public get progress():number
+        {
+            return parseFloat((this._lockedCount / this._totalCount).toFixed(2));
         }
     }
 }
