@@ -38,9 +38,9 @@ namespace com
 
         public reload():void 
         {
-            this._encoder = this._pipeline.getOption(JTChannelAdapter.ENCODE) as JTAbstractEncoderAdapter;
-            this._decoder = this._pipeline.getOption(JTChannelAdapter.DECODE) as JTAbstractDecoderAdapter;
-            this._idleState = this._pipeline.getOption(JTChannelAdapter.IDLE) as JTAbstractIdleStateAdapter;
+            this._encoder = this._pipeline.getOption(JTChannelAdapter.ENCODE) as JTIEncoderAdapter;
+            this._decoder = this._pipeline.getOption(JTChannelAdapter.DECODE) as JTIDecoderAdapter;
+            this._idleState = this._pipeline.getOption(JTChannelAdapter.IDLE) as JTIChannelAdapter;
         }
 
         public bind(channelPipeline:JTIChannelPipeline):void
