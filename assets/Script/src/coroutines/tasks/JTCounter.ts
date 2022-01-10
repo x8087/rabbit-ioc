@@ -82,7 +82,7 @@ namespace com
 
         public get progress():number
         {
-            return parseFloat((this._lockedCount / this._totalCount).toFixed(2));
+            return parseFloat((this._lockedCount / this._totalCount).toFixed(4));
         }
     }
 }

@@ -66,11 +66,6 @@ namespace com
             return taskList;
         }
 
-        public get totalCount():number
-        {
-            return this._counter.totalCount;
-        }
-
         public set factory(value:JTIFactory)
         {
             this._factroy = value;
@@ -85,10 +80,10 @@ namespace com
         {
             this._itemProvider = value;
         }
-
-        public get progress():number
+ 
+        public get counter():JTCounter
         {
-            return this._counter.progress;
+            return this._counter;
         }
     }
 }
