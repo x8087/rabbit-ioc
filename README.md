@@ -22,7 +22,7 @@ Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、�
         pool.totalCount //当前对象池一共创建了多少个对象
         
         //创建方法二:
-        @c.SingletonPool(c.JTPool, c.JTData) 
+        @c.SingletonPool(c.JTPool, c.JTDataInfo) 
         protected pool:c.JTIPool = null;
         
 JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池中留一个引用)
@@ -41,7 +41,7 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         pool.size //当前对象池可用对象数
         pool.totalCount //当前对象池一共创建了多少个对象
          
-        @c.SingletonPool(c.JTCachePool, c.JTData) //注入创建对象池
+        @c.SingletonPool(c.JTCachePool, c.JTDataInfo) //注入创建对象池
         protected pool:c.JTICachePool = null;
  JTFixedPool--固定对象池(在创建对象池时会直接先创建一定个数的对象在池里)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,4 +69,22 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         @c.SingletonPool(c.JTFixedPool, c.JTDataInfo, 100) //注入创建对象池
         protected pool:c.JTIFixedPool = null;
         
+ JTEvent--事件(不支持冒泡)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //由对象池创建
+        let event:c.JTEvent = c.JTEvent.create(this, test, {}, true)
 
+        function test():void
+        {
+
+        }
+        //new 创建
+        let event:c.JTEvent = new c.JTEvent();
+        event.setTo(this, test, null, false)
+
+
+        let result:any = event.run();//可返回结果，不带参数运行回调
+
+        let result:any = event.runWith(data);//可返回结果，带参数运行回调
+
+        c.JTEvent.put(event)//回收事件对象
