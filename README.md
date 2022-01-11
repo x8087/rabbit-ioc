@@ -88,3 +88,31 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         let result:any = event.runWith(data);//可返回结果，带参数运行回调
 
         c.JTEvent.put(event)//回收事件对象
+ JTFunctionManager--全局函数（主要用于通信事件）
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        //注册全局函数
+        c.JTFunctionManager.registerFunction("10000", test, this)
+
+        
+        function test(result:any):void
+        {
+            console.info(result)
+        }
+
+        //执行全局函数
+        c.JTFunctionManager.execute("10000", "hello world!")
+JTEventManager--全局事件（主要用于更新视图）
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        //注册全局事件
+        c.JTEventManager.addEventListener("updateView", test, this)
+
+        
+        function test(result:any):void
+        {
+            console.info(result)
+        }
+
+        //执行全局事件
+        c.JTFunctionManager.execute("updateView", "hello world!")
