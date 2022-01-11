@@ -94,25 +94,41 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         //注册全局函数
         c.JTFunctionManager.registerFunction("10000", test, this)
 
-        
         function test(result:any):void
         {
             console.info(result)
         }
-
         //执行全局函数
         c.JTFunctionManager.execute("10000", "hello world!")
+        
+        c.JTFunctionManager.removeFunction("10000", test, this)//移除单个全局函数
+        c.JTFunctionManager.removeFunctions("10000")//移除指定KEY的所有全局函数
+        
 JTEventManager--全局事件（主要用于更新视图）
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         
         //注册全局事件
         c.JTEventManager.addEventListener("updateView", test, this)
-
         
         function test(result:any):void
         {
             console.info(result)
         }
-
         //执行全局事件
-        c.JTFunctionManager.execute("updateView", "hello world!")
+        c.JTEventManager.dispathEvent("updateView", "hello world!")
+        c.JTEventManager.removeEventListener("updateView", test, this)//移除单个全局事件
+        c.JTEventManager.removeEventListener("updateView",)//移除指定KEY的所有全局事件
+JTEventDispatcher--事件派发器（一些自定义对象需要事件派发提供继承扩展使用）
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        let dispatcher:c.JTEventDispatcher = new c.JTEventDispatcher();
+        //注册事件
+        dispatcher.addEventListener("updateView", test, this)
+        function test(result:any):void
+        {
+            console.info(result)
+        }
+    
+      dispatcher.dispathEvent("updateView", "hello world!")    //执行自定义事件
+      dispatcher.removeEventListener("updateView", test, this)//移除单个事件
+      dispatcher.removeEvents("updateView",)//移除指定KEY的所有事件
+      dispatcher.removes();//移除所有事件
