@@ -11,6 +11,10 @@ namespace com
 
             updateConfigs(configs:any[]):void;
 
-            launch(host:string, port:number):void;
+            connect(host:string, port:number):void;
+
+            config(serverLoader:JTTextLoader, serverId:string):void
+
+            launch():void 
     }
 }

@@ -6,7 +6,7 @@ onmessage = function(evt)
         var task = data.__THREAD_TASK__;
         try
         {
-            var fn = (new Function("return "+task))();
+            var fn = (new Function("return "+ task))();
             var ctx = {
                             threadSignal: true,
                             sleep: function(interval)

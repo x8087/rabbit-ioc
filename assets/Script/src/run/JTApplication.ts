@@ -23,7 +23,8 @@ namespace com
         public static HTTP_CHANNEL:string = "Http_Channel";
         public static CHANNEL_PIPELINE:string = "Pipeline";
 
-        private static _locker:JTLocker = new JTLocker();
+        private _serverLoader:JTTextLoader = null;
+        private _serverTemplate:JTServerConfigTemplate = null;
 
         constructor()
         {
@@ -59,11 +60,22 @@ namespace com
             channelPipeline.childOption(type, channelAdapter);
            return this;
         }
+        
+        public config(serverLoader:JTTextLoader, serverId:string):void
+        {
+            this._serverLoader = serverLoader;
+            this._serverTemplate = serverLoader.toValue(serverId);
+        }
 
-        public launch(host: string, port: number):void 
+        public connect(host:string, port:number):void 
         {
             let channelPipeline:JTIChannelPipeline = this.getObject(JTApplication.CHANNEL_PIPELINE);
             channelPipeline.launch(host, port);
+        }
+
+        public launch():void
+        {
+            this.connect(this._serverTemplate.host, this._serverTemplate.port)
         }
 
         public loadSyncTemplates(list:any[]):void
@@ -72,6 +84,7 @@ namespace com
         }
 
 
+ 
         public updateConfigs(resources:any[]):void
         {
             let templateManager:JTTemplateBaseManager = this.getObject(JTApplication.TEMPLATE);
