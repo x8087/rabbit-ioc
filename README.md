@@ -66,7 +66,7 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         pool.size //当前对象池可用对象数
         pool.totalCount //当前对象池一共创建了多少个对象
          
-        @c.SingletonPool(c.JTFixedPool, c.JTData) //注入创建对象池
+        @c.SingletonPool(c.JTFixedPool, c.JTDataInfo, 100) //注入创建对象池
         protected pool:c.JTIFixedPool = null;
         
 
