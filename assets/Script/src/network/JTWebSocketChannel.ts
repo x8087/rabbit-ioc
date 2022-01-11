@@ -32,7 +32,6 @@ namespace com
             {   
                 socket.send(message);
                 this._encoder.writeComplete(message);
-
             }
             else
             {
@@ -63,12 +62,11 @@ namespace com
             let decoder:JTIDecoderAdapter = this._decoder;
             let message:any = decoder.decode(data);
             decoder.readComplete(message);
-         
         }
 
         protected onCloseHandler(e):void
         {
-                JTLogger.info("the server already close");
+            JTLogger.info("the server already close");
         }
 
         protected onErrorHandler(e):void

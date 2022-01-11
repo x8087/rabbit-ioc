@@ -3,7 +3,7 @@ namespace com
         /***
          * 事件信号器 --- 基于全局函数派发执行，
          */
-        export class JTEventSignaler implements JTIPoolObject
+        export class JTEventSignaler implements JTIEventSignaler
         {
                 protected _eventMap:Object = null;
                 protected _functionMap:{[key:number]: any} = null;
@@ -58,7 +58,7 @@ namespace com
                         JTEventManager.removeEventListener(key, method, caller);
                 }
 
-                protected removeEvents() 
+                public removeEvents() 
                 {
                         var caller:any = this;
                         for (var key in this._eventMap)
@@ -92,7 +92,7 @@ namespace com
                         JTFunctionManager.removeFunction(key, method, caller);
                 }
 
-                protected removeFunctions() 
+                public removeFunctions() 
                 {
                         var caller:any = this;
                         for (var key in this._functionMap)

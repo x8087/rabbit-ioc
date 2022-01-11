@@ -10,7 +10,7 @@ namespace com
 
           getOption(type:string):JTIChannelAdapter
 
-          launch(host:string, port:number):void
+          launch(host:string, port:number):JTIChannel
      
      }
 }

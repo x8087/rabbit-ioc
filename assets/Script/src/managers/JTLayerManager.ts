@@ -6,12 +6,13 @@ namespace com
         public static LAYER_TIPS: string = "layer_tips";
         public static LAYER_SCENE: string = "layer_scene";
         public static LAYER_POPUP: string = "layer_popup";
-
+        public static LAYER_MAP: string = "layer_map";
+        public static LAYER_MASK: string = "layer_mask";
 
         private _layerMap:Object = null;
         private _stage:fgui.GRoot = null;
 
-        constructor(stage:fgui.GRoot)
+        constructor(stage?:fgui.GRoot)
         {
             super();
             this._stage = stage;
@@ -33,10 +34,23 @@ namespace com
             return layer;
         }
 
+        public addChild(componentUI:fgui.GComponent, type:string):void
+        {
+            let layer:fgui.GComponent = this.getLayer(type);
+            layer.addChild(componentUI)
+        }
+
         public getLayer(type:string):fgui.GComponent 
         {
             return this._layerMap[type];
         }
+
+        public get stage():fgui.GRoot
+        {
+            return this._stage;
+        }
+
+
 
     }
 }

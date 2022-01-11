@@ -1,4 +1,4 @@
-///<reference path="./mappers/JTMapper.ts"/>
+///<reference path="mappers/JTMapper.ts"/>
 namespace com 
 {
     export class JTDataInfo extends JTMapper

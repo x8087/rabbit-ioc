@@ -1,4 +1,4 @@
-///<reference path="../../run/JTClassExtension.ts"/>
+///<reference path="../../../run/JTClassExtension.ts"/>
 namespace com 
 {
     export class JTResponseMapping extends JTClassExtension

@@ -61,10 +61,11 @@ namespace com
         
         private static _pool:JTIPool = null;
 
-        public static begin():JTSendPackage
+        public static begin(channel?:JTIChannel):JTSendPackage
         {
             var sendPackage:JTSendPackage = this.pool.get() as JTSendPackage;
-            sendPackage.setup(JTSession.socketChannel);
+            if (!channel) channel = JTSession.channel; //如果没有传连接通道，直接使用框架默认的连接
+            sendPackage.setup(channel);
             return sendPackage;
         }
 

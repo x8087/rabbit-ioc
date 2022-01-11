@@ -13,7 +13,7 @@
         {
             this._channel = channel;
             this._channel.bind(this);
-            JTSession.socketChannel = this._channel;
+            JTSession.channel = this._channel;
             return this._channel;
         }
 
@@ -30,10 +30,11 @@
             return this._pipelineMap[type];
         }
 
-        public launch(host:string, port:number):void
+        public launch(host:string, port:number):JTIChannel
         {
             this._channel.reload();
             this._channel.connect(host, port);
+            return this._channel;
         }
 
         public get channel():JTIChannel
