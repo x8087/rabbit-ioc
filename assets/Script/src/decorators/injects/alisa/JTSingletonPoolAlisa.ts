@@ -7,15 +7,15 @@ module com
 	{
 		private _referenceMap:{[className:string]:string} = null;
 		private _referenceCount:number = 0;
-		private _destroyed:boolean = false;
+		private _parameters:any = false;
 		private _itemCls:any = null;
 
-		constructor(cls:any, itemCls:any, destroyed:boolean = false)
+		constructor(cls:any, itemCls:any, parameters?:any)
 		{
 			super(cls);
 			this._itemCls = itemCls;
 			this._referenceMap = {};
-			this._destroyed = destroyed;
+			this._parameters = parameters;
 		}
 
 		public recycle() 
@@ -47,7 +47,7 @@ module com
 		{
 			if (!this._instance) 
 			{
-				this._instance = this._cls.instance(this._itemCls);
+				this._instance = this._cls.instance(this._itemCls, this._parameters);
 			}
 			return this._instance;
 		}

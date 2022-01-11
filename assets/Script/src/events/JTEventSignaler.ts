@@ -3,7 +3,7 @@ namespace com
         /***
          * 事件信号器 --- 基于全局函数派发执行，
          */
-        export class JTEventSignaler
+        export class JTEventSignaler implements JTIPoolObject
         {
                 protected _eventMap:Object = null;
                 protected _functionMap:{[key:number]: any} = null;

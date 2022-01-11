@@ -11,7 +11,7 @@ module com
 	 * @param itemCls 注入的单例类
 	 * @param destroyed 引用计数为0时，是否自动销毁
 	 */
-	export function SingletonPool(poolCls:any, itemCls:any, destroyed:boolean = false):Function
+	export function SingletonPool(poolCls:any, itemCls:any, parameters?:any):Function
     {
 		return function (target:any, property:string, descripter?:any) 
         {
@@ -21,12 +21,12 @@ module com
 			}
 			else 
             {
-				 registerSingletonPoolAlisa(poolCls, target, property, itemCls, destroyed);
+				 registerSingletonPoolAlisa(poolCls, target, property, itemCls, parameters);
 			}
 		}
 	}
 	 
-	export function registerSingletonPoolAlisa(poolCls:any, target:any, property:string, itemCls:any, destroyed:boolean = false) 
+	export function registerSingletonPoolAlisa(poolCls:any, target:any, property:string, itemCls:any, parameters?:any) 
 	{
 		let key:string = JTDecoratorUtils.registerClassAlias(target, property);
 		Object.defineProperty(target, property, 
@@ -36,7 +36,7 @@ module com
 				let val = this[key];
 				if (val === null || val === undefined) 
 				{
-					let _class:JTClassAlias = JTDecoratorUtils.bindPool(poolCls, itemCls, destroyed);
+					let _class:JTClassAlias = JTDecoratorUtils.bindPool(poolCls, itemCls, parameters);
 					val = this[property] = _class.instance;
 					_class = null;
 				}

@@ -46,13 +46,13 @@ module com
 			return __class;
 		}
 
-		public static bindPool(poolCls:any, itemCls:any, destroyed:boolean = false):JTClassAlias
+		public static bindPool(poolCls:any, itemCls:any, parameters?:any):JTClassAlias
 		{
 			let name:string = itemCls.name;
 			let __class:JTClassAlias = this._bindedMap[name];
 			if (!__class)
 			{
-				__class = new JTSingletonPoolAlias(poolCls, itemCls, destroyed);
+				__class = new JTSingletonPoolAlias(poolCls, itemCls, parameters);
 				this._bindedMap[name] = __class;
 			}
 			return __class;
