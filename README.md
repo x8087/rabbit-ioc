@@ -1,6 +1,6 @@
 # Rabbit-IOC
  
-支持cocos creator 2.4.7及以下的版本
+支持cocos creator 2.4.7及以下的版本（3.0以上的版本要把命名空间--namespace 去掉、GULP和TSCONFIG都需要做一些调整 ）
 支持LAYA所有版本
 支持Egret所有版本
 
