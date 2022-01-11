@@ -104,7 +104,7 @@ JTCachePool--缓存对象池(每一个由该对象池创建的对象都会在池
         c.JTFunctionManager.removeFunction("10000", test, this)//移除单个全局函数
         c.JTFunctionManager.removeFunctions("10000")//移除指定KEY的所有全局函数
         
-JTEventManager--全局事件（主要用于更新视图）
+JTEventManager--全局事件（主要用于通知 (刷新/更新) 视图）
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         
         //注册全局事件
@@ -117,7 +117,7 @@ JTEventManager--全局事件（主要用于更新视图）
         //执行全局事件
         c.JTEventManager.dispathEvent("updateView", "hello world!")
         c.JTEventManager.removeEventListener("updateView", test, this)//移除单个全局事件
-        c.JTEventManager.removeEventListener("updateView",)//移除指定KEY的所有全局事件
+        c.JTEventManager.removeEvents("updateView",)//移除指定KEY的所有全局事件
 JTEventDispatcher--事件派发器（一些自定义对象需要事件派发提供继承扩展使用）
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         let dispatcher:c.JTEventDispatcher = new c.JTEventDispatcher();
@@ -132,3 +132,20 @@ JTEventDispatcher--事件派发器（一些自定义对象需要事件派发提�
       dispatcher.removeEventListener("updateView", test, this)//移除单个事件
       dispatcher.removeEvents("updateView",)//移除指定KEY的所有事件
       dispatcher.removes();//移除所有事件
+JTEventSignaler--全局信号器（该对象能派发、接收全局事件和函数---在框架中提供给视图层和数据层）
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        let signaler:c.JTEventSignaler = new c.JTEventSignaler();
+        //注册全局事件
+        signaler.addEventListener("updateView", test, this)
+        //注册全局函数
+        signaler.registerFunction("10000", test, this)
+        function test(result:any):void
+        {
+            console.info(result)
+        }
+      signaler.executeFunction("10000", "hello world!")
+      signaler.dispathEvent("updateView", "hello world!")    //执行自定义事件
+      
+      signaler.removeEventListener("updateView", test, this)//移除单个事件
+      signaler.removeEvents("updateView",)//移除指定KEY的所有事件
+      signaler.removes();//移除所有事件和函数...等
