@@ -6,7 +6,7 @@ Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、�
 
  
 JTPool.ts 
- /**
+        /**
          * 普通创建方法
          * c.JTDataInfo 必须实现JTIPoolObject接口
          */
