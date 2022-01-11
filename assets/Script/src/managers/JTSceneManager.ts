@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTSceneManager extends JTClassExtension
+    export class JTSceneManager extends JTApplicationContext
     {
         private _layer:fgui.GComponent = null;
         private _sceneMap:{[name:string]:any} = null;
@@ -46,7 +46,7 @@ namespace com
         {
             if (!this._layer)
             {
-                let layerManager:JTLayerManager = JTApplication.getExtensionItem(JTApplication.LAYER);
+                let layerManager:JTLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.LAYER);
                 this._layer = layerManager.getLayer(JTLayerManager.LAYER_SCENE);
             }
             return this._layer;

@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTProtocolItemManager extends JTClassExtension
+    export class JTProtocolItemManager extends JTApplicationContext
     {
         public protocolUp:JTIProtocol = null;
 

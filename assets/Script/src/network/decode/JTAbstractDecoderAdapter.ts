@@ -14,9 +14,9 @@ namespace com
 
         public channelActive():void
         {
-            this._responseMapper = JTApplication.getExtensionItem(JTApplication.MAPPING)
-            this._protocolManager = JTApplication.getExtensionItem(JTApplication.PROTOCOL);
-            this._protocolErrorMessage = JTApplication.getExtensionItem(JTApplication.ERROR_MESSAGE);
+            this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.MAPPING)
+            this._protocolManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.PROTOCOL);
+            this._protocolErrorMessage = JTApplicationBootstrap.getContext(JTApplicationBootstrap.ERROR_MESSAGE);
             this._downProtocol = this._protocolManager.downProtocol;
         }
 

@@ -1,7 +1,7 @@
-///<reference path="../../../context/JTClassExtension.ts"/>
+///<reference path="../../../context/JTApplicationContext.ts"/>
 namespace com 
 {
-    export class JTResponseMapping extends JTClassExtension
+    export class JTResponseMapping extends JTApplicationContext
     {
         public build(): void 
         {

@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTProtocolErrorMsg extends JTClassExtension
+    export class JTProtocolErrorMsg extends JTApplicationContext
     {
         constructor()
         {

@@ -12,7 +12,7 @@ namespace com
         public writeComplete(data:any):void
         {
             let message:any = JSON.parse(data);
-            let protocolManager:JTProtocolItemManager = JTApplication.getExtensionItem(JTApplication.PROTOCOL);
+            let protocolManager:JTProtocolItemManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.PROTOCOL);
             let protocolUp:JTIProtocol = protocolManager.protocolUp;
             let itemProtocol:JTItemProtocol= protocolUp.getProtocol(message.protocol);
             if (itemProtocol && itemProtocol.isWaiting)
