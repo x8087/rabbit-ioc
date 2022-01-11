@@ -1,4 +1,4 @@
-///<reference path="../run/JTClassExtension.ts"/>
+///<reference path="../context/JTClassExtension.ts"/>
 namespace com 
 {
     export class JTLayerManager extends JTClassExtension

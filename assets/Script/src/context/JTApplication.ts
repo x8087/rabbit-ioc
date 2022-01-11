@@ -1,3 +1,4 @@
+///<reference path="../events/JTEventSignaler.ts"/>
 namespace com 
 {
     export abstract class JTApplication extends JTEventSignaler implements JTIOption
