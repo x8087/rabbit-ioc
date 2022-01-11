@@ -4,10 +4,11 @@
 
 Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、控制反转、帧同步、优化帧、计时器、均摊、帧均摊、携程、线程、对象池、Websocket、Template、计数器、引用计数、pomise\yeild等技术封装)
 
-/**
-  *  普通对象池
-  */
-JTPool.ts … 普通对象池
+ 
+JTPool.ts 
+       /**
+         * 普通创建
+         */
         //c.JTDataInfo 必须实现JTIPoolObject接口
         let pool:c.JTIPool = c.JTPool.instance(c.JTDataInfo);
         let dataInfo:c.JTDataInfo = pool.get();//从对象池获取对象
