@@ -1,6 +1,7 @@
+///<reference path="JTTimerTask.ts"/>
 namespace com 
 {
-    export class JTTimer extends JTTaskTimer implements JTITimer
+    export class JTTimer extends JTTimerTask implements JTITimer
     {
         constructor(interval:number = 0, loop:number = 0)
         {

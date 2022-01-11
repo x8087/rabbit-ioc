@@ -81,28 +81,6 @@ namespace com
             else if (times == 1) //正常帧数无需跳帧数
             {
                 super.updateTick(tick);
-                // this._currentTimes ++;
-                // this._currentTick -= this._interval;
-                // this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
-                // if (this._currentTimes >= this._totalTimes)
-                // {
-                //     this._loopTimes ++;
-                //     if (this._loop == 0)this._currentTimes = 0;
-                //     else
-                //     {
-                //         if (this._loopTimes >= this._loop && this._loop != 0)
-                //         {
-                //             this._running = false;
-                //             this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
-                //             this.dispatchEvent(JTTimeEvent.ENTER_COMPLETE, this);
-                //         }
-                //         else
-                //         {
-                //             this._currentTimes = 0;
-                //             this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
-                //         }
-                //     }
-                // }
             }
         }
       

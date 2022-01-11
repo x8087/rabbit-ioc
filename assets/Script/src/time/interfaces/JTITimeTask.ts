@@ -1,6 +1,6 @@
 namespace com 
 {
-    export interface JTITaskTimer  
+    export interface JTITimerTask  
     {
         updateTick(tick:number):void;
         

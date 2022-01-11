@@ -1,6 +1,6 @@
 namespace com 
 {
-    export abstract class JTTaskTimer extends JTEventDispatcher implements JTITaskTimer
+    export abstract class JTTimerTask extends JTEventDispatcher implements JTITimerTask
     {
         protected _currentTick:number = 0;
         protected _interval:number = 0;

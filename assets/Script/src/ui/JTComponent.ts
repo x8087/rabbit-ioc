@@ -6,7 +6,6 @@ namespace com
         protected _componentId:string = null;
         protected _runCls:any = null;
         protected _layerType:string = null;
-
         
         constructor()
         {

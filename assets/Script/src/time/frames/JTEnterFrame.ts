@@ -1,11 +1,14 @@
 namespace com 
 {
     //传统帧事件
-    export class JTEnterFrame extends JTTaskTimer implements JTIEnterFrame
+    export class JTEnterFrame extends JTTimerTask implements JTIEnterFrame
     {
         protected _frameRate:number = 0;
         protected _loop:number = 0;
         protected _loopTimes:number = 0;
+        protected SECOND_INTERVAL:number = 1000;
+        protected DEFAULT_FRAME_RATE:number = 60;
+        protected DEFAULT_FRAME_RATE_TIME:number = 16;
         constructor()
         {
             super(0, 0);
@@ -25,9 +28,7 @@ namespace com
         {
             this._loopTimes = 0;
             this._loop = loop;
-            this._frameRate = frameRate;
             this._totalTimes = totalFrames;
-            this._interval = 1000 / frameRate;
         }
 
         public play(totalFrames:number, loop:number = 0, frameRate:number = 60):void
@@ -39,12 +40,18 @@ namespace com
 
         public gotoAndPlay(frameRate:number, loop:number = 1):void
         {
-
+            
         }
 
         public gotoAndStop():void
         {
 
+        }
+
+        protected adjustFrameRate(value:number):void
+        {
+            this._interval = this.SECOND_INTERVAL / value;
+            this._frameRate = value;
         }
 
         public stop():void
@@ -75,7 +82,7 @@ namespace com
         public updateTick(tick:number):void
         {
             this._currentTick += tick; //叠加时间
-            let count:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数
+            let count:number = Math.floor(this._currentTick / this._interval);//取最小延迟次数-不进行四舍五入，也不直接上向补位，把时间节点留到下次叠加
             if (count > 0) //延迟次数
             {
                 for (let i:number = 0; i < count; i++)
