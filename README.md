@@ -4,9 +4,7 @@
 
 Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、控制反转、帧同步、优化帧、计时器、均摊、帧均摊、携程、线程、对象池、Websocket、Template、计数器、引用计数、pomise\yeild等技术封装)
 
- 
-
-        //JTPool
+        //JTPool --传统的对象池
 
         //普通创建方法
         // c.JTDataInfo 必须实现JTIPoolObject接口
@@ -22,7 +20,8 @@ Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、�
 
         pool.size //当前对象池可用对象数
         pool.totalCount //当前对象池一共创建了多少个对象
+         
+        @c.SingletonPool(c.JTPool, c.JTData //注入创建对象池
+        protected pool:c.JTIPool = null;
         
- 注入创建方法
- @c.SingletonPool(c.JTPool, c.JTData)
- private pool:c.JTIPool = null;
+
