@@ -95,25 +95,6 @@ namespace com
                 else break;//不足1次方计算，直接默认+1，中断循环
             }
             return count;
-            // if(value != 1)
-            // {
-            //     while(value != 1)
-            //     {
-            //         if(value % sqr == 0)
-            //         {
-            //             value = value / sqr;
-            //         }
-            //         else
-            //         {
-            //             return false;
-            //         }
-            //     }
-            //     return true;
-            // }
-            // else
-            // {
-            //     return true;
-            // }
         }
     }
 }
