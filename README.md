@@ -4,7 +4,25 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、控制反转、帧同步、优化帧、计时器、均摊、帧均摊、携程、线程、对象池、Websocket、Template、计数器、引用计数、pomise\yeild等技术封装)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  JTPool--传统对象池
+框架启动配置
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        let application:c.JTIOption = new JTApplicationBoot();
+        application.option(c.JTApplication.PROTOCOL, new JTProtocolManager())//重写了此类
+        application.option(c.JTApplication.TEMPLATE, JTTemplateManager.instance) //注入单例//重写了此类
+        application.option(c.JTApplication.ERROR_MESSAGE, new JTProtocolErrorMessage())//重写了此类
+        // application.option(c.JTApplication.LAYER, new c.JTLayerManager())
+        application.option(c.JTApplication.MAPPING, new c.JTResponseMapping());
+        application.option(c.JTApplication.SCENE, new c.JTSceneManager());
+        application.updateConfigs(resources);
+        application.config(JTTemplateManager.instance.serverLoader,  "testServer");
+        application.channel(new c.JTWebSocketChannel(c.JTWebSocket));
+        application.childOption(c.JTChannelAdapter.ENCODE, new c.JTEncodeToJSONAdapter());
+        application.childOption(c.JTChannelAdapter.DECODE, new c.JTDecoderToJSONAdapter());
+        application.launch();
+
+
+
+JTPool--传统对象池
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         //创建方法 一:
         // c.JTDataInfo 必须实现JTIPoolObject接口
