@@ -21,6 +21,8 @@ namespace com
 
         send(data:any):void 
 
-        connect(host:string, port:number):any;
+        config(host:string, port:number):any;
+
+        connect():void;
     }
 }

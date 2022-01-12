@@ -10,7 +10,7 @@ namespace com
         protected _pipeline:JTIChannelPipeline = null;
         protected _encoder:JTIEncoderAdapter = null;
         protected _decoder:JTIDecoderAdapter = null;
-        protected _idleState:JTIChannelAdapter = null;
+
         constructor(cls:any)
         {
             super();
@@ -26,11 +26,14 @@ namespace com
 
         abstract send(data:any):void 
 
-        public connect(host:string, port:number):any
+        public config(host:string, port:number):void
         {
             this._host = host;
             this._port = port;
+        }
 
+        public connect():any
+        {
             if (this._channel) this._channel.clean();
             else this._channel = new this._cls();
             return this._channel;
@@ -38,9 +41,8 @@ namespace com
 
         public reload():void 
         {
-            this._encoder = this._pipeline.getOption(JTChannelAdapter.ENCODE) as JTIEncoderAdapter;
-            this._decoder = this._pipeline.getOption(JTChannelAdapter.DECODE) as JTIDecoderAdapter;
-            this._idleState = this._pipeline.getOption(JTChannelAdapter.IDLE) as JTIChannelAdapter;
+            this._encoder = this._pipeline.getContext(JTChannelContext.ENCODE) as JTIEncoderAdapter;
+            this._decoder = this._pipeline.getContext(JTChannelContext.DECODE) as JTIDecoderAdapter;
         }
 
         public bind(channelPipeline:JTIChannelPipeline):void

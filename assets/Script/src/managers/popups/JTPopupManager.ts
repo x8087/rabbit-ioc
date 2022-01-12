@@ -171,8 +171,8 @@ namespace com
         {
             if (!this.__layer)
             {                
-                let layerManager:JTLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.LAYER);
-                this.__layer = layerManager.getLayer(JTLayerManager.LAYER_POPUP);
+                let layerManager:JTAbstractLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
+                this.__layer = layerManager.getLayer(JTAbstractLayerManager.LAYER_POPUP);
             }
             return this.__layer;
         }

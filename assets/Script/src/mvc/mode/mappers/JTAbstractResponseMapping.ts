@@ -1,7 +1,6 @@
-///<reference path="../../../context/JTApplicationContext.ts"/>
 namespace com 
 {
-    export abstract class JTResponseMapping extends JTApplicationContext
+    export abstract class JTAbstractResponseMapping extends JTApplicationContext
     {
         public build(): void 
         {
@@ -13,7 +12,7 @@ namespace com
 
         public registerToMapping<T extends JTClassMapper>(protocol:number, __mapper:T):void
         {
-            JTResponseMapping.mappingMap[protocol] = __mapper;
+            JTAbstractResponseMapping.mappingMap[protocol] = __mapper;
         }
 
         public registerMapper(protocol:number, _class:any, createFromPool:boolean = false):void
@@ -23,12 +22,12 @@ namespace com
 
         public getMapper<T extends JTClassMapper>(protocol:number):T
         {
-            return JTResponseMapping.mappingMap[protocol];
+            return JTAbstractResponseMapping.mappingMap[protocol];
         }
 
         public create(protocol:number, data:any):any
         {
-            let __classMapper:JTClassMapper = JTResponseMapping.mappingMap[protocol];
+            let __classMapper:JTClassMapper = JTAbstractResponseMapping.mappingMap[protocol];
             let dataInfo:JTIMapper = __classMapper ? __classMapper.create() : null;
             if (dataInfo)dataInfo.update(data);
             return dataInfo ? dataInfo : data;

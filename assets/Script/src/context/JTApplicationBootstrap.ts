@@ -1,25 +1,25 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
 namespace com 
 {
-    export abstract class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
+    export class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
     {
         protected static _contextMap:{[name:string]:any} = {};
 
-        private static _contexts:JTIApplicationContext[] = []
+        private static ____ctx:JTIApplicationContext[] = []
 
-        public static PROTOCOL:string = "ProtocolManager";
+        public static CONTEXT_PROTOCOL:string = "Context_Protocol";
 
-        public static ERROR_MESSAGE:string = "ErrorMessage";
+        public static CONTEXT_ERROR_MESSAGE:string = "Context_ErrorMessage";
 
-        public static TEMPLATE:string = "TemplateManager";
+        public static CONTEXT_TEMPLATE:string = "Context_Template";
 
-        public static MAPPING:string = "Mapping";
+        public static CONTEXT_MAPPING:string = "Context_Response_Mapping";
 
-        public static SCENE:string = "Scene";
+        public static CONTEXT_SCENE:string = "Context_Scene";
 
-        public static LAYER:string = "Layer";
+        public static CONTEXT_LAYER:string = "Context_Layer";
 
-        public static RUNNER:string = "Runner";
+        public static CONTEXT_RUNNER:string = "Context_RUNNER";
 
         public static CHANNEL:string = "Channel";
         public static WEBSOCKET_CHANNEL:string = "Websocket_Channel";
@@ -50,44 +50,31 @@ namespace com
             return this.registerContextAlias(type, _context) as JTIChildOption
         }
 
-        // protected builds():void
-        // {
-        //     this.buildExecutions();
-        //     // this.buildLayers();
-        // }
-
-        // protected buildLayers():void
-        // {
-        //     let layerManager:JTLayerManager = this.getExtensionItem(JTApplication.LAYER) as JTLayerManager;
-        //     let sceneManager:JTSceneManager = this.getExtensionItem(JTApplication.SCENE);
-        //     sceneManager.layer = layerManager.getLayer(JTLayerManager.LAYER_SCENE)
-        // }
-
         /**
          * 构建上下文对象
          */
         protected buildContexts():void
         {
-            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
             let count:number = __contexts.length;
             for (let i:number = 0; i < count; i++)
             {
-                    let context:JTIApplicationContext = __contexts[i];
-                    context.build();
+                    let ___c:JTIApplicationContext = __contexts[i];
+                    ___c.build();
             }
         }
 
         /**
          * 构建上下文对象
          */
-        protected buildContextsComplete():void
+        protected buildComplete():void
         {
-            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
             let count:number = __contexts.length;
             for (let i:number = 0; i < count; i++)
             {
-                    let context:JTIApplicationContext = __contexts[i];
-                    context.build();
+                    let __c:JTIApplicationContext = __contexts[i];
+                    __c.buildComplete();
             }
         }
 
@@ -111,7 +98,7 @@ namespace com
          * @param channelAdapter 适配器
          * @returns 
          */
-        public childOption(type:string, channelAdapter:JTIChannelAdapter):JTIChannelOption
+        public childOption(type:string, channelAdapter:JTIChannelContext):JTIChannelOption
         {
             let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
             channelPipeline.childOption(type, channelAdapter);
@@ -162,7 +149,7 @@ namespace com
         public launch():JTIChannel
         {
             if (this._taskPipeline) this._taskPipeline.run();
-            this.buildContextsComplete();
+            this.buildComplete();
             return this.connect();
         }
 
@@ -182,7 +169,7 @@ namespace com
             return this._taskPipeline;
         }
 
-        public setDesignResolutionSize(width:number, height:number, resolutionPolicy:string | number):void
+        public setDesignResolutionSize(width:number, height:number, resolutionPolicy?:string | number):void
         {
             JTSession.stageWidth = width;
             JTSession.stageHeight = height;
@@ -194,14 +181,14 @@ namespace com
          */
         public updateConfigs(resources:any[]):void
         {
-            let templateManager:JTTemplateBaseManager = this.getContext(JTApplicationBootstrap.TEMPLATE) as JTTemplateBaseManager;
+            let templateManager:JTAbstractTemplateManager = this.getContext(JTApplicationBootstrap.CONTEXT_TEMPLATE) as JTAbstractTemplateManager;
             templateManager.updateConfigs(resources);
         } 
 
         public registerContextAlias(key:string, __context:any):JTIOption
         {
             JTApplicationBootstrap._contextMap[key] = __context;
-            let contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            let contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
             if (__context instanceof JTApplicationContext)  contexts.push(__context);
             return this;
         }

@@ -1,6 +1,6 @@
 namespace com 
 {
-     export interface JTIDecoderAdapter extends JTIChannelAdapter
+     export interface JTIDecoderAdapter extends JTIChannelContext
      {
           decode(data:any):any;
 

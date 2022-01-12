@@ -2,6 +2,10 @@ namespace com
 {
     export class JTDecoderToJSONAdapter extends JTAbstractDecoderAdapter
     {
+        public build(): void {
+            
+            
+        }
         constructor()
         {
             super();

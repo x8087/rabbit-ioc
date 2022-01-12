@@ -2,6 +2,12 @@ namespace com
 {
     export class JTEncodeToJSONAdapter extends JTAbstractEncoderAdapter
     {
+        public build(): void 
+        {
+          
+            
+        }
+        
         constructor()
         {
             super();
@@ -20,5 +26,7 @@ namespace com
         {
             super.writeComplete(data);
         }
+
+
     }
 }

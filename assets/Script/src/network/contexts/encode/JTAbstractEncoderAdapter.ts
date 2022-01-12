@@ -1,6 +1,6 @@
 namespace com 
 {
-    export abstract class JTAbstractEncoderAdapter extends JTChannelAdapter implements JTIEncoderAdapter
+    export abstract class JTAbstractEncoderAdapter extends JTChannelContextAdapter implements JTIEncoderAdapter
     {
         constructor()
         {
@@ -12,7 +12,7 @@ namespace com
         public writeComplete(data:any):void
         {
             let message:any = JSON.parse(data);
-            let protocolManager:JTProtocolItemManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.PROTOCOL);
+            let protocolManager:JTAbstractProtocolManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
             let protocolUp:JTIProtocol = protocolManager.protocolUp;
             let itemProtocol:JTItemProtocol= protocolUp.getProtocol(message.protocol);
             if (itemProtocol && itemProtocol.isWaiting)
@@ -21,5 +21,11 @@ namespace com
             }
             JTLogger.info("[sendPackage.send] : UpProtocol:  " + message.protocol,  "   content: " + JSON.stringify(message.content));
         }
+
+        public channelInactive(): void
+        {
+
+        }         
+            
     }
 }

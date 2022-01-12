@@ -1,7 +1,7 @@
 ///<reference path="../context/JTApplicationContext.ts"/>
 namespace com 
 {
-    export abstract class JTLayerManager extends JTApplicationContext
+    export abstract class JTAbstractLayerManager extends JTApplicationContext
     {
         public static LAYER_TIPS: string = "layer_tips";
         public static LAYER_SCENE: string = "layer_scene";
@@ -24,15 +24,17 @@ namespace com
             {
                 this._layerMap = {};
                 this._stage = fgui.GRoot.create();
-                this.createLayer(JTLayerManager.LAYER_SCENE);
-                this.createLayer(JTLayerManager.LAYER_POPUP);
-                this.createLayer(JTLayerManager.LAYER_TIPS);
+                this.createLayer(JTAbstractLayerManager.LAYER_MAP);
+                this.createLayer(JTAbstractLayerManager.LAYER_SCENE);
+                this.createLayer(JTAbstractLayerManager.LAYER_MASK);
+                this.createLayer(JTAbstractLayerManager.LAYER_POPUP);
+                this.createLayer(JTAbstractLayerManager.LAYER_TIPS);
             }
         }
         
         private createLayer(type:string):fgui.GComponent 
         {
-            let layer: fgui.GComponent = new fgui.GComponent();
+            let layer:fgui.GComponent = new fgui.GComponent();
             layer.makeFullScreen();
             this._layerMap[type] = layer;
             this._stage.addChild(layer);

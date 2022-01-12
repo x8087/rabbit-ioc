@@ -1,10 +1,11 @@
+///<reference path="../JTChannelContextAdapter.ts"/>
 namespace com 
 {
-    export abstract class JTAbstractDecoderAdapter extends JTChannelAdapter implements JTIDecoderAdapter
+    export abstract class JTAbstractDecoderAdapter extends JTChannelContextAdapter implements JTIDecoderAdapter
     {
-        protected _responseMapper:JTResponseMapping = null;
-        protected _protocolManager:JTProtocolItemManager = null;
-        protected _protocolErrorMessage:JTProtocolErrorMsg = null;
+        protected _responseMapper:JTAbstractResponseMapping = null;
+        protected _protocolContext:JTAbstractProtocolManager = null;
+        protected _errorMessageContext:JTAbstractProtocolErrorMessage = null;
         protected _downProtocol:JTIProtocol = null;
         constructor()
         {
@@ -14,10 +15,10 @@ namespace com
 
         public channelActive():void
         {
-            this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.MAPPING)
-            this._protocolManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.PROTOCOL);
-            this._protocolErrorMessage = JTApplicationBootstrap.getContext(JTApplicationBootstrap.ERROR_MESSAGE);
-            this._downProtocol = this._protocolManager.downProtocol;
+            this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)
+            this._protocolContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
+            this._errorMessageContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE);
+            this._downProtocol = this._protocolContext.downProtocol;
         }
 
         public abstract decode(data:any):any;
@@ -35,7 +36,7 @@ namespace com
             {
                 this._downProtocol.execute(content);
             }
-            if (this._protocolErrorMessage.checkPackageStatus(receivePackage))
+            if (this._errorMessageContext.checkPackageStatus(receivePackage))
             {
                 if (this._responseMapper) content = this.toMapper(protocol, content); //检查协议号是否绑定了Mapper映射序列化
                 JTFunctionManager.execute(protocol.toString(), content);
@@ -43,9 +44,14 @@ namespace com
             }
             else
             {
-                this._protocolErrorMessage.showErrorMessage(receivePackage);
+                this._errorMessageContext.showErrorMessage(receivePackage);
                 JTLogger.info("[receivePackage.read] protocol: " + protocol,  "    errorCode:  " + receivePackage.errorCode);
             }
+        }
+
+        public channelInactive(): void
+        {
+
         }
 
         protected toMapper(protocol:number, data:any):any

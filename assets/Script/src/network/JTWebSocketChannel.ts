@@ -1,9 +1,11 @@
+///<reference path="JTChannel.ts"/>
 namespace com 
 {
     export class JTWebSocketChannel extends JTChannel
     {
         protected _connected:boolean = false;
         protected _buffers:any[] = null;
+        protected _idleState:JTIChannelContext = null;
         constructor(cls:any)
         {
             super(cls);
@@ -40,19 +42,26 @@ namespace com
             }
         }
 
-        public connect(host:string, port:number):any
+        public config(host:string, port:number):any
         {
-            var channel:JTWebSocket = super.connect(host, port);
+            super.config(host, port);
+        }
+
+        public connect():any
+        {
+            var channel:JTWebSocket = super.connect() as JTWebSocket;
             channel.addEventListener(JTWebSocket.OPEN, this.onConnectSucceed, this);
             channel.addEventListener(JTWebSocket.MESSAGE, this.onReceiveMessage, this);
             channel.addEventListener(JTWebSocket.CLOSE, this.onCloseHandler, this);
             channel.addEventListener(JTWebSocket.ERROR, this.onErrorHandler, this);
-            channel.connect(host, port);
+            channel.connect(this._host, this.port);
+            return channel;
         }
 
         protected onConnectSucceed(e):void
         {
             JTLogger.info("connect succeed!")
+            this.pipeline.channelActive();
             this.flush();
             JTFunctionManager.execute(JTWebSocket.OPEN);
         }
@@ -66,12 +75,20 @@ namespace com
 
         protected onCloseHandler(e):void
         {
+            this.pipeline.channelInactive();
             JTLogger.info("the server already close");
         }
 
         protected onErrorHandler(e):void
         {
+            this.pipeline.channelInactive();
             JTLogger.info("current connect error")
+        }
+
+        public reload():void 
+        {
+            super.reload();
+            this._idleState = this._pipeline.getContext(JTChannelContext.IDLE) as JTIChannelContext;
         }
     }
 }

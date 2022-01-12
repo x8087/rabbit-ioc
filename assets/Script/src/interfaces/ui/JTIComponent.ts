@@ -9,7 +9,7 @@ namespace com
     {
         componentUI:fgui.GComponent;
 
-        componentId:string;
+        classUI:any;
         
         runClass:any;
     }

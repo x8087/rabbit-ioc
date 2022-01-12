@@ -3,12 +3,36 @@
     export class JTChannelPipeline extends JTEventDispatcher implements JTIChannelPipeline
     {
         private _channel:JTIChannel = null;
-        private _pipelineMap:{[type:string]: JTIChannelAdapter} = {};
+        private __contextMap:{[type:string]: JTIChannelContext} = {};
+        private ___ctxs:JTIChannelContext[] = []
         constructor()
         {
             super();
         }
 
+        public channelActive():void
+        {
+            for (let i:number = 0; i < this.___ctxs.length; i++)
+            {
+                let ___c:JTIChannelContext = this.___ctxs[i];
+                ___c.channelActive();
+            }
+    }
+
+        public channelInactive():void
+        {
+            for (let i:number = 0; i < this.___ctxs.length; i++)
+            {
+                let ___c:JTIChannelContext = this.___ctxs[i];
+                ___c.channelInactive();
+            }
+        }
+
+        /**
+         * 
+         * @param channel 
+         * @returns 
+         */
         public bind(channel:JTIChannel):JTIChannel
         {
             this._channel = channel;
@@ -17,23 +41,31 @@
             return this._channel;
         }
 
-        public childOption(type:string, channelAdapter:JTIChannelAdapter):JTChannelPipeline
+        /**
+         * 
+         * @param type 
+         * @param ___c 
+         * @returns 
+         */
+        public childOption(type:string, ___c:JTIChannelContext):JTChannelPipeline
         {
-            channelAdapter.bind(this);
-            channelAdapter.channelActive();
-            this._pipelineMap[type] =  channelAdapter;
+            ___c.bind(this);
+            ___c.build();
+            this.__contextMap[type] =  ___c;
+            this.___ctxs.push(___c);
             return this;
         }
 
-        public getOption(type:string):JTIChannelAdapter
+        public getContext(type:string):JTIChannelContext
         {
-            return this._pipelineMap[type];
+            return this.__contextMap[type];
         }
 
         public launch(host:string, port:number):JTIChannel
         {
             this._channel.reload();
-            this._channel.connect(host, port);
+            this._channel.config(host, port);
+            this._channel.connect();
             return this._channel;
         }
 

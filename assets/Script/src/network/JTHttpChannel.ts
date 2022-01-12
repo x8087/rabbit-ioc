@@ -1,15 +1,21 @@
+///<reference path="JTChannel.ts"/>
 namespace com 
 {
     export class JTHttpChannel extends JTChannel
     {
-        flush():void 
+        constructor(cls:any)
         {
-            throw new Error("Method not implemented.");
+            super(cls);
         }
 
-        send(data:any):void 
+        public flush():void 
         {
-            throw new Error("Method not implemented.");
+            
+        }
+
+        public send(data:any):void 
+        {
+
         }
     }
 }

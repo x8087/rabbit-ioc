@@ -1,6 +1,6 @@
 namespace com 
 {
-    export abstract class JTTemplateBaseManager extends JTApplicationContext
+    export abstract class JTAbstractTemplateManager extends JTApplicationContext
     {
         public _configMap:{[url:string]: any} = {}
         constructor()
@@ -17,12 +17,12 @@ namespace com
 
         public put(url:string, data:any):void
         {
-                this._configMap[url] = data;
+            this._configMap[url] = data;
         }
 
         public getValue(url:string):any
         {
-                return this._configMap[url];
+            return this._configMap[url];
         }   
     }
 }

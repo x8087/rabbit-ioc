@@ -2,6 +2,11 @@
 {
     export class JTEncodeToByteAdapter extends JTAbstractEncoderAdapter
     {
+        public build(): void 
+        {
+            
+        }
+        
         constructor()
         {
             super();

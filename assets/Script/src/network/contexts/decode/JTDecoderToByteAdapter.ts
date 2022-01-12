@@ -3,6 +3,12 @@ namespace com
     export class JTDecoderToByteAdapter extends JTAbstractDecoderAdapter 
     {
 
+
+        public build():void 
+        {
+
+        }
+
         constructor()
         {
             super();

@@ -3,27 +3,35 @@ namespace com
     export abstract class JTComponent<T extends fgui.GComponent> extends JTEventSignaler implements JTIComponent
     {
         protected _componentUI:T = null;
-        protected _runClass:any = null;
-        protected _componentId:string = null;
+        protected __runnableClass:any = null;
         protected _url:string = null;
-        private _registeredClick:boolean = false;
+        protected _pacakgeName:string = null;
+        protected __classUI:T = null;
+        protected _registeredClick:boolean = false;
         constructor()
         {
             super();
         }
 
-        protected loadAsset(url:string, id:string, runClass?:any, registeredClick:boolean = true):void
+        protected loadAsset(url:string, __class:any, runClass?:any, registeredClick:boolean = true):void
         {
-            this._componentId = id;
             this._url = url;
-            this._runClass = runClass;
+            this.__classUI = __class
+            this._pacakgeName = this._url.split("/").pop();
+            this.__runnableClass = runClass;
             this._registeredClick = registeredClick;
+        }
+
+        public load()
+        {
             fgui.UIPackage.loadPackage(this._url, this.loadAssetComplete.bind(this));
         }
 
         protected loadAssetComplete():void
         {
-            this._componentUI = fgui.UIPackage.createObject(this._url, this._componentId) as T;
+            fgui.UIPackage.addPackage(this._url);
+            this.__runnableClass.bindAll();
+            this._componentUI = this.__classUI["createInstance"]();
             this._componentUI.makeFullScreen();
             JTPopupManager.center(this._componentUI);
             if (this._registeredClick)  this._componentUI.onClick(this.registerMouseClick, this);
@@ -53,14 +61,14 @@ namespace com
             return this._componentUI;
         }
 
-        public get componentId():string
+        public get classUI():T
         {
-            return this._componentId;
+            return this.__classUI;
         }
 
         public get runClass():any
         {
-            return this._runClass;
+            return this.__runnableClass;
         }
 
     }

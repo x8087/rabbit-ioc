@@ -2,13 +2,11 @@
 
 namespace com 
 {
-    export interface JTIChannelPipeline extends JTIChannelOption
+    export interface JTIChannelPipeline extends JTIChannelOption, JTIChannelState, JTIChannelContextMap
      {
-          channel:JTIChannel;
-
           bind(channel:JTIChannel):JTIChannel
 
-          getOption(type:string):JTIChannelAdapter
+
 
           launch(host:string, port:number):JTIChannel
      

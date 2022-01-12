@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "amd",
-    "target": "es6",
+    "target": "es5",
     "skipLibCheck": true,
     "outFile": "./common.js",
     "declaration": true,
@@ -18,7 +18,7 @@
   },
   "include": [
     "assets/script/src"
-  ],
+, "assets/Script/src/network/contexts/idleState/.ts"  ],
   "exclude": [
     "node_modules"
   ]

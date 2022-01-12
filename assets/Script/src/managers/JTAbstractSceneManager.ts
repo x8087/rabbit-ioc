@@ -1,11 +1,13 @@
 namespace com 
 {
-    export abstract class JTSceneManager extends JTApplicationContext
+    export abstract class JTAbstractSceneManager extends JTApplicationContext
     {
         private _layer:fgui.GComponent = null;
+
+        public static locker:JTLocker = new JTLocker();
+
         private _sceneMap:{[name:string]:any} = null;
 
-        private _locker:JTLocker = new JTLocker();
         constructor()
         {
             super();
@@ -32,7 +34,8 @@ namespace com
         {
             let cls:any = this._sceneMap[type];
             let scene:JTScene<fgui.GComponent> = new cls();
-            await scene.load();
+            scene.load();
+            await JTAbstractSceneManager.locker.lock();
             while (this.layer.numChildren) this._layer.removeChildAt(0);
             this.layer.addChild(scene.componentUI);
         }
@@ -42,19 +45,14 @@ namespace com
     
         }
 
-        public get layer():fgui.GComponent
+        public get layer():fgui.GComponent 
         {
             if (!this._layer)
             {
-                let layerManager:JTLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.LAYER);
-                this._layer = layerManager.getLayer(JTLayerManager.LAYER_SCENE);
+                let layerManager:JTAbstractLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
+                this._layer = layerManager.getLayer(JTAbstractLayerManager.LAYER_SCENE) as fgui.GComponent ;
             }
             return this._layer;
-        }
-
-        public get locker():JTLocker
-        {
-            return this._locker;
         }
 
     }
