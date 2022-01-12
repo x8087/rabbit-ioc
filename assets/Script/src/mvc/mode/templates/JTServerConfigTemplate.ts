@@ -9,5 +9,11 @@ namespace com
                         super();
                 }
 
+                public setup(host:string, port:number):void
+                {
+                        this.port = port;
+                        this.host = host;
+                }
+
         }
 }

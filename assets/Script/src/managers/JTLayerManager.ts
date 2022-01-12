@@ -20,9 +20,14 @@ namespace com
 
         public build():void
         {
-            this.createLayer(JTLayerManager.LAYER_SCENE);
-            this.createLayer(JTLayerManager.LAYER_POPUP);
-            this.createLayer(JTLayerManager.LAYER_TIPS);
+            if (!this._stage) 
+            {
+                this._layerMap = {};
+                this._stage = fgui.GRoot.create();
+                this.createLayer(JTLayerManager.LAYER_SCENE);
+                this.createLayer(JTLayerManager.LAYER_POPUP);
+                this.createLayer(JTLayerManager.LAYER_TIPS);
+            }
         }
         
         private createLayer(type:string):fgui.GComponent 
@@ -49,8 +54,5 @@ namespace com
         {
             return this._stage;
         }
-
-
-
     }
 }

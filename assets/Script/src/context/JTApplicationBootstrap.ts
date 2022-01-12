@@ -28,6 +28,7 @@ namespace com
         private _serverTemplate:JTServerConfigTemplate = null;
 
         private _taskPipeline:JTFuturePipeline = null;
+        private _connectedLaunch:boolean = false;
 
         constructor()
         {
@@ -97,10 +98,11 @@ namespace com
          * @param serverLoader 服务器地址和端口配置
          * @param serverId 服务器ID
          */
-        public config(serverLoader:JTTextLoader, serverId:string):void
+        public configServerTemaplete(serverLoader:JTTextLoader, serverId:string):JTServerConfigTemplate
         {
             this._serverLoader = serverLoader;
             this._serverTemplate = serverLoader.toValue(serverId);
+            return this._serverTemplate
         }
 
         /**
@@ -108,19 +110,32 @@ namespace com
          * @param host 服务器域名
          * @param port 服务器端口
          */
-        public connect(host:string, port:number):JTIChannel 
+        public conofig(host:string, port:number):JTServerConfigTemplate 
         {
-            let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
-            return channelPipeline.launch(host, port);
+            this._serverTemplate = new JTServerConfigTemplate();
+            this._serverTemplate.setup(host, port);
+            return this._serverTemplate;
+        }
 
+        public connect():JTIChannel
+        {
+            let channel:JTIChannel = null;
+            if (!this._connectedLaunch)
+            {
+                let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
+                channel = channelPipeline.launch(this._serverTemplate.host, this._serverTemplate.port);
+                this._connectedLaunch = true;
+            }
+            return channel;
         }
 
         /**
          * 启动框架
          */
-        public launch():void
+        public launch():JTIChannel
         {
-            this.connect(this._serverTemplate.host, this._serverTemplate.port)
+            if (this._taskPipeline) this._taskPipeline.run();
+            return this.connect();
         }
 
         /**
@@ -137,6 +152,12 @@ namespace com
             }
             this._taskPipeline.itemRender = JTEvent.create(createRender.caller, createRender);
             return this._taskPipeline;
+        }
+
+        public setDesignResolutionSize(width:number, height:number, resolutionPolicy:string | number):void
+        {
+            JTSession.stageWidth = width;
+            JTSession.stageHeight = height;
         }
  
         /**

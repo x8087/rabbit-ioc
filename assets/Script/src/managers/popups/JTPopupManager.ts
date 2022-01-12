@@ -5,7 +5,10 @@ namespace com
     {
         private static __layer:fgui.GComponent = null;
         private static __childs:JTChildPopUp[] = [];
-        private static __graphics:fgui.GGraph = null;
+        /**
+         * 弹窗蒙板
+         */
+        private static __backgroundMask:fgui.GGraph = null;
         public static initialize():void
         {
 
@@ -50,12 +53,12 @@ namespace com
             {
                 childPopUp.setup(component, parent, isTween, mode);
             }
-            if (!this.__graphics)//由于FraiyGUI graphics 画的接口暴露了cocos的方法，所以可能要使用UI编辑器来画一张图
+            if (!this.__backgroundMask)//由于FraiyGUI graphics 画的接口暴露了cocos的方法，所以可能要使用UI编辑器来画一张图
             {
-                // this.__graphics = new fgui.GGraph();
-                // this.__graphics.clearGraphics();
-                // this.__graphics.setSize(JTSession.stageWidth, JTSession.stageHeight);
-                // this.__graphics.drawRect(0, null, null, null);
+                this.__backgroundMask = new fgui.GGraph();
+                this.__backgroundMask.clearGraphics();
+                this.__backgroundMask.setSize(JTSession.stageWidth, JTSession.stageHeight);
+                this.__backgroundMask.drawRect(0, null, null, null);
             }
             if (childPopUp.mode)
             {

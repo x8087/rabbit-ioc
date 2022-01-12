@@ -11,10 +11,12 @@ namespace com
 
             updateConfigs(configs:any[]):void;
 
-            connect(host:string, port:number):void;
+            conofig(host:string, port:number):JTServerConfigTemplate 
 
-            config(serverLoader:JTTextLoader, serverId:string):void
+            configServerTemaplete(serverLoader:JTTextLoader, serverId:string):JTServerConfigTemplate
 
-            launch():void 
+            connect():JTIChannel
+
+            launch():JTIChannel 
     }
 }
