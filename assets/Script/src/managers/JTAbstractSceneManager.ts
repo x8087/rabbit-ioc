@@ -4,7 +4,7 @@ namespace com
     {
         private _layer:fgui.GComponent = null;
 
-        public static locker:JTLocker = new JTLocker();
+        public static _locker:JTLocker = null;
 
         private _sceneMap:{[name:string]:any} = null;
 
@@ -34,7 +34,6 @@ namespace com
         {
             let cls:any = this._sceneMap[type];
             let scene:JTScene<fgui.GComponent> = new cls();
-            scene.load();
             await JTAbstractSceneManager.locker.lock();
             while (this.layer.numChildren) this._layer.removeChildAt(0);
             this.layer.addChild(scene.componentUI);
@@ -55,5 +54,14 @@ namespace com
             return this._layer;
         }
 
+
+        public static get locker():JTLocker
+        {
+            if (!this._locker) 
+            {
+                this._locker = new JTLocker();
+            }
+            return this._locker
+        }
     }
 }

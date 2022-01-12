@@ -8,6 +8,7 @@ namespace com
         protected _pacakgeName:string = null;
         protected __classUI:T = null;
         protected _registeredClick:boolean = false;
+        protected __loaded:boolean = false;
         constructor()
         {
             super();
@@ -20,21 +21,29 @@ namespace com
             this._pacakgeName = this._url.split("/").pop();
             this.__runnableClass = runClass;
             this._registeredClick = registeredClick;
+            if (!this.__loaded)   this.load();
+            else
+            {
+                this.loadAssetComplete();
+            }
         }
 
-        public load()
+        public load():void
         {
+            this.__runnableClass && this.__runnableClass.bindAll();
             fgui.UIPackage.loadPackage(this._url, this.loadAssetComplete.bind(this));
         }
 
         protected loadAssetComplete():void
         {
             fgui.UIPackage.addPackage(this._url);
-            this.__runnableClass.bindAll();
             this._componentUI = this.__classUI["createInstance"]();
+            this._componentUI.x = this._componentUI.y = 0;
             this._componentUI.makeFullScreen();
             JTPopupManager.center(this._componentUI);
             if (this._registeredClick)  this._componentUI.onClick(this.registerMouseClick, this);
+            this.locker.release();
+            this.__loaded = true;
             this.notifyComplete();
         }
 
@@ -69,6 +78,11 @@ namespace com
         public get runClass():any
         {
             return this.__runnableClass;
+        }
+
+        public get locker():JTLocker
+        {
+            return null;
         }
 
     }

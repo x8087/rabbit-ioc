@@ -1,7 +1,7 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
 namespace com 
 {
-    export class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
+    export abstract class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
     {
         protected static _contextMap:{[name:string]:any} = {};
 
@@ -150,7 +150,17 @@ namespace com
         {
             if (this._taskPipeline) this._taskPipeline.run();
             this.buildComplete();
-            return this.connect();
+            let channel:JTIChannel = this.connect();
+            this.launchSucceed();
+            return channel;
+        }
+
+        protected abstract launchSucceed():void
+
+
+        public sync():void
+        {
+
         }
 
         /**

@@ -3,6 +3,7 @@ namespace com
 {
     export class JTPopupManager
     {
+        private static __locker:JTLocker = null;
         private static __layer:fgui.GComponent = null;
         private static __childs:JTChildPopUp[] = [];
         /**
@@ -197,6 +198,15 @@ namespace com
                 this._pool = JTPool.instance(JTChildPopUp);
             }
             return this._pool;
+        }
+
+        public static get locker():JTLocker
+        {
+            if (!this.__locker)
+            {
+                this.__locker = new JTLocker();
+            }
+            return this.__locker;
         }
     }
 }

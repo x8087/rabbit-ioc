@@ -6,5 +6,10 @@ namespace com
         {
             super();
         }
+
+        public get locker():JTLocker
+        {
+            return JTPopupManager.locker;
+        }
     }
 }
