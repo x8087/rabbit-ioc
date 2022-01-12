@@ -10,6 +10,6 @@ namespace com
 
         public abstract build():void;
 
-        public abstract notifyComplete():void;
+        public abstract buildComplete():void;
     }
 }

@@ -64,16 +64,30 @@ namespace com
         // }
 
         /**
-         * 构建扩展对象
+         * 构建上下文对象
          */
-        protected buildExecutions():void
+        protected buildContexts():void
         {
-            let contextMap:Object = JTApplicationBootstrap._contextMap;
-            for (var key in contextMap)
+            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            let count:number = __contexts.length;
+            for (let i:number = 0; i < count; i++)
             {
-                let _class:JTApplicationContext = contextMap[key];
+                    let context:JTIApplicationContext = __contexts[i];
+                    context.build();
+            }
+        }
 
-                _class.build();
+        /**
+         * 构建上下文对象
+         */
+        protected buildContextsComplete():void
+        {
+            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            let count:number = __contexts.length;
+            for (let i:number = 0; i < count; i++)
+            {
+                    let context:JTIApplicationContext = __contexts[i];
+                    context.build();
             }
         }
 
@@ -84,7 +98,7 @@ namespace com
          */
         public channel(channel:JTIChannel):JTIChannelOption
         {
-            this.buildExecutions();
+            this.buildContexts();
             this.registerContextAlias(JTApplicationBootstrap.CHANNEL, channel);
             let channelPipeline:JTIChannelPipeline = new JTChannelPipeline();
             channelPipeline.bind(channel);
@@ -148,8 +162,7 @@ namespace com
         public launch():JTIChannel
         {
             if (this._taskPipeline) this._taskPipeline.run();
-            let layerManager:JTLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.LAYER);
-            
+            this.buildContextsComplete();
             return this.connect();
         }
 
@@ -185,9 +198,11 @@ namespace com
             templateManager.updateConfigs(resources);
         } 
 
-        public registerContextAlias(key:string, _contextClass:any):JTIOption
+        public registerContextAlias(key:string, __context:any):JTIOption
         {
-            JTApplicationBootstrap._contextMap[key] = _contextClass;
+            JTApplicationBootstrap._contextMap[key] = __context;
+            let contexts:JTIApplicationContext[] = JTApplicationBootstrap._contexts;
+            if (__context instanceof JTApplicationContext)  contexts.push(__context);
             return this;
         }
 

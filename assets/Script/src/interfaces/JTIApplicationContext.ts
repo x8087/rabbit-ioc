@@ -9,6 +9,6 @@ namespace com
     {
             build():void;
 
-            notifyComplete():void;
+            buildComplete():void;
     }
 }
