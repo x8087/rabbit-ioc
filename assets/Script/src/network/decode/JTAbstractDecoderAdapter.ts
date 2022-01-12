@@ -48,7 +48,7 @@ namespace com
                }
         }
 
-        protected toMapper(protocol:number, data:any):JTIMapper
+        protected toMapper(protocol:number, data:any):any
         {
                return this._responseMapper.create(protocol, data)
         }

@@ -3,7 +3,9 @@ namespace com
 {
     export abstract class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
     {
-        protected static extensionClassMap:{[name:string]:any} = {};
+        protected static _contextMap:{[name:string]:any} = {};
+
+        private static _contexts:JTIApplicationContext[] = []
 
         public static PROTOCOL:string = "ProtocolManager";
 
@@ -28,15 +30,24 @@ namespace com
         private _serverTemplate:JTServerConfigTemplate = null;
 
         private _taskPipeline:JTFuturePipeline = null;
-        private _connectedLaunch:boolean = false;
+        private _launchConnected:boolean = false;
+
+
 
         constructor()
         {
             super();
         }
-        public option(type: string, _extension: JTIApplicationContext): JTIChildOption 
+
+        /**
+         * 
+         * @param type 
+         * @param _context 
+         * @returns 
+         */
+        public option(type: string, _context: JTIApplicationContext): JTIChildOption 
         {
-            return this.registerClassAlias(type, _extension) as JTIChildOption
+            return this.registerContextAlias(type, _context) as JTIChildOption
         }
 
         // protected builds():void
@@ -57,10 +68,11 @@ namespace com
          */
         protected buildExecutions():void
         {
-            let extensionMap:Object = JTApplicationBootstrap.extensionClassMap;
-            for (var key in extensionMap)
+            let contextMap:Object = JTApplicationBootstrap._contextMap;
+            for (var key in contextMap)
             {
-                let _class:JTApplicationContext = extensionMap[key];
+                let _class:JTApplicationContext = contextMap[key];
+
                 _class.build();
             }
         }
@@ -73,10 +85,10 @@ namespace com
         public channel(channel:JTIChannel):JTIChannelOption
         {
             this.buildExecutions();
-            this.registerClassAlias(JTApplicationBootstrap.CHANNEL, channel);
+            this.registerContextAlias(JTApplicationBootstrap.CHANNEL, channel);
             let channelPipeline:JTIChannelPipeline = new JTChannelPipeline();
             channelPipeline.bind(channel);
-            return this.registerClassAlias(JTApplicationBootstrap.CHANNEL_PIPELINE, channelPipeline);
+            return this.registerContextAlias(JTApplicationBootstrap.CHANNEL_PIPELINE, channelPipeline);
         }
 
         /**
@@ -89,7 +101,7 @@ namespace com
         {
             let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
             channelPipeline.childOption(type, channelAdapter);
-           return this;
+            return this;
         }
         
         /**
@@ -106,7 +118,8 @@ namespace com
         }
 
         /**
-         * 连接网络
+         * 配置网络
+         * 该方法和launch()一起使用
          * @param host 服务器域名
          * @param port 服务器端口
          */
@@ -120,11 +133,11 @@ namespace com
         public connect():JTIChannel
         {
             let channel:JTIChannel = null;
-            if (!this._connectedLaunch)
+            if (!this._launchConnected)
             {
                 let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
                 channel = channelPipeline.launch(this._serverTemplate.host, this._serverTemplate.port);
-                this._connectedLaunch = true;
+                this._launchConnected = true;
             }
             return channel;
         }
@@ -135,6 +148,8 @@ namespace com
         public launch():JTIChannel
         {
             if (this._taskPipeline) this._taskPipeline.run();
+            let layerManager:JTLayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.LAYER);
+            
             return this.connect();
         }
 
@@ -170,20 +185,20 @@ namespace com
             templateManager.updateConfigs(resources);
         } 
 
-        public registerClassAlias(key:string, __extensionClass:any):JTIOption
+        public registerContextAlias(key:string, _contextClass:any):JTIOption
         {
-            JTApplicationBootstrap.extensionClassMap[key] = __extensionClass;
+            JTApplicationBootstrap._contextMap[key] = _contextClass;
             return this;
         }
 
         public getContext(key:string):any
         {
-            return JTApplicationBootstrap.extensionClassMap[key];
+            return JTApplicationBootstrap._contextMap[key];
         }
 
         public static getContext(key:string):any
         {
-            return this.extensionClassMap[key];
+            return this._contextMap[key];
         }
     }
 }

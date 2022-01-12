@@ -9,5 +9,7 @@ namespace com
         }
 
         public abstract build():void;
+
+        public abstract notifyComplete():void;
     }
 }

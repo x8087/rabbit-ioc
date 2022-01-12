@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTSceneManager extends JTApplicationContext
+    export abstract class JTSceneManager extends JTApplicationContext
     {
         private _layer:fgui.GComponent = null;
         private _sceneMap:{[name:string]:any} = null;

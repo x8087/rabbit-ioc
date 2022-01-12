@@ -1,7 +1,7 @@
 ///<reference path="../../../context/JTApplicationContext.ts"/>
 namespace com 
 {
-    export class JTResponseMapping extends JTApplicationContext
+    export abstract class JTResponseMapping extends JTApplicationContext
     {
         public build(): void 
         {
@@ -30,8 +30,8 @@ namespace com
         {
             let __classMapper:JTClassMapper = JTResponseMapping.mappingMap[protocol];
             let dataInfo:JTIMapper = __classMapper ? __classMapper.create() : null;
-            dataInfo.update(data);
-            return dataInfo;
+            if (dataInfo)dataInfo.update(data);
+            return dataInfo ? dataInfo : data;
         }
     }
 }
