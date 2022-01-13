@@ -63,7 +63,7 @@ namespace com
                 this.___runClass && this.___runClass.bindAll();
                 this.__uiPackage = fgui.UIPackage.addPackage(this._url);
                 this._____ui = this.getObject(this.__componentId);
-                this._____ui.makeFullScreen();
+                this.adjustLayoutView();
                 JTPopupManager.center(this._____ui);
                 if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
             }
@@ -103,9 +103,13 @@ namespace com
     
         }
 
-        public onResize():void
+        public adjustLayoutView():void
         {
-            info("test");
+            info(this.constructor.name  + "                    onResize");
+            if (!this._____ui) return;
+            this._____ui.setSize(JTAbstractLayerManager.stage.width, JTAbstractLayerManager.stage.height)
+            this._____ui.addRelation(JTAbstractLayerManager.stage, fgui.RelationType.Size);
+            this._____ui.makeFullScreen();
         }
 
         public get componentUI():T

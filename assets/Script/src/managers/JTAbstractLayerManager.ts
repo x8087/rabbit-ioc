@@ -31,17 +31,19 @@ namespace com
                 let layerManager:JTILayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
                 JTAbstractLayerManager._instance = layerManager;
                 this.createLayers();
+                this.registerWindowResize();
             }
         }
 
         protected registerWindowResize():void
         {
-            window.addEventListener("resize", this.onResize);
+            window.addEventListener("resize", this.onResize.bind(this));
         }
 
         protected onResize(e):void
         {
-                dispatchEvent(JTResizeEvent.RESIZE);
+            // this._stage.makeFullScreen();
+            dispatchEvent(JTResizeEvent.RESIZE);
         }
 
         /**

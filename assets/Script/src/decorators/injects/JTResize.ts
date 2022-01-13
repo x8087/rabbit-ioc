@@ -23,7 +23,7 @@ module com
 			let component:any = target;
 			//get 方法取代	component.__evtMap = {};
 			let prototype:any = component.prototype;
-			prototype.addEventListener(JTResizeEvent.RESIZE, prototype.onResize, target, once)
+			prototype.addEventListener(JTResizeEvent.RESIZE, prototype.adjustLayoutView, target, once)
 			// component.addEventListener = function (key:any, method:Function, caller:any, once?:boolean) //在注入时，cocos creator IDE 找不到该方法
 			// {
 			// 	let flag:Boolean = this.__evtMap[key];
