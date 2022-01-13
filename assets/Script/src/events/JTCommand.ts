@@ -36,70 +36,70 @@ namespace com
             *执行处理器，携带额外数据。
             *@param data 附加的回调数据，可以是单数据或者Array(作为多参)。
             */
-            public runWith(data):any
-            {
-                if (this._method == null)return null;
-                if (data == null)
-                    var result = this._method.apply(this._caller, this._args);
-                else if (!this._args && !data.unshift)result = this._method.call(this._caller, data);
-                else if (this._args)result = this._method.apply(this._caller, this._args.concat(data));
-                else result = this._method.apply(this._caller, data instanceof Array ? [data] : data); //调用apply时，不管参数是否为数组，方法自动会认为参数为数组，所以传入数组时，一定要判断
-                this._once && this.recover();
-                return result;
-            }
+        public runWith(data):any
+        {
+            if (this._method == null)return null;
+            if (data == null)
+                var result = this._method.apply(this._caller, this._args);
+            else if (!this._args && !data.unshift)result = this._method.call(this._caller, data);
+            else if (this._args)result = this._method.apply(this._caller, this._args.concat(data));
+            else result = this._method.apply(this._caller, data instanceof Array ? [data] : data); //调用apply时，不管参数是否为数组，方法自动会认为参数为数组，所以传入数组时，一定要判断
+            this._once && this.recover();
+            return result;
+        }
 
-            /**
-            *清理对象引用。
-            */
-            public clear():JTCommand
-            {
-                this._method = this._args = this._caller = null;
-                return this;
-            }
+        /**
+        *清理对象引用。
+        */
+        public clear():JTCommand
+        {
+            this._method = this._args = this._caller = null;
+            return this;
+        }
 
-            /**
-            *清理并回收到 Handler 对象池内。
-            */
-            public recover()
-            {
-                this.clear();
-            }
+        /**
+        *清理并回收到 Handler 对象池内。
+        */
+        public recover()
+        {
+            this.clear();
+        }
 
-            public get caller():any
-            {
-                return this._caller;
-            }
+        public get caller():any
+        {
+            return this._caller;
+        }
 
-            public get method():Function
-            {
-                return this._method;
-            }
+        public get method():Function
+        {
+            return this._method;
+        }
 
-            public get once():Boolean
-            {
-                return this._once;
-            }
+        public get once():Boolean
+        {
+            return this._once;
+        }
 
-            public static get pool():JTIPool
+        public static get pool():JTIPool
+        {
+            if(!this._pool)
             {
-                if(!this._pool)
-                {
-                    this._pool = JTPool.instance(JTCommand);
-                }
-                return this._pool;
+                this._pool = JTPool.instance(JTCommand);
             }
-            
-            private static _pool:JTIPool = null;
-            public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
-            {
-                var command:JTCommand = this.pool.get() as JTCommand;
-                command.setTo(caller, method, args, once);
-                return command;
-            }
+            return this._pool;
+        }
+        
+        private static _pool:JTIPool = null;
+        public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
+        {
+            var command:JTCommand = this.pool.get() as JTCommand;
+            command.setTo(caller, method, args, once);
+            return command;
+        }
 
-            public static put(command:JTCommand):void
-            {
-                this.pool.put(command)
-            }
+        public static put(command:JTCommand):void
+        {
+            this.pool.put(command)
+        }
     }
 }

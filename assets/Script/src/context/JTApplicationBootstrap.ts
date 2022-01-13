@@ -158,33 +158,12 @@ namespace com
         protected abstract launchSucceed():void
 
         /**
-         * 加载配置文件列表
+         * 加载资源
          * @param assets 任务列表
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public loadConfigs(assets:{[url:string]:string}[], createRender?:JTCommand):JTFuturePipeline
-        {
-            if (!this.__loaderManager)
-            {
-                this.__loaderManager = new JTFuturePipeline();
-            }
-            else
-            {
-                this.__loaderManager.reset();
-            }
-            this.__loaderManager.dataList = assets;
-            this.__loaderManager.itemRender = createRender;
-            return this.__loaderManager;
-        }
-
-        /**
-         * 加载配置文件列表
-         * @param tasks 任务列表
-         * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
-         * @returns 返回任务执行队列
-         */
-        public preloadAssets(assets:string[], createRender:JTCommand):JTFuturePipeline
+        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTCommand):JTFuturePipeline
         {
             if (!this.__loaderManager)
             {
@@ -201,7 +180,7 @@ namespace com
 
         /**
          * 加载
-         * 需要配合await一起使用
+         * 需要配合await一起使用 
          */
         public async load():Promise<any>
         {
