@@ -3,7 +3,7 @@
 */
 module com 
 {
-	export class JTSingletonClassAlias extends JTClassAlias
+	export class JTSingletonClassAlias extends JTClassInjectAlias
 	{
 		private _referenceMap:{[className:string]:string} = null;
 		private _referenceCount:number = 0;
@@ -45,7 +45,7 @@ module com
 		{
 			if (!this._instance) 
 			{
-				this._instance = new this._cls();
+				this._instance = new this.___c();
 			}
 			return this._instance;
 		}

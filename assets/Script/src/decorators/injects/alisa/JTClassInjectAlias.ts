@@ -3,28 +3,28 @@
 */
 module com 
 {
-	export abstract class JTClassAlias
+	export abstract class JTClassInjectAlias
 	{
-		protected _cls:any = null;
+		protected ___c:any = null;
 		protected _instance:any = null;
 
 		public static CLASS_NAME:string = "__ClassName";
 
 		constructor(cls:any)
 		{
-			this._cls = cls;
+			this.___c = cls;
 		}
 
 		public recycle() 
 		{
-			this._instance = this._cls = null;
+			this._instance = this.___c = null;
 		}
 
 		public get instance():any
 		{
 			if (!this._instance) 
 			{
-				this._instance = new this._cls();
+				this._instance = new this.___c();
 			}
 			return this._instance;
 		}

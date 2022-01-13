@@ -1,9 +1,10 @@
+///<reference path="JTClassInjectAlias.ts"/>
 /*
 * name;
 */
 module com 
 {
-	export class JTConfigurationAlisa extends JTClassAlias
+	export class JTConfigurationAlisa extends JTClassInjectAlias
 	{
 		private _referenceMap:{[className:string]:string} = null;
 		private _referenceCount:number = 0;
@@ -52,17 +53,17 @@ module com
 					{
 						case JTTextLoader.PARSE_BINARY:
 						{
-							loader.parseBinary(data, this._cls);
+							loader.parseBinary(data, this.___c);
 							break;
 						}
 						case JTTextLoader.PARSE_STRING:
 						{
-							loader.parseStr(data, this._cls);
+							loader.parseStr(data, this.___c);
 							break;
 						}
 						case JTTextLoader.PARSE_ZIP:
 						{
-							loader.parseZip(data, this._cls);
+							loader.parseZip(data, this.___c);
 							break;
 						}
 					}

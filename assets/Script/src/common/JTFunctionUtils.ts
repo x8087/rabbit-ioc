@@ -5,7 +5,7 @@ namespace com
           com.JTFunctionManager.execute(key, args);
      }
 
-     export function dispatchEvent(key:string, args):void
+     export function dispatchEvent(key:string, args?:any):void
      {
           com.JTEventManager.dispatchEvent(key, args);
      }

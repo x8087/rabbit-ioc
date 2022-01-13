@@ -1,8 +1,14 @@
 namespace com 
 {
-    export abstract class JTAbstractTemplateManager extends JTApplicationContext
+    /**
+     * 此类的属性太多，不需要扩展instance
+     * 继承直接单例注入instance就好了。
+     */
+    export abstract class JTAbstractTemplateManager extends JTApplicationContext implements JTITemplateInfoManager
     {
         public _configMap:{[url:string]: any} = {}
+
+
         constructor()
         {
             super();
@@ -12,7 +18,7 @@ namespace com
 
         public build():void
         {
-
+                
         }
 
         public put(url:string, data:any):void
@@ -23,6 +29,7 @@ namespace com
         public getValue(url:string):any
         {
             return this._configMap[url];
-        }   
+        }  
+      
     }
 }

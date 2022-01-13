@@ -35,7 +35,7 @@ module com
 				let val = this[key];
 				if (val === null || val === undefined) 
 				{
-					let _class:JTClassAlias = JTDecoratorUtils.bind(cls, destroyed);
+					let _class:JTClassInjectAlias = JTDecoratorUtils.bind(cls, destroyed);
 					val = this[property] = _class.instance;
 					_class = null;
 				}

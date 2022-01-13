@@ -5,7 +5,7 @@ module com
 {
 	export class JTDecoratorUtils 
 	{
-		private static _bindedMap:{[name:string] : JTClassAlias} = {};
+		private static _bindedMap:{[name:string] : JTClassInjectAlias} = {};
 		// private static _singletonMap:{[name:string] : JTClassAlisa} = {};
 
 		public static DECORATOR_KEY:string = "__c.decorator__";
@@ -34,10 +34,10 @@ module com
 		 * @param destroyed 
 		 * @returns 
 		 */
-		public static bind(cls:any, destroyed:boolean = false):JTClassAlias
+		public static bind(cls:any, destroyed:boolean = false):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassAlias = this._bindedMap[name];
+			let __class:JTClassInjectAlias = this._bindedMap[name];
 			if (!__class)
 			{
 				__class = new JTSingletonClassAlias(cls, destroyed);
@@ -46,10 +46,10 @@ module com
 			return __class;
 		}
 
-		public static bindPool(poolCls:any, itemCls:any, parameters?:any):JTClassAlias
+		public static bindPool(poolCls:any, itemCls:any, parameters?:any):JTClassInjectAlias
 		{
 			let name:string = itemCls.name;
-			let __class:JTClassAlias = this._bindedMap[name];
+			let __class:JTClassInjectAlias = this._bindedMap[name];
 			if (!__class)
 			{
 				__class = new JTSingletonPoolAlias(poolCls, itemCls, parameters);
@@ -58,10 +58,10 @@ module com
 			return __class;
 		}
 
-		public static bindTemplate(cls:any, parameters:any):JTClassAlias
+		public static bindTemplate(cls:any, parameters:any):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassAlias = this._bindedMap[name];
+			let __class:JTClassInjectAlias = this._bindedMap[name];
 			if (!__class)
 			{
 				__class = new JTConfigurationAlisa(cls, parameters);
@@ -70,10 +70,10 @@ module com
 			return __class;
 		}
 
-		public static getClassAlisa(cls:any):JTClassAlias
+		public static getClassAlisa(cls:any):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassAlias = this._bindedMap[name];
+			let __class:JTClassInjectAlias = this._bindedMap[name];
 			return __class;
 		}
 	}
