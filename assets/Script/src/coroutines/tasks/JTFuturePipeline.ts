@@ -8,16 +8,18 @@ namespace com
         protected _factroy:JTIFactory = null;
         protected _itemProvider:JTCommand = null;
         protected _itemRender:JTCommand = null;
+        protected ___dataList:any[] = null;
 
-        constructor(totalCount?:number)
+        constructor(__datas?:any[])
         {
             super();
-            this.setTotalCount(totalCount);
+            this.___dataList = __datas;
         }
 
-        public setTotalCount(totalCount:number):void
+        public set dataList(___datas:any[])
         {
-            this._counter.setTotalCount(totalCount);
+            this.___dataList = ___datas;
+            this._counter.setTotalCount(___datas.length);
         }
 
         /***
@@ -43,6 +45,7 @@ namespace com
 
         public reset():void
         {
+            this.removes();
             this._counter.reset();
             this._tasks = null;
             this._factroy = null;
@@ -50,26 +53,27 @@ namespace com
             this._itemProvider && JTCommand.put(this._itemProvider);
             this._itemProvider = null;
             this._itemRender = null;
+            this.___dataList = null;
         }
         
-        private createTasks(): JTITaskExecutor[] 
+        private createTasks():JTITaskExecutor[] 
         {
-            let taskList:JTITaskExecutor[] = [];
+            let list:JTITaskExecutor[] = [];
             let totalCount:number = this._counter.totalCount;
             if (this._itemRender)
             {
-                    for (let i:number = 0; i < totalCount; i++)
-                    {
-                        let task:JTITaskExecutor = this._itemRender.run();
-                        taskList.push(task);
-                    }
+                for (let i:number = 0; i < totalCount; i++)
+                {
+                    let task:JTITaskExecutor = this._itemRender.run();
+                    list.push(task);
+                }
             }
             else if (this._itemProvider)
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._itemProvider.runWith([i, totalCount]);
-                    taskList.push(task);
+                    let task:JTITaskExecutor = this._itemProvider.runWith([i, this.___dataList[i]]);
+                    list.push(task);
                 }
             }
             else if (this._factroy)
@@ -77,10 +81,10 @@ namespace com
                 for (let i:number = 0; i < totalCount; i++)
                 {
                     let task:JTITaskExecutor = this._factroy.produce();
-                    taskList.push(task);
+                    list.push(task);
                 }
             }
-            return taskList;
+            return list;
         }
 
         public set factory(value:JTIFactory)

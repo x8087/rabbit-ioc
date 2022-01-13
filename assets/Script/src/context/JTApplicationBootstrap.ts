@@ -59,8 +59,8 @@ namespace com
             let count:number = __contexts.length;
             for (let i:number = 0; i < count; i++)
             {
-                    let ___c:JTIApplicationContext = __contexts[i];
-                    ___c.build();
+                let ___c:JTIApplicationContext = __contexts[i];
+                ___c.build();
             }
         }
 
@@ -73,8 +73,8 @@ namespace com
             let count:number = __contexts.length;
             for (let i:number = 0; i < count; i++)
             {
-                    let __c:JTIApplicationContext = __contexts[i];
-                    __c.buildComplete();
+                let __c:JTIApplicationContext = __contexts[i];
+                __c.buildComplete();
             }
         }
 
@@ -159,11 +159,11 @@ namespace com
 
         /**
          * 加载配置文件列表
-         * @param list 任务列表
+         * @param assets 任务列表
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public async loadConfigs(list:{[url:string]:string}[], createRender?:JTCommand):Promise<JTFuturePipeline>
+        public loadConfigs(assets:{[url:string]:string}[], createRender?:JTCommand):JTFuturePipeline
         {
             if (!this.__loaderManager)
             {
@@ -173,13 +173,39 @@ namespace com
             {
                 this.__loaderManager.reset();
             }
+            this.__loaderManager.dataList = assets;
             this.__loaderManager.itemRender = createRender;
-            return    await this.__loaderManager.run();
+            return this.__loaderManager;
         }
 
+        /**
+         * 加载配置文件列表
+         * @param tasks 任务列表
+         * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
+         * @returns 返回任务执行队列
+         */
         public preloadAssets(assets:string[], createRender:JTCommand):JTFuturePipeline
         {
-            return null;
+            if (!this.__loaderManager)
+            {
+                this.__loaderManager = new JTFuturePipeline();
+            }
+            else
+            {
+                this.__loaderManager.reset();
+            }
+            this.__loaderManager.dataList = assets;
+            this.__loaderManager.itemRender = createRender;
+            return this.__loaderManager;
+        }
+
+        /**
+         * 加载
+         * 需要配合await一起使用
+         */
+        public async load():Promise<any>
+        {
+           await this.__loaderManager.run();
         }
 
         public setDesignResolutionSize(width:number, height:number, resolutionPolicy?:string | number):void
