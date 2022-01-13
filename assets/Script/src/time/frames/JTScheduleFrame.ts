@@ -7,7 +7,7 @@ namespace com
     export class JTScheduleFrame extends JTEnterFrame implements JTIScheduleFrame
     {
         private _frames:any[] = null;
-        private _createFrames:JTEvent = null;
+        private _createFrames:JTCommand = null;
         constructor()
         {
             super();
@@ -23,7 +23,7 @@ namespace com
             return this._frames;
         }
 
-        public set createFrames(value:JTEvent)
+        public set createFrames(value:JTCommand)
         {
             this._createFrames = value;
         }

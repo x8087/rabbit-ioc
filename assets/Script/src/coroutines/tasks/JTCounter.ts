@@ -68,6 +68,19 @@ namespace com
                     info("the task execute fail count:  " +  this._failCount);
                 }
             }
+            return true;
+        }
+
+        public recycle() 
+        {
+            super.recycle();
+            this._failCount = this._lockedCount = this._succeedCount = this._totalCount = 0;
+        }
+
+
+        public reset():void
+        {
+            this.recycle();
         }
 
         public get lockedCount():number

@@ -41,10 +41,10 @@ namespace com
             return layer;
         }
 
-        public addChild(componentUI:fgui.GComponent, type:string):void
+        public addChildTo(componentUI:fgui.GComponent, type:string):void
         {
             let layer:fgui.GComponent = this.getLayer(type);
-            layer.addChild(componentUI)
+            layer.addChild(componentUI);
         }
 
         public getLayer(type:string):fgui.GComponent 

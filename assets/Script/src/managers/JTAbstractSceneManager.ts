@@ -4,7 +4,7 @@ namespace com
     {
         private _layer:fgui.GComponent = null;
 
-        public static _locker:JTLocker = null;
+        public static locker:JTLocker = new JTLocker();
 
         private _sceneMap:{[name:string]:any} = null;
 
@@ -54,14 +54,5 @@ namespace com
             return this._layer;
         }
 
-
-        public static get locker():JTLocker
-        {
-            if (!this._locker) 
-            {
-                this._locker = new JTLocker();
-            }
-            return this._locker
-        }
     }
 }

@@ -14,7 +14,7 @@ namespace com
 
         public static addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTEvent[] = this._eventMap[key];
+            var list:JTCommand[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -31,13 +31,13 @@ namespace com
                 list = [];
                 this._eventMap[key] = list;
             }
-            var command:JTEvent = JTEvent.create(caller, method, null, once);
+            var command:JTCommand = JTCommand.create(caller, method, null, once);
             list.push(command);
         }
 
         public static dispatchEvent(key:any, args?:any):void
         {
-            var list:JTEvent[] = this._eventMap[key];
+            var list:JTCommand[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -57,7 +57,7 @@ namespace com
 
         public static removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTEvent[] = this._eventMap[key];
+            var list:JTCommand[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -73,7 +73,7 @@ namespace com
 
         public static removeEvents(key:any):void
         {
-            var list:JTEvent[] = this._eventMap[key];
+            var list:JTCommand[] = this._eventMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -88,12 +88,12 @@ namespace com
             }
         }
 
-        protected static delete(list:JTEvent[], command:JTEvent):void
+        protected static delete(list:JTCommand[], command:JTCommand):void
         {
                 var index:number = list.indexOf(command);
-                var removes:JTEvent[] = list.splice(index, 1);
+                var removes:JTCommand[] = list.splice(index, 1);
                 removes.shift();
-                JTEvent.put(command);
+                JTCommand.put(command);
         }
 
         protected static removes() 

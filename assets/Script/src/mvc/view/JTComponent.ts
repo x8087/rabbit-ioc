@@ -2,8 +2,8 @@ namespace com
 {
     export abstract class JTComponent<T extends fgui.GComponent> extends JTEventSignaler implements JTIComponent
     {
-        protected _componentUI:T = null;
-        protected __runnableClass:any = null;
+        protected _____ui:T = null;
+        protected ___runClass:any = null;
         protected _url:string = null;
         protected _pacakgeName:string = null;
         protected __classUI:T = null;
@@ -19,7 +19,7 @@ namespace com
             this._url = url;
             this.__classUI = __class
             this._pacakgeName = this._url.split("/").pop();
-            this.__runnableClass = runClass;
+            this.___runClass = runClass;
             this._registeredClick = registeredClick;
             if (!this.__loaded)   this.load();
             else
@@ -30,19 +30,19 @@ namespace com
 
         public load():void
         {
-            this.__runnableClass && this.__runnableClass.bindAll();
+            this.___runClass && this.___runClass.bindAll();
             fgui.UIPackage.loadPackage(this._url, this.loadAssetComplete.bind(this));
         }
 
         protected loadAssetComplete():void
         {
             fgui.UIPackage.addPackage(this._url);
-            this._componentUI = this.__classUI["createInstance"]();
-            this._componentUI.x = this._componentUI.y = 0;
-            this._componentUI.makeFullScreen();
-            JTPopupManager.center(this._componentUI);
-            if (this._registeredClick)  this._componentUI.onClick(this.registerMouseClick, this);
-            this.locker.release();
+            this._____ui = this.__classUI["createInstance"]();
+            this._____ui.x = this._____ui.y = 0;
+            this._____ui.makeFullScreen();
+            JTPopupManager.center(this._____ui);
+            if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
+            if (!this.__loaded)this.locker.release();
             this.__loaded = true;
             this.notifyComplete();
         }
@@ -67,7 +67,7 @@ namespace com
 
         public get componentUI():T
         {
-            return this._componentUI;
+            return this._____ui;
         }
 
         public get classUI():T
@@ -77,7 +77,7 @@ namespace com
 
         public get runClass():any
         {
-            return this.__runnableClass;
+            return this.___runClass;
         }
 
         public get locker():JTLocker

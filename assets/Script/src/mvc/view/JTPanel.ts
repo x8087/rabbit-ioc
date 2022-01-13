@@ -7,6 +7,12 @@ namespace com
             super();
         }
 
+        public load(): void 
+        {
+            super.load();
+            this.locker.lock();
+        }
+
         public get locker():JTLocker
         {
             return JTPopupManager.locker;

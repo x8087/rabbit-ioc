@@ -6,12 +6,17 @@ namespace com
         protected _counter:JTCounter = JTCounter.create();
         protected _tasks:JTITaskExecutor[] = null;
         protected _factroy:JTIFactory = null;
-        protected _itemProvider:JTEvent = null;
-        protected _itemRender:JTEvent = null;
+        protected _itemProvider:JTCommand = null;
+        protected _itemRender:JTCommand = null;
 
-        constructor(totalCount:number)
+        constructor(totalCount?:number)
         {
             super();
+            this.setTotalCount(totalCount);
+        }
+
+        public setTotalCount(totalCount:number):void
+        {
             this._counter.setTotalCount(totalCount);
         }
 
@@ -35,6 +40,17 @@ namespace com
                 this.dispatchEvent(JTTaskEvent.TASK_COMPLETE, this);
             }
         }   
+
+        public reset():void
+        {
+            this._counter.reset();
+            this._tasks = null;
+            this._factroy = null;
+            this._itemRender && JTCommand.put(this._itemRender);
+            this._itemProvider && JTCommand.put(this._itemProvider);
+            this._itemProvider = null;
+            this._itemRender = null;
+        }
         
         private createTasks(): JTITaskExecutor[] 
         {
@@ -72,12 +88,12 @@ namespace com
             this._factroy = value;
         }
 
-        public set itemRender(value:JTEvent)
+        public set itemRender(value:JTCommand)
         {
             this._itemRender = value;
         }
 
-        public set itemProvider(value:JTEvent)
+        public set itemProvider(value:JTCommand)
         {
             this._itemProvider = value;
         }

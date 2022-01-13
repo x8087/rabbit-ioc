@@ -29,7 +29,7 @@ namespace com
         private _serverLoader:JTTextLoader = null;
         private _serverTemplate:JTServerConfigTemplate = null;
 
-        private _taskPipeline:JTFuturePipeline = null;
+        private __loaderManager:JTFuturePipeline = null;
         private _launchConnected:boolean = false;
 
 
@@ -148,7 +148,7 @@ namespace com
          */
         public launch():JTIChannel
         {
-            if (this._taskPipeline) this._taskPipeline.run();
+            if (this.__loaderManager) this.__loaderManager.run();
             this.buildComplete();
             let channel:JTIChannel = this.connect();
             this.launchSucceed();
@@ -157,26 +157,29 @@ namespace com
 
         protected abstract launchSucceed():void
 
-
-        public sync():void
-        {
-
-        }
-
         /**
          * 加载配置文件列表
          * @param list 任务列表
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public loadConfigs(list:{[url:string]:string}[], createRender?:Function):JTFuturePipeline
+        public async loadConfigs(list:{[url:string]:string}[], createRender?:JTCommand):Promise<JTFuturePipeline>
         {
-            if (!this._taskPipeline)
+            if (!this.__loaderManager)
             {
-                this._taskPipeline = new JTFuturePipeline(list.length);
+                this.__loaderManager = new JTFuturePipeline();
             }
-            this._taskPipeline.itemRender = JTEvent.create(createRender.caller, createRender);
-            return this._taskPipeline;
+            else
+            {
+                this.__loaderManager.reset();
+            }
+            this.__loaderManager.itemRender = createRender;
+            return    await this.__loaderManager.run();
+        }
+
+        public preloadAssets(assets:string[], createRender:JTCommand):JTFuturePipeline
+        {
+            return null;
         }
 
         public setDesignResolutionSize(width:number, height:number, resolutionPolicy?:string | number):void
