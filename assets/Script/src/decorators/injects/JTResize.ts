@@ -18,11 +18,22 @@ module com
 	 */
 	 export function Resize(once:boolean = false):Function
 	 {
-		 return function (target:any, property:string) 
+		 return function (target:any) 
 		 {
-			let signaler:JTIEventSignaler = target;
-			signaler["injectEventMap"]();//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
-			signaler.addEventListener(JTResizeEvent.RESIZE, target[property], target, once);
+			let component:any = target;
+			//get 方法取代	component.__evtMap = {};
+			let prototype:any = component.prototype;
+			prototype.addEventListener(JTResizeEvent.RESIZE, prototype.onResize, target, once)
+			// component.addEventListener = function (key:any, method:Function, caller:any, once?:boolean) //在注入时，cocos creator IDE 找不到该方法
+			// {
+			// 	let flag:Boolean = this.__evtMap[key];
+			// 	if (!flag)
+			// 	{
+			// 			this.__evtMap[key] = method;
+			// 			JTEventManager.addEventListener(key, method, caller, once);
+			// 	}      
+			// }
+			// component.addEventListener (JTResizeEvent.RESIZE, component.onResize, target, once);
 		 }
 	 }
 }

@@ -31,8 +31,12 @@ namespace com
                 let layerManager:JTILayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
                 JTAbstractLayerManager._instance = layerManager;
                 this.createLayers();
-                window.addEventListener("resize", this.onResize)
             }
+        }
+
+        protected registerWindowResize():void
+        {
+            window.addEventListener("resize", this.onResize);
         }
 
         protected onResize(e):void
@@ -57,6 +61,8 @@ namespace com
         {
             let layer:fgui.GComponent = new fgui.GComponent();
             layer.makeFullScreen();
+            layer.setPivot(.5, .5);
+            layer.setPosition(0, 0);
             this._layerMap[type] = layer;
             this._stage.addChild(layer);
             return layer;

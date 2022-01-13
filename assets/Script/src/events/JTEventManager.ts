@@ -2,7 +2,7 @@ namespace com
 {
     export class JTEventManager
     {
-        protected static _eventMap:Object = {}
+        protected static __evtMap:Object  = {}
         constructor()
         {
         }
@@ -14,7 +14,7 @@ namespace com
 
         public static addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTCommand[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -29,7 +29,7 @@ namespace com
             else
             {
                 list = [];
-                this._eventMap[key] = list;
+                this.__evtMap[key] = list;
             }
             var command:JTCommand = JTCommand.create(caller, method, null, once);
             list.push(command);
@@ -37,7 +37,7 @@ namespace com
 
         public static dispatchEvent(key:any, args?:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTCommand[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -57,7 +57,7 @@ namespace com
 
         public static removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTCommand[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -73,7 +73,7 @@ namespace com
 
         public static removeEvents(key:any):void
         {
-            var list:JTCommand[] = this._eventMap[key];
+            var list:JTCommand[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -83,8 +83,8 @@ namespace com
                         this.delete(list, element);
                     }
                 });
-                this._eventMap[key] = null;
-                delete this._eventMap[key]
+                this.__evtMap[key] = null;
+                delete this.__evtMap[key]
             }
         }
 
@@ -108,11 +108,11 @@ namespace com
                 
             // });
             var caller:any = this;
-            for (var key in this._eventMap)
+            for (var key in this.__evtMap)
             {
-                    this.removeEventListener(key, this._eventMap[key], caller)
+                    this.removeEvents(key);
             }
-            this._eventMap = {};
+            this.__evtMap = {};
         }
         
     }

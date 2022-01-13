@@ -3,7 +3,7 @@ namespace com
     export class JTFunctionManager
     {
         private static _eventMap:Object = {};
-        public static registerFunction(key:any, method:Function, caller:any, once?:boolean):void
+        public static registerFunction(key:number | string, method:Function, caller:any, once?:boolean):void
         {
             var list:JTCommand[] = this._eventMap[key]
             if (list)
@@ -26,7 +26,7 @@ namespace com
             list.push(command);
         }
 
-        public static addCommand(key:any, command:JTCommand):void
+        public static addCommand(key:number | string, command:JTCommand):void
         {
             var list:JTCommand[] = this._eventMap[key]
             if (list)
@@ -48,7 +48,7 @@ namespace com
             list.push(command);
         }
 
-        public static execute(key:any, args?:any):void
+        public static execute(key:number | string, args?:any):void
         {
             var list:JTCommand[] = this._eventMap[key]
             if (list)
@@ -69,7 +69,7 @@ namespace com
             }
         }
 
-        public static removeFunction(key:any, method:Function, caller:any):void
+        public static removeFunction(key:number | string, method:Function, caller:any):void
         {
             var list:JTCommand[] =  this._eventMap[key]
             if (list)
@@ -85,7 +85,7 @@ namespace com
             }
         }
 
-        public static removeFunctions(key:any):void
+        public static removeFunctions(key:number | string):void
         {
             var list:JTCommand[] =  this._eventMap[key]
             if (list)

@@ -16,7 +16,7 @@ module com
 		return function (target:any, property:string, descripter?:any) 
         {
 			let signaler:JTEventSignaler = target;
-			signaler["injectFunctionMap"]();//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
+		//get 方法取代	// signaler.__funMap = {};//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
 			signaler.registerFunction(protocol, target[property], target);
 		}
 	}
@@ -40,10 +40,8 @@ module com
 		return function (target:any, property:string, descripter?:any) 
 		{
 			let signaler:JTEventSignaler = target;
-			signaler["injectFunctionMap"]();//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
-			
+				//get 方法取代// signaler.__funMap = {};//由于装饰器注入的对象是单例时，此方法生效（装鉓器的对象有多个时，未测试）因为该对象并未实例化，装饰器
 			JTAbstractResponseMapping["mappingMap"][protocol] = new JTClassMapper(__mapperClass, createFromPool); //注入MAPPER 映射
-		 
 			signaler.registerFunction(protocol, target[property], target);
 		}
 	}

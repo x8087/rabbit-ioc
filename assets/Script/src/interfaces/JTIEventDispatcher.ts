@@ -9,6 +9,5 @@ namespace com
          removeEventListener(key:any, method:Function, caller:any):void
 
          removeEvents(key:any):void
-        
     }
 }

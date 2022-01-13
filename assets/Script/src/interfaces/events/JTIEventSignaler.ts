@@ -22,6 +22,5 @@ namespace com
         removeFunction(key:any, method:Function, caller:any):void
 
         removeFunctions() 
-
     }
 }

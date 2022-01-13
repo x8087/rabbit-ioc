@@ -18,7 +18,7 @@
   },
   "include": [
     "assets/script/src"
-, "assets/Script/src/network/contexts/idleState/.ts"  ],
+  ],
   "exclude": [
     "node_modules"
   ]

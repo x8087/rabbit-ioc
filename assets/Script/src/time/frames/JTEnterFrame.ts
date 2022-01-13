@@ -29,6 +29,7 @@ namespace com
             this._loopTimes = 0;
             this._loop = loop;
             this._totalTimes = totalFrames;
+            this.adjustFrameRate(frameRate);
         }
 
         public play(totalFrames:number, loop:number = 0, frameRate:number = 60):void
@@ -38,19 +39,9 @@ namespace com
             JTTimerTool.animationTimer.addTask(this);//加入到动画对列里
         }
 
-        public gotoAndPlay(frameRate:number, loop:number = 1):void
-        {
-            
-        }
-
-        public gotoAndStop():void
-        {
-
-        }
-
         protected adjustFrameRate(value:number):void
         {
-            this._interval = this.SECOND_INTERVAL / value;
+            this._interval = value  == this.DEFAULT_FRAME_RATE ? this.DEFAULT_FRAME_RATE_TIME : this.SECOND_INTERVAL / value;
             this._frameRate = value;
         }
 
