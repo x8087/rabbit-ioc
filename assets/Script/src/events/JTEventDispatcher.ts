@@ -37,7 +37,7 @@ namespace com
 
         public dispatchEvent(key:any, args?:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTCommand[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -57,7 +57,7 @@ namespace com
 
         public removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTCommand[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -73,7 +73,7 @@ namespace com
 
         public removeEvents(key:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTCommand[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -107,7 +107,7 @@ namespace com
             // this._eventMap.forEach(element => {
                 
             // });
-            for (var key in this.__evtMap)
+            for (var key in this.evtMap)
             {
                     this.removeEvents(key);
             }

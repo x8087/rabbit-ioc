@@ -29,12 +29,12 @@ namespace com
 
                 public dispatchEvent(key:any, args?:any):void
                 {
-                        key in this.__evtMap && JTEventManager.dispatchEvent(key, args);
+                        key in this.evtMap && JTEventManager.dispatchEvent(key, args);
                 }
 
                 public removeEventListener(key:any, method:Function, caller:any):void
                 {
-                        let fun:Function = this.__evtMap[key]
+                        let fun:Function = this.evtMap[key]
                         fun = null;
                         this.__evtMap[key] = null;
                         delete this.__evtMap[key]
@@ -44,9 +44,9 @@ namespace com
                 public removeEvents() 
                 {
                         var caller:any = this;
-                        for (var key in this.__evtMap)
+                        for (var key in this.evtMap)
                         {
-                                this.removeFunction(key, this.__evtMap[key], caller)
+                                this.removeEventListener(key, this.__evtMap[key], caller)
                         }
                         this.__evtMap = {};
                 }
@@ -62,12 +62,12 @@ namespace com
 
                 public execute(key:any, args?:any):void
                 {
-                        key in this.__funMap && JTFunctionManager.execute(key, args);
+                        key in this.funMap && JTFunctionManager.execute(key, args);
                 }
 
                 public removeFunction(key:any, method:Function, caller:any):void
                 {
-                        let fun:Function = this.__funMap[key]
+                        let fun:Function = this.funMap[key]
                         fun = null;
                         this.__funMap[key] = null;
                         delete this.__funMap[key]
@@ -77,7 +77,7 @@ namespace com
                 public removeFunctions() 
                 {
                         var caller:any = this;
-                        for (var key in this.__funMap)
+                        for (var key in this.funMap)
                         {
                                 this.removeFunction(key, this.__funMap[key], caller)
                         }

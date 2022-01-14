@@ -21,7 +21,7 @@ namespace com
                 {
                     if (element && element.method == method && element.caller == caller)
                     {
-                        JTLogger.info("[JTFunctionManager.registerFunction] The key"+ key +" function already registered ");
+                        JTLogger.info("[JTEventManager.addEventListener] The key"+ key +" function already registered ");
                         return ;
                     }
                 });
@@ -51,7 +51,7 @@ namespace com
             }
             else
             {
-                JTLogger.info("[JTFunctionManager.execute] Cant find the function by key : " + key);
+                JTLogger.info("[JTEventManager.dispatchEvent] Cant find the function by key : " + key);
             }
         }
 

@@ -63,6 +63,13 @@ namespace com
                 this.___runClass && this.___runClass.bindAll();
                 this.__uiPackage = fgui.UIPackage.addPackage(this._url);
                 this._____ui = this.getObject(this.__componentId);
+                this._____ui.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
+                let className:string = this.constructor["name"];
+                let index:number = JTResizeEvent.indexOf(className);
+                if (index != -1)
+                {
+                        this.addEventListener(JTResizeEvent.RESIZE, this.adjustLayoutView, this);
+                }
                 this.adjustLayoutView();
                 JTPopupManager.center(this._____ui);
                 if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
@@ -82,6 +89,7 @@ namespace com
             let _____ui:T = this.__uiPackage.createObject(id) as T;
             _____ui.setPivot(.5, .5);
             _____ui.setPivot(0, 0);
+    
             return _____ui;
         }
 
@@ -130,6 +138,15 @@ namespace com
         public get locker():JTLocker
         {
             return null;
+        }
+
+        protected onRemoveFromStage():void
+        {
+            this._____ui && this._____ui.off(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this);
+            if (this._registeredClick) this._____ui && this._____ui.offClick(this.onMouseClickHandler, this)
+            this._pacakgeName = this.___runClass = this._url = 
+            this.__classUI = this.__componentId = this.__uiPackage = this._____ui = null;
+            this.recycle();
         }
 
     }
