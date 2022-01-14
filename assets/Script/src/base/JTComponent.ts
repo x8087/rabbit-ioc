@@ -33,11 +33,12 @@ namespace com
 
         protected loadAsset(url:string, id:string, runClass?:any, registeredClick:boolean = true):void
         {
-            if (this.__loaded)
-            {
-                info("asset already loaded");
-                return;
-            }
+                if (this._url == url && url != null)
+                {
+                    info("asset already loaded");
+                    return;
+                }
+                this.__loaded = false;
             this._url = url;
             this.__componentId = id;
             this._pacakgeName = this._url.split("/").pop();
@@ -138,6 +139,11 @@ namespace com
         public get locker():JTLocker
         {
             return null;
+        }
+
+        public get uiPackage(): fairygui.UIPackage
+        {
+            return this.__uiPackage;
         }
 
         protected onRemoveFromStage():void

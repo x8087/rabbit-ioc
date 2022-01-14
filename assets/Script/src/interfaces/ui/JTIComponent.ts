@@ -12,5 +12,10 @@ namespace com
         classUI:any;
         
         runClass:any;
+
+        uiPackage:fgui.UIPackage;
+
+        getObject(id:string):fgui.GComponent;
+
     }
 }

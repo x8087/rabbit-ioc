@@ -67,7 +67,6 @@ namespace com
                         this.delete(list, element);
                     }
                 });
-                
             }
         }
 

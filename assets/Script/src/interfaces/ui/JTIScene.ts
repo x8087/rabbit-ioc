@@ -5,8 +5,8 @@
 */
 namespace com 
 {
-    export interface JTIScene<T extends fgui.GComponent>
+    export interface JTIScene extends JTIComponent
     {
-        componentUI:T;
+        getUIComponent<V extends fgui.GComponent>(___class:any, __id:string, registeredClick?:boolean, runClass?:any):JTUIComponent<V>
     }
 }

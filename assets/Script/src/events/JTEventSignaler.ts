@@ -5,8 +5,8 @@ namespace com
          */
         export class JTEventSignaler implements JTIEventSignaler
         {
-                public __evtMap:Object = null;
-                public __funMap:Object = null;
+                private __evtMap:Object = null;
+                private __funMap:Object = null;
 
                 recycle() 
                 {
@@ -102,5 +102,28 @@ namespace com
                         }       
                         return this.__funMap;
                 }
+
+                public static get pool():JTIPool
+                {
+                    if(!this._pool)
+                    {
+                        this._pool = JTPool.instance(JTEventSignaler);
+                    }
+                    return this._pool;
+                }
+                
+                private static _pool:JTIPool = null;
+                public static create():JTEventSignaler
+                {
+                    var signaler:JTEventSignaler = this.pool.get() as JTEventSignaler;
+                    return signaler;
+                }
+        
+                public static put(signaler:JTEventSignaler):void
+                {
+                    this.pool.put(signaler)
+                }
         }
+
+        
 }
