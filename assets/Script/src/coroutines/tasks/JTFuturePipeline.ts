@@ -6,7 +6,7 @@ namespace com
      */
     export class JTFuturePipeline extends JTEventDispatcher
     {
-        protected _taskCounter:JTTaskCounter = JTTaskCounter.create();
+        protected _counter:JTTaskCounter = JTTaskCounter.create();
         protected _tasks:JTITaskExecutor[] = null;
         protected _factroy:JTIFactory = null;
         protected _itemProvider:JTCommand = null;
@@ -29,7 +29,7 @@ namespace com
         public set dataList(___datas:any[])
         {
             this.___dataList = ___datas;
-            this._taskCounter.setTotalCount(___datas.length);
+            this._counter.setTotalCount(___datas.length);
         }
 
         /***
@@ -41,13 +41,13 @@ namespace com
             while(this._tasks.length)
             {
                 let task:JTITaskExecutor = this._tasks.shift();
-                task.relevance(this._taskCounter);
+                task.relevance(this._counter);
                 task.execute();
-                await this._taskCounter.lock();
+                await this._counter.lock();
                 this.dispatchEvent(JTTaskEvent.TASK_PROGRESS, this);
                 task.recycle();
             }
-            if (this._taskCounter.completed)
+            if (this._counter.completed)
             {
                 this.dispatchEvent(JTTaskEvent.TASK_COMPLETE, this);
             }
@@ -59,7 +59,7 @@ namespace com
         public reset():void
         {
             this.removes();
-            this._taskCounter.reset();
+            this._counter.reset();
             this._tasks = null;
             this._factroy = null;
             this._itemRender && JTCommand.put(this._itemRender);
@@ -72,12 +72,12 @@ namespace com
         private createTasks():JTITaskExecutor[] 
         {
             let list:JTITaskExecutor[] = [];
-            let totalCount:number = this._taskCounter.totalCount;
+            let totalCount:number = this._counter.totalCount;
             if (this._itemRender)
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._itemRender.run();
+                    let task:JTITaskExecutor = this._itemRender.runWith([i, this.___dataList[i]]);
                     list.push(task);
                 }
             }
@@ -127,9 +127,9 @@ namespace com
         /**
          * 计数器
          */
-        public get taskCounter():JTTaskCounter
+        public get counter():JTTaskCounter
         {
-            return this._taskCounter;
+            return this._counter;
         }
     }
 }
