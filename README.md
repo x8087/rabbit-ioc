@@ -192,25 +192,25 @@ JTFuturePipeline--异步事件对列（满足任务异步函数任务对列）
             return new JTLoadTask();
         }
         
-export default class JTLoadTask extends c.JTTaskExecutor
-{
-        constructor()
+        export default class JTLoadTask extends c.JTTaskExecutor
         {
-                super();
-        }
+                constructor()
+                {
+                        super();
+                }
 
-        public async execute(): Promise<any> 
-        {
-            
-                let timer:c.JTITimer = c.JTTimer.create(1000, 1);
-                timer.addEventListener(c.JTTimeEvent.TIMER_COMPLETE, this.onTimerComplete, this);
-                timer.start();
-           
-        }
+                public async execute(): Promise<any> 
+                {
 
-        protected onTimerComplete(e):void
-        {
-                this.release();
-                info("1000");
+                        let timer:c.JTITimer = c.JTTimer.create(1000, 1);
+                        timer.addEventListener(c.JTTimeEvent.TIMER_COMPLETE, this.onTimerComplete, this);
+                        timer.start();
+
+                }
+
+                protected onTimerComplete(e):void
+                {
+                        this.release();
+                        info("1000");
+                }
         }
-}
