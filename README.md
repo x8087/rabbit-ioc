@@ -166,3 +166,51 @@ JTEventSignaler--全局信号器（该对象能派发、接收全局事件和函
       signaler.removeEventListener("updateView", test, this)//移除单个事件
       signaler.removeEvents("updateView",)//移除指定KEY的所有事件
       signaler.removes();//移除所有事件和函数...等
+      
+JTFuturePipeline--异步事件对列（满足任务异步函数任务对列）
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+        let taskPipeline:c.JTFuturePipeline = new c.JTFuturePipeline(400);
+        taskPipeline.itemRender = c.JTCommand.create(this,  createTaskHandler);
+        taskPipeline.addEventListener(c.JTTaskEvent.TASK_PROGRESS, onTaskProgress, this);
+        taskPipeline.addEventListener(c.JTTaskEvent.TASK_COMPLETE, onTaskComplete, this);
+        taskPipeline.run();
+
+        function onTaskProgress(task:c.JTFuturePipeline):void
+        {
+            let counter:c.JTCounter = task.counter;
+            info("完成任务数量" + counter.lockedCount + "           当前进度为 :" + counter.progress + "%")
+        }
+
+        function onTaskComplete(task:c.JTFuturePipeline):void
+        {
+            let counter:c.JTCounter = task.counter;
+            info("完成任务数量" + counter.lockedCount + "           当前进度为 :" + counter.progress + "%")
+        }
+
+        function createTaskHandler():c.JTITaskExecutor
+        {
+            return new JTLoadTask();
+        }
+        
+export default class JTLoadTask extends c.JTTaskExecutor
+{
+        constructor()
+        {
+                super();
+        }
+
+        public async execute(): Promise<any> 
+        {
+            
+                let timer:c.JTITimer = c.JTTimer.create(1000, 1);
+                timer.addEventListener(c.JTTimeEvent.TIMER_COMPLETE, this.onTimerComplete, this);
+                timer.start();
+           
+        }
+
+        protected onTimerComplete(e):void
+        {
+                this.release();
+                info("1000");
+        }
+}
