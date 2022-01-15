@@ -75,19 +75,11 @@ namespace com
         protected buildingUI():void
         {
                 this.____ui = this.__uiPackage.createObject(this._componentId) as T;
-                // this.____ui.setSize(this.width, this.height);
-                // this.____ui.addRelation(this, fgui.RelationType.Height);
                 this.on(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
-                // JTTimeUtils.callLater(this.adjustLayoutView.bind(this));
                 if (this._registeredClick)  this.____ui.onClick(this.registerMouseClick, this);
                 this.bindUIRelation(this, fgui.RelationType.Height);
                 this.addChild(this.____ui);
-                let className:string = this.constructor["name"];
-                let index:number = JTResizeEvent.indexOf(className);
-                if (index != -1)
-                {
-                        this.addEventListener(JTResizeEvent.RESIZE, this.adjustLayoutView, this);
-                }
+                JTResizeEvent.registerResize(this);
                 this.notifyComplete();
         }
 
@@ -128,15 +120,14 @@ namespace com
     
         }
 
-        public adjustLayoutView():void
+        public onResizeHandler():void
         {
-            if (!this.____ui) return;
-            JTLayoutManager.update(this);
+        //     if (!this.____ui) return;
+        //     JTLayoutManager.update(this);
         }
 
         protected onRemoveFromeStage(e):void
         {
-                // this.off(fgui.Event.DISPLAY, this.onAddChildToStage, this);
                 this.off(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
                 this.removeChildren();
                 this._signaler && JTEventSignaler.put(this._signaler);

@@ -5,7 +5,6 @@
 */
 module com 
 {
-
     export class JTResizeEvent
     {
 		public static RESIZE:string = "resize";
@@ -22,6 +21,15 @@ module com
 			return this.___classNames.indexOf(___className);
 		}
 
+		public static registerResize(target:JTIComponent):void
+		{
+			let className:string = target.className;
+			let index:number = JTResizeEvent.indexOf(className);
+			if (index != -1)
+			{
+				target.addEventListener(JTResizeEvent.RESIZE, target.onResizeHandler, target);
+			}
+		}
 	}
 	/**
 	 * 自动适配
@@ -29,26 +37,12 @@ module com
 	 * @param once 是否只执行一次
 	 * @returns 
 	 */
-	 export function Resize(once:boolean = false):Function
+	 export function ResizeEvent():Function
 	 {
 		 return function (target:any) 
 		 {
-			// let component:any = target;
 			JTDecoratorUtils.registerClassAlias(target, "name")
 			JTResizeEvent.className.push(target.name);
-			//get 方法取代	component.__evtMap = {};
-			// let prototype:any = component.prototype;
-			// prototype.addEventListener(JTResizeEvent.RESIZE, prototype.adjustLayoutView, target, once)
-			// component.addEventListener = function (key:any, method:Function, caller:any, once?:boolean) //在注入时，cocos creator IDE 找不到该方法
-			// {
-			// 	let flag:Boolean = this.__evtMap[key];
-			// 	if (!flag)
-			// 	{
-			// 			this.__evtMap[key] = method;
-			// 			JTEventManager.addEventListener(key, method, caller, once);
-			// 	}      
-			// }
-			// component.addEventListener (JTResizeEvent.RESIZE, component.onResize, target, once);
 		 }
 	 }
 }

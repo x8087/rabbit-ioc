@@ -18,5 +18,7 @@ namespace com
         bindUIRelation(parent:fgui.GComponent, type:number):void;
 
         bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void;
+
+        onResizeHandler(e:any):void;
     }
 }

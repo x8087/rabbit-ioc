@@ -17,20 +17,6 @@ namespace com
             super();
         }
 
-        // protected loadAsset(url:string, __class:any, runClass?:any, registeredClick:boolean = true):void
-        // {
-        //     this._url = url;
-        //     this.__classUI = __class
-        //     this._pacakgeName = this._url.split("/").pop();
-        //     this.___runClass = runClass;
-        //     this._registeredClick = registeredClick;
-        //     if (!this.__loaded)   this.load();
-        //     else
-        //     {
-        //         this.loadAssetComplete();
-        //     }
-        // }
-
         protected loadAsset(url:string, id:string, runClass?:any, registeredClick:boolean = true):void
         {
             if (this._url == url && url != null)
@@ -65,12 +51,7 @@ namespace com
                 this.__uiPackage = fgui.UIPackage.addPackage(this._url);
                 this._____ui = this.getObject(this.__componentId);
                 this._____ui.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
-                let index:number = JTResizeEvent.indexOf(this.className);
-                if (index != -1)
-                {
-                        this.addEventListener(JTResizeEvent.RESIZE, this.adjustLayoutView, this);
-                }
-         
+                JTResizeEvent.registerResize(this);
                 JTPopupManager.center(this._____ui);
                 if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
             }
@@ -119,10 +100,10 @@ namespace com
             return this.constructor["name"];
         }
 
-        public adjustLayoutView():void
+        public onResizeHandler():void
         {
-            if (!this._____ui) return;
-            JTLayoutManager.update(this);
+            // if (!this._____ui) return;
+            // JTLayoutManager.update(this);
         }
 
         public get componentUI():T
