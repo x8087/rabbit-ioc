@@ -42,9 +42,9 @@ namespace com
         }
 
         /**
-         * 
-         * @param type 
-         * @param _context 
+         * 选项必须继承--JTApplicationContext
+         * @param type 类型
+         * @param _context 扩展上下文
          * @returns 
          */
         public option(type: string, _context: JTIApplicationContext): JTIChildOption 

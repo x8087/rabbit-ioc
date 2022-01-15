@@ -1,32 +1,31 @@
 namespace com 
 {
+    /**
+     * 计数器
+     */
     export class JTCounter extends JTLocker
     {
         /*
         *失败次数
         */
-        private _failCount:number = 0;
+        protected _failCount:number = 0;
         /*
         *成功次数
         */
-        private _succeedCount:number = 0;
-
+        protected _succeedCount:number = 0;
         /*
         *已经完成的次数
         */
-        private _lockedCount:number = 0;
+        protected _lockedCount:number = 0;
 
-        private _totalCount:number = 0;
         constructor()
         {
             super();
         }
 
-        public setTotalCount(totalCount:number):void
-        {
-            this._totalCount = totalCount;
-        }
-
+        /**
+         * 释放锁
+         */
         public release():void
         {
             super.release();
@@ -34,6 +33,9 @@ namespace com
             this._lockedCount ++;
         }
 
+        /**
+         * 强制性解锁--取消锁
+         */
         public kill():void
         {
             super.kill();
@@ -41,48 +43,38 @@ namespace com
             this._lockedCount ++;
         }
 
-        public get totalCount():number
-        {
-            return this._totalCount;
-        }
-
+        /**
+         * 成功的次数
+         */
         public get succeedCount():number
         {
             return this._succeedCount;
         }
-
+        /**
+         * 失败的次数
+         */
         public get failCount():number
         {
             return this._failCount;
         }
 
-        public get completed():boolean
-        {
-            let count:number = this._succeedCount + this._failCount;
-            if (this._totalCount != count)return false;
-            else
-            {
-                if (this._totalCount == this._succeedCount) return true;
-                else
-                {
-                    info("the task execute fail count:  " +  this._failCount);
-                }
-            }
-            return true;
-        }
-
         public recycle() 
         {
             super.recycle();
-            this._failCount = this._lockedCount = this._succeedCount = this._totalCount = 0;
+            this._failCount = this._lockedCount = this._succeedCount = 0;
         }
 
-
+        /**
+         * 重置
+         */
         public reset():void
         {
             this.recycle();
         }
 
+        /**
+         * 当前执行的次数
+         */
         public get lockedCount():number
         {
             return this._lockedCount;
@@ -92,10 +84,6 @@ namespace com
         {
             return JTPool.instance(JTCounter).get() as JTCounter;
         }
-
-        public get progress():number
-        {
-            return parseFloat((this._lockedCount / this._totalCount).toFixed(4));
-        }
+   
     }
 }
