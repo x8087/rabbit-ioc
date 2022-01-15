@@ -1,9 +1,8 @@
  
 namespace com
 {
-export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent implements JTIEventSignaler
+   export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent implements JTIComponent
    {
-
         protected _componentId:string = null;
         protected ____ui:T = null;
         protected _url:string = null;
@@ -17,6 +16,16 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
         {
                 super();
                 this._signaler = JTEventSignaler.create();
+        }
+
+        public get uiPackage():fgui.UIPackage
+        {
+                return this.__uiPackage
+        }
+
+        public get runClass():any
+        {
+                return this.__runClass;
         }
 
         /**
@@ -52,7 +61,7 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
                 fgui.UIPackage.loadPackage(this._url, this.loadAssetComplete.bind(this));
         }
 
-        public build(owner:JTIScene, __id:string, registeredClick:boolean = true, runClass?:any):void
+        public setup(owner:JTIScene, __id:string, registeredClick:boolean = true, runClass?:any):void
         {
                 this._componentId = __id;
                 this.__runClass = runClass;
@@ -60,15 +69,37 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
                 this.__uiPackage = this.___owner.uiPackage
                 this._registeredClick = registeredClick;
                 this.__runClass && this.__runClass.bindAll();
-                this.createView();
+                this.buildingUI();
         }
 
-        protected createView():void
+        protected buildingUI():void
         {
                 this.____ui = this.__uiPackage.createObject(this._componentId) as T;
-                if (this._registeredClick) this.on(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
+                // this.____ui.setSize(this.width, this.height);
+                // this.____ui.addRelation(this, fgui.RelationType.Height);
+                this.on(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
+                // JTTimeUtils.callLater(this.adjustLayoutView.bind(this));
+                if (this._registeredClick)  this.____ui.onClick(this.registerMouseClick, this);
+                this.bindUIRelation(this, fgui.RelationType.Height);
                 this.addChild(this.____ui);
-     
+                let className:string = this.constructor["name"];
+                let index:number = JTResizeEvent.indexOf(className);
+                if (index != -1)
+                {
+                        this.addEventListener(JTResizeEvent.RESIZE, this.adjustLayoutView, this);
+                }
+                this.notifyComplete();
+        }
+
+        public bindUIRelation(parent:fgui.GComponent, type:number):void
+        {
+                this.bindRelation(this.____ui, parent, type);
+        }
+
+        public bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void
+        {
+                child.setSize(parent.width, parent.height);
+                child.addRelation(parent, type);
         }
 
         protected loadAssetComplete():void
@@ -76,11 +107,36 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
                this.__loaded = true;
                this.__runClass && this.__runClass.bindAll(); 
                this.__uiPackage = fgui.UIPackage.addPackage(this._url);
-               this.createView();
+               this.buildingUI();
+        }
+
+        protected notifyComplete():void
+        {
+          
+        }
+
+        protected registerMouseClick(e):void
+        {
+            var target: fgui.GComponent = e.target["$gobj"]; //cocos 是$gobj Laya是$owner
+            var targetName: string = target.name;
+            if (!targetName) return;
+            this.onMouseClickHandler(target, targetName);
+        }
+    
+        protected onMouseClickHandler(target:fairygui.GComponent, targetName:string):void
+        {
+    
+        }
+
+        public adjustLayoutView():void
+        {
+            if (!this.____ui) return;
+            JTLayoutManager.update(this);
         }
 
         protected onRemoveFromeStage(e):void
         {
+                // this.off(fgui.Event.DISPLAY, this.onAddChildToStage, this);
                 this.off(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
                 this.removeChildren();
                 this._signaler && JTEventSignaler.put(this._signaler);
@@ -96,6 +152,12 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
         {
                 this._signaler.recycle();
         }
+
+        public get className():string
+        {
+            return this.constructor["name"];
+        }
+
 
         public addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
@@ -136,7 +198,7 @@ export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent im
         {
                 this._signaler.removeFunctions(); 
         }
-    }
 
+    }
         
 }

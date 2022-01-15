@@ -18,6 +18,7 @@ namespace com
         {
             if (this._size > 0)
             {
+                this._size --;
                 return this._list.shift();
             }
             this._totalCount ++;
@@ -29,8 +30,7 @@ namespace com
             if (item && this._list.indexOf(item) == -1)   
             {
                 item.recycle();
-                this._list.push(item);
-                this._size ++;
+                this._size = this._list.push(item);
             }
         }
 

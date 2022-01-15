@@ -52,6 +52,12 @@ namespace com
             this._hostroys.push(sceneType);
             await JTAbstractSceneManager.locker.lock();
             while (this.layer.numChildren) this._layer.removeChildAt(0);
+            this.addChild(scene, fgui.RelationType.Height);
+        }
+
+        public addChild(scene:JTIScene, type?:number):void
+        {
+            scene.bindUIRelation(this.layer, type)
             this.layer.addChild(scene.componentUI);
         }
 

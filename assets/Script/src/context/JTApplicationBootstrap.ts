@@ -21,6 +21,8 @@ namespace com
 
         public static CONTEXT_RUNNER:string = "Context_RUNNER";
 
+        protected static CONTEXT_LAYOUT:string = "Context_Layout";
+
         public static CHANNEL:string = "Channel";
         public static WEBSOCKET_CHANNEL:string = "Websocket_Channel";
         public static HTTP_CHANNEL:string = "Http_Channel";
@@ -103,6 +105,12 @@ namespace com
             let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
             channelPipeline.childOption(type, channelAdapter);
             return this;
+        }
+
+        public layout(layoutType:string):JTIChildOption
+        {
+            JTLayoutManager.currentLayout = layoutType;
+            return this.registerContextAlias(JTApplicationBootstrap.CONTEXT_LAYOUT, new JTLayoutManager());
         }
         
         /**

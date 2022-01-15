@@ -15,7 +15,7 @@ namespace com
         public getUIComponent<V extends fgui.GComponent>(___class:any, __id:string, registeredClick:boolean = true, runClass?:any):JTUIComponent<V>
         {
             let uiComponent:JTUIComponent<V> = new ___class();
-            uiComponent.build(this, __id, registeredClick, runClass);
+            uiComponent.setup(this, __id, registeredClick, runClass);
             return uiComponent;
         }
     }

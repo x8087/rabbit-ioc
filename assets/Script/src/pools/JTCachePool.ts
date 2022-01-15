@@ -18,6 +18,7 @@ namespace com
         {
             if (this._size > 0)
             {
+                this._size --;
                 return this._list.shift();
             }
             this._totalCount ++;

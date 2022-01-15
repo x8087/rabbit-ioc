@@ -23,28 +23,15 @@ namespace com
 
         public build():void
         {
-            if (!this._stage) 
-            {
-                this._layerMap = {};
-                this._stage = fgui.GRoot.create();
-                this._stage.makeFullScreen();
-                let layerManager:JTILayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
-                JTAbstractLayerManager._instance = layerManager;
-                this.createLayers();
-                this.registerWindowResize();
-            }
+            this._stage = JTSession.stage;
+            this._layerMap = {};
+            this._stage.makeFullScreen();
+            let layerManager:JTILayerManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_LAYER);
+            JTAbstractLayerManager._instance = layerManager;
+            this.createLayers();
         }
 
-        protected registerWindowResize():void
-        {
-            window.addEventListener("resize", this.onResize.bind(this));
-        }
-
-        protected onResize(e):void
-        {
-            // this._stage.makeFullScreen();
-            dispatchEvent(JTResizeEvent.RESIZE);
-        }
+ 
 
         /**
          * 默认创建五层
@@ -63,9 +50,10 @@ namespace com
         {
             let layer:fgui.GComponent = new fgui.GComponent();
             layer.makeFullScreen();
-            layer.setPivot(.5, .5);
             layer.setPosition(0, 0);
             this._layerMap[type] = layer;
+            layer.setSize( this._stage.width, this._stage.height);
+            layer.addRelation(this._stage, fgui.RelationType.Height);
             this._stage.addChild(layer);
             return layer;
         }

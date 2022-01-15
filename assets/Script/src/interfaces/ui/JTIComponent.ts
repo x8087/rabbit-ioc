@@ -9,13 +9,14 @@ namespace com
     {
         componentUI:fgui.GComponent;
 
-        classUI:any;
-        
         runClass:any;
 
         uiPackage:fgui.UIPackage;
 
-        getObject(id:string):fgui.GComponent;
+        className:string;
 
+        bindUIRelation(parent:fgui.GComponent, type:number):void;
+
+        bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void;
     }
 }

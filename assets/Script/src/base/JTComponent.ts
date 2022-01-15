@@ -33,12 +33,12 @@ namespace com
 
         protected loadAsset(url:string, id:string, runClass?:any, registeredClick:boolean = true):void
         {
-                if (this._url == url && url != null)
-                {
-                    info("asset already loaded");
-                    return;
-                }
-                this.__loaded = false;
+            if (this._url == url && url != null)
+            {
+                info("asset already loaded");
+                return;
+            }
+            this.__loaded = false;
             this._url = url;
             this.__componentId = id;
             this._pacakgeName = this._url.split("/").pop();
@@ -65,13 +65,12 @@ namespace com
                 this.__uiPackage = fgui.UIPackage.addPackage(this._url);
                 this._____ui = this.getObject(this.__componentId);
                 this._____ui.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
-                let className:string = this.constructor["name"];
-                let index:number = JTResizeEvent.indexOf(className);
+                let index:number = JTResizeEvent.indexOf(this.className);
                 if (index != -1)
                 {
                         this.addEventListener(JTResizeEvent.RESIZE, this.adjustLayoutView, this);
                 }
-                this.adjustLayoutView();
+         
                 JTPopupManager.center(this._____ui);
                 if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
             }
@@ -80,17 +79,20 @@ namespace com
             this.notifyComplete();
         }
 
-        // public getObject():T
-        // {
-        //     return this.__classUI["createInstance"]();
-        // }
+        public bindUIRelation(parent:fgui.GComponent, type:number):void
+        {
+                this.bindRelation(this._____ui, parent, type);
+        }
 
+        public bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void
+        {
+                child.setSize(parent.width, parent.height);
+                child.addRelation(parent, type);
+        }
         public getObject(id:string):T
         {
             let _____ui:T = this.__uiPackage.createObject(id) as T;
-            _____ui.setPivot(.5, .5);
-            _____ui.setPivot(0, 0);
-    
+            _____ui.setPosition(0, 0);
             return _____ui;
         }
 
@@ -112,13 +114,15 @@ namespace com
     
         }
 
+        public get className():string
+        {
+            return this.constructor["name"];
+        }
+
         public adjustLayoutView():void
         {
-            info(this.constructor.name  + "                    onResize");
             if (!this._____ui) return;
-            this._____ui.setSize(JTAbstractLayerManager.stage.width, JTAbstractLayerManager.stage.height)
-            this._____ui.addRelation(JTAbstractLayerManager.stage, fgui.RelationType.Size);
-            this._____ui.makeFullScreen();
+            JTLayoutManager.update(this);
         }
 
         public get componentUI():T
@@ -149,7 +153,7 @@ namespace com
         protected onRemoveFromStage():void
         {
             this._____ui && this._____ui.off(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this);
-            if (this._registeredClick) this._____ui && this._____ui.offClick(this.onMouseClickHandler, this)
+            if (this._registeredClick) this._____ui && this._____ui.offClick(this.onMouseClickHandler, this);
             this._pacakgeName = this.___runClass = this._url = 
             this.__classUI = this.__componentId = this.__uiPackage = this._____ui = null;
             this.recycle();

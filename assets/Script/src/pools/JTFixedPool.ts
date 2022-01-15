@@ -46,12 +46,14 @@
                     list.push(item);
                 }
             }
+            this._size = list.length;
         }
 
         public get():T
         {
             if (this._size > 0)
             {
+                this._size --;
                 return this._list.shift();
             }
             this.create();
