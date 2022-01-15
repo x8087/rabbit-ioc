@@ -169,7 +169,7 @@ JTEventSignaler--全局信号器（该对象能派发、接收全局事件和函
       
 JTFuturePipeline--异步事件对列（满足任务异步函数任务对列）
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
-        let taskPipeline:c.JTFuturePipeline = new c.JTFuturePipeline(400);
+        let taskPipeline:c.JTFuturePipeline = new c.JTFuturePipeline([1000, 200, 111, 2222, 1111, 23333]);
         taskPipeline.itemRender = c.JTCommand.create(this,  createTaskHandler);
         taskPipeline.addEventListener(c.JTTaskEvent.TASK_PROGRESS, onTaskProgress, this);
         taskPipeline.addEventListener(c.JTTaskEvent.TASK_COMPLETE, onTaskComplete, this);
@@ -177,17 +177,17 @@ JTFuturePipeline--异步事件对列（满足任务异步函数任务对列）
 
         function onTaskProgress(task:c.JTFuturePipeline):void
         {
-            let counter:c.JTCounter = task.counter;
+            let counter:c.JTTaskCounter = task.counter;
             info("完成任务数量" + counter.lockedCount + "           当前进度为 :" + counter.progress + "%")
         }
 
         function onTaskComplete(task:c.JTFuturePipeline):void
         {
-            let counter:c.JTCounter = task.counter;
+            let counter:c.JTTaskCounter = task.counter;
             info("完成任务数量" + counter.lockedCount + "           当前进度为 :" + counter.progress + "%")
         }
 
-        function createTaskHandler():c.JTITaskExecutor
+        function createTaskHandler(index:number, data:any):c.JTITaskExecutor
         {
             return new JTLoadTask();
         }
