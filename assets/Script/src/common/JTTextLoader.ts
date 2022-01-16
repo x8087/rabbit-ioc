@@ -62,7 +62,12 @@ namespace com
          {
             this._datas = data;
             this._class = cls;
-            let list:string[] = data.split('\n').join("").split("\r");
+            let list:string[] = content.split('\n');
+            let index:number = content.indexOf("\r");
+            if (index != -1)  
+            {
+                list = list.join("").split("\r");
+            }
             let head:string = list.shift();
             let propertys:string[] = head.split('\t');
             let keys:string[] = null;
