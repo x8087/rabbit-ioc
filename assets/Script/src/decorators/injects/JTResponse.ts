@@ -11,7 +11,7 @@ module com
 	 * @param protocol 协议号，目前只支持长连接请求---WebSocket
 	 * @returns 
 	 */
-	export function Response(protocol:number, waitingbar:boolean = true):Function
+	export function Response(protocol:number | string, waitingbar:boolean = true):Function
     {
 		return function (target:any, property:string, descripter?:any) 
         {
@@ -35,7 +35,7 @@ module com
 	 * @param waitingbar 
 	 * @returns 
 	 */
-	export function ResponseMapping(protocol:number, __mapperClass:any, createFromPool:boolean = false, waitingbar:boolean = true):Function
+	export function ResponseMapping(protocol:number | string, __mapperClass:any, createFromPool:boolean = false, waitingbar:boolean = true):Function
 	{
 		return function (target:any, property:string, descripter?:any) 
 		{

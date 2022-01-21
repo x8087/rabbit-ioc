@@ -5,10 +5,10 @@ namespace com
     {
         private _content:Object = {};
         private _data:Object = {};
-        private _protocol:number = 0;
+        private _protocol:number | string;
         private _channel:JTIChannel = null;
         
-        public writeProtocol(protocol:number):void
+        public writeProtocol(protocol:number | string):void
         {
             this._protocol = protocol;
         }
@@ -23,17 +23,26 @@ namespace com
             return this._content;
         }
 
-        public get protocol():number
+        public get protocol():number | string
         {
             return this._protocol;
         }
 
-        public send():void
+        public get channel():JTIChannel
         {
-            this._data["protocol"] = this._protocol;
-            this._data["content"] = this._content;
-            this._channel && this._channel.send(this._data);
+            return this._channel;
+        }
 
+        public send( ):void
+        {
+            this._data["content"] = this._content;
+            this._data["protocol"] = this._protocol;
+            // if (this._channel instanceof JTHttpChannel)
+            // {
+            //     // if (!methodType)methodType = JTHttpChannel.METHOD_POST;//如果为NULL，直接为post
+            //     // this._channel.writeMethod(methodType);
+            // }
+            this._channel && this._channel.send(this._data);
             JTSendPackage.put(this);
         }
 

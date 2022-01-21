@@ -45,6 +45,7 @@ namespace com
         public config(host:string, port:number):any
         {
             super.config(host, port);
+            this._connectUrl = "ws://" + host + ":" + port;
         }
 
         public connect():any
@@ -64,13 +65,6 @@ namespace com
             this.pipeline.channelActive();
             this.flush();
             JTFunctionManager.execute(JTWebSocket.OPEN);
-        }
-
-        protected onReceiveMessage(data:any):void
-        {
-            let decoder:JTIDecoderAdapter = this._decoder;
-            let message:any = decoder.decode(data);
-            decoder.readComplete(message);
         }
 
         protected onCloseHandler(e):void

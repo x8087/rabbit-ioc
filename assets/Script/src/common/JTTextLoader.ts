@@ -58,9 +58,9 @@ namespace com
             this._class = cls;
          }
 
-         public parseStr(data:string, cls:any):void
+         public parseStr(content:string, cls:any):void
          {
-            this._datas = data;
+            this._datas = content;
             this._class = cls;
             let list:string[] = content.split('\n');
             let index:number = content.indexOf("\r");

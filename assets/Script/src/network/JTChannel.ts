@@ -10,6 +10,7 @@ namespace com
         protected _pipeline:JTIChannelPipeline = null;
         protected _encoder:JTIEncoderAdapter = null;
         protected _decoder:JTIDecoderAdapter = null;
+        protected _connectUrl:string = null;
 
         constructor(cls:any)
         {
@@ -45,9 +46,21 @@ namespace com
             this._decoder = this._pipeline.getContext(JTChannelContext.DECODE) as JTIDecoderAdapter;
         }
 
+        protected onReceiveMessage(data:any):void
+        {
+            let decoder:JTIDecoderAdapter = this._decoder;
+            let message:any = decoder.decode(data);
+            decoder.readComplete(message);
+        }
+
         public bind(channelPipeline:JTIChannelPipeline):void
         {
             this._pipeline = channelPipeline;
+        }
+
+        public get url():string
+        {
+            return this._connectUrl;
         }
 
         public get pipeline():JTIChannelPipeline
