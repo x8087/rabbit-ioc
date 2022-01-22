@@ -5,21 +5,53 @@ Rabbit-IOC 是一个跨引擎的前端框架(注入、注解、Mapping映射、�
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 框架启动配置
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        let application:c.JTIOption = new JTApplicationBoot();
-        application.option(c.JTApplication.PROTOCOL, new JTProtocolManager())//重写了此类
-        application.option(c.JTApplication.TEMPLATE, JTTemplateManager.instance) //注入单例//重写了此类
-        application.option(c.JTApplication.ERROR_MESSAGE, new JTProtocolErrorMessage())//重写了此类
-        // application.option(c.JTApplication.LAYER, new c.JTLayerManager())
-        application.option(c.JTApplication.MAPPING, new c.JTResponseMapping());
-        application.option(c.JTApplication.SCENE, new c.JTSceneManager());
+        let application:JTApplication = new JTApplication();
+        // application.preloadAssets();
+        // await application.load();
+        // application.preloadAssets();
+        // await application.load();
+
+        application.option(c.JTApplicationBootstrap.CONTEXT_PROTOCOL, new JTProtocolManager());
+        application.option(c.JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE, new JTProtocolErrorMessage());
+        application.option(c.JTApplicationBootstrap.CONTEXT_LAYER, new JTLayerManager());
+        application.option(c.JTApplicationBootstrap.CONTEXT_MAPPING, new JTResponseMapping());
+        application.option(c.JTApplicationBootstrap.CONTEXT_SCENE, new JTSceneManager());
+        application.layout(c.JTLayout.LAYOUT_VERTICAL);
+        application.option(c.JTApplicationBootstrap.CONTEXT_TEMPLATE, JTTemplateManager.instance); //注入单例
         application.updateConfigs(resources);
-        application.config(JTTemplateManager.instance.serverLoader,  "testServer");
-        application.channel(new c.JTWebSocketChannel(c.JTWebSocket));
-        application.childOption(c.JTChannelAdapter.ENCODE, new c.JTEncodeToJSONAdapter());
-        application.childOption(c.JTChannelAdapter.DECODE, new c.JTDecoderToJSONAdapter());
+        application.configServerTemaplete(JTTemplateManager.instance.serverLoader,  "httpServer");
+        application.channelGroup(new JTConnectionManager());
+        // application.channel(new c.JTHttpChannel(c.JTHttpRequest));
+        // application.channel(new c.JTWebSocketChannel(c.JTWebSocket));
+        // application.childOption(c.JTChannelContext.IDLE, new c.JTIdleStateAdapter());
+        // application.childOption(c.JTChannelContext.ENCODE, new c.JTEncodeToJSONAdapter());
+        // application.childOption(c.JTChannelContext.DECODE, new c.JTDecoderToJSONAdapter());
+        application.connect();
         application.launch();
+        
+        
+        
+        export default class JTConnectionManager extends c.JTChannelGroup 
+        {
+            constructor() 
+            {
+                super();
+            }
 
+            public initialize():void 
+            {
+                let socketPipeline:c.JTIChannelPipeline = this.setupChannel(c.JTChannelGroup.WEBSOCKET_CHANNEL, c.JTWebSocketChannel);
+                socketPipeline.childOption(c.JTChannelContext.IDLE, new c.JTIdleStateAdapter());
+                socketPipeline.childOption(c.JTChannelContext.ENCODE, new c.JTEncodeToJSONAdapter());
+                socketPipeline.childOption(c.JTChannelContext.DECODE, new c.JTDecoderToJSONAdapter());
+                socketPipeline.config("127.0.0.1", 8889).mark();
 
+                let httpPipeline:c.JTIChannelPipeline = this.setupChannel(c.JTChannelGroup.HTTP_CHANNEL, c.JTHttpChannel);
+                httpPipeline.childOption(c.JTChannelContext.ENCODE, new c.JTEncodeToJSONAdapter());
+                httpPipeline.childOption(c.JTChannelContext.DECODE, new c.JTDecoderToJSONAdapter());
+                httpPipeline.config("127.0.0.1", 8081).mark();
+            }
+        }
 
 JTPool--传统对象池
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
