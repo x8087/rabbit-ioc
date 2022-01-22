@@ -76,7 +76,7 @@ namespace com
         protected onErrorHandler(e):void
         {
             this.pipeline.channelInactive();
-            JTLogger.info("current connect error")
+            JTLogger.info("current connect error");
         }
 
         public reload():void 

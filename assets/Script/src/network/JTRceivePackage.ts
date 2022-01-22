@@ -10,8 +10,6 @@ namespace com
         private _status:number = 0;
         private _errorCode:number = 0;
 
-
-
         public get content():Object
         {
             return this._content;

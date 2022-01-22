@@ -8,33 +8,26 @@ namespace com
         private static ____ctx:JTIApplicationContext[] = []
 
         public static CONTEXT_PROTOCOL:string = "Context_Protocol";
-
         public static CONTEXT_ERROR_MESSAGE:string = "Context_ErrorMessage";
-
         public static CONTEXT_TEMPLATE:string = "Context_Template";
-
         public static CONTEXT_MAPPING:string = "Context_Response_Mapping";
-
         public static CONTEXT_SCENE:string = "Context_Scene";
-
         public static CONTEXT_LAYER:string = "Context_Layer";
-
         public static CONTEXT_RUNNER:string = "Context_RUNNER";
-
         protected static CONTEXT_LAYOUT:string = "Context_Layout";
 
         public static CHANNEL:string = "Channel";
-        public static WEBSOCKET_CHANNEL:string = "Websocket_Channel";
-        public static HTTP_CHANNEL:string = "Http_Channel";
+
         public static CHANNEL_PIPELINE:string = "Pipeline";
+
+        public static CHANNEL_GROUP:string = "ChannelGroup";
 
         private _serverLoader:JTTextLoader = null;
         private _serverTemplate:JTServerConfigTemplate = null;
 
         private __loaderManager:JTFuturePipeline = null;
         private _launchConnected:boolean = false;
-
-
+        private __channelGroup:JTIChannelGroup = null;
 
         constructor()
         {
@@ -44,39 +37,39 @@ namespace com
         /**
          * 选项必须继承--JTApplicationContext
          * @param type 类型
-         * @param _context 扩展上下文
+         * @param ___cxt 扩展上下文
          * @returns 
          */
-        public option(type: string, _context: JTIApplicationContext): JTIChildOption 
+        public option(type: string, ___cxt: JTIApplicationContext): JTIChildOption 
         {
-            return this.registerContextAlias(type, _context) as JTIChildOption
+            return this.registerContextAlias(type, ___cxt) as JTIChildOption
         }
 
         /**
          * 构建上下文对象
          */
-        protected buildContexts():void
+        protected builds():void
         {
-            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
-            let count:number = __contexts.length;
+            let _____ctxs:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
+            let count:number = _____ctxs.length;
             for (let i:number = 0; i < count; i++)
             {
-                let ___c:JTIApplicationContext = __contexts[i];
-                ___c.build();
+                let ___c:JTIApplicationContext = _____ctxs[i];
+                !___c.builded && ___c.build();
             }
         }
 
         /**
          * 构建上下文对象
          */
-        protected buildComplete():void
+        protected buildsComplete():void
         {
-            let __contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
-            let count:number = __contexts.length;
+            let ____ctxs:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
+            let count:number = ____ctxs.length;
             for (let i:number = 0; i < count; i++)
             {
-                let __c:JTIApplicationContext = __contexts[i];
-                __c.buildComplete();
+                let __c:JTIApplicationContext = ____ctxs[i];
+                !__c.buildCompleted && __c.buildComplete();
             }
         }
 
@@ -87,11 +80,19 @@ namespace com
          */
         public channel(channel:JTIChannel):JTIChannelOption
         {
-            this.buildContexts();
+            this.builds();
             this.registerContextAlias(JTApplicationBootstrap.CHANNEL, channel);
             let channelPipeline:JTIChannelPipeline = new JTChannelPipeline();
             channelPipeline.bind(channel);
             return this.registerContextAlias(JTApplicationBootstrap.CHANNEL_PIPELINE, channelPipeline);
+        }
+
+
+        public channelGroup(channelGroup:JTIChannelGroup):JTIChannelGroup
+        {
+            this.builds();
+            this.__channelGroup = channelGroup;
+            return channelGroup;
         }
 
         /**
@@ -139,13 +140,21 @@ namespace com
             return this._serverTemplate;
         }
 
-        public connect():JTIChannel
+        public connect():JTIConnection
         {
-            let channel:JTIChannel = null;
+            let channel:JTIConnection = null;
             if (!this._launchConnected)
             {
-                let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
-                channel = channelPipeline.launch(this._serverTemplate.host, this._serverTemplate.port);
+                if (this.__channelGroup)
+                {
+                        this.__channelGroup.initialize();
+                        channel = this.__channelGroup.connect();
+                }
+                else
+                {
+                    let channelPipeline:JTIChannelPipeline = this.getContext(JTApplicationBootstrap.CHANNEL_PIPELINE);
+                    channel = channelPipeline.launch(this._serverTemplate.host, this._serverTemplate.port);
+                }
                 this._launchConnected = true;
             }
             return channel;
@@ -154,11 +163,11 @@ namespace com
         /**
          * 启动框架
          */
-        public launch():JTIChannel
+        public launch():JTIConnection
         {
             if (this.__loaderManager) this.__loaderManager.run();
-            this.buildComplete();
-            let channel:JTIChannel = this.connect();
+            this.buildsComplete();
+            let channel:JTIConnection = this.connect();
             this.launchSucceed();
             return channel;
         }

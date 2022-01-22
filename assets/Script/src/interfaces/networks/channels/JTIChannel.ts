@@ -5,24 +5,19 @@
 */
 namespace com 
 {
-    export interface JTIChannel
+    export interface JTIChannel extends JTIConnection
     {
         host:string;
         port:number;
-        
+
+        name:string;
 
         pipeline:JTIChannelPipeline;
 
-        reload():void;
-
         bind(channelPipeline:JTIChannelPipeline):void
-
-        flush():void;
-
-        send(data:any):void 
 
         config(host:string, port:number):any;
 
-        connect():void;
+        connect():any;
     }
 }

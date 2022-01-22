@@ -6,7 +6,7 @@ namespace com
         private _content:Object = {};
         private _data:Object = {};
         private _protocol:number | string;
-        private _channel:JTIChannel = null;
+        private _channel:JTIConnection = null;
         
         public writeProtocol(protocol:number | string):void
         {
@@ -28,7 +28,7 @@ namespace com
             return this._protocol;
         }
 
-        public get channel():JTIChannel
+        public get channel():JTIConnection
         {
             return this._channel;
         }
@@ -46,7 +46,7 @@ namespace com
             JTSendPackage.put(this);
         }
 
-        public setup(channel:JTIChannel):void
+        public setup(channel:JTIConnection):void
         {
             this._channel = channel;
         }
@@ -70,7 +70,7 @@ namespace com
         
         private static _pool:JTIPool = null;
 
-        public static begin(channel?:JTIChannel):JTSendPackage
+        public static begin(channel?:JTIConnection):JTSendPackage
         {
             var sendPackage:JTSendPackage = this.pool.get() as JTSendPackage;
             if (!channel) channel = JTSession.channel; //如果没有传连接通道，直接使用框架默认的连接

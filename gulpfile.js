@@ -15,14 +15,14 @@ gulp.task('buildJs', () => {
         .pipe(inject.replace('var __extends', 'window.__extends'))
         // .pipe(babel())
         // .pipe(minify({ ext: { min: ".min.js" } }))
-        .pipe(gulp.dest('D:/IMChats/IMClient/IMChat/assets/Script/libs'));
+        .pipe(gulp.dest('D:/IMChats/IMChatClient/assets/Script/libs'));
 })
 
 gulp.task("buildDts", () => {
     return tsProject.src()
         .pipe(tsProject())
         .dts.pipe(inject.append('import c = com;'))
-        .pipe(gulp.dest('D:/IMChats/IMClient/IMChat/assets/Script/libs'));
+        .pipe(gulp.dest('D:/IMChats/IMChatClient/assets/Script/libs'));
 });
 
 gulp.task("copy", () => {

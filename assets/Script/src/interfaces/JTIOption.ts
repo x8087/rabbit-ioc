@@ -13,10 +13,12 @@ namespace com
 
             conofig(host:string, port:number):JTServerConfigTemplate 
 
+            channelGroup(channelGroup:JTIChannelGroup):JTIChannelGroup;
+
             configServerTemaplete(serverLoader:JTTextLoader, serverId:string):JTServerConfigTemplate
 
-            connect():JTIChannel
+            connect():JTIConnection
 
-            launch():JTIChannel 
+            launch():JTIConnection 
     }
 }

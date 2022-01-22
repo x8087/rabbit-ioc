@@ -6,6 +6,7 @@ namespace com
         protected _port:number = 0;
         protected _host:string = null;
         protected _channel:any = null;
+        protected __name:string = "";
 
         protected _pipeline:JTIChannelPipeline = null;
         protected _encoder:JTIEncoderAdapter = null;
@@ -15,7 +16,6 @@ namespace com
         constructor(cls:any)
         {
             super();
-
             if (cls)this._cls = cls;
             else
             {
@@ -51,6 +51,22 @@ namespace com
             let decoder:JTIDecoderAdapter = this._decoder;
             let message:any = decoder.decode(data);
             decoder.readComplete(message);
+        }
+
+        public writeAndFlush(data:any):void
+        {
+            this.flush();
+            this.send(data);
+        }
+
+        public get name():string
+        {
+            return this.__name;
+        }
+
+        public set name(value:string)
+        {
+            this.__name = value;
         }
 
         public bind(channelPipeline:JTIChannelPipeline):void

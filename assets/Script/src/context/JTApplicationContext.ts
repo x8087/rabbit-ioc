@@ -6,9 +6,21 @@ namespace com
      */
     export abstract class JTApplicationContext extends JTEventSignaler implements JTIApplicationContext
     {
+        protected _builded:boolean = false;
+        protected _buildCompleted:boolean = false;
         constructor()
         {
             super();
+        }
+        
+        public get builded():boolean
+        {
+            return this._builded;
+        }
+
+        public get buildCompleted():boolean
+        {
+            return this._buildCompleted;
         }
 
         /**

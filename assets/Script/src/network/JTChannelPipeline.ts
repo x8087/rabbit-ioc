@@ -3,11 +3,50 @@
     export class JTChannelPipeline extends JTEventDispatcher implements JTIChannelPipeline
     {
         private _channel:JTIChannel = null;
-        private __contextMap:{[type:string]: JTIChannelContext} = {};
+        private ___ctxMap:{[type:string]: JTIChannelContext} = {};
         private ___ctxs:JTIChannelContext[] = []
-        constructor()
+        private __channelGroup:JTIChannelGroup = null;
+        constructor(channelGroup?:JTIChannelGroup)
         {
             super();
+            this.__channelGroup = channelGroup;
+        }
+
+        public mark():void 
+        {
+           this.__channelGroup && this.__channelGroup.mark(this);
+        }
+
+        public config(host:string, port:number):JTIMarkChannelConnected
+        {
+            this._channel.reload();
+            this._channel.config(host, port);
+            return this;
+        }
+
+        public connect():any
+        {
+           return this._channel.connect();
+        }
+
+        public reload(): void 
+        {
+            this._channel.reload();
+        }
+
+        public flush(): void 
+        {
+            this._channel.flush();
+        }
+
+        public send(data: any): void 
+        {
+            this._channel.send(data);
+        }
+
+        public writeAndFlush(data: any): void 
+        {
+             this._channel.writeAndFlush(data);
         }
 
         public channelActive():void
@@ -17,7 +56,7 @@
                 let ___c:JTIChannelContext = this.___ctxs[i];
                 ___c.channelActive();
             }
-    }
+        }
 
         public channelInactive():void
         {
@@ -51,14 +90,14 @@
         {
             ___c.bind(this);
             ___c.build();
-            this.__contextMap[type] =  ___c;
+            this.___ctxMap[type] =  ___c;
             this.___ctxs.push(___c);
             return this;
         }
 
         public getContext(type:string):JTIChannelContext
         {
-            return this.__contextMap[type];
+            return this.___ctxMap[type];
         }
 
         public launch(host:string, port:number):JTIChannel
