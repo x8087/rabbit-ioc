@@ -23,9 +23,9 @@ namespace com
             }
         }
 
-        abstract flush():void
+        public abstract flush():void;
 
-        abstract send(data:any):void 
+        public abstract send(data:any):void;
 
         public config(host:string, port:number):void
         {

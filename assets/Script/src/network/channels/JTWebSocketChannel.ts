@@ -38,7 +38,7 @@ namespace com
             else
             {
                 this._buffers.push(message);
-                JTLogger.info("send error, the websocket cant send msg to server!");
+                JTLogger.info("Websocket send error, The websocket cant send msg to server!");
             }
         }
 
@@ -61,22 +61,22 @@ namespace com
 
         protected onConnectSucceed(e):void
         {
-            JTLogger.info("connect succeed!")
+            info("The channel connect websocket server succeed!")
             this.pipeline.channelActive();
             this.flush();
-            JTFunctionManager.execute(JTWebSocket.OPEN);
+            execute(JTWebSocket.OPEN);
         }
 
         protected onCloseHandler(e):void
         {
             this.pipeline.channelInactive();
-            JTLogger.info("the server already close");
+            info("The websocket server already close!");
         }
 
         protected onErrorHandler(e):void
         {
             this.pipeline.channelInactive();
-            JTLogger.info("current connect error");
+            info("The websocket connect server fail!");
         }
 
         public reload():void 

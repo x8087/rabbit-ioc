@@ -96,7 +96,7 @@ namespace com
                 JTCommand.put(command);
         }
 
-        protected removes() 
+        protected removes():void 
         {
             // this._eventMap.forEach((value, key)=>{
             //         this.removeEvents(key);

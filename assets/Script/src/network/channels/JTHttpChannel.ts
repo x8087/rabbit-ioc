@@ -84,7 +84,7 @@ namespace com
 
         protected onErrorHandler(e) 
         {
-            JTLogger.info("the send package error!");
+            JTLogger.info("The http channel send msg fail!");
             this.pipeline.channelInactive();
         }
 
