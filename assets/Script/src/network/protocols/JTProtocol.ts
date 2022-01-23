@@ -51,7 +51,7 @@ namespace com
             return this._encrypts;
         }
 
-        public getProtocol(protocol:number):JTItemProtocol
+        public getProtocol(protocol:number | string):JTItemProtocol
         {
             return this._protocolMap[protocol];
         }
