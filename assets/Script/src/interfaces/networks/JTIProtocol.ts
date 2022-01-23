@@ -2,15 +2,15 @@ namespace com
 {
     export interface JTIProtocol
     {
-        protocols:number[];
+        protocols:number | string[];
 
         encrypts:number[];
 
         build():void;
 
-        registerProtocol(protocol:number, waiting:boolean, encrypt?:string):void;
+        registerProtocol(protocol:number | string, waiting:boolean, encrypt?:string):void;
 
-        getProtocol(protocol:number):JTItemProtocol;
+        getProtocol(protocol:number | string):JTItemProtocol;
 
         execute(message:any):void;
     }

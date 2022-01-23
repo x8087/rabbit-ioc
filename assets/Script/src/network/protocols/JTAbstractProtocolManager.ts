@@ -22,7 +22,7 @@ namespace com
          * @param waiting 是否显示转圈
          * @param security 加密方式
          */
-        public registerDownProtocol(protocol:number, waiting:boolean, security?:string):void
+        public registerDownProtocol(protocol:number | string, waiting:boolean, security?:string):void
         {
                 this.downProtocol.registerProtocol(protocol, waiting, security)
         }
@@ -34,7 +34,7 @@ namespace com
          * @param waiting 是否显示转圈
          * @param security 解密方式
          */
-         public registerUpProtocol(protocol:number, waiting:boolean, security?:string):void
+         public registerUpProtocol(protocol:number | string, waiting:boolean, security?:string):void
          {
             this.protocolUp.registerProtocol(protocol, waiting, security);
          }

@@ -4,9 +4,9 @@ namespace com
     {
          private _isWaiting:boolean = false;
          private _securityOption:string = null;
-         private _protocol:number = 0;
+         private _protocol:number | string = 0;
 
-         constructor(protocol:number)
+         constructor(protocol:number | string)
          {
             this._protocol = protocol;
          }
@@ -17,14 +17,14 @@ namespace com
             this._isWaiting = isWaiting;
          }
 
-         public static create(protocol:number, isWaiting:boolean, security?:string):JTItemProtocol
+         public static create(protocol:number | string, isWaiting:boolean, security?:string):JTItemProtocol
          {
                var item:JTItemProtocol = new JTItemProtocol(protocol);
                item.setup(isWaiting, security);
                return item;
          }
 
-         public get protocol():number
+         public get protocol():number | string
          {
              return this._protocol;
          }

@@ -2,7 +2,7 @@ namespace com
 {
     export class JTProtocol implements JTIProtocol
     {
-        private _protocols:number[] = null;
+        private _protocols:any[] = null;
 
         private _encrypts:number[] = null;
 
@@ -31,17 +31,17 @@ namespace com
          * @param waiting 是否显示隐藏通信转圈
          * @param encrypt 是否显示加解密的转圈
          */
-        public registerProtocol(protocol:number, waiting:boolean, security?:string):void 
+        public registerProtocol(protocol:number | string, waiting:boolean, security?:string):void 
         {
                this._protocolMap[protocol] = JTItemProtocol.create(protocol, waiting, security)
-               waiting && this._protocols.push(protocol);
+               waiting && this.protocols.push(protocol);
         }
 
         /**
          * 同时拥有加解密功能的协议号列表
          * 
          */
-        public get protocols():number[]
+        public get protocols():any[]
         {
             return this._protocols;
         }
