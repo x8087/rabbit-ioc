@@ -1,6 +1,6 @@
 namespace com 
 {
-    export abstract class JTAbstractProtocolManager extends JTApplicationContext
+    export abstract class JTAbstractProtocolManager extends JTOptionContext
     {
         public protocolUp:JTIProtocol = null;
 

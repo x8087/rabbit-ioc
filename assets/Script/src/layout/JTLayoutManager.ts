@@ -1,6 +1,6 @@
 namespace com 
 {
-    export class JTLayoutManager extends JTApplicationContext
+    export class JTLayoutManager extends JTOptionContext
     {
 
         public static ___classLayoutMap:{[className:string] : {[name:string]:JTLayout}} = {}

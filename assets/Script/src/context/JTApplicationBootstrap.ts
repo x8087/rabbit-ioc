@@ -5,7 +5,7 @@ namespace com
     {
         protected static _contextMap:{[name:string]:any} = {};
 
-        private static ____ctx:JTIApplicationContext[] = []
+        private static ____ctx:JTIOptionContext[] = []
 
         public static CONTEXT_PROTOCOL:string = "Context_Protocol";
         public static CONTEXT_ERROR_MESSAGE:string = "Context_ErrorMessage";
@@ -40,7 +40,7 @@ namespace com
          * @param ___cxt 扩展上下文
          * @returns 
          */
-        public option(type: string, ___cxt: JTIApplicationContext): JTIChildOption 
+        public option(type: string, ___cxt: JTIOptionContext): JTIChildOption 
         {
             return this.registerContextAlias(type, ___cxt) as JTIChildOption
         }
@@ -50,11 +50,11 @@ namespace com
          */
         protected builds():void
         {
-            let _____ctxs:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
+            let _____ctxs:JTIOptionContext[] = JTApplicationBootstrap.____ctx;
             let count:number = _____ctxs.length;
             for (let i:number = 0; i < count; i++)
             {
-                let ___c:JTIApplicationContext = _____ctxs[i];
+                let ___c:JTIOptionContext = _____ctxs[i];
                 !___c.builded && ___c.build();
             }
         }
@@ -64,11 +64,11 @@ namespace com
          */
         protected buildsComplete():void
         {
-            let ____ctxs:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
+            let ____ctxs:JTIOptionContext[] = JTApplicationBootstrap.____ctx;
             let count:number = ____ctxs.length;
             for (let i:number = 0; i < count; i++)
             {
-                let __c:JTIApplicationContext = ____ctxs[i];
+                let __c:JTIOptionContext = ____ctxs[i];
                 !__c.buildCompleted && __c.buildComplete();
             }
         }
@@ -223,8 +223,8 @@ namespace com
         public registerContextAlias(key:string, __context:any):JTIOption
         {
             JTApplicationBootstrap._contextMap[key] = __context;
-            let contexts:JTIApplicationContext[] = JTApplicationBootstrap.____ctx;
-            if (__context instanceof JTApplicationContext)  contexts.push(__context);
+            let contexts:JTIOptionContext[] = JTApplicationBootstrap.____ctx;
+            if (__context instanceof JTOptionContext)  contexts.push(__context);
             return this;
         }
 

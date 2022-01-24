@@ -9,24 +9,13 @@ module com
 		// private static _singletonMap:{[name:string] : JTClassAlisa} = {};
 
 		public static DECORATOR_KEY:string = "__c.decorator__";
-		/**
-		 * 标记当前对象哪些属性进行了注入
-		 * @param cls 注入的类型
-		 * @param target 注入的类
-		 * @param property 被注入的属性名
-		 * @returns 返回注入关键字+属性名 __c.decorator__
-		 */
-		public static registerClassAlias(target:any, property:string):string 
+
+		public static registerDecoratorKey(__property:string):string
 		{
-			 let __lines:string[] = target[this.DECORATOR_KEY];
-			 if (!__lines)
-			 {
-				target[this.DECORATOR_KEY] = __lines = [];
-			 }
-			 __lines.push(property);
-			let key:string = this.DECORATOR_KEY + property;
+			let key:string = this.DECORATOR_KEY + __property;
 			return key;
 		}
+
 
 		/**
 		 * 全局单例--一个项目中只能存在一份实例（以cls做为参照对象）

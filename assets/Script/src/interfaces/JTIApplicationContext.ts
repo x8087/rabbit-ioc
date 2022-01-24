@@ -5,7 +5,7 @@
 */
 namespace com 
 {
-    export interface JTIApplicationContext
+    export interface JTIOptionContext
     {
             build():void;
 

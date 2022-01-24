@@ -28,7 +28,7 @@ module com
 	 
 	export function registerSingletonPoolAlisa(poolCls:any, target:any, property:string, itemCls:any, parameters?:any) 
 	{
-		let key:string = JTDecoratorUtils.registerClassAlias(target, property);
+		let key:string = JTDecoratorUtils.registerDecoratorKey(property);		
 		Object.defineProperty(target, property, 
 		{
 			get: function () 

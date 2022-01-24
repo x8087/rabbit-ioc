@@ -4,7 +4,7 @@ namespace com
     /**
      * 扩展基类
      */
-    export abstract class JTApplicationContext extends JTEventSignaler implements JTIApplicationContext
+    export abstract class JTOptionContext extends JTEventSignaler implements JTIOptionContext
     {
         protected _builded:boolean = false;
         protected _buildCompleted:boolean = false;

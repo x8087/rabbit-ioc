@@ -27,7 +27,7 @@ module com
 	 
 	export function registerSingletonClassAlias(cls:any, target:any, property:string, destroyed:boolean = false) 
 	{
-		let key:string = JTDecoratorUtils.registerClassAlias(target, property);
+		let key:string = JTDecoratorUtils.registerDecoratorKey(property);
 		Object.defineProperty(target, property, 
 		{
 			get: function () 

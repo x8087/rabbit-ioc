@@ -4,7 +4,7 @@ namespace com
      * 此类的属性太多，不需要扩展instance
      * 继承直接单例注入instance就好了。
      */
-    export abstract class JTAbstractTemplateManager extends JTApplicationContext implements JTITemplateInfoManager
+    export abstract class JTAbstractTemplateManager extends JTOptionContext implements JTITemplateInfoManager
     {
         public _configMap:{[url:string]: any} = {}
 

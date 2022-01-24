@@ -41,7 +41,6 @@ module com
 	 {
 		 return function (target:any) 
 		 {
-			JTDecoratorUtils.registerClassAlias(target, "name")
 			JTResizeEvent.className.push(target.name);
 		 }
 	 }

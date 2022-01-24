@@ -1,6 +1,6 @@
 namespace com 
 {
-    export abstract class JTAbstractSceneManager extends JTApplicationContext implements JTISceneManager
+    export abstract class JTAbstractSceneManager extends JTOptionContext implements JTISceneManager
     {
         private _layer:fgui.GComponent = null;
 

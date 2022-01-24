@@ -1,7 +1,7 @@
-///<reference path="../context/JTApplicationContext.ts"/>
+///<reference path="../context/JTOptionContext.ts"/>
 namespace com 
 {
-    export abstract class JTAbstractLayerManager extends JTApplicationContext implements JTILayerManager
+    export abstract class JTAbstractLayerManager extends JTOptionContext implements JTILayerManager
     {
         public static LAYER_TIPS: string = "layer_tips";
         public static LAYER_SCENE: string = "layer_scene";
