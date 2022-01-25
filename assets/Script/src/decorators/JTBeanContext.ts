@@ -1,30 +1,30 @@
 namespace com 
 {
-    export class JTClassContext
+    export class JTBeanContext
     {
         public ___class:any = null;
         public ___descripter:any = null;
-        public ___sourceProperty:string = null;
-        public __changedProperty:string = null;
-        public _instance:any = null;
         public ___caller:any = null;
+        public ___instance:any = null;
+        public ___sourceProperty:string = null;
+        public ___changedProperty:string = null;
 
         public bind(caller:any, property:string, descripter:any):void
         {
             this.___caller = caller;
             this.___descripter = descripter;
-            this.__changedProperty = this.___sourceProperty = property;
+            this.___changedProperty = this.___sourceProperty = property;
         }
 
         public get instance():any
 		{
-			if (!this._instance) 
+			if (!this.___instance) 
 			{
                 let __method:Function = this.___descripter.value;
-				this._instance = __method.apply(this.___caller, []);
-                this.___class = this._instance["constructor"];
+				this.___instance = __method.apply(this.___caller, []);
+                this.___class = this.___instance["constructor"];
 			}
-			return this._instance;
+			return this.___instance;
 		}
     }
 }

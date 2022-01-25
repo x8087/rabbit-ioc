@@ -2,40 +2,40 @@
 
 namespace com 
 {
-    export class JTApplicationContext
+    export class JTContainerContext
     {
         public static ___contextMap:Object = {};
-        public static ___contexts:JTClassContext[] = [];
+        public static ___contexts:JTBeanContext[] = [];
 
-        protected getObjectByClass(___class:any):JTClassContext
+        protected getObjectByClass(___class:any):JTBeanContext
         {
             return null;
         }
 
         public static collect(caller:any, property:string, descripter:any):void
         {
-            let __context:JTClassContext = this.___contextMap[property];
+            let __context:JTBeanContext = this.___contextMap[property];
             if (__context)
             {
                 error("already inject " + property  + " bean object. need change other property name!");
             }
-            this.___contextMap[property] = __context = new JTClassContext();
+            this.___contextMap[property] = __context = new JTBeanContext();
             __context.bind(caller, property, descripter);
         }
 
-        public static getContext(property:string):JTClassContext
+        public static getContext(property:string):JTBeanContext
         {
             return this.___contextMap[property];
         }
 
-        public static changedPropertyName(caller:any, __sourceProperty:string, descripter:any, __changedProperty:string):void
+        public static changedPropertyName(__sourceProperty:string, descripter:any, __changedProperty:string):void
         {
-            let  ___c:JTClassContext = null;
+            let  ___c:JTBeanContext = null;
             for (let key in this.___contextMap)
             {
                 ___c = this.___contextMap[key];
                 if (___c.___descripter !== descripter) continue;
-                ___c.__changedProperty = __changedProperty;
+                ___c.___changedProperty = __changedProperty;
                 this.___contextMap[__changedProperty] = ___c;
                 
                 delete this.___contextMap[__sourceProperty];
@@ -62,7 +62,7 @@ namespace com
            JTLogger.error("inject Bean Object is error, only use method!")
            return;
         }
-        JTApplicationContext.collect(caller, property, descripter);
+        JTContainerContext.collect(caller, property, descripter);
     };
 
     export var Qualifier:Function = function(changedProperty:string)
@@ -101,7 +101,7 @@ namespace com
             }
             else //方法或者类
             {
-                JTApplicationContext.changedPropertyName(___caller, __property, descripter, changedProperty);
+                JTContainerContext.changedPropertyName(__property, descripter, changedProperty);
             }
         }
     }
@@ -123,7 +123,7 @@ namespace com
 				let val = this[key];
 				if (val === null || val === undefined) 
 				{
-					let ____c:JTClassContext = JTApplicationContext.getContext( changedProperty);
+					let ____c:JTBeanContext = JTContainerContext.getContext(changedProperty);
 					val = this[__property] = ____c.instance;
 					____c = null;
 				}
