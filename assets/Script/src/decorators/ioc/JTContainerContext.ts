@@ -57,60 +57,38 @@ namespace com
 
     export var Bean:Function = function(caller:any, property:string, descripter:any):void
     {
-
-        JTApplicationContext.collect(caller, Bean, property, descripter, arguments)
-        if (!descripter)
+        if (!JTApplicationContext.collect(caller, Bean, property, descripter, [caller, property, descripter]))
         {
-           JTLogger.error("inject Bean Object is error, only use method!")
-           return;
+            JTContainerContext.collect(caller, property, descripter);
         }
-        JTContainerContext.collect(caller, property, descripter);
     };
 
     export var Qualifier:Function = function(changedProperty:string)
     {
+        var parameters:any = arguments;
         return function(___caller:any, __property:string, descripter:any)
         {
-            if (!descripter) //属性获取时，先修改对属性获取BEAN对象的属性名;
+            if (!JTApplicationContext.collect(___caller, Qualifier, __property, descripter, parameters))
             {
-                Object.defineProperty(___caller, __property, {});
-                doAutowired(___caller, __property, changedProperty);
-                // let __descriptor:any = Object.getOwnPropertyDescriptor(___caller, __property)
-                // if (__descriptor) return;//避免重复注册钩子
-                // let key:string = JTDecoratorUtils.registerDecoratorKey(__property);
-                // Object.defineProperty(___caller, __property, 
-                // {
-                //     get: function () 
-                //     {
-                //         let val = this[key];
-                //         if (val === null || val === undefined) 
-                //         {
-                //             let ____c:JTClassContext = JTApplicationContext.getContext(changedProperty);
-                //             val = this[__property] = ____c.instance;
-                //             ____c = null;
-                //         }
-                //         return val;
-                //     },
-                //     set: function (val) 
-                //     {
-                //         let oldVal:any = this[key];
-                //         if (val === oldVal) return;
-                //         this[key] = val;
-                //     },
-                // enumerable: true,
-                // configurable: true
-                // });
-            }
-            else //方法或者类
-            {
-                JTContainerContext.changedPropertyName(__property, descripter, changedProperty);
+                if (!descripter) //属性获取时，先修改对属性获取BEAN对象的属性名;
+                {
+                    Object.defineProperty(___caller, __property, {});
+                    doAutowired(___caller, __property, changedProperty);
+                }
+                else //方法或者类
+                {
+                    JTContainerContext.changedPropertyName(__property, descripter, changedProperty);
+                }
             }
         }
     }
 
     export var Autowired:Function = function (___caller:any, __property:string)
     {
-        doAutowired(___caller, __property, __property)
+        if (!JTApplicationContext.collect(___caller, Autowired, __property, {}, [___caller, __property]))
+        {
+            doAutowired(___caller, __property, __property)
+        }
     }
     
     function doAutowired(___caller:any, __property:string, changedProperty:string)

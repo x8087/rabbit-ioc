@@ -5,15 +5,6 @@ module com
 {
 	export class JTIOCController
 	{
-		public execute():void
-		{
-			let lines:JTDescripter[] = this.__annotations;
-			for (let i:number = 0; i < lines.length; i++)
-			{
-				let descripter:JTDescripter = lines[i] as JTDescripter;
-				descripter.run();
-			}
-		}
 
 		public __annotationMap:{[className:string]:JTDescripter} = {};
 		public __annotations:JTDescripter[] = [];
@@ -21,6 +12,16 @@ module com
 		constructor()
 		{
 			
+		}
+
+		public run():void
+		{
+			let lines:JTDescripter[] = this.__annotations;
+			for (let i:number = 0; i < lines.length; i++)
+			{
+				let descripter:JTDescripter = lines[i] as JTDescripter;
+				descripter.run();
+			}
 		}
 
 		public makeClassMap(__emt:JTElementDescripter):void
