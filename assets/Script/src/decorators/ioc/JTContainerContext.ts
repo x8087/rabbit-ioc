@@ -39,8 +39,8 @@ namespace com
                 ___c.___changedProperty = __changedProperty;
                 this.___contextMap[__changedProperty] = ___c;
                 
-                delete this.___contextMap[__sourceProperty];
                 this.___contextMap[__sourceProperty] = null;
+                delete this.___contextMap[__sourceProperty];
                 break;
             }
         }
