@@ -1,48 +1,32 @@
-
+///<reference path="../../common/JTDictionary.ts"/>
  
 
 namespace com 
 {
-    export class JTContainerContext
+    export class JTContextMap extends JTDictionary<string, JTBeanContext>
     {
-        public static ___contextMap:Object = {};
-        public static ___contexts:JTBeanContext[] = [];
 
         protected getObjectByClass(___class:any):JTBeanContext
         {
             return null;
         }
 
-        public static collect(__c:any, property:string, descripter:any):void
+        public collect(__c:any, property:string, descripter:any):void
         {
-            let __context:JTBeanContext = this.___contextMap[property];
+            let __context:JTBeanContext = this.get(property);
             if (__context)
             {
                 error("already inject " + property  + " bean object. need change other property name!");
             }
-            this.___contextMap[property] = __context = new JTBeanContext();
+            __context = new JTBeanContext();
+            this.set(property, __context);
             __context.bind(__c, property, descripter);
         }
 
-        public static getContext(property:string):JTBeanContext
+        public changed(__sourceProperty:string, __changedProperty:string):void
         {
-            return this.___contextMap[property];
-        }
-
-        public static changedPropertyName(__sourceProperty:string, descripter:any, __changedProperty:string):void
-        {
-            let  ___c:JTBeanContext = null;
-            for (let key in this.___contextMap)
-            {
-                ___c = this.___contextMap[key];
-                if (___c.___descripter !== descripter) continue;
-                ___c.___changedProperty = __changedProperty;
-                this.___contextMap[__changedProperty] = ___c;
-                
-                this.___contextMap[__sourceProperty] = null;
-                delete this.___contextMap[__sourceProperty];
-                break;
-            }
+            let value:JTBeanContext = this.remove(__sourceProperty);
+            value &&  this.set(__changedProperty, value)
         }
 
         public bind():void
@@ -56,21 +40,27 @@ namespace com
         }
     }
 
+    /**
+     * 可选@Qualifier("propertyName")
+     * Bean对象 配合Autowired一起使用
+     * @param ___c 
+     * @param property 
+     * @param descripter 
+     */
     export var Bean:Function = function(___c:any, property:string, descripter:any):void
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTContainerContext.collect(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
         }
         else
         {
             JTApplicationContext.collect(___c, Bean, property, descripter, [___c, property, descripter])
         }
-        
     };
 
     /**
-     * 
+     * 从
      * @param changedProperty 
      * @returns 
      */
@@ -86,7 +76,7 @@ namespace com
             }
             else //方法或者类
             {
-                JTContainerContext.changedPropertyName(__c.__property, __c.__descripter, __c.parameters[0]);
+                JTApplicationContext.changed(__c.__property, __c.parameters[0]);
             }
         }
         else
@@ -121,8 +111,6 @@ namespace com
     
     function doAutowired(__caller:any, __property:string, changedProperty:string)
     {
-        // let __descriptor:any = Object.getOwnPropertyDescriptor(__caller, __property)
-        // if (__descriptor && __descriptor.value) return;//避免重复注册钩子
         let key:string = JTDecoratorUtils.registerDecoratorKey(__property);
 		Object.defineProperty(__caller, __property, 
 		{
@@ -131,7 +119,7 @@ namespace com
 				let val = this[key];
 				if (val === null || val === undefined) 
 				{
-					let ____c:JTBeanContext = JTContainerContext.getContext(changedProperty);
+					let ____c:JTBeanContext = JTApplicationContext.get(changedProperty);
 					val = this[__property] = ____c.instance;
 					____c = null;
 				}

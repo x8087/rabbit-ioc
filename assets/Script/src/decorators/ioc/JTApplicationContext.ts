@@ -1,4 +1,5 @@
 ///<reference path="JTIOCController.ts"/>
+///<reference path="JTContextMap.ts"/>
 /*
 * 
 */
@@ -9,6 +10,7 @@ module com
 		public static controller:JTIocController = null;
 		private static _launched:boolean = false;
 		public static __elements:JTElementDescripter[] = [];
+		public static __contextMap:JTContextMap = new JTContextMap();
 
 		public static collect(__c:any, runnable:Function,  property:string, descripter:any, parameters:any):boolean
 		{
@@ -17,6 +19,21 @@ module com
 			this.__elements.push(__e);
 			return true;
 		}
+
+		public static collectToMap(__c:any, property:string, descripter:any):void
+		{
+			this.__contextMap.collect(__c, property, descripter);
+		}
+
+		public static changed(__sourceProperty:string, __changedProperty:string):void
+		{
+			this.__contextMap.changed(__sourceProperty, __changedProperty);
+		}
+
+		public static get(key:string):JTBeanContext
+		{
+			return this.__contextMap.get(key);
+		}	
 
 		public static get launched():boolean
 		{

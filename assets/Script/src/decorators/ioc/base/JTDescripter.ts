@@ -5,7 +5,6 @@ module com
 {
 	export abstract class JTDescripter
 	{
-
 		public ____c:any = null;
 		public __property:string = null;
 		public __elements:JTElementDescripter[] = null;

@@ -1,23 +1,19 @@
+///<reference path="../../common/JTDictionary.ts"/>
 /*
 * name;
 */
 module com 
 {
-	export class JTIocController
+	export class JTIocController extends JTDictionary<string, JTDescripter>
 	{
-
-
-		public __annotationMap:{[className:string]:JTDescripter} = {};
-		public __annotations:JTDescripter[] = [];
-
 		constructor()
 		{
-			
+			super();
 		}
 
 		public build():void
 		{
-			let lines:JTDescripter[] = this.__annotations;
+			let lines:JTDescripter[] = this._values;
 			for (let i:number = 0; i < lines.length; i++)
 			{
 				let descripter:JTDescripter = lines[i] as JTDescripter;
@@ -27,7 +23,7 @@ module com
 
 		public run():void
 		{
-			let lines:JTDescripter[] = this.__annotations;
+			let lines:JTDescripter[] = this._values;
 			for (let i:number = 0; i < lines.length; i++)
 			{
 				let descripter:JTDescripter = lines[i] as JTDescripter;
@@ -38,12 +34,11 @@ module com
 		public makeClassMap(__emt:JTElementDescripter):void
 		{
 			let __className:string = __emt.className;
-			let __classDescripter:JTClassDescripter = this.__annotationMap[__className] as JTClassDescripter;
+			let __classDescripter:JTClassDescripter = this.get(__className) as JTClassDescripter;
 			if (!__classDescripter)
 			{
 				__classDescripter = new JTClassDescripter(__emt.cls);
-				this.__annotationMap[__className] = __classDescripter
-				this.__annotations.push(__classDescripter);
+				this.set(__className, __classDescripter)
 			}
 			__classDescripter.collect(__emt);
 		}
