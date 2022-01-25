@@ -24,9 +24,14 @@ module com
 			return this.__class["constructor"].name;
 		}
 
-		public getClassType():any
+		public getClassContainer():any
 		{
-			return this.__config.getContainerClass();
+			return this.__config.getClassContainer();
+		}
+
+		public get property():string
+		{
+			return this.__config.__property;
 		}
 
 		public get cls()

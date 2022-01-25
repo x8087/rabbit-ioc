@@ -16,7 +16,7 @@ module com
 			this.__descripter = descripter;
 		}
 
-		public getContainerClass():any
+		public getClassContainer():any
 		{
 			let _____c:any = null;
 			if (!this.__property)
