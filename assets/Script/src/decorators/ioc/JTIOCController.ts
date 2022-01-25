@@ -1,15 +1,29 @@
-///<reference path="base/JTDescripter.ts"/>
 /*
 * name;
 */
 module com 
 {
-	export class JTIocController
+	export class JTIOCController
 	{
+		public execute():void
+		{
+			let lines:JTDescripter[] = this.__annotations;
+			for (let i:number = 0; i < lines.length; i++)
+			{
+				let descripter:JTDescripter = lines[i] as JTDescripter;
+				descripter.run();
+			}
+		}
+
 		public __annotationMap:{[className:string]:JTDescripter} = {};
 		public __annotations:JTDescripter[] = [];
 
-		public classification(__emt:JTElementDescripter):void
+		constructor()
+		{
+			
+		}
+
+		public makeClassMap(__emt:JTElementDescripter):void
 		{
 			let __className:string = __emt.className;
 			let __classDescripter:JTClassDescripter = this.__annotationMap[__className] as JTClassDescripter;

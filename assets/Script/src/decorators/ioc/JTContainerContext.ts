@@ -57,6 +57,8 @@ namespace com
 
     export var Bean:Function = function(caller:any, property:string, descripter:any):void
     {
+
+        JTApplicationContext.collect(caller, Bean, property, descripter, arguments)
         if (!descripter)
         {
            JTLogger.error("inject Bean Object is error, only use method!")

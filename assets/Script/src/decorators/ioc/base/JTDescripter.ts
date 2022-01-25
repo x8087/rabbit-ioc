@@ -20,6 +20,17 @@ module com
 			this.__key = this.__className + _property ?  _property : "";
 		}
 
+		public run(lines?:any):void
+		{
+			if (!lines) lines = this.__elements;
+			let total:number = lines.length;
+			for (let i:number = 0; i < total; i++)
+			{
+				 let element:JTElementDescripter = lines[i];
+				 element.run();
+			}
+		}
+
 		public addElement(element:JTElementDescripter):void
 		{
 			 this.__elements.push(element);	 

@@ -6,17 +6,24 @@ module com
 {
 	export class JTClassDescripter extends JTDescripter
 	{
-		public __propertys:JTDescripter[] = null;//属性描述列表
+		public __runnablePropertys:JTDescripter[] = null;//属性描述列表
+		public __runnableMethods:JTDescripter[] = null;//方法描述列表
 
 		public __descripterMap:{[key:string]:JTDescripter} = null;
-		public __methods:JTDescripter[] = null;//方法描述列表
 
 		constructor(__class:any)
 		{
 			super(__class);
-			this.__methods = [];
-			this.__propertys = [];
+			this.__runnableMethods = [];
+			this.__runnablePropertys = [];
 			this.__descripterMap = {};
+		}
+
+		public run(): void 
+		{
+			super.run(this.__runnablePropertys);
+			super.run(this.__runnableMethods);
+			super.run();
 		}
 
 		public assemble(__emt:JTElementDescripter):void
@@ -33,7 +40,7 @@ module com
 				if (!descripter)
 				{
 					descripter = new ___classContainer(__emt.cls, __emt.property);
-					___classContainer == JTPropertyDescripter? this.__propertys.push(descripter) : this.__methods.push(descripter);
+					___classContainer == JTPropertyDescripter? this.__runnablePropertys.push(descripter) : this.__runnableMethods.push(descripter);
 				}
 				descripter.addElement(__emt);
 			}

@@ -5,18 +5,23 @@ module com
 {
 	export class JTElementDescripter
 	{
-		private _type:string = null;
+		private __runable:Function = null;
 		private __class:any = null;
 		private __config:JTConfigDescripter = null;
 		private _parameter:{[name:string]:any} = null;
 
 
-		public relevance(__class:any, annotationType:string, parameters:any, __config?:JTConfigDescripter):void
+		public relevance(__class:any, runable:Function, parameters:any, __config?:JTConfigDescripter):void
 		{
 			this.__class = __class;
-			this._type = annotationType;
+			this.__runable = runable;
 			this._parameter = parameters;
 			this.__config = __config;
+		}
+
+		public run():void
+		{
+			this.__runable &&  this.__runable.apply(this.__class, this._parameter);
 		}
 
 		public get className():string
@@ -39,10 +44,10 @@ module com
 			return this.__class;
 		}
 
-		public static create(__class:any, annotationType:string, parameters:any, __config?:JTConfigDescripter):JTElementDescripter
+		public static create(__class:any, runnable:Function, parameters:any, __config?:JTConfigDescripter):JTElementDescripter
 		{
 			let element:JTElementDescripter = new JTElementDescripter();
-			element.relevance(__class, annotationType, parameters, __config);
+			element.relevance(__class, runnable, parameters, __config);
 			return element;
 		}
 	}
