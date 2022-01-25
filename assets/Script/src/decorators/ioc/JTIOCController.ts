@@ -3,8 +3,9 @@
 */
 module com 
 {
-	export class JTIOCController
+	export class JTIocController
 	{
+
 
 		public __annotationMap:{[className:string]:JTDescripter} = {};
 		public __annotations:JTDescripter[] = [];
@@ -12,6 +13,16 @@ module com
 		constructor()
 		{
 			
+		}
+
+		public build():void
+		{
+			let lines:JTDescripter[] = this.__annotations;
+			for (let i:number = 0; i < lines.length; i++)
+			{
+				let descripter:JTDescripter = lines[i] as JTDescripter;
+				descripter.builds();
+			}
 		}
 
 		public run():void
@@ -34,7 +45,7 @@ module com
 				this.__annotationMap[__className] = __classDescripter
 				this.__annotations.push(__classDescripter);
 			}
-			__classDescripter.assemble(__emt);
+			__classDescripter.collect(__emt);
 		}
 	}
 }

@@ -3,24 +3,33 @@
 */
 module com 
 {
-	export class JTDescripter
+	export abstract class JTDescripter
 	{
-		public __class:any = null;
+
+		public ____c:any = null;
 		public __property:string = null;
 		public __elements:JTElementDescripter[] = null;
 		private __className:string = null;
-		private __key:string = null;
+		protected ___dependencies:Function[] = null;
 
-		constructor(_class:any, _property?:string)
+		constructor(___caller:any, _property?:string)
 		{
 			this.__elements = [];
-			this.__class = _class;
+			this.___dependencies = [];
+			this.____c = ___caller;
 			this.__property = _property;
-			this.__className = _class["constructor"].name;
-			this.__key = this.__className + _property ?  _property : "";
+			this.__className = ___caller["constructor"].name;
 		}
 
-		public run(lines?:any):void
+
+		public abstract assemble():void
+
+		public builds() 
+		{
+			this.assemble();
+		}
+	 
+		public run(lines?:JTElementDescripter[]):void
 		{
 			if (!lines) lines = this.__elements;
 			let total:number = lines.length;
@@ -33,19 +42,14 @@ module com
 
 		public addElement(element:JTElementDescripter):void
 		{
-			 this.__elements.push(element);	 
+			let index:number = this.__elements.push(element);	 
+			this.___dependencies[index - 1] = element.runnable;
 		}
 
 		public get className():string
 		{
 			return this.__className;
 		}
-
-		public get dependKey():string
-		{
-			return this.__key;
-		}
-
 	}
 }
 

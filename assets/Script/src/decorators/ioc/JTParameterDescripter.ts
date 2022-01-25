@@ -6,6 +6,10 @@ module com
 {
 	export class JTParameterDescripter extends JTDescripter
 	{
+		public assemble(): void
+		 {
+		 
+		}
 		
 	}
 }

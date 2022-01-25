@@ -3,9 +3,10 @@
 */
 module com 
 {
-	export class JTContextFactory
+	Autowired
+	export interface JTContextFactory extends Function
 	{
-		
+		caller:Function;
 	}
 }
 
