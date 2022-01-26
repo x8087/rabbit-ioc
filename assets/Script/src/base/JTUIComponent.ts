@@ -157,7 +157,7 @@ module com
 
         public dispatchEvent(key:any, args?:any)
         {
-               return this._signaler.dispatchEvent(key, args);
+               return this._signaler.dispatchEvent(key, args);//
         }
 
         public removeEventListener(key:any, method:Function, caller:any):void
