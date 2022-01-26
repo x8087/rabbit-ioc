@@ -27,7 +27,7 @@ namespace com
                         }       
                 }
 
-                public dispatchEvent(key:any, args?:any):void
+                public dispatchEvent(key:any, args?:any)
                 {
                         key in this.evtMap && JTEventManager.dispatchEvent(key, args);
                 }

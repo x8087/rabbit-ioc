@@ -2,10 +2,8 @@ namespace com
 {
     export class JTBean
     {
-        public ___descripter:any = null;
-
         public ___caller:any = null;
-
+        public ___descripter:any = null;
         public ___instance:any = null;
 
         public ___sourceProperty:string = null;

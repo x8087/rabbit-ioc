@@ -3,7 +3,7 @@
     "module": "amd",
     "target": "es5",
     "skipLibCheck": true,
-    "outFile": "./z-robbit-ioc.js",
+    "outFile": "./rabbit-ioc/z-rabbit-ioc.js",
     "declaration": true,
     "sourceMap": false,
     "removeComments": true,

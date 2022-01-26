@@ -35,7 +35,7 @@ module com
 			let bean:JTBean = this.__beanMap.remove(__sourceProperty);
 			if (bean)
 			{
-					this.__beanMap.set(__changedProperty, bean);
+				this.__beanMap.set(__changedProperty, bean);
 			}
 		}
 

@@ -35,7 +35,7 @@ namespace com
             list.push(command);
         }
 
-        public dispatchEvent(key:any, args?:any):void
+        public dispatchEvent(key:any, args?:any)
         {
             var list:JTCommand[] = this.evtMap[key];
             if (list)

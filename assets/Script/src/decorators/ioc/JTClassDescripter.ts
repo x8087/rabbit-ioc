@@ -23,8 +23,7 @@ module com
 		{
 			this.assembles(this.__runnablePropertys);//组装属性注解
 			this.assembles(this.__runnableMethods);//组装方法注解
-			super.builds();
-			// this.assemble();//组装Class类注解
+			super.builds();// this.assemble();//组装Class类注解
 		}
 
 		public assemble():void 
@@ -38,8 +37,8 @@ module com
 			let total:number = lines.length;
 			for (let i:number = 0; i < total; i++)
 			{
-				 let element:JTDescripter = lines[i];
-				 element.builds();
+				let element:JTDescripter = lines[i];
+				element.builds();
 			}
 		}
 

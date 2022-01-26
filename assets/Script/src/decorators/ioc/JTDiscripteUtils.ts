@@ -8,30 +8,18 @@ namespace com
         return function(caller:any, property:string, descripter?:any)
         {
             let configurable = arguments
-
             info("Services" + parameters, configurable)
         }
-        // 
-        // let caller:any = 
-        // if (___c instanceof JTConfigDescripter)
-        // {
-        //     JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
-        // }
-        // else
-        // {
-        //     JTApplicationContext.collect(___c, Services, property, descripter, [___c, property, descripter])
-        // }
     }
 
-    export var Scene:Function = function(___c:any, property:string, descripter:any)
+    export var Scene:Function = function()
     {
         let parameters = arguments
 
         return function(caller:any, property:string, descripter?:any)
         {
             let configurable = arguments
-
-            info("Scene: " + parameters, configurable)
+            info("Scene: " + parameters, configurable);
         }
     }
 

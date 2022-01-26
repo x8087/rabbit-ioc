@@ -5,25 +5,25 @@ module com
 {
 	export class JTElementDescripter implements JTIPoolObject
 	{
-		private __runable:Function = null;
+		private __runnableMethod:Function = null;
 		private ___c:any = null;
 		private __config:JTConfigDescripter = null;
 
-		public relevance(__caller:any, runable:Function,  __config?:JTConfigDescripter):void
+		public relevance(__caller:any, runnable:Function,  __config?:JTConfigDescripter):void
 		{
 			this.___c = __caller;
-			this.__runable = runable;
+			this.__runnableMethod = runnable;
 			this.__config = __config;
 		}
 
 		public get runnable():Function
 		{
-			return this.__runable;
+			return this.__runnableMethod;
 		}
 
 		public run():void
 		{
-			this.__runable &&  this.__runable.apply(this.___c, [this.__config]);
+			this.__runnableMethod &&  this.__runnableMethod.apply(this.___c, [this.__config]);
 		}
 
 		public get config():JTConfigDescripter
@@ -43,7 +43,7 @@ module com
 
 		public getClassContainer():any
 		{
-			return this.__config.getClassContainer();
+			return this.__config.getClass();
 		}
 
 		public get property():string
@@ -59,7 +59,7 @@ module com
 		public recycle() 
 		{
 			this.___c = null;
-			this.__runable = null;
+			this.__runnableMethod = null;
 			let config:JTConfigDescripter = this.__config;
 			this.__config = null;
 			config && JTConfigDescripter.put(config);

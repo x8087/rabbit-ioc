@@ -24,7 +24,7 @@ module com
 			this.parameters = this.__descripter = this.__property = this.__caller = null;
 		}
 
-		public getClassContainer():any
+		public getClass():any
 		{
 			let _____c:any = null;
 			if (!this.__property)
