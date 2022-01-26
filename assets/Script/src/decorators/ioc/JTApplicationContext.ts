@@ -1,5 +1,4 @@
 ///<reference path="JTIOCController.ts"/>
-///<reference path="JTContextMap.ts"/>
 /*
 * 
 */
@@ -10,7 +9,7 @@ module com
 		public static controller:JTIocController = null;
 		private static _launched:boolean = false;
 		public static __elements:JTElementDescripter[] = [];
-		public static __contextMap:JTContextMap = new JTContextMap();
+		public static __beanMap:JTDictionary<string, JTBean> = new JTDictionary();
 
 		public static collect(__c:any, runnable:Function,  property:string, descripter:any, parameters:any):boolean
 		{
@@ -22,17 +21,27 @@ module com
 
 		public static collectToMap(__c:any, property:string, descripter:any):void
 		{
-			this.__contextMap.collect(__c, property, descripter);
+			let bean:JTBean = this.__beanMap.get(property);
+			if (!bean)
+			{
+				bean = new JTBean();
+				bean.bind(__c, property, descripter);
+				this.__beanMap.set(property, bean);
+			}
 		}
 
 		public static changed(__sourceProperty:string, __changedProperty:string):void
 		{
-			this.__contextMap.changed(__sourceProperty, __changedProperty);
+			let bean:JTBean = this.__beanMap.remove(__sourceProperty);
+			if (bean)
+			{
+					this.__beanMap.set(__changedProperty, bean);
+			}
 		}
 
-		public static get(key:string):JTBeanContext
+		public static get(key:string):JTBean
 		{
-			return this.__contextMap.get(key);
+			return this.__beanMap.get(key);
 		}	
 
 		public static get launched():boolean

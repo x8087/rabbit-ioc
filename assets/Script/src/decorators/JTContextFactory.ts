@@ -3,10 +3,9 @@
 */
 module com 
 {
-	Autowired
-	export interface JTContextFactory extends Function
+	export interface JTIContextFactory 
 	{
-		caller:Function;
+		product():any
 	}
 }
 

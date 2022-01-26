@@ -1,13 +1,20 @@
 namespace com 
 {
-    export class JTBeanContext
+    export class JTBean
     {
-        public ___class:any = null;
         public ___descripter:any = null;
+
         public ___caller:any = null;
+
         public ___instance:any = null;
+
         public ___sourceProperty:string = null;
         public ___changedProperty:string = null;
+
+        constructor(paramaters?:any)
+        {
+
+        }
 
         public bind(caller:any, property:string, descripter:any):void
         {
@@ -22,7 +29,6 @@ namespace com
 			{
                 let __method:Function = this.___descripter.value;
 				this.___instance = __method.apply(this.___caller, []);
-                this.___class = this.___instance["constructor"];
 			}
 			return this.___instance;
 		}
