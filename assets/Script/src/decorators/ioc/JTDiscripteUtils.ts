@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
 
     export var Services:Function = function()

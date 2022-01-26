@@ -1,5 +1,5 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTApplicationBootstrap extends JTEventSignaler implements JTIOption
     {

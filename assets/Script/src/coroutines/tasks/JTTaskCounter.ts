@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     /**
      * 任务计数器

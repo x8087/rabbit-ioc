@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
      export function execute(key:string, args?:string):void
      {

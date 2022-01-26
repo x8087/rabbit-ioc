@@ -1,4 +1,4 @@
-declare namespace fgui {
+declare module fgui {
     class AsyncOperation {
         callback: (obj: GObject) => void;
         private _node;
@@ -9,7 +9,7 @@ declare namespace fgui {
         private completed;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Controller extends cc.EventTarget {
         private _selectedIndex;
         private _previousIndex;
@@ -52,7 +52,7 @@ declare namespace fgui {
         setup(buffer: ByteBuffer): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class DragDropManager {
         private _agent;
         private _sourceData;
@@ -66,7 +66,7 @@ declare namespace fgui {
         private onDragEnd;
     }
 }
-declare namespace fgui {
+declare module fgui {
     enum ButtonMode {
         Common = 0,
         Check = 1,
@@ -240,7 +240,7 @@ declare namespace fgui {
         Selected = 9
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GObject {
         data?: any;
         packageItem?: PackageItem;
@@ -453,7 +453,7 @@ declare namespace fgui {
         protected onDestroy(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GComponent extends GObject {
         hitArea?: IHitTest;
         private _sortingChildCount;
@@ -555,7 +555,7 @@ declare namespace fgui {
         protected onDisable(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GButton extends GComponent {
         protected _titleObject: GObject;
         protected _iconObject: GObject;
@@ -632,7 +632,7 @@ declare namespace fgui {
         private onClick_1;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GComboBox extends GComponent {
         dropdown: GComponent;
         protected _titleObject: GObject;
@@ -693,7 +693,7 @@ declare namespace fgui {
         private onTouchEnd_1;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GGraph extends GObject {
         _content: cc.Graphics;
         private _type;
@@ -727,7 +727,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GGroup extends GObject {
         private _layout;
         private _lineGap;
@@ -772,7 +772,7 @@ declare namespace fgui {
         setup_afterAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GImage extends GObject {
         _content: Image;
         constructor();
@@ -795,7 +795,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GLabel extends GComponent {
         protected _titleObject: GObject;
         protected _iconObject: GObject;
@@ -819,7 +819,7 @@ declare namespace fgui {
         setup_afterAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GList extends GComponent {
         itemRenderer: (index: number, item: GObject) => void;
         itemProvider: (index: number) => string;
@@ -938,7 +938,7 @@ declare namespace fgui {
         setup_afterAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GObjectPool {
         private _pool;
         private _count;
@@ -949,7 +949,7 @@ declare namespace fgui {
         returnObject(obj: GObject): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GLoader extends GObject {
         _content: MovieClip;
         private _url;
@@ -1022,7 +1022,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GLoader3D extends GObject {
         private _url;
         private _align;
@@ -1089,7 +1089,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GMovieClip extends GObject {
         _content: MovieClip;
         constructor();
@@ -1113,7 +1113,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GProgressBar extends GComponent {
         private _min;
         private _max;
@@ -1147,7 +1147,7 @@ declare namespace fgui {
         setup_afterAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTextField extends GObject {
         _label: cc.Label;
         protected _font: string;
@@ -1236,7 +1236,7 @@ declare namespace fgui {
         setup_afterAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class RichTextImageAtlas extends cc.SpriteAtlas {
         getSpriteFrame(key: string): cc.SpriteFrame;
     }
@@ -1266,7 +1266,7 @@ declare namespace fgui {
         protected handleSizeChanged(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GRoot extends GComponent {
         static contentScaleLevel: number;
         private _modalLayer;
@@ -1317,7 +1317,7 @@ declare namespace fgui {
         private updateContentScaleLevel;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GScrollBar extends GComponent {
         private _grip;
         private _arrowButton1;
@@ -1344,7 +1344,7 @@ declare namespace fgui {
         private onBarTouchBegin;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GSlider extends GComponent {
         private _min;
         private _max;
@@ -1387,7 +1387,7 @@ declare namespace fgui {
         private onBarTouchBegin;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTextInput extends GTextField {
         _editBox: cc.EditBox;
         private _promptText;
@@ -1421,7 +1421,7 @@ declare namespace fgui {
         setup_beforeAdd(buffer: ByteBuffer, beginPos: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTree extends GList {
         treeNodeRender: (node: GTreeNode, obj: GComponent) => void;
         treeNodeWillExpand: (node: GTreeNode, expanded: boolean) => void;
@@ -1459,7 +1459,7 @@ declare namespace fgui {
         protected readItems(buffer: ByteBuffer): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTreeNode {
         data?: any;
         private _parent;
@@ -1499,14 +1499,14 @@ declare namespace fgui {
         _setTree(value: GTree): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     interface IUISource {
         fileName: string;
         loaded: boolean;
         load(callback: Function, target: any): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Margin {
         left: number;
         right: number;
@@ -1517,7 +1517,7 @@ declare namespace fgui {
         isNone(): boolean;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class PackageItem {
         owner: UIPackage;
         type: PackageItemType;
@@ -1552,7 +1552,7 @@ declare namespace fgui {
         toString(): string;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class PopupMenu {
         protected _contentPane: GComponent;
         protected _list: GList;
@@ -1579,7 +1579,7 @@ declare namespace fgui {
         private onDisplay;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class RelationItem {
         private _owner;
         private _target;
@@ -1615,7 +1615,7 @@ declare namespace fgui {
         copyFrom(source: RelationDef): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Relations {
         private _owner;
         private _items;
@@ -1635,7 +1635,7 @@ declare namespace fgui {
         setup(buffer: ByteBuffer, parentToChild: boolean): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ScrollPane extends cc.Component {
         private _owner;
         private _container;
@@ -1795,7 +1795,7 @@ declare namespace fgui {
         private runTween;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Transition {
         name: string;
         private _owner;
@@ -1854,7 +1854,7 @@ declare namespace fgui {
         private decodeValue;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class TranslationHelper {
         static strings: {
             [index: string]: {
@@ -1865,7 +1865,7 @@ declare namespace fgui {
         static translateComponent(item: PackageItem): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class UIConfig {
         constructor();
         static defaultFont: string;
@@ -1898,7 +1898,7 @@ declare namespace fgui {
     function registerFont(name: string, font: cc.Font | string): void;
     function getFontByName(name: string): cc.Font;
 }
-declare namespace fgui {
+declare module fgui {
     class UIObjectFactory {
         static counter: number;
         static extensions: {
@@ -1912,7 +1912,7 @@ declare namespace fgui {
         static newObject(type: number | PackageItem, userClass?: new () => GObject): GObject;
     }
 }
-declare namespace fgui {
+declare module fgui {
     type PackageDependency = {
         id: string;
         name: string;
@@ -1974,7 +1974,7 @@ declare namespace fgui {
     }
     export {};
 }
-declare namespace fgui {
+declare module fgui {
     class Window extends GComponent {
         private _contentPane;
         private _modalWaitPane;
@@ -2030,7 +2030,7 @@ declare namespace fgui {
         private onDragStart_1;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ControllerAction {
         fromPage: string[];
         toPage: string[];
@@ -2042,7 +2042,7 @@ declare namespace fgui {
         setup(buffer: ByteBuffer): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ChangePageAction extends ControllerAction {
         objectId: string;
         controllerName: string;
@@ -2052,7 +2052,7 @@ declare namespace fgui {
         setup(buffer: ByteBuffer): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class PlayTransitionAction extends ControllerAction {
         transitionName: string;
         playTimes: number;
@@ -2065,7 +2065,7 @@ declare namespace fgui {
         setup(buffer: ByteBuffer): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     enum BlendMode {
         Normal = 0,
         None = 1,
@@ -2085,7 +2085,7 @@ declare namespace fgui {
         static override(blendMode: BlendMode, srcFactor: number, dstFactor: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Image extends cc.Sprite {
         private _flip;
         private _fillMethod;
@@ -2111,7 +2111,7 @@ declare namespace fgui {
         set grayed(value: boolean);
     }
 }
-declare namespace fgui {
+declare module fgui {
     interface Frame {
         rect: cc.Rect;
         addDelay: number;
@@ -2155,7 +2155,7 @@ declare namespace fgui {
         private drawFrame;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class Event extends cc.Event {
         static TOUCH_BEGIN: string;
         static TOUCH_MOVE: string;
@@ -2200,7 +2200,7 @@ declare namespace fgui {
         static _return(evt: Event): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     interface IHitTest {
         hitTest(pt: cc.Vec2, globalPt: cc.Vec2): boolean;
     }
@@ -2225,7 +2225,7 @@ declare namespace fgui {
         hitTest(pt: cc.Vec2, globalPt: cc.Vec2): boolean;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class InputProcessor extends cc.Component {
         private _owner;
         private _touchListener;
@@ -2262,7 +2262,7 @@ declare namespace fgui {
         private getEvent;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearBase {
         static disableAllTweenEffect: boolean;
         protected _owner: GObject;
@@ -2291,7 +2291,7 @@ declare namespace fgui {
         constructor();
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearAnimation extends GearBase {
         private _storage;
         private _default;
@@ -2302,7 +2302,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearColor extends GearBase {
         private _storage;
         private _default;
@@ -2313,7 +2313,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearDisplay extends GearBase {
         pages: string[];
         private _visible;
@@ -2326,7 +2326,7 @@ declare namespace fgui {
         get connected(): boolean;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearDisplay2 extends GearBase {
         pages: string[];
         condition: number;
@@ -2337,7 +2337,7 @@ declare namespace fgui {
         evaluate(connected: boolean): boolean;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearFontSize extends GearBase {
         private _storage;
         private _default;
@@ -2348,7 +2348,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearIcon extends GearBase {
         private _storage;
         private _default;
@@ -2359,7 +2359,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearLook extends GearBase {
         private _storage;
         private _default;
@@ -2372,7 +2372,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearSize extends GearBase {
         private _storage;
         private _default;
@@ -2386,7 +2386,7 @@ declare namespace fgui {
         updateFromRelations(dx: number, dy: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearText extends GearBase {
         private _storage;
         private _default;
@@ -2397,7 +2397,7 @@ declare namespace fgui {
         updateState(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GearXY extends GearBase {
         positionsInPercent: boolean;
         private _storage;
@@ -2413,10 +2413,10 @@ declare namespace fgui {
         updateFromRelations(dx: number, dy: number): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     function evaluateEase(easeType: number, time: number, duration: number, overshootOrAmplitude: number, period: number): number;
 }
-declare namespace fgui {
+declare module fgui {
     class EaseType {
         static Linear: number;
         static SineIn: number;
@@ -2452,7 +2452,7 @@ declare namespace fgui {
         static Custom: number;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GPath {
         private _segments;
         private _points;
@@ -2471,7 +2471,7 @@ declare namespace fgui {
         private onBezierCurve;
     }
 }
-declare namespace fgui {
+declare module fgui {
     enum CurveType {
         CRSpline = 0,
         Bezier = 1,
@@ -2493,7 +2493,7 @@ declare namespace fgui {
         clone(): GPathPoint;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTween {
         static catchCallbackExceptions: boolean;
         static to(start: number, end: number, duration: number): GTweener;
@@ -2508,7 +2508,7 @@ declare namespace fgui {
         static getTween(target: any, propType?: any): GTweener;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class GTweener {
         _target: any;
         _propType: any;
@@ -2588,7 +2588,7 @@ declare namespace fgui {
         private callCompleteCallback;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class TweenManager {
         static createTween(): GTweener;
         static isTweening(target: any, propType?: any): boolean;
@@ -2597,7 +2597,7 @@ declare namespace fgui {
         private static update;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class TweenValue {
         x: number;
         y: number;
@@ -2611,7 +2611,7 @@ declare namespace fgui {
         setZero(): void;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ByteBuffer {
         stringTable: Array<string>;
         version: number;
@@ -2644,7 +2644,7 @@ declare namespace fgui {
         seek(indexTablePos: number, blockIndex: number): boolean;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ColorMatrix {
         readonly matrix: Array<number>;
         constructor(p_brightness?: number, p_contrast?: number, p_saturation?: number, p_hue?: number);
@@ -2662,7 +2662,7 @@ declare namespace fgui {
         protected cleanValue(p_val: number, p_limit: number): number;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class UBBParser {
         private _text;
         private _readPos;
@@ -2685,7 +2685,7 @@ declare namespace fgui {
         parse(text: string, remove?: boolean): string;
     }
 }
-declare namespace fgui {
+declare module fgui {
     class ToolSet {
         static startsWith(source: string, str: string, ignoreCase?: boolean): boolean;
         static encodeHTML(str: string): string;

@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     /**
      * 帧均摊--利用帧频间隔来进行渲染图像/或者计算数据

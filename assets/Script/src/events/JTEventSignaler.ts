@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
         /***
          * 事件信号器 --- 基于全局函数派发执行，
@@ -27,9 +27,10 @@ namespace com
                         }       
                 }
 
-                public dispatchEvent(key:any, args?:any)
+                public dispatchEvent(key:any, args?:any):any
                 {
                         key in this.evtMap && JTEventManager.dispatchEvent(key, args);
+                        return null;
                 }
 
                 public removeEventListener(key:any, method:Function, caller:any):void

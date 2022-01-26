@@ -1,6 +1,6 @@
  
 
-namespace com 
+module com 
 {
     /**
      * <p> <code>Byte</code> 类提供用于优化读取、写入以及处理二进制数据的方法和属性。</p>

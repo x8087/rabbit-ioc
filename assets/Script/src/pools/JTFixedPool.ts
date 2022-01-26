@@ -2,7 +2,7 @@
 /**
  * 
  */
- namespace com 
+ module com 
  {
     export class JTFixedPool<T extends JTIPoolObject> extends JTCachePool<T>
     {

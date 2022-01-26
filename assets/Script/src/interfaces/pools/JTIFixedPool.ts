@@ -1,7 +1,7 @@
 /*
 * name;
 */
-namespace com
+module com
 {
       export interface JTIFixedPool extends JTICachePool
       {

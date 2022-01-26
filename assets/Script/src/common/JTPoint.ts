@@ -1,6 +1,6 @@
  
 
-namespace com 
+module com 
 {
 /**
  * <code>Point</code> 对象表示二维坐标系统中的某个位置，其中 x 表示水平轴，y 表示垂直轴。

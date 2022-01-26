@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export class JTEventDispatcher implements JTIPoolObject, JTIEventDispatcher
     {
@@ -35,7 +35,7 @@ namespace com
             list.push(command);
         }
 
-        public dispatchEvent(key:any, args?:any)
+        public dispatchEvent(key:any, args?:any):any
         {
             var list:JTCommand[] = this.evtMap[key];
             if (list)
@@ -48,10 +48,6 @@ namespace com
                         this.delete(list, command);
                     }
                 });
-            }
-            else
-            {
-                // JTLogger.info("[JTFunctionManager.execute] Cant find the function by key : " + key);
             }
         }
 

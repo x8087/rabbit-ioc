@@ -2,7 +2,7 @@
 /*
 * 支持自动将对象全部回收到对象池里;
 */
-namespace com
+module com
 {
     export class JTCachePool<T extends JTIPoolObject> extends JTPool<T>
     {

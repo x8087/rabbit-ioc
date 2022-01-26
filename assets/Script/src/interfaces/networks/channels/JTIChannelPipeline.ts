@@ -1,6 +1,6 @@
  
 
-namespace com 
+module com 
 {
     export interface JTIChannelPipeline extends JTIChannelOption, JTIChannelState, JTIChannelContextMap, JTIConnection, JTIMarkChannelConnected
      {

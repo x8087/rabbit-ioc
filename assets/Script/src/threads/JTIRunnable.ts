@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export interface JTIRunnable
     {

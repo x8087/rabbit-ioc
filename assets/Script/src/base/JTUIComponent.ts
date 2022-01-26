@@ -1,5 +1,5 @@
  
-namespace com
+module com
 {
    export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent implements JTIComponent
    {
@@ -155,9 +155,9 @@ namespace com
                 this._signaler.addEventListener(key, method, caller, once);
         }
 
-        public dispatchEvent(key:any, args?:any):void
+        public dispatchEvent(key:any, args?:any)
         {
-                this._signaler.dispatchEvent(key, args);
+               return this._signaler.dispatchEvent(key, args);
         }
 
         public removeEventListener(key:any, method:Function, caller:any):void

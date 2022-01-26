@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     /**
      * <p> <code>Matrix</code> 类表示一个转换矩阵，它确定如何将点从一个坐标空间映射到另一个坐标空间。</p>

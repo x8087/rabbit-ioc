@@ -1,5 +1,5 @@
 ///<reference path="../JTChannelContext.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTAbstractIdleStateAdapter extends JTChannelContext
     {

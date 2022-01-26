@@ -1,5 +1,5 @@
  
-namespace com 
+module com 
 {
     export abstract class JTChannelContext extends JTEventDispatcher implements JTIChannelContext
     {

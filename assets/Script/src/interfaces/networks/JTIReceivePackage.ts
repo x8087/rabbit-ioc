@@ -1,6 +1,6 @@
  
 
-namespace com 
+module com 
 {
     export interface JTIReceivePackage extends JTIPoolObject
      {

@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     /**
      * 此类的属性太多，不需要扩展instance

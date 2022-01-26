@@ -1,5 +1,5 @@
 ///<reference path="JTTimerTask.ts"/>
-namespace com 
+module com 
 {
     export class JTTimer extends JTTimerTask implements JTITimer
     {

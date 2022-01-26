@@ -1,5 +1,5 @@
 ///<reference path="../context/JTOptionContext.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTAbstractLayerManager extends JTOptionContext implements JTILayerManager
     {

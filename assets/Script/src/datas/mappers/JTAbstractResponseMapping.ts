@@ -1,5 +1,5 @@
 ///<reference path="../../context/JTOptionContext.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTAbstractResponseMapping extends JTOptionContext
     {

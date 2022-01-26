@@ -3,7 +3,7 @@
 /*
 * name;
 */
-namespace com 
+module com 
 {
     export interface JTILocker extends JTIPoolObject
     {

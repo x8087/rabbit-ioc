@@ -1,5 +1,5 @@
 ///<reference path="../../events/JTEventDispatcher.ts"/>
-namespace com 
+module com 
 {
     /**
      * 异步事件任务对列

@@ -1,5 +1,5 @@
 ///<reference path="JTChannel.ts"/>
-namespace com 
+module com 
 {
     export class JTHttpChannel extends JTChannel implements JTIHttpChannel
     {

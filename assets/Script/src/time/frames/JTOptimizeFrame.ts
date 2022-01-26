@@ -1,7 +1,7 @@
 /**
  * 根据系统时间延迟情况自动调整帧频并做跳帧数处理，保持最新的一帧数，大大降低了CPU的负荷...
  */
-namespace com 
+module com 
 {
     export class JTOptimizeFrame extends JTJumpFrame
     {

@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     /***
      * 跳帧-又称帧同步

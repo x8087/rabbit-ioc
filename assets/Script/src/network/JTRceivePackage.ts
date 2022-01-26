@@ -1,5 +1,5 @@
  
-namespace com 
+module com 
 {
     export class JTReceivePackage implements JTIReceivePackage
     {

@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     //传统帧事件
     export class JTEnterFrame extends JTTimerTask implements JTIEnterFrame

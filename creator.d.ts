@@ -1,9 +1,9 @@
 
 /** !#en
-The main namespace of Cocos2d-JS, all engine core classes, functions, properties and constants are defined in this namespace.
+The main module of Cocos2d-JS, all engine core classes, functions, properties and constants are defined in this module.
 !#zh
 Cocos 引擎的主要命名空间，引擎代码中所有的类，函数，属性和常量都在这个命名空间中定义。 */
-declare namespace cc {	
+declare module cc {	
 	/** The current version of Cocos2d being used.<br/>
 	Please DO NOT remove this String, it is an important flag for bug tracking.<br/>
 	If you post a bug to forum, please attach this flag. */
@@ -17101,7 +17101,7 @@ declare namespace cc {
 	* audioEngine
 	*****************************************************/
 	
-	export namespace audioEngine {		
+	export module audioEngine {		
 		/** !#en Audio state.
 		!#zh 声音播放状态 */
 		export enum AudioState {			
@@ -17117,7 +17117,7 @@ declare namespace cc {
 	* debug
 	*****************************************************/
 	
-	export namespace debug {		
+	export module debug {		
 		/** !#en Enum for debug modes.
 		!#zh 调试模式 */
 		export enum DebugMode {			
@@ -17135,7 +17135,7 @@ declare namespace cc {
 	* Node
 	*****************************************************/
 	
-	export namespace Node {		
+	export module Node {		
 		/** !#en Node's local dirty properties flag
 		!#zh Node 的本地属性 dirty 状态位 */
 		export enum _LocalDirtyFlag {			
@@ -17163,7 +17163,7 @@ declare namespace cc {
 	* Node
 	*****************************************************/
 	
-	export namespace Node {		
+	export module Node {		
 		/** !#en The event type supported by Node
 		!#zh Node 支持的事件类型 */
 		export class EventType {			
@@ -17255,7 +17255,7 @@ declare namespace cc {
 	* ParticleSystem
 	*****************************************************/
 	
-	export namespace ParticleSystem {		
+	export module ParticleSystem {		
 		/** !#en Enum for emitter modes
 		!#zh 发射模式 */
 		export enum EmitterMode {			
@@ -17268,7 +17268,7 @@ declare namespace cc {
 	* ParticleSystem
 	*****************************************************/
 	
-	export namespace ParticleSystem {		
+	export module ParticleSystem {		
 		/** !#en Enum for particles movement type.
 		!#zh 粒子位置类型 */
 		export enum PositionType {			
@@ -17282,7 +17282,7 @@ declare namespace cc {
 	* WebView
 	*****************************************************/
 	
-	export namespace WebView {		
+	export module WebView {		
 		/** !#en WebView event type
 		!#zh 网页视图事件类型 */
 		export enum EventType {			
@@ -17296,7 +17296,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** !#en The orientation of tiled map.
 		!#zh Tiled Map 地图方向。 */
 		export enum Orientation {			
@@ -17310,7 +17310,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** The property type of tiled map. */
 		export enum Property {			
 			NONE = 0,
@@ -17326,7 +17326,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** The tile flags of tiled map. */
 		export enum TileFlag {			
 			HORIZONTAL = 0,
@@ -17341,7 +17341,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** !#en The stagger axis of Hex tiled map.
 		!#zh 六边形地图的 stagger axis 值 */
 		export enum StaggerAxis {			
@@ -17354,7 +17354,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** !#en The render order of tiled map.
 		!#zh 地图的渲染顺序 */
 		export enum RenderOrder {			
@@ -17371,7 +17371,7 @@ declare namespace cc {
 	* TiledMap
 	*****************************************************/
 	
-	export namespace TiledMap {		
+	export module TiledMap {		
 		/** !#en TiledMap Object Type
 		!#zh 地图物体类型 */
 		export enum TMXObjectType {			
@@ -17388,7 +17388,7 @@ declare namespace cc {
 	* VideoPlayer
 	*****************************************************/
 	
-	export namespace VideoPlayer {		
+	export module VideoPlayer {		
 		/** !#en Video event type
 		!#zh 视频事件类型 */
 		export enum EventType {			
@@ -17406,7 +17406,7 @@ declare namespace cc {
 	* VideoPlayer
 	*****************************************************/
 	
-	export namespace VideoPlayer {		
+	export module VideoPlayer {		
 		/** !#en Enum for video resouce type type.
 		!#zh 视频来源 */
 		export enum ResourceType {			
@@ -17419,7 +17419,7 @@ declare namespace cc {
 	* Collider
 	*****************************************************/
 	
-	export namespace Collider {		
+	export module Collider {		
 		/** !#en Defines a Box Collider .
 		!#zh 用来定义包围盒碰撞体 */
 		export class Box {			
@@ -17436,7 +17436,7 @@ declare namespace cc {
 	* Collider
 	*****************************************************/
 	
-	export namespace Collider {		
+	export module Collider {		
 		/** !#en Defines a Circle Collider .
 		!#zh 用来定义圆形碰撞体 */
 		export class Circle {			
@@ -17453,7 +17453,7 @@ declare namespace cc {
 	* Collider
 	*****************************************************/
 	
-	export namespace Collider {		
+	export module Collider {		
 		/** !#en Defines a Polygon Collider .
 		!#zh 用来定义多边形碰撞体 */
 		export class Polygon {			
@@ -17470,7 +17470,7 @@ declare namespace cc {
 	* Light
 	*****************************************************/
 	
-	export namespace Light {		
+	export module Light {		
 		/** !#en The light source type
 		
 		!#zh 光源类型 */
@@ -17486,7 +17486,7 @@ declare namespace cc {
 	* Light
 	*****************************************************/
 	
-	export namespace Light {		
+	export module Light {		
 		/** !#en The shadow type
 		
 		!#zh 阴影类型 */
@@ -17502,7 +17502,7 @@ declare namespace cc {
 	* Prefab
 	*****************************************************/
 	
-	export namespace Prefab {		
+	export module Prefab {		
 		/** !#zh
 		Prefab 创建实例所用的优化策略，配合 {{#crossLink "Prefab.optimizationPolicy"}}cc.Prefab#optimizationPolicy{{/crossLink}} 使用。
 		!#en
@@ -17519,7 +17519,7 @@ declare namespace cc {
 	* RenderTexture
 	*****************************************************/
 	
-	export namespace RenderTexture {		
+	export module RenderTexture {		
 		/** !#en The depth buffer and stencil buffer format for RenderTexture.
 		!#zh RenderTexture 的深度缓冲以及模板缓冲格式。 */
 		export enum DepthStencilFormat {			
@@ -17533,7 +17533,7 @@ declare namespace cc {
 	* Texture2D
 	*****************************************************/
 	
-	export namespace Texture2D {		
+	export module Texture2D {		
 		/** The texture pixel format, default value is RGBA8888,
 		you should note that textures loaded by normal image files (png, jpg) can only support RGBA8888 format,
 		other formats are supported by compressed file types or raw data. */
@@ -17564,7 +17564,7 @@ declare namespace cc {
 	* Texture2D
 	*****************************************************/
 	
-	export namespace Texture2D {		
+	export module Texture2D {		
 		/** The texture wrap mode */
 		export enum WrapMode {			
 			REPEAT = 0,
@@ -17577,7 +17577,7 @@ declare namespace cc {
 	* Texture2D
 	*****************************************************/
 	
-	export namespace Texture2D {		
+	export module Texture2D {		
 		/** The texture filter mode */
 		export enum Filter {			
 			LINEAR = 0,
@@ -17589,7 +17589,7 @@ declare namespace cc {
 	* Event
 	*****************************************************/
 	
-	export namespace Event {		
+	export module Event {		
 		/** !#en The Custom event
 		!#zh 自定义事件 */
 		export class EventCustom extends Event {			
@@ -17625,7 +17625,7 @@ declare namespace cc {
 	* SystemEvent
 	*****************************************************/
 	
-	export namespace SystemEvent {		
+	export module SystemEvent {		
 		/** !#en The event type supported by SystemEvent
 		!#zh SystemEvent 支持的事件类型 */
 		export class EventType {			
@@ -17645,7 +17645,7 @@ declare namespace cc {
 	* Animation
 	*****************************************************/
 	
-	export namespace Animation {		
+	export module Animation {		
 		/** !#en The event type supported by Animation
 		!#zh Animation 支持的事件类型 */
 		export class EventType {			
@@ -17674,7 +17674,7 @@ declare namespace cc {
 	* Button
 	*****************************************************/
 	
-	export namespace Button {		
+	export module Button {		
 		/** !#en Enum for transition type.
 		!#zh 过渡类型 */
 		export enum Transition {			
@@ -17689,7 +17689,7 @@ declare namespace cc {
 	* Component
 	*****************************************************/
 	
-	export namespace Component {		
+	export module Component {		
 		/** !#en
 		Component will register a event to target component's handler.
 		And it will trigger the handler when a certain event occurs.
@@ -17740,7 +17740,7 @@ declare namespace cc {
 	* Label
 	*****************************************************/
 	
-	export namespace Label {		
+	export module Label {		
 		/** !#en Enum for text alignment.
 		!#zh 文本横向对齐类型 */
 		export enum HorizontalAlign {			
@@ -17754,7 +17754,7 @@ declare namespace cc {
 	* Label
 	*****************************************************/
 	
-	export namespace Label {		
+	export module Label {		
 		/** !#en Enum for vertical text alignment.
 		!#zh 文本垂直对齐类型 */
 		export enum VerticalAlign {			
@@ -17768,7 +17768,7 @@ declare namespace cc {
 	* Label
 	*****************************************************/
 	
-	export namespace Label {		
+	export module Label {		
 		/** !#en Enum for Overflow.
 		!#zh Overflow 类型 */
 		export enum Overflow {			
@@ -17783,7 +17783,7 @@ declare namespace cc {
 	* Label
 	*****************************************************/
 	
-	export namespace Label {		
+	export module Label {		
 		/** !#en Enum for font type.
 		!#zh Type 类型 */
 		export enum Type {			
@@ -17797,7 +17797,7 @@ declare namespace cc {
 	* Label
 	*****************************************************/
 	
-	export namespace Label {		
+	export module Label {		
 		/** !#en Enum for cache mode.
 		!#zh CacheMode 类型 */
 		export enum CacheMode {			
@@ -17811,7 +17811,7 @@ declare namespace cc {
 	* Layout
 	*****************************************************/
 	
-	export namespace Layout {		
+	export module Layout {		
 		/** !#en Enum for Layout type
 		!#zh 布局类型 */
 		export enum Type {			
@@ -17826,7 +17826,7 @@ declare namespace cc {
 	* Layout
 	*****************************************************/
 	
-	export namespace Layout {		
+	export module Layout {		
 		/** !#en Enum for Layout Resize Mode
 		!#zh 缩放模式 */
 		export enum ResizeMode {			
@@ -17840,7 +17840,7 @@ declare namespace cc {
 	* Layout
 	*****************************************************/
 	
-	export namespace Layout {		
+	export module Layout {		
 		/** !#en Enum for Grid Layout start axis direction.
 		The items in grid layout will be arranged in each axis at first.;
 		!#zh 布局轴向，只用于 GRID 布局。 */
@@ -17854,7 +17854,7 @@ declare namespace cc {
 	* Layout
 	*****************************************************/
 	
-	export namespace Layout {		
+	export module Layout {		
 		/** !#en Enum for vertical layout direction.
 		 Used in Grid Layout together with AxisDirection is VERTICAL
 		!#zh 垂直方向布局方式 */
@@ -17868,7 +17868,7 @@ declare namespace cc {
 	* Layout
 	*****************************************************/
 	
-	export namespace Layout {		
+	export module Layout {		
 		/** !#en Enum for horizontal layout direction.
 		 Used in Grid Layout together with AxisDirection is HORIZONTAL
 		!#zh 水平方向布局方式 */
@@ -17882,7 +17882,7 @@ declare namespace cc {
 	* Mask
 	*****************************************************/
 	
-	export namespace Mask {		
+	export module Mask {		
 		/** !#en the type for mask.
 		!#zh 遮罩组件类型 */
 		export enum Type {			
@@ -17896,7 +17896,7 @@ declare namespace cc {
 	* PageView
 	*****************************************************/
 	
-	export namespace PageView {		
+	export module PageView {		
 		/** !#en The Page View Size Mode
 		!#zh 页面视图每个页面统一的大小类型 */
 		export enum SizeMode {			
@@ -17909,7 +17909,7 @@ declare namespace cc {
 	* PageView
 	*****************************************************/
 	
-	export namespace PageView {		
+	export module PageView {		
 		/** !#en The Page View Direction
 		!#zh 页面视图滚动类型 */
 		export enum Direction {			
@@ -17922,7 +17922,7 @@ declare namespace cc {
 	* PageView
 	*****************************************************/
 	
-	export namespace PageView {		
+	export module PageView {		
 		/** !#en Enum for ScrollView event type.
 		!#zh 滚动视图事件类型 */
 		export enum EventType {			
@@ -17934,7 +17934,7 @@ declare namespace cc {
 	* ProgressBar
 	*****************************************************/
 	
-	export namespace ProgressBar {		
+	export module ProgressBar {		
 		/** !#en Enum for ProgressBar mode
 		!#zh 进度条模式 */
 		export enum Mode {			
@@ -17948,7 +17948,7 @@ declare namespace cc {
 	* PageViewIndicator
 	*****************************************************/
 	
-	export namespace PageViewIndicator {		
+	export module PageViewIndicator {		
 		/** !#en Enum for PageView Indicator direction
 		!#zh 页面视图指示器的摆放方向 */
 		export enum Direction {			
@@ -17961,7 +17961,7 @@ declare namespace cc {
 	* Scrollbar
 	*****************************************************/
 	
-	export namespace Scrollbar {		
+	export module Scrollbar {		
 		/** Enum for Scrollbar direction */
 		export enum Direction {			
 			HORIZONTAL = 0,
@@ -17973,7 +17973,7 @@ declare namespace cc {
 	* ScrollView
 	*****************************************************/
 	
-	export namespace ScrollView {		
+	export module ScrollView {		
 		/** !#en Enum for ScrollView event type.
 		!#zh 滚动视图事件类型 */
 		export enum EventType {			
@@ -17997,7 +17997,7 @@ declare namespace cc {
 	* Slider
 	*****************************************************/
 	
-	export namespace Slider {		
+	export module Slider {		
 		/** !#en The Slider Direction
 		!#zh 滑动器方向 */
 		export enum Direction {			
@@ -18010,7 +18010,7 @@ declare namespace cc {
 	* Sprite
 	*****************************************************/
 	
-	export namespace Sprite {		
+	export module Sprite {		
 		/** !#en Enum for sprite type.
 		!#zh Sprite 类型 */
 		export enum Type {			
@@ -18026,7 +18026,7 @@ declare namespace cc {
 	* Sprite
 	*****************************************************/
 	
-	export namespace Sprite {		
+	export module Sprite {		
 		/** !#en Enum for fill type.
 		!#zh 填充类型 */
 		export enum FillType {			
@@ -18040,7 +18040,7 @@ declare namespace cc {
 	* Sprite
 	*****************************************************/
 	
-	export namespace Sprite {		
+	export module Sprite {		
 		/** !#en Sprite Size can track trimmed size, raw size or none.
 		!#zh 精灵尺寸调整模式 */
 		export enum SizeMode {			
@@ -18054,7 +18054,7 @@ declare namespace cc {
 	* Sprite
 	*****************************************************/
 	
-	export namespace Sprite {		
+	export module Sprite {		
 		/** !#en Sprite state can choice the normal or grayscale.
 		!#zh 精灵颜色通道模式。 */
 		export enum State {			
@@ -18067,7 +18067,7 @@ declare namespace cc {
 	* Widget
 	*****************************************************/
 	
-	export namespace Widget {		
+	export module Widget {		
 		/** !#en Enum for Widget's alignment mode, indicating when the widget should refresh.
 		!#zh Widget 的对齐模式，表示 Widget 应该何时刷新。 */
 		export enum AlignMode {			
@@ -18081,7 +18081,7 @@ declare namespace cc {
 	* Event
 	*****************************************************/
 	
-	export namespace Event {		
+	export module Event {		
 		/** !#en The mouse event
 		!#zh 鼠标事件类型 */
 		export class EventMouse extends Event {			
@@ -18206,7 +18206,7 @@ declare namespace cc {
 	* Event
 	*****************************************************/
 	
-	export namespace Event {		
+	export module Event {		
 		/** !#en The touch event
 		!#zh 触摸事件 */
 		export class EventTouch extends Event {			
@@ -18293,7 +18293,7 @@ declare namespace cc {
 	* Event
 	*****************************************************/
 	
-	export namespace Event {		
+	export module Event {		
 		/** !#en The acceleration event
 		!#zh 加速度事件 */
 		export class EventAcceleration extends Event {		
@@ -18304,7 +18304,7 @@ declare namespace cc {
 	* Event
 	*****************************************************/
 	
-	export namespace Event {		
+	export module Event {		
 		/** !#en The keyboard event
 		!#zh 键盘事件 */
 		export class EventKeyboard extends Event {			
@@ -18325,7 +18325,7 @@ declare namespace cc {
 	* Graphics
 	*****************************************************/
 	
-	export namespace Graphics {		
+	export module Graphics {		
 		/** !#en Enum for LineCap.
 		!#zh 线段末端属性 */
 		export enum LineCap {			
@@ -18339,7 +18339,7 @@ declare namespace cc {
 	* Graphics
 	*****************************************************/
 	
-	export namespace Graphics {		
+	export module Graphics {		
 		/** !#en Enum for LineJoin.
 		!#zh 线段拐角属性 */
 		export enum LineJoin {			
@@ -18353,7 +18353,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** Aabb */
 		export class Aabb {			
 			/**
@@ -18420,7 +18420,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en Shape type. */
 		export enum enums {			
 			SHAPE_RAY = 0,
@@ -18439,7 +18439,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en frustum
 		!#zh 平截头体 */
 		export class Frustum {			
@@ -18481,7 +18481,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** undefined */
 		export class intersect {			
 			/**
@@ -18689,7 +18689,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en
 		line
 		!#zh
@@ -18781,7 +18781,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en obb
 		!#zh
 		基础几何  方向包围盒。 */
@@ -18921,7 +18921,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en
 		plane。
 		!#zh
@@ -19022,7 +19022,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en
 		ray
 		!#zh
@@ -19105,7 +19105,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** !#en
 		Sphere.
 		!#zh
@@ -19219,7 +19219,7 @@ declare namespace cc {
 	* geomUtils
 	*****************************************************/
 	
-	export namespace geomUtils {		
+	export module geomUtils {		
 		/** Triangle */
 		export class Triangle {			
 			/**
@@ -19278,7 +19278,7 @@ declare namespace cc {
 	* Camera
 	*****************************************************/
 	
-	export namespace Camera {		
+	export module Camera {		
 		/** !#en Values for Camera.clearFlags, determining what to clear when rendering a Camera.
 		!#zh 摄像机清除标记位，决定摄像机渲染时会清除哪些状态 */
 		export enum ClearFlags {			
@@ -19292,7 +19292,7 @@ declare namespace cc {
 	* MeshRenderer
 	*****************************************************/
 	
-	export namespace MeshRenderer {		
+	export module MeshRenderer {		
 		/** !#en Shadow projection mode
 		
 		!#ch 阴影投射方式 */
@@ -19306,7 +19306,7 @@ declare namespace cc {
 	* PhysicsManager
 	*****************************************************/
 	
-	export namespace PhysicsManager {		
+	export module PhysicsManager {		
 		/** !#en
 		The draw bits for drawing physics debug information.<br>
 		example:<br>
@@ -19340,7 +19340,7 @@ declare namespace cc {
 	* macro
 	*****************************************************/
 	
-	export namespace macro {		
+	export module macro {		
 		/** !#en Key map for keyboard event
 		!#zh 键盘事件的按键值 */
 		export enum KEY {			
@@ -19452,7 +19452,7 @@ declare namespace cc {
 	* macro
 	*****************************************************/
 	
-	export namespace macro {		
+	export module macro {		
 		/** Image formats */
 		export enum ImageFormat {			
 			JPG = 0,
@@ -19473,7 +19473,7 @@ declare namespace cc {
 	* macro
 	*****************************************************/
 	
-	export namespace macro {		
+	export module macro {		
 		/** !#en
 		Enum for blend factor
 		Refer to: http://www.andersriggelsen.dk/glblendfunc.php
@@ -19498,7 +19498,7 @@ declare namespace cc {
 	* macro
 	*****************************************************/
 	
-	export namespace macro {		
+	export module macro {		
 		/** undefined */
 		export enum TextAlignment {			
 			LEFT = 0,
@@ -19511,7 +19511,7 @@ declare namespace cc {
 	* sys
 	*****************************************************/
 	
-	export namespace sys {		
+	export module sys {		
 		/** !#en
 		Network type enumeration
 		!#zh
@@ -19527,7 +19527,7 @@ declare namespace cc {
 	* AnimationCurve
 	*****************************************************/
 	
-	export namespace AnimationCurve {		
+	export module AnimationCurve {		
 		/** !#en The wrap mode
 		!#zh 循环模式 */
 		export enum WrapMode {			
@@ -19547,7 +19547,7 @@ declare namespace cc {
 	* ParticleSystem3DAssembler
 	*****************************************************/
 	
-	export namespace ParticleSystem3DAssembler {		
+	export module ParticleSystem3DAssembler {		
 		/** undefined */
 		export enum Space {					
 		}	
@@ -19557,7 +19557,7 @@ declare namespace cc {
 	* ParticleSystem3DAssembler
 	*****************************************************/
 	
-	export namespace ParticleSystem3DAssembler {		
+	export module ParticleSystem3DAssembler {		
 		/** 粒子的生成模式 */
 		export enum RenderMode {					
 		}	
@@ -19567,7 +19567,7 @@ declare namespace cc {
 	* shapeModule
 	*****************************************************/
 	
-	export namespace shapeModule {		
+	export module shapeModule {		
 		/** 粒子发射器类型 */
 		export enum ShapeType {			
 			Box = 0,
@@ -19582,7 +19582,7 @@ declare namespace cc {
 	* shapeModule
 	*****************************************************/
 	
-	export namespace shapeModule {		
+	export module shapeModule {		
 		/** 粒子从发射器的哪个部位发射 */
 		export enum EmitLocation {			
 			Base = 0,
@@ -19596,7 +19596,7 @@ declare namespace cc {
 	* shapeModule
 	*****************************************************/
 	
-	export namespace shapeModule {		
+	export module shapeModule {		
 		/** 粒子在扇形区域的发射方式 */
 		export enum ArcMode {			
 			Random = 0,
@@ -19609,7 +19609,7 @@ declare namespace cc {
 	* trailModule
 	*****************************************************/
 	
-	export namespace trailModule {		
+	export module trailModule {		
 		/** 选择如何为粒子系统生成轨迹 */
 		export enum TrailMode {					
 		}	
@@ -19619,7 +19619,7 @@ declare namespace cc {
 	* trailModule
 	*****************************************************/
 	
-	export namespace trailModule {		
+	export module trailModule {		
 		/** 纹理填充模式 */
 		export enum TextureMode {					
 		}	
@@ -19629,7 +19629,7 @@ declare namespace cc {
 	* primitive
 	*****************************************************/
 	
-	export namespace primitive {		
+	export module primitive {		
 		/** undefined */
 		export enum PolyhedronType {			
 			Tetrahedron = 0,
@@ -19654,7 +19654,7 @@ declare namespace cc {
 	* primitive
 	*****************************************************/
 	
-	export namespace primitive {		
+	export module primitive {		
 		/** undefined */
 		export class VertexData {			
 			positions: number[];			
@@ -19671,7 +19671,7 @@ declare namespace cc {
 	* Material
 	*****************************************************/
 	
-	export namespace Material {		
+	export module Material {		
 		/** !#en Material builtin name
 		!#zh 内置材质名字 */
 		export enum BUILTIN_NAME {			
@@ -19685,7 +19685,7 @@ declare namespace cc {
 	* EditBox
 	*****************************************************/
 	
-	export namespace EditBox {		
+	export module EditBox {		
 		/** !#en Enum for keyboard return types
 		!#zh 键盘的返回键类型 */
 		export enum KeyboardReturnType {			
@@ -19702,7 +19702,7 @@ declare namespace cc {
 	* EditBox
 	*****************************************************/
 	
-	export namespace EditBox {		
+	export module EditBox {		
 		/** !#en The EditBox's InputMode defines the type of text that the user is allowed to enter.
 		!#zh 输入模式 */
 		export enum InputMode {			
@@ -19720,7 +19720,7 @@ declare namespace cc {
 	* EditBox
 	*****************************************************/
 	
-	export namespace EditBox {		
+	export module EditBox {		
 		/** !#en Enum for the EditBox's input flags
 		!#zh 定义了一些用于设置文本显示和文本格式化的标志位。 */
 		export enum InputFlag {			
@@ -19737,7 +19737,7 @@ declare namespace cc {
 	* textureAnimationModule
 	*****************************************************/
 	
-	export namespace textureAnimationModule {		
+	export module textureAnimationModule {		
 		/** 粒子贴图动画类型 */
 		export enum Mode {					
 		}	
@@ -19747,7 +19747,7 @@ declare namespace cc {
 	* textureAnimationModule
 	*****************************************************/
 	
-	export namespace textureAnimationModule {		
+	export module textureAnimationModule {		
 		/** 贴图动画的播放方式 */
 		export enum Animation {					
 		}	
@@ -19756,12 +19756,12 @@ declare namespace cc {
 }
 
 /** !#en
-The global main namespace of DragonBones, all classes, functions,
-properties and constants of DragonBones are defined in this namespace
+The global main module of DragonBones, all classes, functions,
+properties and constants of DragonBones are defined in this module
 !#zh
 DragonBones 的全局的命名空间，
 与 DragonBones 相关的所有的类，函数，属性，常量都在这个命名空间中定义。 */
-declare namespace dragonBones {	
+declare module dragonBones {	
 	/** !#en
 	The Armature Display of DragonBones <br/>
 	<br/>
@@ -20002,7 +20002,7 @@ declare namespace dragonBones {
 	* ArmatureDisplay
 	*****************************************************/
 	
-	export namespace ArmatureDisplay {		
+	export module ArmatureDisplay {		
 		/** !#en Enum for cache mode type.
 		!#zh Dragonbones渲染类型 */
 		export enum AnimationCacheMode {			
@@ -20016,7 +20016,7 @@ declare namespace dragonBones {
 	* dragonBones
 	*****************************************************/
 	
-	export namespace dragonBones {		
+	export module dragonBones {		
 		/** !#en Attach node tool
 		!#zh 挂点工具类 */
 		export class AttachUtil {			
@@ -20059,12 +20059,12 @@ declare namespace dragonBones {
 }
 
 /** !#en
-The global main namespace of Spine, all classes, functions,
-properties and constants of Spine are defined in this namespace
+The global main module of Spine, all classes, functions,
+properties and constants of Spine are defined in this module
 !#zh
 Spine 的全局的命名空间，
 与 Spine 相关的所有的类，函数，属性，常量都在这个命名空间中定义。 */
-declare namespace sp {	
+declare module sp {	
 	/** !#en
 	The skeleton of Spine <br/>
 	<br/>
@@ -20528,7 +20528,7 @@ declare namespace sp {
 	* sp
 	*****************************************************/
 	
-	export namespace sp {		
+	export module sp {		
 		/** !#en Attach node tool
 		!#zh 挂点工具类 */
 		export class AttachUtil {			
@@ -20572,7 +20572,7 @@ declare namespace sp {
 	* Skeleton
 	*****************************************************/
 	
-	export namespace Skeleton {		
+	export module Skeleton {		
 		/** !#en Enum for animation cache mode type.
 		!#zh Spine动画缓存类型 */
 		export enum AnimationCacheMode {			
@@ -20585,11 +20585,11 @@ declare namespace sp {
 }
 
 /** !#en
-`sp.spine` is the namespace for official Spine Runtime, which officially implemented and maintained by Spine.<br>
+`sp.spine` is the module for official Spine Runtime, which officially implemented and maintained by Spine.<br>
 Please refer to the official documentation for its detailed usage: [http://en.esotericsoftware.com/spine-using-runtimes](http://en.esotericsoftware.com/spine-using-runtimes)
 !#zh
 sp.spine 模块是 Spine 官方运行库的 API 入口，由 Spine 官方统一实现和维护，具体用法请参考：[http://zh.esotericsoftware.com/spine-using-runtimes](http://zh.esotericsoftware.com/spine-using-runtimes) */
-declare namespace sp.spine {
+declare module sp.spine {
 }
 
 /** !#en
@@ -20598,7 +20598,7 @@ All member can be accessed with `cc.assetManager`. All class or enum can be acce
 
 !#zh
 此模块管理资源的行为和信息，包括加载，释放等，所有成员能够通过 `cc.assetManager` 调用. 所有类型或枚举能通过 `cc.AssetManager` 访问 */
-declare namespace cc.AssetManager {	
+declare module cc.AssetManager {	
 	/** !#en
 	This module contains the builtin asset, it's a singleton, all member can be accessed with `cc.assetManager.builtins`
 	
@@ -21919,7 +21919,7 @@ declare namespace cc.AssetManager {
 }
 
 /** Some helpful utilities */
-declare namespace cc.geomUtils {	
+declare module cc.geomUtils {	
 	/**
 	!#en
 	the distance between a point and a plane
@@ -21964,7 +21964,7 @@ declare namespace cc.geomUtils {
 /** !#en Some JavaScript decorators which can be accessed with "cc._decorator".
 !#zh 一些 JavaScript 装饰器，目前可以通过 "cc._decorator" 来访问。
 （这些 API 仍不完全稳定，有可能随着 JavaScript 装饰器的标准实现而调整） */
-declare namespace cc._decorator {	
+declare module cc._decorator {	
 	/**
 	!#en
 	Declare the standard [ES6 Class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
@@ -22290,7 +22290,7 @@ declare namespace cc._decorator {
 
 /** !#en This module provides some JavaScript utilities. All members can be accessed with `cc.js`.
 !#zh 这个模块封装了 JavaScript 相关的一些实用函数，你可以通过 `cc.js` 来访问这个模块。 */
-declare namespace cc.js {	
+declare module cc.js {	
 	/**
 	Check the obj whether is number or not
 	If a number is created by using 'new Number(10086)', the typeof it will be "object"...
@@ -22571,7 +22571,7 @@ declare namespace cc.js {
 
 /** !#en A basic module for creating vertex data for 3D objects. You can access this module by `cc.primitive`.
 !#zh 一个创建 3D 物体顶点数据的基础模块，你可以通过 `cc.primitive` 来访问这个模块。 */
-declare namespace cc.primitive {	
+declare module cc.primitive {	
 	/**
 	!#en Create box vertex data
 	!#zh 创建长方体顶点数据
@@ -22742,7 +22742,7 @@ interface IVec4Like {
     z: number;
     w: number;
 }
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -22776,7 +22776,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -23037,7 +23037,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The BaseObject is the base class for all objects in the DragonBones framework.
      * All BaseObject instances are cached to the object pool to reduce the performance consumption of frequent requests for memory or memory recovery.
@@ -23151,7 +23151,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - 2D Transform matrix.
      * @version DragonBones 3.0
@@ -23346,7 +23346,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - 2D Transform.
      * @version DragonBones 3.0
@@ -23505,7 +23505,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -23546,7 +23546,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The Point object represents a location in a two-dimensional coordinate system.
      * @version DragonBones 3.0
@@ -23631,7 +23631,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - A Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its
      * width and its height.<br/>
@@ -23739,7 +23739,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The user custom data.
      * @version DragonBones 5.0
@@ -23874,7 +23874,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The DragonBones data.
      * A DragonBones data contains multiple armature data.
@@ -24055,7 +24055,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The armature data.
      * @version DragonBones 3.0
@@ -24487,7 +24487,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -24534,7 +24534,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -24572,7 +24572,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The skin data, typically a armature data instance contains at least one skinData.
      * @version DragonBones 3.0
@@ -24645,7 +24645,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -24751,7 +24751,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The base class of bounding box data.
      * @see dragonBones.RectangleData
@@ -25022,7 +25022,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The animation data.
      * @version DragonBones 3.0
@@ -25252,7 +25252,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The animation config is used to describe all the information needed to play an animation state.
      * The API is still in the experimental phase and may encounter bugs or stability or compatibility issues when used.
@@ -25551,7 +25551,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The texture atlas data.
      * @version DragonBones 3.0
@@ -25665,7 +25665,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The armature proxy interface, the docking engine needs to implement it concretely.
      * @see dragonBones.Armature
@@ -25761,7 +25761,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - Armature is the core of the skeleton animation system.
      * @see dragonBones.ArmatureData
@@ -26324,7 +26324,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The base class of the transform object.
      * @see dragonBones.Transform
@@ -26493,7 +26493,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - Bone is one of the most important logical units in the armature animation system,
      * and is responsible for the realization of translate, rotation, scaling in the animations.
@@ -26728,7 +26728,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -26801,7 +26801,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The slot attached to the armature, controls the display status and properties of the display object.
      * A bone can contain multiple slots.
@@ -27369,7 +27369,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -27448,7 +27448,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - Play animation interface. (Both Armature and Wordclock implement the interface)
      * Any instance that implements the interface can be added to the Worldclock instance and advance time by Worldclock instance uniformly.
@@ -27524,7 +27524,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - Worldclock provides clock support for animations, advance time for each IAnimatable object added to the instance.
      * @see dragonBones.IAnimateble
@@ -27683,7 +27683,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The animation player is used to play the animation data and manage the animation states.
      * @see dragonBones.AnimationData
@@ -28160,7 +28160,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The animation state is generated when the animation data is played.
      * @see dragonBones.Animation
@@ -28650,7 +28650,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -28764,7 +28764,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -28938,7 +28938,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - The properties of the object carry basic information about an event,
      * which are passed as parameter or parameter's parameter to event listeners when an event occurs.
@@ -29177,7 +29177,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @private
      */
@@ -29316,7 +29316,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -29491,7 +29491,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -29618,7 +29618,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * @internal
      * @private
@@ -29676,7 +29676,7 @@ declare namespace dragonBones {
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-declare namespace dragonBones {
+declare module dragonBones {
     /**
      * - Base class for the factory that create the armatures. (Typically only one global factory instance is required)
      * The factory instance create armatures by parsed and added DragonBonesData instances and TextureAtlasData instances.
@@ -30220,7 +30220,7 @@ declare namespace dragonBones {
     }
 }
 
-declare namespace sp.spine {
+declare module sp.spine {
 	class Animation {
 		name: string;
 		timelines: Array<Timeline>;
@@ -30465,7 +30465,7 @@ declare namespace sp.spine {
 		apply(skeleton: Skeleton, lastTime: number, time: number, firedEvents: Array<Event>, alpha: number, blend: MixBlend, direction: MixDirection): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class AnimationState {
 		static emptyAnimation: Animation;
 		static SUBSEQUENT: number;
@@ -30587,7 +30587,7 @@ declare namespace sp.spine {
 		event(entry: TrackEntry, event: Event): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class AnimationStateData {
 		skeletonData: SkeletonData;
 		animationToMixTime: Map<number>;
@@ -30598,7 +30598,7 @@ declare namespace sp.spine {
 		getMix(from: Animation, to: Animation): number;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class AssetManager implements Disposable {
 		private pathPrefix;
 		private textureLoader;
@@ -30625,7 +30625,7 @@ declare namespace sp.spine {
 		getErrors(): Map<string>;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class AtlasAttachmentLoader implements AttachmentLoader {
 		atlas: TextureAtlas;
 		constructor(atlas: TextureAtlas);
@@ -30637,7 +30637,7 @@ declare namespace sp.spine {
 		newClippingAttachment(skin: Skin, name: string): ClippingAttachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	enum BlendMode {
 		Normal = 0,
 		Additive = 1,
@@ -30645,7 +30645,7 @@ declare namespace sp.spine {
 		Screen = 3
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class Bone implements Updatable {
 		data: BoneData;
 		skeleton: Skeleton;
@@ -30692,7 +30692,7 @@ declare namespace sp.spine {
 		rotateWorld(degrees: number): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class BoneData {
 		index: number;
 		name: string;
@@ -30718,7 +30718,7 @@ declare namespace sp.spine {
 		NoScaleOrReflection = 4
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	abstract class ConstraintData {
 		name: string;
 		order: number;
@@ -30726,7 +30726,7 @@ declare namespace sp.spine {
 		constructor(name: string, order: number, skinRequired: boolean);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class Event {
 		data: EventData;
 		intValue: number;
@@ -30738,7 +30738,7 @@ declare namespace sp.spine {
 		constructor(time: number, data: EventData);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class EventData {
 		name: string;
 		intValue: number;
@@ -30750,7 +30750,7 @@ declare namespace sp.spine {
 		constructor(name: string);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class IkConstraint implements Updatable {
 		data: IkConstraintData;
 		bones: Array<Bone>;
@@ -30769,7 +30769,7 @@ declare namespace sp.spine {
 		apply2(parent: Bone, child: Bone, targetX: number, targetY: number, bendDir: number, stretch: boolean, softness: number, alpha: number): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class IkConstraintData extends ConstraintData {
 		bones: BoneData[];
 		target: BoneData;
@@ -30782,7 +30782,7 @@ declare namespace sp.spine {
 		constructor(name: string);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class PathConstraint implements Updatable {
 		static NONE: number;
 		static BEFORE: number;
@@ -30812,7 +30812,7 @@ declare namespace sp.spine {
 		addCurvePosition(p: number, x1: number, y1: number, cx1: number, cy1: number, cx2: number, cy2: number, x2: number, y2: number, out: Array<number>, o: number, tangents: boolean): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class PathConstraintData extends ConstraintData {
 		bones: BoneData[];
 		target: SlotData;
@@ -30841,7 +30841,7 @@ declare namespace sp.spine {
 		ChainScale = 2
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SharedAssetManager implements Disposable {
 		private pathPrefix;
 		private clientAssets;
@@ -30861,7 +30861,7 @@ declare namespace sp.spine {
 		getErrors(): Map<string>;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class Skeleton {
 		data: SkeletonData;
 		bones: Array<Bone>;
@@ -30909,7 +30909,7 @@ declare namespace sp.spine {
 		update(delta: number): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkeletonBinary {
 		static AttachmentTypeValues: number[];
 		static TransformModeValues: TransformMode[];
@@ -30945,7 +30945,7 @@ declare namespace sp.spine {
 		setCurve(timeline: CurveTimeline, frameIndex: number, cx1: number, cy1: number, cx2: number, cy2: number): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkeletonBounds {
 		minX: number;
 		minY: number;
@@ -30968,7 +30968,7 @@ declare namespace sp.spine {
 		getHeight(): number;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkeletonClipping {
 		private triangulator;
 		private clippingPolygon;
@@ -30987,7 +30987,7 @@ declare namespace sp.spine {
 		static makeClockwise(polygon: ArrayLike<number>): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkeletonData {
 		name: string;
 		bones: BoneData[];
@@ -31021,7 +31021,7 @@ declare namespace sp.spine {
 		findPathConstraintIndex(pathConstraintName: string): number;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkeletonJson {
 		attachmentLoader: AttachmentLoader;
 		scale: number;
@@ -31040,7 +31040,7 @@ declare namespace sp.spine {
 		static transformModeFromString(str: string): TransformMode;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SkinEntry {
 		slotIndex: number;
 		name: string;
@@ -31064,7 +31064,7 @@ declare namespace sp.spine {
 		attachAll(skeleton: Skeleton, oldSkin: Skin): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class Slot {
 		data: SlotData;
 		bone: Bone;
@@ -31082,7 +31082,7 @@ declare namespace sp.spine {
 		setToSetupPose(): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SlotData {
 		index: number;
 		name: string;
@@ -31094,7 +31094,7 @@ declare namespace sp.spine {
 		constructor(index: number, name: string, boneData: BoneData);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	abstract class Texture {
 		protected _image: HTMLImageElement;
 		constructor(image: HTMLImageElement);
@@ -31139,7 +31139,7 @@ declare namespace sp.spine {
 		dispose(): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class TextureAtlas implements Disposable {
 		pages: TextureAtlasPage[];
 		regions: TextureAtlasRegion[];
@@ -31169,7 +31169,7 @@ declare namespace sp.spine {
 		texture: Texture;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class TransformConstraint implements Updatable {
 		data: TransformConstraintData;
 		bones: Array<Bone>;
@@ -31190,7 +31190,7 @@ declare namespace sp.spine {
 		applyRelativeLocal(): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class TransformConstraintData extends ConstraintData {
 		bones: BoneData[];
 		target: BoneData;
@@ -31209,7 +31209,7 @@ declare namespace sp.spine {
 		constructor(name: string);
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class Triangulator {
 		private convexPolygons;
 		private convexPolygonsIndices;
@@ -31225,13 +31225,13 @@ declare namespace sp.spine {
 		private static winding;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	interface Updatable {
 		update(): void;
 		isActive(): boolean;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	interface Map<T> {
 		[key: string]: T;
 	}
@@ -31355,7 +31355,7 @@ declare namespace sp.spine {
 		getMean(): number;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	interface VertexEffect {
 		begin(skeleton: Skeleton): void;
 		transform(position: Vector2, uv: Vector2, light: Color, dark: Color): void;
@@ -31365,7 +31365,7 @@ declare namespace sp.spine {
 interface Math {
 	fround(n: number): number;
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	abstract class Attachment {
 		name: string;
 		constructor(name: string);
@@ -31383,7 +31383,7 @@ declare namespace sp.spine {
 		copyTo(attachment: VertexAttachment): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	interface AttachmentLoader {
 		newRegionAttachment(skin: Skin, name: string, path: string): RegionAttachment;
 		newMeshAttachment(skin: Skin, name: string, path: string): MeshAttachment;
@@ -31393,7 +31393,7 @@ declare namespace sp.spine {
 		newClippingAttachment(skin: Skin, name: string): ClippingAttachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	enum AttachmentType {
 		Region = 0,
 		BoundingBox = 1,
@@ -31404,14 +31404,14 @@ declare namespace sp.spine {
 		Clipping = 6
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class BoundingBoxAttachment extends VertexAttachment {
 		color: Color;
 		constructor(name: string);
 		copy(): Attachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class ClippingAttachment extends VertexAttachment {
 		endSlot: SlotData;
 		color: Color;
@@ -31419,7 +31419,7 @@ declare namespace sp.spine {
 		copy(): Attachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class MeshAttachment extends VertexAttachment {
 		region: TextureRegion;
 		path: string;
@@ -31441,7 +31441,7 @@ declare namespace sp.spine {
 		newLinkedMesh(): MeshAttachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class PathAttachment extends VertexAttachment {
 		lengths: Array<number>;
 		closed: boolean;
@@ -31451,7 +31451,7 @@ declare namespace sp.spine {
 		copy(): Attachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class PointAttachment extends VertexAttachment {
 		x: number;
 		y: number;
@@ -31463,7 +31463,7 @@ declare namespace sp.spine {
 		copy(): Attachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class RegionAttachment extends Attachment {
 		static OX1: number;
 		static OY1: number;
@@ -31526,7 +31526,7 @@ declare namespace sp.spine {
 		copy(): Attachment;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class JitterEffect implements VertexEffect {
 		jitterX: number;
 		jitterY: number;
@@ -31536,7 +31536,7 @@ declare namespace sp.spine {
 		end(): void;
 	}
 }
-declare namespace sp.spine {
+declare module sp.spine {
 	class SwirlEffect implements VertexEffect {
 		static interpolation: PowOut;
 		centerX: number;
@@ -31557,7 +31557,7 @@ declare namespace sp.spine {
  * Author: haroel
  * Homepage: https://github.com/haroel/creatorexDTS
  */
-declare namespace jsb{
+declare module jsb{
     export module reflection{
         /**
          * https://docs.cocos.com/creator/manual/zh/advanced-topics/java-reflection.html

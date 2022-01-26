@@ -3,7 +3,7 @@
 /*
 * name;
 */
-namespace com 
+module com 
 {
     export interface JTITask extends JTIPoolObject
     {

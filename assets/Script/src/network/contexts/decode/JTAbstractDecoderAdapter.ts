@@ -1,5 +1,5 @@
 ///<reference path="../JTChannelContextAdapter.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTAbstractDecoderAdapter extends JTChannelContextAdapter implements JTIDecoderAdapter
     {

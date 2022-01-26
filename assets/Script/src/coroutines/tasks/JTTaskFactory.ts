@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export abstract class JTTaskFactory implements JTIFactory
     {

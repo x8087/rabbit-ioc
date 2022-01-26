@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export abstract class JTAbstractProtocolErrorMessage extends JTOptionContext
     {

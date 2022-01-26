@@ -1,5 +1,5 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
-namespace com 
+module com 
 {
     /**
      * 扩展基类

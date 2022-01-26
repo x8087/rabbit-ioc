@@ -1,5 +1,5 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
-namespace com 
+module com 
 {
     export abstract class JTComponent<T extends fgui.GComponent> extends JTEventSignaler implements JTIComponent
     {

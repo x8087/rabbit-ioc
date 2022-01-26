@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export class JTEncodeToJSONAdapter extends JTAbstractEncoderAdapter
     {

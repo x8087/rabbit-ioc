@@ -1,5 +1,5 @@
 ///<reference path="../events/JTEventSignaler.ts"/>
-namespace com 
+module com 
 {
     export class JTDataInfoManager extends JTEventSignaler
     {

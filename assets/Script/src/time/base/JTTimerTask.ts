@@ -1,4 +1,4 @@
-namespace com 
+module com 
 {
     export abstract class JTTimerTask extends JTEventDispatcher implements JTITimerTask
     {
