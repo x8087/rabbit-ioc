@@ -9,20 +9,20 @@ module com
 
         public writeString(content:string):void
         {
-            this.writeType(JTDataClass.CLASS_String);
+            this.writeType(JTObjectType.STRING);
             this.buffer.writeByte(length);
             this.buffer.writeUTFBytes(content)
         }
 
         public writeInt(value:number)
         {
-            this.writeType(JTDataClass.CLASS_Int);
+            this.writeType(JTObjectType.INT);
             this.buffer.writeInt32(value);
         }
 
         public writeByte(value:number)
         {
-            this.writeType(JTDataClass.CLASS_Byte);
+            this.writeType(JTObjectType.BYTE);
             this.buffer.writeByte(value);
         }
 
@@ -33,12 +33,12 @@ module com
 
         public writeMap(valueMap:Object):void
         {
-            this.writeType(JTDataClass.CLASS_Map);
+            this.writeType(JTObjectType.MAP);
         }
 
         public writeArray(values:any[])
         {
-            this. writeType(JTDataClass.CLASS_ARRAY);
+            this. writeType(JTObjectType.ARRAY);
             let count:number = values.length;
             this.buffer.writeByte(count);
             for (let i:number = 0; i < count; i++)
@@ -79,7 +79,7 @@ module com
 
         private writeBoolean(value:boolean):void
         {
-            this.writeType(JTDataClass.DATA_Boolean);
+            this.writeType(JTObjectType.BOOLEAN);
             this.buffer.writeByte(value == true ? 1 : 0);
         }
 

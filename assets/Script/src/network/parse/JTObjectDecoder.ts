@@ -44,32 +44,32 @@ module com
             let value:any = null;
             switch (type)
             {
-                case JTDataClass.CLASS_Int:
+                case JTObjectType.INT:
                 {
                     value = this.readInt();
                     break;
                 }
-                case JTDataClass.CLASS_ARRAY:
+                case JTObjectType.ARRAY:
                 {
                     value = this.readArray();
                     break;
                 }
-                case JTDataClass.CLASS_JSON:
+                case JTObjectType.JSON:
                 {
                     value = this.readJSON();
                     break;
                 }
-                case JTDataClass.CLASS_Map:
+                case JTObjectType.MAP:
                 {
                     value = this.readMap();
                     break;
                 }
-                case JTDataClass.CLASS_String:
+                case JTObjectType.STRING:
                 {
                     value = this.readString();
                     break;
                 }
-                case JTDataClass.DATA_Boolean:
+                case JTObjectType.BOOLEAN:
                 {
                     value = this.readBoolean();
                     break;
