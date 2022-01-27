@@ -6,7 +6,8 @@ module com
      * <p> <code>Byte</code> 类提供用于优化读取、写入以及处理二进制数据的方法和属性。</p>
      * <p> <code>Byte</code> 类适用于需要在字节层访问数据的高级开发人员。</p>
      */
-    export class JTBuffer {
+    export class JTBuffer implements JTIPoolObject
+    {
 
         /**
          * <p>主机字节序，是 CPU 存放数据的两种不同顺序，包括小端字节序和大端字节序。通过 <code>getSystemEndian</code> 可以获取当前系统的字节序。</p>
@@ -63,6 +64,9 @@ module com
             } else {
                 this._resizeBuffer(this._allocated_);
             }
+        }
+        recycle() {
+          this.clear();
         }
 
         /**
@@ -811,6 +815,26 @@ module com
             rst = this._u8d_.buffer.slice(this._pos_, this._pos_ + length);
             this._pos_ = this._pos_ + length
             return rst;
+        }
+
+        public static get pool():JTIPool
+        {
+            if(!this._pool)
+            {
+                this._pool = JTPool.instance(JTBuffer);
+            }
+            return this._pool;
+        }
+        
+        private static _pool:JTIPool = null;
+        public static create():JTBuffer
+        {
+            return this.pool.get() as JTBuffer;
+        }
+
+        public static put(buffer:JTBuffer):void
+        {
+            this.pool.put(buffer)
         }
     }
 }
