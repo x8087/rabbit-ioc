@@ -2,15 +2,11 @@ module com
 {
     export class JTObjectEncoder extends JTObjectCoder implements JTIObjectEncoder
     {
-        public JTObjectEncoder(bytes:JTBuffer)
-        {
-            this.buffer = bytes;
-        }
 
         public writeString(content:string):void
         {
             this.writeType(JTObjectType.STRING);
-            this.buffer.writeByte(length);
+            this.buffer.writeByte(JTBuffer.stringLength(content));
             this.buffer.writeUTFBytes(content)
         }
 

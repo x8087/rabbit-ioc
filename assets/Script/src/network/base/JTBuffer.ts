@@ -1,5 +1,4 @@
- 
-
+///<reference path="../../pools/JTPool.ts"/>
 module com 
 {
     /**
@@ -110,7 +109,8 @@ module com
         /**@private */
         private _resizeBuffer(len: number): void {
             try {
-                var newByteView: any = new Uint8Array(len);
+
+                var newByteView: Uint8Array = new Uint8Array(len);
                 if (this._u8d_ != null) {
                     if (this._u8d_.length <= len) newByteView.set(this._u8d_);
                     else newByteView.set(this._u8d_.subarray(0, len));
@@ -817,16 +817,17 @@ module com
             return rst;
         }
 
-        public static get pool():JTIPool
+        public static stringLength(content:string):number
         {
-            if(!this._pool)
-            {
-                this._pool = JTPool.instance(JTBuffer);
-            }
-            return this._pool;
+            let bytes:JTBuffer = JTBuffer.create();
+            bytes.writeUTFBytes(content);
+            let size:number = bytes.length;
+            JTBuffer.put(bytes);
+            return size;
         }
-        
-        private static _pool:JTIPool = null;
+
+
+        private static pool:JTIPool = JTPool.instance(JTBuffer);;
         public static create():JTBuffer
         {
             return this.pool.get() as JTBuffer;

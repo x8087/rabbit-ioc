@@ -3,6 +3,7 @@ module com
     export class JTObjectDecoder extends JTObjectCoder implements JTIObjectDecoder
     {
 
+        
 
 
         public readType():number
@@ -40,7 +41,7 @@ module com
 
         public readObject():any
         {
-            let type:number = this.buffer.readByte();
+            let type:number = this.readType();
             let value:any = null;
             switch (type)
             {
@@ -86,7 +87,7 @@ module com
             return this.buffer.readByte() == 1 ? true : false;
         }
 
-        private  readString():string
+        private readString():string
         {
             let length:number = this.buffer.readByte();
             let content:string = this.buffer.readUTFBytes(length)
