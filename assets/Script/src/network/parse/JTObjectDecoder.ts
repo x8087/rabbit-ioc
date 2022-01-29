@@ -3,9 +3,6 @@ module com
     export class JTObjectDecoder extends JTObjectCoder implements JTIObjectDecoder
     {
 
-        
-
-
         public readType():number
         {
             return this.buffer.readByte();

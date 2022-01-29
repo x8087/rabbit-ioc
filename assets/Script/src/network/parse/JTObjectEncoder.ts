@@ -10,13 +10,13 @@ module com
             this.buffer.writeUTFBytes(content)
         }
 
-        public writeInt(value:number)
+        public writeInt(value:number):void
         {
             this.writeType(JTObjectType.INT);
             this.buffer.writeInt32(value);
         }
 
-        public writeByte(value:number)
+        public writeByte(value:number):void
         {
             this.writeType(JTObjectType.BYTE);
             this.buffer.writeByte(value);
@@ -32,7 +32,7 @@ module com
             this.writeType(JTObjectType.MAP);
         }
 
-        public writeArray(values:any[])
+        public writeArray(values:any[]):void
         {
             this. writeType(JTObjectType.ARRAY);
             let count:number = values.length;
@@ -45,7 +45,7 @@ module com
             }
         }
 
-        public writeObject(value:any)
+        public writeObject(value:any):void
         {
             if (typeof value == 'string')
             {
@@ -79,12 +79,12 @@ module com
             this.buffer.writeByte(value == true ? 1 : 0);
         }
 
-        public serialize(value:Object)
+        public serialize(value:Object):void
         {
             this.writeObject(value);
         }
 
-        public writeJSON(value:Object)
+        public writeJSON(value:Object):void
         {
 
         }

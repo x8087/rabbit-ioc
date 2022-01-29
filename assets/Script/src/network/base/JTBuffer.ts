@@ -64,6 +64,7 @@ module com
                 this._resizeBuffer(this._allocated_);
             }
         }
+        
         recycle() {
           this.clear();
         }
