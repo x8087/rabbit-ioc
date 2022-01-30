@@ -76,10 +76,15 @@ module com
          */
         public childOption(type:string, ___c:JTIChannelContext):JTChannelEventLoop
         {
-            ___c.build();
             this._contextMap[type] = ___c;
             this.__context.push(___c);
+            this.__context.sort(this.compare);
             return this;
+        }
+
+        protected compare(a:JTChannelContext, b:JTChannelContext):number
+        {
+                return a.sortId - b.sortId ;
         }
 
         public getContext(type:string):JTIChannelContext
@@ -90,6 +95,11 @@ module com
         protected poll():any
         {
             return null;
+        }
+
+        public get sortId():number 
+        {
+            return JTChannelContextSortId.EVENTLOOP;
         }
     }
 }

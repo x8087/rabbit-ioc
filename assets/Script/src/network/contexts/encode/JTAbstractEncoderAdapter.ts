@@ -18,12 +18,17 @@ module com
             return data;
         }
 
-        public channelActive():void
+        public build(): void 
         {
             this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)
             this._protocolContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
             this._errorMessageContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE);
             this._upProtocol = this._protocolContext.protocolUp;
+        }
+
+        public channelActive():void
+        {
+        
         }
 
         public abstract encode(data:any):any;
@@ -42,7 +47,12 @@ module com
         public channelInactive(): void
         {
 
-        }         
+        } 
+        
+        public get sortId():number
+        {
+            return JTChannelContextSortId.ENCODE;
+        }
             
     }
 }

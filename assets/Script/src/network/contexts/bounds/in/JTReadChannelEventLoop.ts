@@ -8,7 +8,7 @@ module com
             super(timerTask, keepCount);
         }
 
-        protected flowMessage(message:any): void 
+        protected flowMessage(message:any):void
         {
             for (let i:number = 0; i < this.__context.length; i++)
             {

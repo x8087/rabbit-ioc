@@ -3,11 +3,10 @@ module com
     export class JTDecoderToByteAdapter extends JTAbstractDecoderAdapter 
     {
 
+        // public build():void 
+        // {
 
-        public build():void 
-        {
-
-        }
+        // }
 
         constructor()
         {

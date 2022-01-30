@@ -69,5 +69,10 @@ module com
         {
             return this._connected;
         }
+
+        public get sortId():number
+        {
+            return JTChannelContextSortId.IDEAL;
+        }
     }
 }

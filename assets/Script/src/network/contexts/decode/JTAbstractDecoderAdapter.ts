@@ -20,12 +20,17 @@ module com
             return data;
         }
 
-        public channelActive():void
+        public build():void
         {
             this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)
             this._protocolContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
             this._errorMessageContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE);
             this._downProtocol = this._protocolContext.downProtocol;
+        }
+
+        public channelActive():void
+        {
+
         }
 
         public abstract decode(data:any):any;
@@ -64,6 +69,11 @@ module com
         protected toMapper(protocol:number, data:any):any
         {
             return this._responseMapper.create(protocol, data);
+        }
+
+        public get sortId():number
+        {
+            return JTChannelContextSortId.DECODE;
         }
     
     }

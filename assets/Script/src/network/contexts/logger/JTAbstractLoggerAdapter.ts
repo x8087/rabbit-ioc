@@ -11,6 +11,11 @@ module com
 
         public abstract channelWrite(msg:any):void; 
 
+        public get sortId():number
+        {
+            return JTChannelContextSortId.LOGGER;
+        }
+
     }
 
     

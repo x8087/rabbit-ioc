@@ -2,10 +2,10 @@ module com
 {
     export class JTDecoderToJSONAdapter extends JTAbstractDecoderAdapter
     {
-        public build(): void {
+        // public build(): void {
             
             
-        }
+        // }
         constructor()
         {
             super();

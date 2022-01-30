@@ -15,6 +15,7 @@ module com
                 let ___c:JTIChannelWrite = (this.__context[i] as any) as JTIChannelWrite;
                 message = ___c.channelWrite(message);
             }
+            this._channel.send(message);
         }
 
         public flush(): void 

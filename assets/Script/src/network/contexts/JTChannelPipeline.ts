@@ -27,15 +27,16 @@
         {
             this.__readChannelEventLoop = channelReadEventLoop as any;
             this.__writeChannelEventLoop = channelWriteEventLoop as any;
-            this.registerChannelEventLoop(JTChannelContext.CHANNEL_READ, channelReadEventLoop);
-            this.registerChannelEventLoop(JTChannelContext.CHANNEL_WRITE, channelWriteEventLoop);
+            this.registerChannelContext(JTChannelContext.CHANNEL_READ, channelReadEventLoop);
+            this.registerChannelContext(JTChannelContext.CHANNEL_WRITE, channelWriteEventLoop);
         }
 
-        protected registerChannelEventLoop(type:string, eventLoop:JTChannelEventLoop):void
+        protected registerChannelContext(type:string, __c:JTIChannelContext):void
         {
-            eventLoop.build();
-            this.___ctxs.push(eventLoop);
-            this.___ctxMap[type] = eventLoop;
+            __c.bind(this);
+            __c.build();
+            this.___ctxs.push(__c);
+            this.___ctxMap[type] = __c;
         }
         
         public mark():void 
@@ -114,16 +115,17 @@
          */
         public childOption(type:string, ___c:JTIChannelContext):JTChannelPipeline
         {
-            ___c.bind(this);
-            ___c.build();
-            this.___ctxMap[type] =  ___c;
-            this.___ctxs.push(___c);
+            this.registerChannelContext(type, ___c)
+
+            this.___ctxs.sort(this.compare);
             if (___c["channelRead"])(this.__readChannelEventLoop as any).childOption(type, ___c);
-            else if (___c["channelWrite"])
-            {
-                (this.__writeChannelEventLoop as any).childOption(type, ___c);
-            }
+            if (___c["channelWrite"]) (this.__writeChannelEventLoop as any).childOption(type, ___c);
             return this;
+        }
+
+        protected compare(a:JTChannelContext, b:JTChannelContext):number
+        {
+                return a.sortId - b.sortId;
         }
 
         public getContext(type:string):JTIChannelContext

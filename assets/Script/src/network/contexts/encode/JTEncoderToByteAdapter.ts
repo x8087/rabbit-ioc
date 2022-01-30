@@ -2,10 +2,10 @@
 {
     export class JTEncoderToByteAdapter extends JTAbstractEncoderAdapter
     {
-        public build(): void 
-        {
+        // public build(): void 
+        // {
             
-        }
+        // }
         
         constructor()
         {
