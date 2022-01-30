@@ -56,7 +56,7 @@ module com
 
         protected toMapper(protocol:number, data:any):any
         {
-            return this._responseMapper.create(protocol, data)
+            return this._responseMapper.create(protocol, data);
         }
     
     }

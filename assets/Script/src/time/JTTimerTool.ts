@@ -48,6 +48,8 @@ module com
                     break;
                 }
             }
+
+            setInterval(JTTimerTool.actives.bind(this), 0)
         }
 
         public static get frameRate():number
@@ -70,7 +72,7 @@ module com
             this._currentTime = 0;
         }
 
-        public static actives():void
+        protected static actives():void
         {
             this.defaultTimer.active();
             this.animationTimer.active();

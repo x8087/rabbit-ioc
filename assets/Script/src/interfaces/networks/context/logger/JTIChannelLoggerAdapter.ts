@@ -2,8 +2,8 @@ module com
 {
      export interface JTIChannelLoggerAdapter extends JTIChannelContext
      {
-          readComplete(msg:any):void 
+          channelRead(msg:any):void 
 
-          writeComplete(msg:any):void 
+          channelWrite(msg:any):void 
      }
 }

@@ -11,6 +11,7 @@ module com
         public static IDLE:string = "idle";
         public static LOGGER:string = "logger";
         public static HANDLER:string = "handler";
+        public static MESSAGE_PROCESSOR:string = "MESSAGE_PROCESSOR";
 
         constructor()
         {

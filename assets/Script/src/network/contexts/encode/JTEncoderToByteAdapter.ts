@@ -1,6 +1,6 @@
  module com 
 {
-    export class JTEncodeToByteAdapter extends JTAbstractEncoderAdapter
+    export class JTEncoderToByteAdapter extends JTAbstractEncoderAdapter
     {
         public build(): void 
         {

@@ -1,6 +1,6 @@
 module com 
 {
-    export class JTEncodeToJSONAdapter extends JTAbstractEncoderAdapter
+    export class JTEncoderToJSONAdapter extends JTAbstractEncoderAdapter
     {
         public build(): void 
         {
