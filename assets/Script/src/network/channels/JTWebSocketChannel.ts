@@ -75,7 +75,7 @@ module com
 
         protected onErrorHandler(e):void
         {
-            this.pipeline.channelInactive();
+            // this.pipeline.channelInactive();
             info("The websocket connect server fail!");
         }
 

@@ -7,8 +7,6 @@
         private ___ctxs:JTIChannelContext[] = []
         private __channelGroup:JTIChannelGroup = null;
 
-        private _inMessages:any[] = null;
-        private _outMessage:any[] = null;
         constructor(channelGroup?:JTIChannelGroup)
         {
             super();
