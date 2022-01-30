@@ -34,7 +34,7 @@ module com
 
         public setupChannel(type:string, __channleClass:any):JTIChannelPipeline
         {
-            let ___pipeline:JTIChannelPipeline = this.___pipelineMap[type];;
+            let ___pipeline:JTIChannelPipeline = this.___pipelineMap[type];
             if (!___pipeline)
             {   
                 let __c:JTIChannel = new __channleClass();

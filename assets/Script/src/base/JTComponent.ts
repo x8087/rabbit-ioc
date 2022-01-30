@@ -62,13 +62,13 @@ module com
 
         public bindUIRelation(parent:fgui.GComponent, type:number):void
         {
-                this.bindRelation(this._____ui, parent, type);
+            this.bindRelation(this._____ui, parent, type);
         }
 
         public bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void
         {
-                child.setSize(parent.width, parent.height);
-                child.addRelation(parent, type);
+            child.setSize(parent.width, parent.height);
+            child.addRelation(parent, type);
         }
         public getObject(id:string):T
         {
@@ -139,6 +139,5 @@ module com
             this.__classUI = this.__componentId = this.__uiPackage = this._____ui = null;
             this.recycle();
         }
-
     }
 }

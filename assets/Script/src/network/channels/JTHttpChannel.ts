@@ -19,7 +19,7 @@ module com
             
         }
 
-        public writeMethod(methodType: string):void
+        public writeMethod(methodType:string):void
         {
                 this.__defaultMethodType = methodType;
         }

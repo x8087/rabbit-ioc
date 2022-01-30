@@ -13,6 +13,8 @@ module com
 
         protected _connected:boolean = false;
 
+        protected _protocol:any = null;
+
 
 
         /**
@@ -50,16 +52,21 @@ module com
 
         protected onTimerHandler(timer:JTITimer):void
         {
-                if (!this._connected) 
-                {
-                    this._timer.stop();
-                    return;
-                }
+            if (!this._connected) 
+            {
+                this._timer.stop();
+                return;
+            }
         }
         
         protected onTimerComplete(timer:JTITimer):void
         {
                 // this._channelPipeline.launch();
+        }
+
+        public get protocol():any
+        {
+            return this._protocol;
         }
     }
 }

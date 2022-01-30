@@ -1,6 +1,6 @@
 module com 
 {
-     export interface JTIMarkChannelConnected
+     export interface JTIMarkConnected
      {
           mark():void;
      }

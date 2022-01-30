@@ -6,6 +6,9 @@
         private ___ctxMap:{[type:string]: JTIChannelContext} = {};
         private ___ctxs:JTIChannelContext[] = []
         private __channelGroup:JTIChannelGroup = null;
+
+        private _inMessages:any[] = null;
+        private _outMessage:any[] = null;
         constructor(channelGroup?:JTIChannelGroup)
         {
             super();
@@ -17,7 +20,7 @@
            this.__channelGroup && this.__channelGroup.mark(this);
         }
 
-        public config(host:string, port:number):JTIMarkChannelConnected
+        public config(host:string, port:number):JTIMarkConnected
         {
             this._channel.reload();
             this._channel.config(host, port);

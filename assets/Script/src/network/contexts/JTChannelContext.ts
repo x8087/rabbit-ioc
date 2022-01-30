@@ -9,6 +9,9 @@ module com
         public static ENCODE:string = "encode";
         public static DECODE:string = "decode";
         public static IDLE:string = "idle";
+        public static LOGGER:string = "logger";
+        public static HANDLER:string = "handler";
+
         constructor()
         {
             super();
