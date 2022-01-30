@@ -5,7 +5,7 @@
 */
 module com 
 {
-    export interface JTIConnection
+    export interface JTIConnection extends JTIChannelWrite
     {
         connect():any;
 

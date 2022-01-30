@@ -1,6 +1,6 @@
 module com 
 {
-      export interface JTIEncoderAdapter extends JTIChannelContext
+      export interface JTIEncoderAdapter extends JTIChannelWrite
       {
             encode(data:any):any;
 

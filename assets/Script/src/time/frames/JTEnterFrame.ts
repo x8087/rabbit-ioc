@@ -32,7 +32,7 @@ module com
             this.adjustFrameRate(frameRate);
         }
 
-        public play(totalFrames:number, loop:number = 0, frameRate:number = 60):void
+        public play(totalFrames:number = 0, loop:number = 0, frameRate:number = 60):void
         {
             this._running = true;
             this.setup(totalFrames, loop, frameRate);

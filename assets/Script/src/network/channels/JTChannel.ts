@@ -9,8 +9,10 @@ module com
         protected __name:string = "";
 
         protected _pipeline:JTIChannelPipeline = null;
-        protected _encoder:JTIEncoderAdapter = null;
-        protected _decoder:JTIDecoderAdapter = null;
+        protected _channelRead:JTIChannelRead = null;
+        protected _channelWrite:JTIChannelWrite = null;
+        // protected _encoder:JTIEncoderAdapter = null;
+        // protected _decoder:JTIDecoderAdapter = null;
         protected _connectUrl:string = null;
 
         constructor(cls:any)
@@ -21,6 +23,11 @@ module com
             {
                 this._cls = this instanceof JTWebSocketChannel ? JTWebSocket : JTHttpRequest;
             }
+        }
+
+        public channelWrite(data:any): void 
+        {
+            this._channelWrite.channelWrite(data);
         }
 
         public abstract flush():void;
@@ -42,15 +49,18 @@ module com
 
         public reload():void 
         {
-            this._encoder = this._pipeline.getContext(JTChannelContext.ENCODE) as JTIEncoderAdapter;
-            this._decoder = this._pipeline.getContext(JTChannelContext.DECODE) as JTIDecoderAdapter;
+            this._channelRead = this._pipeline.getContext(JTChannelContext.CHANNEL_READ) as JTIChannelRead
+            this._channelWrite = this._pipeline.getContext(JTChannelContext.CHANNEL_WRITE) as JTIChannelWrite
+            // this._encoder = this._pipeline.getContext(JTChannelContext.ENCODE) as JTIEncoderAdapter;
+            // this._decoder = this._pipeline.getContext(JTChannelContext.DECODE) as JTIDecoderAdapter;
         }
 
         protected onReceiveMessage(data:any):void
         {
-            let decoder:JTIDecoderAdapter = this._decoder;
-            let message:any = decoder.decode(data);
-            decoder.readComplete(message);
+            this._channelRead.channelRead(data);
+            // let decoder:JTIDecoderAdapter = this._decoder;
+            // let message:any = decoder.decode(data);
+            // decoder.readComplete(message);
         }
 
         public writeAndFlush(data:any):void

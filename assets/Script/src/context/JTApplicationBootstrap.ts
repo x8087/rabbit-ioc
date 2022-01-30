@@ -32,8 +32,7 @@ module com
         constructor()
         {
             super();
-
-
+            JTTimerTool.launch();
         }
 
         /**
@@ -167,7 +166,7 @@ module com
          */
         public launch():JTIConnection
         {
-            JTTimerTool.launch();
+
             if (this.__loaderManager) this.__loaderManager.run();
             this.buildsComplete();
             let channel:JTIConnection = this.connect();

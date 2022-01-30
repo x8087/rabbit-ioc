@@ -13,6 +13,13 @@ module com
             
         }
 
+        public channelRead(message:any):any
+        {
+            let data:any = this.decode(message);
+            this.readComplete(data);
+            return data;
+        }
+
         public channelActive():void
         {
             this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)

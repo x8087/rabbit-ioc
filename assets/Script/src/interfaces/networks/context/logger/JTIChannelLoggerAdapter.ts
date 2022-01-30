@@ -1,9 +1,6 @@
 module com 
 {
-     export interface JTIChannelLoggerAdapter extends JTIChannelContext
+     export interface JTIChannelLoggerAdapter extends JTChannelContext, JTIChannelRead, JTIChannelWrite
      {
-          channelRead(msg:any):void 
-
-          channelWrite(msg:any):void 
      }
 }

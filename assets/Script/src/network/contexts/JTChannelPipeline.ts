@@ -4,15 +4,40 @@
     {
         private _channel:JTIChannel = null;
         private ___ctxMap:{[type:string]: JTIChannelContext} = {};
-        private ___ctxs:JTIChannelContext[] = []
+        private ___ctxs:JTIChannelContext[] = [];
         private __channelGroup:JTIChannelGroup = null;
+
+ 
+        private __readChannelEventLoop:JTIChannelRead = null;
+        private __writeChannelEventLoop:JTIChannelWrite = null;
 
         constructor(channelGroup?:JTIChannelGroup)
         {
             super();
             this.__channelGroup = channelGroup;
+
+        }
+        
+        public channelWrite(data: any): void 
+        {
+            this.__writeChannelEventLoop.channelWrite(data);
         }
 
+        public setEventLoopGroup(channelReadEventLoop:JTChannelEventLoop, channelWriteEventLoop:JTChannelEventLoop):void
+        {
+            this.__readChannelEventLoop = channelReadEventLoop as any;
+            this.__writeChannelEventLoop = channelWriteEventLoop as any;
+            this.registerChannelEventLoop(JTChannelContext.CHANNEL_READ, channelReadEventLoop);
+            this.registerChannelEventLoop(JTChannelContext.CHANNEL_WRITE, channelWriteEventLoop);
+        }
+
+        protected registerChannelEventLoop(type:string, eventLoop:JTChannelEventLoop):void
+        {
+            eventLoop.build();
+            this.___ctxs.push(eventLoop);
+            this.___ctxMap[type] = eventLoop;
+        }
+        
         public mark():void 
         {
            this.__channelGroup && this.__channelGroup.mark(this);
@@ -35,19 +60,19 @@
             this._channel.reload();
         }
 
-        public flush(): void 
+        public flush():void 
         {
-            this._channel.flush();
+            this.channel.flush();
         }
 
-        public send(data: any): void 
+        public send(data:any): void 
         {
-            this._channel.send(data);
+           this.channel.send(data);
         }
 
-        public writeAndFlush(data: any): void 
+        public writeAndFlush(data:any): void 
         {
-             this._channel.writeAndFlush(data);
+            this.channel.writeAndFlush(data);
         }
 
         public channelActive():void
@@ -93,6 +118,11 @@
             ___c.build();
             this.___ctxMap[type] =  ___c;
             this.___ctxs.push(___c);
+            if (___c["channelRead"])(this.__readChannelEventLoop as any).childOption(type, ___c);
+            else if (___c["channelWrite"])
+            {
+                (this.__writeChannelEventLoop as any).childOption(type, ___c);
+            }
             return this;
         }
 

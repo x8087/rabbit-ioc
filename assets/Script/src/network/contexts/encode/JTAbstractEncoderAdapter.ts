@@ -2,9 +2,28 @@ module com
 {
     export abstract class JTAbstractEncoderAdapter extends JTChannelContextAdapter implements JTIEncoderAdapter
     {
+        protected _responseMapper:JTAbstractResponseMapping = null;
+        protected _protocolContext:JTAbstractProtocolManager = null;
+        protected _errorMessageContext:JTAbstractProtocolErrorMessage = null;
+        protected _upProtocol:JTIProtocol = null;
         constructor()
         {
             super();
+        }
+        
+        public channelWrite(message:any):any
+        {
+            let data:any = this.encode(message);
+            this.writeComplete(data);
+            return data;
+        }
+
+        public channelActive():void
+        {
+            this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)
+            this._protocolContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
+            this._errorMessageContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE);
+            this._upProtocol = this._protocolContext.protocolUp;
         }
 
         public abstract encode(data:any):any;
@@ -12,12 +31,10 @@ module com
         public writeComplete(data:any):void
         {
             let message:any = JSON.parse(data);
-            let protocolManager:JTAbstractProtocolManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
-            let protocolUp:JTIProtocol = protocolManager.protocolUp;
-            let itemProtocol:JTItemProtocol= protocolUp.getProtocol(message.protocol);
+            let itemProtocol:JTItemProtocol= this._upProtocol.getProtocol(message.protocol);
             if (itemProtocol && itemProtocol.isWaiting)
             {
-                protocolUp.execute(message);
+                this._upProtocol.execute(message);
             }
             JTLogger.info("[sendPackage.send] : UpProtocol:  " + message.protocol,  "   content: " + JSON.stringify(message.content));
         }

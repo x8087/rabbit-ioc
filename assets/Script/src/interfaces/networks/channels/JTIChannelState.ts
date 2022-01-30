@@ -5,14 +5,12 @@
 */
 module com 
 {
-    export interface JTIChannelState
+    export interface JTIChannelState extends JTIChannelContextMap
     {
         channelInactive():void
 
         channel:JTIChannel;
 
         channelActive():void;
-
-        getContext(type:string):JTIChannelContext
     }
 }

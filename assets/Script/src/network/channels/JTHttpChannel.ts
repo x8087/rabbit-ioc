@@ -30,10 +30,10 @@ module com
         public send(data:any):void 
         {
             let protocol:number | string = data["protocol"];
-            let message:any = this._encoder.encode(data);
+            // let message:any = this._encoder.encode(data);
             let httpChannel:JTHttpRequest = this._channel as JTHttpRequest;
-            httpChannel.send(this._connectUrl + protocol, message, this.__defaultMethodType);
-            this._encoder.writeComplete(message);
+            httpChannel.send(this._connectUrl + protocol, data, this.__defaultMethodType);
+            // this._encoder.writeComplete(message);
         }
 
        /**
@@ -77,9 +77,10 @@ module com
         
         protected onReceiveMessage(data:any):void
         {
-            let decoder:JTIDecoderAdapter = this._decoder;
-            let message:any = decoder.decode(data);
-            decoder.readComplete(message);
+            this._channelRead.channelRead(data);
+            // let decoder:JTIDecoderAdapter = this._decoder;
+            // let message:any = decoder.decode(data);
+            // decoder.readComplete(message);
         }
 
         protected onErrorHandler(e) 

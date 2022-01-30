@@ -5,7 +5,7 @@ module com
     {
         protected _connected:boolean = false;
         protected _buffers:any[] = null;
-        protected _idleState:JTIChannelContext = null;
+        // protected _idleState:JTIChannelContext = null;
         constructor(cls:any)
         {
             super(cls);
@@ -21,23 +21,23 @@ module com
                 if (socket)
                 {   
                     socket.connected && socket.send(msg);
-                    this._encoder.writeComplete(msg);
+                    // this._encoder.writeComplete(msg);
                 }
             }
         }
 
         public send(data:any):void 
         {
-            let message:any = this._encoder.encode(data);
+            // let message:any = this._encoder.encode(data);
             let socket:JTWebSocket = this._channel as JTWebSocket;
             if (socket && socket.connected)
             {   
-                socket.send(message);
-                this._encoder.writeComplete(message);
+                socket.send(data);
+                // this._encoder.writeComplete(message);
             }
             else
             {
-                this._buffers.push(message);
+                this._buffers.push(data);
                 JTLogger.info("Websocket send error, The websocket cant send msg to server!");
             }
         }
@@ -82,7 +82,7 @@ module com
         public reload():void 
         {
             super.reload();
-            this._idleState = this._pipeline.getContext(JTChannelContext.IDLE) as JTIChannelContext;
+            // this._idleState = this._pipeline.getContext(JTChannelContext.IDLE) as JTIChannelContext;
         }
     }
 }

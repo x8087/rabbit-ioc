@@ -1,6 +1,6 @@
 module com 
 {
-     export interface JTIDecoderAdapter extends JTIChannelContext
+     export interface JTIDecoderAdapter extends  JTIChannelRead
      {
           decode(data:any):any;
 

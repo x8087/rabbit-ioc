@@ -42,7 +42,7 @@ module com
             //     // if (!methodType)methodType = JTHttpChannel.METHOD_POST;//如果为NULL，直接为post
             //     // this._channel.writeMethod(methodType);
             // }
-            this._channel && this._channel.send(this._data);
+            this._channel && this._channel.channelWrite(this._data);
             JTSendPackage.put(this);
         }
 
