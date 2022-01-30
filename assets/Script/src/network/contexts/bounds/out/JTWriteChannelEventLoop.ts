@@ -18,25 +18,32 @@ module com
             this._channel.send(message);
         }
 
-        public flush(): void 
-        {
-            this._channel.flush();
-        }
-
         public channelWrite(data:any):void
         {
+            this.showWaitting(data);
             this._messageQueue.push(data);
         }
 
         public send(data:any): void 
         {
+            this.showWaitting(data);
             this._channel.send(data);
         }
 
         public writeAndFlush(data:any): void 
         {
+            this.showWaitting(data);
             this._messageQueue.push(data);
             this._channel.flush();
+        }
+
+        protected showWaitting(data:any):void
+        {
+            let itemProtocol:JTItemProtocol= this._protocolContext.protocolUp.getProtocol(data.protocol);
+            if (itemProtocol && itemProtocol.isWaiting)
+            {
+                this._protocolContext.protocolUp.execute(data);
+            }
         }
     }
 }

@@ -14,6 +14,10 @@ module com
         public static CHANNEL_READ:string = "channel_read";
         public static CHANNEL_WRITE:string = "channel_write";
 
+        protected _responseMapper:JTAbstractResponseMapping = null;
+        protected _protocolContext:JTAbstractProtocolManager = null;
+        protected _errorMessageContext:JTAbstractProtocolErrorMessage = null;
+
         constructor()
         {
             super();
@@ -21,7 +25,12 @@ module com
 
         public abstract channelInactive():void;
   
-        public abstract build():void;
+        public build(): void 
+        {
+            this._responseMapper = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_MAPPING)
+            this._protocolContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_PROTOCOL);
+            this._errorMessageContext = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_ERROR_MESSAGE);
+        }
         
         public getContext(type: string): JTIChannelContext 
         {

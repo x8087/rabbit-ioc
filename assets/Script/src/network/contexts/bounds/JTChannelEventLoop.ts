@@ -36,6 +36,7 @@ module com
 
         public build(): void 
         {
+            super.build();
             if (this._timerTask instanceof JTTimer)
             {
                 this._timerTask.start();

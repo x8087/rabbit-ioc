@@ -12,7 +12,7 @@ module com
         protected _protocol:string | number = null;
 
         /**
-         * 以秒为单位
+         * 以毫秒为单位--发送心跳包
          * @param interval 
          * @param repeatTimes 
          */
@@ -22,11 +22,6 @@ module com
             this._protocol = protocol;
             this._heartInterval = interval;
             this._heartTimer = this.createTimer(this._heartInterval, this.onTimerHandler);
-        }
-
-        public build(): void 
-        {
-  
         }
 
         public channelInactive():void

@@ -2,7 +2,6 @@ module com
 {
     export class JTReadChannelEventLoop extends JTChannelEventLoop implements JTIChannelRead
     {
-
         constructor(timerTask:JTITimer | JTIEnterFrame, keepCount:number = 100)
         {
             super(timerTask, keepCount);
