@@ -2,30 +2,30 @@ module com
 {
     export class JTDictionary<K, V>
     {
-        protected  _values:V[] = [];
-		protected  _keys:K[] = [];
+		protected _keys:K[] = null;
+        protected _values:V[] = null;
 
-		/**
-		 * 获取所有的子元素列表。
-		 */
+		constructor()
+		{
+			this._values = [];
+			this._keys = [];
+		}
+
 		public get values():V[] 
         {
 			return this._values;
 		}
+
+		public get size():number
+		{
+			return this._values.length;
+		}
 		
-		/**
-		 * 获取所有的子元素键名列表。
-		 */
 		public get keys():K[] 
         {
 			return this._keys;
 		}
 		
-		/**
-		 * 给指定的键名设置值。
-		 * @param	key 键名。
-		 * @param	value 值。
-		 */
 		public set(key:K, value:V):void 
         {
 			var index:number = this.indexOf(key);
@@ -38,36 +38,19 @@ module com
 			this._values.push(value);
 		}
 		
-		/**
-		 * 获取指定对象的键名索引。
-		 * @param	key 键名对象。
-		 * @return 键名索引。
-		 */
 		public indexOf(key:K):number 
         {
 			var index:number = this._keys.indexOf(key);
             return index;
-			// if (index >= 0) return index;
-			// key = (typeof key == 'string') ? Number(key) : ((typeof key == 'number') ? key.toString() : key);
-			// return this._keys.indexOf(key);
+
 		}
 		
-		/**
-		 * 返回指定键名的值。
-		 * @param	key 键名对象。
-		 * @return 指定键名的值。
-		 */
 		public get(key:K):V
         {
 			var index:number = this.indexOf(key);
 			return index < 0 ? null : this._values[index];
 		}
-		
-		/**
-		 * 移除指定键名的值。
-		 * @param	key 键名对象。
-		 * @return 是否成功移除。
-		 */
+ 
 		public remove(key:K):V
          {
 			var index:number = this.indexOf(key);
@@ -79,10 +62,50 @@ module com
 			}
 			return value;
 		}
-		
-		/**
-		 * 清除此对象的键名列表和键值列表。
-		 */
+
+		public removeAt(index:number):V
+		{
+		   var value:V = null;
+		   if (index >= 0) 
+		   {
+			   this._keys.splice(index, 1);
+			   value = this._values.splice(index, 1).shift();
+		   }
+		   return value;
+	   }
+
+		public last():V
+		{
+			let size:number = this._values.length;
+			if (size > 0)
+			{
+				return this._values[size - 1]
+			}
+			return null;
+		}
+
+		public shift():V
+		{
+			let size:number = this._values.length;
+			if (size > 0)
+			{
+				this._keys.shift();
+				return this._values.shift();
+			}
+			return null;
+		}
+
+		public pop():V
+		{
+			let size:number = this._values.length;
+			if (size > 0)
+			{
+				this._keys.pop();
+				return this._values.pop();
+			}
+			return null;
+		}
+
 		public clear():void 
         {
 			this._values.length = 0;

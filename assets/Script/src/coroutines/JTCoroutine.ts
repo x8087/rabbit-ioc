@@ -3,87 +3,91 @@ module com
     /**
      * 协程
      */
-    export class JTCoroutine implements JTILocker
+    export class JTCoroutine implements JTICoroutine
     {
-        protected __currentLocked:JTSignal = null;
-        protected __lockeds:JTSignal[] = null;
+        protected __currentLocked:JTITaskLocker = null;
+        protected __lockedMap:any = null;
+        protected __lockedCount:number = 0;
 
         constructor()
         {
-            this.__lockeds = [];
+            this.__lockedMap = {}
         }
 
         /**
-         * 如果不传结果，则会返回JTLocker自身
-         * @param __result 
+         * 
+         * @param key 
          * @returns 
          */
-        public lock(__result?:any):Promise<any>
+        public lock(key:number | string):Promise<any>
         {
-            let caller:any = __result ? __result : this;
-            let succeed:Function = null;
-            let fail:Function = null;
-            let promise:Promise<any> = new Promise((resolve, reject) => 
-            {
-                succeed = resolve;
-                fail = reject;
-            })
-            let signal:JTSignal = this.__currentLocked = JTSignal.create();
-            signal.setup(caller, promise, succeed, fail);
-            this.__lockeds.push(signal);
-            return promise;
+            let locker:JTITaskLocker = this.__currentLocked = JTLocker.create() as JTITaskLocker;
+            this.__lockedMap[key] = locker;
+            this.__lockedCount ++;
+            return locker.lock();
         }
 
+        /**
+         * 
+         * @param key 
+         */
         public release():void
         {
-            let loadedCount:number = this.__lockeds.length;
-            if (loadedCount > 0)
+            for (var key in this.__lockedMap)
             {
-                let locked:JTSignal = this.__lockeds.shift();
-                locked.release();
-                this.__currentLocked = null;
-                -- loadedCount ;
-            }
-            if (loadedCount > 0)
-            {
-                this.__currentLocked = this.__lockeds[loadedCount - 1];
+                 this.unlock(key);
             }
         }
 
-        public kill():void
+        public unlock(key:number | string):void
         {
-            let loadedCount:number = this.__lockeds.length;
-            if (loadedCount > 0)
-            {
-                let locked:JTSignal = this.__lockeds.shift();
-                locked.kill();
-                this.__currentLocked = null;
-                -- loadedCount ;
-            }
-            if (loadedCount > 0)
-            {
-                this.__currentLocked = this.__lockeds[loadedCount - 1];
-            }
-        }
-
-        public locked():boolean
-        {
-            return this.__lockeds.length > 0;
+            let locker:JTLocker = this.__lockedMap[key] as JTLocker;
+            if (!locker) return;
+            locker.release();
+            this.remove(key, locker);
         }
 
         /**
-         * 如果不传结果，则会返回JTLocker自身
-         * @param __result 
-         * @returns 
+         * 
+         * @param key 
          */
-        public tryLock(__caller:any):Promise<any>
+        public kill(key:any):void
         {
-            return this.locked() ? this.__currentLocked.promise : this.lock(__caller);
+            let locker:JTLocker = this.__lockedMap[key] as JTLocker;
+            if (!locker) return;
+            locker.kill();
+            this.remove(key, locker);
+     
+        }
+
+        protected remove(key:number | string, locker:JTLocker):void
+        {
+            -- this.__lockedCount;
+            this.__lockedMap[key] = null;
+            delete this.__lockedMap[key]
+            JTLocker.put(locker);
+        }
+        
+        public get locked():boolean
+        {
+            return this.__lockedCount > 0
+        }
+
+        public tryLock(key:any):Promise<any>
+        {
+            return this.__currentLocked.signal ? this.__currentLocked.signal : this.lock(key);
+        }
+
+        public get lockedCount():number
+        {
+            return this.__lockedCount;
         }
 
         public recycle() 
         {
-     
+            this.__lockedCount = 0;
+            this.__lockedMap = {};
+            this.__currentLocked = null;
         }
 
         public static create():JTCoroutine

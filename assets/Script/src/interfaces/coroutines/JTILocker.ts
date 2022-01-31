@@ -7,15 +7,18 @@ module com
 {
     export interface JTILocker extends JTIPoolObject
     {
-         lock(__caller?:any):Promise<any>
+         lock(key?:any):Promise<any>
 
          release():void
+
+         unlock(key?:any):void
        
-         kill():void
+         kill(key?:any):void
       
-         locked():boolean
+         locked:boolean
      
-         tryLock(__caller:any):Promise<any>
+         tryLock(key:any):Promise<any>
+
        
     }
 }
