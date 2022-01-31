@@ -8,7 +8,7 @@ module com
         /**
          * 需要重写此方法
          */
-        public abstract execute():Promise<any>;
+        public abstract run():Promise<any>;
 
         public recycle() 
         {

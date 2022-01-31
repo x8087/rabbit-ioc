@@ -7,6 +7,6 @@ module com
 {
     export interface JTITask extends JTIPoolObject
     {
-        execute():Promise<any>
+        run():Promise<any>
     }
 }

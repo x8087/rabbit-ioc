@@ -1,9 +1,9 @@
 module com 
 {
-    export class JTLocker implements JTLocker 
+    export class JTLocker implements JTILocker 
     {
-        protected _resolve:Function = null;
-        protected _reject:Function = null;
+        protected _succeed:Function = null;
+        protected _fail:Function = null;
         protected _locker:Promise<any> = null;
         protected ___result:any = null;
         /**
@@ -18,21 +18,21 @@ module com
             this.___result = __result ? __result : this;
             this._locker = new Promise((resolve, reject) => 
             {
-                    locker._reject = reject;
-                    locker._resolve = resolve;
+                locker._fail = reject;
+                locker._succeed = resolve;
             })
             return this._locker;
         }
 
         public release():void
         {
-            this._resolve && this._resolve.apply(this, [this.___result])
+            this._succeed && this._succeed.apply(this, [this.___result]);
             this.recycle();
         }
 
         public kill():void
         {
-            this._reject && this._reject.apply(this, [this.___result])
+            this._fail && this._fail.apply(this, [this.___result]);
             this.recycle();
         }
 
@@ -54,7 +54,7 @@ module com
 
         public recycle() 
         {
-            this.___result = this._locker = this._reject = this._resolve = null;
+            this.___result = this._locker = this._fail = this._succeed = null;
         }
 
         public static create():JTLocker

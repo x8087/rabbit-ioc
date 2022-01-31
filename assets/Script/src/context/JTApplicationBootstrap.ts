@@ -25,7 +25,7 @@ module com
         private _serverLoader:JTTextLoader = null;
         private _serverTemplate:JTServerConfigTemplate = null;
 
-        private __loaderManager:JTFuturePipeline = null;
+        private __loaderManager:JTAsyncTaskPipeline = null;
         private _launchConnected:boolean = false;
         private __channelGroup:JTIChannelGroup = null;
 
@@ -182,11 +182,11 @@ module com
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTCommand):JTFuturePipeline
+        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTCommand):JTAsyncTaskPipeline
         {
             if (!this.__loaderManager)
             {
-                this.__loaderManager = new JTFuturePipeline();
+                this.__loaderManager = new JTAsyncTaskPipeline();
             }
             else
             {

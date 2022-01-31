@@ -1,3 +1,4 @@
+///<reference path="../lockers/JTLocker.ts"/>
 module com 
 {
     /**

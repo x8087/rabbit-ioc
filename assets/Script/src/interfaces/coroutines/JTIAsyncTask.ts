@@ -5,7 +5,7 @@
 */
 module com 
 {
-    export interface JTITaskExecutor extends JTITask
+    export interface JTIAsyncTask extends JTITask
     {
         relevance(counter:JTCounter):void;
     }

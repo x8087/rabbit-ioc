@@ -4,10 +4,10 @@ module com
     /**
      * 异步事件任务对列
      */
-    export class JTFuturePipeline extends JTEventDispatcher
+    export class JTAsyncTaskPipeline extends JTEventDispatcher
     {
         protected _counter:JTTaskCounter = JTTaskCounter.create();
-        protected _tasks:JTITaskExecutor[] = null;
+        protected _tasks:JTIAsyncTask[] = null;
         protected _factroy:JTIFactory = null;
         protected _itemProvider:JTCommand = null;
         protected _itemRender:JTCommand = null;
@@ -40,9 +40,9 @@ module com
             this._tasks = this.createTasks();
             while(this._tasks.length)
             {
-                let task:JTITaskExecutor = this._tasks.shift();
+                let task:JTIAsyncTask = this._tasks.shift();
                 task.relevance(this._counter);
-                task.execute();
+                task.run();
                 await this._counter.lock();
                 this.dispatchEvent(JTTaskEvent.TASK_PROGRESS, this);
                 task.recycle();
@@ -69,15 +69,15 @@ module com
             this.___dataList = null;
         }
         
-        private createTasks():JTITaskExecutor[] 
+        private createTasks():JTIAsyncTask[] 
         {
-            let list:JTITaskExecutor[] = [];
+            let list:JTIAsyncTask[] = [];
             let totalCount:number = this._counter.totalCount;
             if (this._itemRender)
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._itemRender.runWith([i, this.___dataList[i]]);
+                    let task:JTIAsyncTask = this._itemRender.runWith([i, this.___dataList[i]]);
                     list.push(task);
                 }
             }
@@ -85,7 +85,7 @@ module com
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._itemProvider.runWith([i, this.___dataList[i]]);
+                    let task:JTIAsyncTask = this._itemProvider.runWith([i, this.___dataList[i]]);
                     list.push(task);
                 }
             }
@@ -93,7 +93,7 @@ module com
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTITaskExecutor = this._factroy.produce();
+                    let task:JTIAsyncTask = this._factroy.produce();
                     list.push(task);
                 }
             }

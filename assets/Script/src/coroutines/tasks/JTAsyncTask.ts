@@ -1,6 +1,7 @@
+///<reference path="../tasks/JTTask.ts"/>
 module com 
 {
-    export abstract class JTTaskExecutor extends JTTask implements JTITaskExecutor
+    export abstract class JTAsyncTask extends JTTask implements JTIAsyncTask
     {
         private _counter:JTCounter = null;
 
