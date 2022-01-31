@@ -12,7 +12,7 @@ module com
 
         protected release():void
         {
-            this._counter && this._counter.release();
+            this._counter && this._counter.unlock();
         }
 
         protected kill():void

@@ -11,6 +11,8 @@ module com
 
          release():void
 
+         unlock(key?:any):void;
+
          kill(key?:any):void
       
          locked:boolean

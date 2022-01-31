@@ -27,9 +27,10 @@ module com
         /**
          * 释放锁
          */
-        public release():void
+        public unlock():void
         {
-            super.release();
+            super.unlock();
+            super.clear();
             this._succeedCount ++;
             this._lockedCount ++;
         }
@@ -40,8 +41,14 @@ module com
         public kill():void
         {
             super.kill();
+            super.clear();
             this._failCount ++;
             this._lockedCount ++;
+        }
+
+        public release(): void 
+        {
+            this.recycle();
         }
 
         /**

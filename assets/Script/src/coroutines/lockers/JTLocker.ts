@@ -21,8 +21,13 @@ module com
 
         public release():void
         {
-            this.__succeed && this.__succeed.apply(this, []);
             this.clear();
+        }
+
+        public unlock():void
+        {
+            this.__succeed && this.__succeed.apply(this, []);
+            this.__succeed = null;
         }
 
         protected clear():void
@@ -33,7 +38,7 @@ module com
         public kill():void
         {
             this.__fail && this.__fail.apply(this, []);
-            this.clear();
+            this.__fail = null;
         }
 
         public get locked():boolean
