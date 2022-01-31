@@ -24,13 +24,13 @@ module com
             this._messageQueue.push(data);
         }
 
-        public send(data:any): void 
+        public send(data:any):void 
         {
             this.showWaitting(data);
             this._channel.send(data);
         }
 
-        public writeAndFlush(data:any): void 
+        public writeAndFlush(data:any):void 
         {
             this.showWaitting(data);
             this._messageQueue.push(data);
@@ -39,7 +39,7 @@ module com
 
         protected showWaitting(data:any):void
         {
-            let itemProtocol:JTItemProtocol= this._protocolContext.protocolUp.getProtocol(data.protocol);
+            let itemProtocol:JTItemProtocol = this._protocolContext.protocolUp.getProtocol(data.protocol);
             if (itemProtocol && itemProtocol.isWaiting)
             {
                 this._protocolContext.protocolUp.execute(data);

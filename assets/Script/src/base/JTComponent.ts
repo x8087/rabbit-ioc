@@ -126,7 +126,7 @@ module com
             return null;
         }
 
-        public get uiPackage(): fairygui.UIPackage
+        public get uiPackage():fairygui.UIPackage
         {
             return this.__uiPackage;
         }
