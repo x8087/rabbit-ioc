@@ -56,7 +56,6 @@ module com
                 if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
             }
             this.locker.unlock();
-            this.locker.release();
             this.__loaded = true;
             this.notifyComplete();
         }

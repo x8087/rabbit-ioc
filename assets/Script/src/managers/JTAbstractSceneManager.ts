@@ -4,7 +4,7 @@ module com
     {
         private _layer:fgui.GComponent = null;
 
-        public static locker:JTLocker = new JTLocker();
+        public static locker:JTLocker = JTCounter.create();
 
         private _sceneMap:{[name:string]:any} = null;
         private _hostroys:string[] = null;
