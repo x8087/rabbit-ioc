@@ -21,19 +21,19 @@ module com
 
         public release():void
         {
-            this.recycle();
+            this.__succeed && this.__succeed.apply(this, []);
+            this.clear();
         }
 
-        public unlock():void
+        protected clear():void
         {
-            this.__succeed && this.__succeed.apply(this, []);
-            this.__succeed = null;
+            this.__lockedLogic = this.__fail = this.__succeed = null;
         }
 
         public kill():void
         {
             this.__fail && this.__fail.apply(this, []);
-            this.__fail = null;
+            this.clear();
         }
 
         public get locked():boolean
@@ -54,7 +54,7 @@ module com
 
         public recycle() 
         {
-           this.__lockedLogic = this.__fail = this.__succeed = null;
+           this.clear();
         }
 
         private static _pool:JTIPool = JTPool.instance(JTLocker);
