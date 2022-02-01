@@ -12,12 +12,12 @@ module com
 
         protected release():void
         {
-            this._counter && this._counter.unlock();
+            this._counter && this._counter.unlock(this._name);
         }
 
         protected kill():void
         {
-            this._counter && this._counter.kill();
+            this._counter && this._counter.kill(this._name);
         }
 
         recycle() 

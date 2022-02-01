@@ -8,5 +8,7 @@ module com
     export interface JTITask extends JTIPoolObject
     {
         run():Promise<any>
+
+        name:number | string;
     }
 }

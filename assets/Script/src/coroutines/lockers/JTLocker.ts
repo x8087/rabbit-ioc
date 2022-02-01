@@ -5,18 +5,18 @@ module com
     {
         protected __fail:Function = null;
         protected __succeed:Function = null;
-        protected __lockedLogic:Promise<any> = null;
+        protected __signal:Promise<any> = null;
 
         public lock():Promise<any>
         {
-            if (this.__lockedLogic) return this.__lockedLogic; //注意，当前正使用锁时，如果没有调用release 时不能再使用lock()方法
+            if (this.__signal) return this.__signal; //注意，当前正使用锁时，如果没有调用release 时不能再使用lock()方法
             let locker:JTLocker = this;
-            this.__lockedLogic = new Promise((resolve, reject) => 
+            this.__signal = new Promise((resolve, reject) => 
             {
                 locker.__fail = reject;
                 locker.__succeed = resolve;
             })
-            return this.__lockedLogic;
+            return this.__signal;
         }
 
         public release():void
@@ -26,35 +26,39 @@ module com
 
         public unlock():void
         {
-            this.__succeed && this.__succeed.apply(this, []);
+            let succeed:Function = this.__succeed;
             this.__succeed = null;
+            succeed && succeed.apply(this, []);
+            succeed = null;
         }
 
         protected clear():void
         {
-            this.__lockedLogic = this.__fail = this.__succeed = null;
+            this.__signal = this.__fail = this.__succeed = null;
         }
 
         public kill():void
         {
-            this.__fail && this.__fail.apply(this, []);
+            let fail:Function = this.__fail;
             this.__fail = null;
+            fail && fail.apply(this, []);
+            fail = null;
         }
 
         public get locked():boolean
         {
-            return this.__lockedLogic != null;
+            return this.__signal != null;
         }
 
         public tryLock():Promise<any>
         {
-            this.__lockedLogic &&  this.release();
+            this.__signal &&  this.release();
             return this.lock();
         }
 
         public get signal():Promise<any>
         {
-            return this.__lockedLogic;
+            return this.__signal;
         }
 
         public recycle() 

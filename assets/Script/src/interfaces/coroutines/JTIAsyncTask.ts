@@ -7,6 +7,6 @@ module com
 {
     export interface JTIAsyncTask extends JTITask
     {
-        relevance(counter:JTITaskCounter):void;
+        relevance(counter:JTILocker):void;
     }
 }

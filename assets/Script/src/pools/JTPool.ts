@@ -49,7 +49,7 @@ module com
             var pool:JTIPool = this._poolMap[cls];
             if (!pool)
             {
-            pool = this._poolMap[cls] = new JTPool(cls);
+                pool = this._poolMap[cls] = new JTPool(cls);
             }
             return pool;
         }

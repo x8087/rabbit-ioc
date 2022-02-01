@@ -5,9 +5,9 @@ module com
      */
     export class JTCoroutine implements JTICoroutine
     {
-        protected __currentLocked:JTITaskLocker = null;
         protected __lockedMap:any = null;
         protected __lockedCount:number = 0;
+        protected __currentLocked:JTITaskLocker = null;
 
         constructor()
         {
@@ -21,7 +21,9 @@ module com
          */
         public lock(key:number | string):Promise<any>
         {
-            let locker:JTITaskLocker = this.__currentLocked = JTLocker.create() as JTITaskLocker;
+            let locker:JTITaskLocker = this.__lockedMap[key];
+            if (locker) return locker.lock();
+            this.__currentLocked = locker = JTLocker.create() as JTITaskLocker;
             this.__lockedMap[key] = locker;
             this.__lockedCount ++;
             return locker.lock();
@@ -43,8 +45,9 @@ module com
         {
             let locker:JTLocker = this.__lockedMap[key] as JTLocker;
             if (!locker) return;
-            locker.unlock();
             this.remove(key, locker);
+            locker.unlock();
+            JTLocker.put(locker);
         }
 
         /**
@@ -55,18 +58,17 @@ module com
         {
             let locker:JTLocker = this.__lockedMap[key] as JTLocker;
             if (!locker) return;
-            locker.kill();
             this.remove(key, locker);
-     
+            locker.kill();
+            JTLocker.put(locker);
         }
 
         protected remove(key:number | string, locker:JTLocker):void
         {
-            locker.release();
             -- this.__lockedCount;
             this.__lockedMap[key] = null;
             delete this.__lockedMap[key]
-            JTLocker.put(locker);
+            this.__currentLocked = null;
         }
         
         public get locked():boolean
@@ -76,7 +78,7 @@ module com
 
         public tryLock(key:any):Promise<any>
         {
-            return this.__currentLocked.signal ? this.__currentLocked.signal : this.lock(key);
+            return this.locked ? this.__currentLocked.signal : this.lock(key);
         }
 
         public get lockedCount():number

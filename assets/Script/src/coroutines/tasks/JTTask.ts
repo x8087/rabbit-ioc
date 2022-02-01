@@ -5,6 +5,8 @@ module com
      */
     export abstract class JTTask implements JTITask
     {
+        protected _name:number | string = 0;
+
         /**
          * 需要重写此方法
          */
@@ -12,6 +14,16 @@ module com
 
         public recycle() 
         {
+        }
+
+        public get name():number | string
+        {
+            return this._name;
+        }
+
+        public set name(value:number | string)
+        {
+            this._name = value;
         }
     }
 }
