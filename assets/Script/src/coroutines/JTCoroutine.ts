@@ -43,7 +43,7 @@ module com
         {
             let locker:JTLocker = this.__lockedMap[key] as JTLocker;
             if (!locker) return;
-            locker.release();
+            locker.unlock();
             this.remove(key, locker);
         }
 
@@ -62,6 +62,7 @@ module com
 
         protected remove(key:number | string, locker:JTLocker):void
         {
+            locker.release();
             -- this.__lockedCount;
             this.__lockedMap[key] = null;
             delete this.__lockedMap[key]

@@ -7,7 +7,7 @@ module com
     export class JTScheduleFrame extends JTEnterFrame implements JTIScheduleFrame
     {
         private _frames:any[] = null;
-        private _createFrames:JTCommand = null;
+        private _createFrames:JTEvent = null;
         constructor()
         {
             super();
@@ -23,7 +23,7 @@ module com
             return this._frames;
         }
 
-        public set createFrames(value:JTCommand)
+        public set createFrames(value:JTEvent)
         {
             this._createFrames = value;
         }

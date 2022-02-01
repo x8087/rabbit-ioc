@@ -44,8 +44,7 @@ module com
          */
         public get completed():boolean
         {
-            let count:number = this._succeedCount + this._failCount;
-            if (this._totalCount != count)return false;
+            if (this._totalCount != this._lockedCount)return false;
             else
             {
                 if (this._totalCount == this._succeedCount) return true;

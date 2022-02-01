@@ -14,7 +14,7 @@ module com
 
         public static addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTEvent[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -31,13 +31,13 @@ module com
                 list = [];
                 this.__evtMap[key] = list;
             }
-            var command:JTCommand = JTCommand.create(caller, method, null, once);
+            var command:JTEvent = JTEvent.create(caller, method, null, once);
             list.push(command);
         }
 
         public static dispatchEvent(key:any, args?:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTEvent[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -57,7 +57,7 @@ module com
 
         public static removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTEvent[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -72,7 +72,7 @@ module com
 
         public static removeEvents(key:any):void
         {
-            var list:JTCommand[] = this.__evtMap[key];
+            var list:JTEvent[] = this.__evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -87,12 +87,12 @@ module com
             }
         }
 
-        protected static delete(list:JTCommand[], command:JTCommand):void
+        protected static delete(list:JTEvent[], command:JTEvent):void
         {
                 var index:number = list.indexOf(command);
-                var removes:JTCommand[] = list.splice(index, 1);
+                var removes:JTEvent[] = list.splice(index, 1);
                 removes.shift();
-                JTCommand.put(command);
+                JTEvent.put(command);
         }
 
         protected static removes() 

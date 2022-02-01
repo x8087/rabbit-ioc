@@ -5,7 +5,7 @@ module com
         private static _eventMap:Object = {};
         public static registerFunction(key:number | string, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTCommand[] = this._eventMap[key]
+            var list:JTEvent[] = this._eventMap[key]
             if (list)
             {
                 list.forEach(element => 
@@ -22,13 +22,13 @@ module com
                 list = [];
                 this._eventMap[key] = list;
             }
-            var command:JTCommand = JTCommand.create(caller, method, null, once);
+            var command:JTEvent = JTEvent.create(caller, method, null, once);
             list.push(command);
         }
 
-        public static addCommand(key:number | string, command:JTCommand):void
+        public static addCommand(key:number | string, command:JTEvent):void
         {
-            var list:JTCommand[] = this._eventMap[key]
+            var list:JTEvent[] = this._eventMap[key]
             if (list)
             {
                 list.forEach(element => 
@@ -50,7 +50,7 @@ module com
 
         public static execute(key:number | string, args?:any):void
         {
-            var list:JTCommand[] = this._eventMap[key]
+            var list:JTEvent[] = this._eventMap[key]
             if (list)
             {
                 list.forEach(command => 
@@ -71,7 +71,7 @@ module com
 
         public static removeFunction(key:number | string, method:Function, caller:any):void
         {
-            var list:JTCommand[] =  this._eventMap[key]
+            var list:JTEvent[] =  this._eventMap[key]
             if (list)
             {
                 list.forEach(element => 
@@ -87,7 +87,7 @@ module com
 
         public static removeFunctions(key:number | string):void
         {
-            var list:JTCommand[] =  this._eventMap[key]
+            var list:JTEvent[] =  this._eventMap[key]
             if (list)
             {
                 list.forEach(element => 
@@ -102,12 +102,12 @@ module com
             }
         }
 
-        private static delete(list:JTCommand[], command:JTCommand):void
+        private static delete(list:JTEvent[], command:JTEvent):void
         {
                 var index:number = list.indexOf(command);
-                var removes:JTCommand[] = list.splice(index, 1);
+                var removes:JTEvent[] = list.splice(index, 1);
                 removes.shift();
-                JTCommand.put(command);
+                JTEvent.put(command);
 
         }
     }

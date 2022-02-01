@@ -182,7 +182,7 @@ module com
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTCommand):JTAsyncTaskPipeline
+        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTEvent):JTAsyncTaskPipeline
         {
             if (!this.__loaderManager)
             {

@@ -3,9 +3,9 @@ module com
 {
     export abstract class JTAsyncTask extends JTTask implements JTIAsyncTask
     {
-        private _counter:JTCounter = null;
+        protected _counter:JTITaskCounter = null;
 
-        public relevance(counter: JTCounter): void 
+        public relevance(counter: JTITaskCounter): void 
         {
             this._counter = counter;
         }

@@ -9,8 +9,8 @@ module com
         protected _counter:JTTaskCounter = JTTaskCounter.create();
         protected _tasks:JTIAsyncTask[] = null;
         protected _factroy:JTIFactory = null;
-        protected _itemProvider:JTCommand = null;
-        protected _itemRender:JTCommand = null;
+        protected _itemProvider:JTEvent = null;
+        protected _itemRender:JTEvent = null;
         protected ___dataList:any[] = null;
 
         /**
@@ -60,13 +60,11 @@ module com
         {
             this.removes();
             this._counter.reset();
-            this._tasks = null;
-            this._factroy = null;
-            this._itemRender && JTCommand.put(this._itemRender);
-            this._itemProvider && JTCommand.put(this._itemProvider);
-            this._itemProvider = null;
-            this._itemRender = null;
-            this.___dataList = null;
+            let provider:JTEvent = this._itemRender;
+            let render:JTEvent = this._itemRender
+            this.___dataList = this._factroy = this._tasks = this._itemRender = this._itemProvider = null;
+            render && JTEvent.put(render);
+            provider && JTEvent.put(provider);
         }
         
         private createTasks():JTIAsyncTask[] 
@@ -111,7 +109,7 @@ module com
         /**
          * 创建任务命令
          */
-        public set itemRender(value:JTCommand)
+        public set itemRender(value:JTEvent)
         {
             this._itemRender = value;
         }
@@ -119,7 +117,7 @@ module com
         /**
          * 创建任务类命令
          */
-        public set itemProvider(value:JTCommand)
+        public set itemProvider(value:JTEvent)
         {
             this._itemProvider = value;
         }

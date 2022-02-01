@@ -4,7 +4,7 @@ module com
     /**
      * 计数器
      */
-    export class JTCounter extends JTLocker
+    export class JTCounter extends JTLocker implements JTICounter
     {
         /*
         *失败次数

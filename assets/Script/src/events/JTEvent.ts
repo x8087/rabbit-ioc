@@ -1,6 +1,6 @@
 module com 
 {
-    export class JTCommand implements JTIPoolObject
+    export class JTEvent implements JTIPoolObject
     {
         private _caller:any = null;
         private _method:Function = null;
@@ -12,7 +12,7 @@ module com
             this._caller = this._method = this._args = null;
         }
 
-        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
+        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
         {
             this._caller =caller;
             this._method = method;
@@ -51,7 +51,7 @@ module com
         /**
         *清理对象引用。
         */
-        public clear():JTCommand
+        public clear():JTEvent
         {
             this._method = this._args = this._caller = null;
             return this;
@@ -84,22 +84,22 @@ module com
         {
             if(!this._pool)
             {
-                this._pool = JTPool.instance(JTCommand);
+                this._pool = JTPool.instance(JTEvent);
             }
             return this._pool;
         }
         
         private static _pool:JTIPool = null;
-        public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTCommand
+        public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
         {
-            var command:JTCommand = this.pool.get() as JTCommand;
-            command.setTo(caller, method, args, once);
-            return command;
+            var evt:JTEvent = this.pool.get() as JTEvent;
+            evt.setTo(caller, method, args, once);
+            return evt;
         }
 
-        public static put(command:JTCommand):void
+        public static put(evt:JTEvent):void
         {
-            this.pool.put(command)
+            this.pool.put(evt)
         }
     }
 }
