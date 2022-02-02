@@ -24,11 +24,11 @@ module com
             this.clear();
         }
 
-        public unlock(...args):void
+        public unlock(data?:any):void
         {
             let succeed:Function = this.__succeed;
             this.__succeed = null;
-            succeed && succeed.apply(this, !args || args.length == 0 ? [] : args);
+            succeed && succeed.apply(this, [data]);
             succeed = null;
         }
 
@@ -37,11 +37,11 @@ module com
             this.__signal = this.__fail = this.__succeed = null;
         }
 
-        public kill(...args):void
+        public kill(data?:any):void
         {
             let fail:Function = this.__fail;
             this.__fail = null;
-            fail && fail.apply(this, !args || args.length == 0 ? [] : args);
+            fail && fail.apply(this, [data]);
             fail = null;
         }
 
