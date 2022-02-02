@@ -37,7 +37,7 @@ module com
 
         public execute(task:JTIAsyncTask):void
         {
-            task.name = (JTTimeUtils.runnbleTime + "|" + Math.random() * 1000000)
+            task.id = (JTTimeUtils.runnbleTime + "|" + Math.random() * 1000000)
             this.__taskQueue.push(task);
         }
 

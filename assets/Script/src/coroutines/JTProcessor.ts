@@ -17,7 +17,7 @@ module com
         {
             runnable.relevance(this);
             runnable.run();
-            await this.tryLock(runnable.name)
+            await this.tryLock(runnable.id)
         }
 
         public get name():string

@@ -9,6 +9,7 @@ module com
          * 总共需要执行多少次
          */
         private _totalCount:number = 0;
+        
         constructor()
         {
             super();

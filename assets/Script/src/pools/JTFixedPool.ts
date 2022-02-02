@@ -16,13 +16,13 @@
 
         public set fixedCount(value:number)
         {
-            this._size = this._fixedCount = value;
+            this._fixedCount = value;
             this.create();
         }
 
         protected create():void
         {
-            var list:T[] = this._list;
+            var list:JTLinkedList<T> = this.__linkedPool;
             var count:number = 0;
             var lines:T[] = [];
             while(list.length)//检查以前的池对象并重新放入临时对列里
@@ -39,22 +39,21 @@
             {
                 var leng:number = this._fixedCount - count;
                 var cls:any = this._cls;
-                list = list.concat(lines)
+                list = list.concat(lines) as JTLinkedList<T>
                 for (var i:number = 0; i < leng; i++)
                 {
                     var item:T = new cls();
                     list.push(item);
                 }
             }
-            this._size = list.length;
+           
         }
 
         public get():T
         {
-            if (this._size > 0)
+            if (this.size > 0)
             {
-                this._size --;
-                return this._list.shift();
+                return this.__linkedPool.shift();
             }
             this.create();
             return this.get();
@@ -65,7 +64,7 @@
          * */
         public get fullPool():boolean
         {
-            return this._fixedCount == this._size;
+            return this._fixedCount == this.__linkedPool.length;
         }
 
         public static instance(cls:any, fixedCount:number = 100):JTIFixedPool 

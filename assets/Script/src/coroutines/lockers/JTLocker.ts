@@ -31,6 +31,7 @@ module com
             succeed && succeed.apply(this, [data]);
             succeed = null;
         }
+ 
 
         protected clear():void
         {
@@ -67,6 +68,7 @@ module com
         }
 
         private static _pool:JTIPool = JTPool.instance(JTLocker);
+        
         public static create():JTILocker
         {
             let locker:JTILocker = this._pool.get() as JTILocker;

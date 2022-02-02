@@ -2,6 +2,6 @@ module com
 {
     export abstract class JTTaskFactory implements JTIFactory
     {
-        public abstract produce():JTITask;
+        public abstract produce():JTIRunnable;
     }   
 }

@@ -5,7 +5,7 @@
 */
 module com 
 {
-    export interface JTIAsyncTask extends JTITask
+    export interface JTIAsyncTask extends JTIRunnable
     {
         relevance(counter:JTILocker):void;
     }

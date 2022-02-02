@@ -7,6 +7,11 @@ module com
             return performance.now();
         }
 
+        public static useTime(start:number):number
+        {
+            return performance.now() - start;
+        }
+
         /**
          * 等下一帧，注意，这里的帧是指浏览器的帧（一般为4MS），而非游戏帧
          */

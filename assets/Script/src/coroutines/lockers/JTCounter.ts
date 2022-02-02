@@ -31,8 +31,8 @@ module com
         {
             super.unlock(args);
             super.clear();
-            this._succeedCount ++;
             this._lockedCount ++;
+            this._succeedCount ++;
         }
 
         /**

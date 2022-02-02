@@ -7,10 +7,15 @@ module com
     export class JTAsyncTaskPipeline extends JTEventDispatcher
     {
         protected _counter:JTTaskCounter = JTTaskCounter.create();
+
         protected _tasks:JTIAsyncTask[] = null;
+
         protected _factroy:JTIFactory = null;
+
         protected _itemProvider:JTEvent = null;
+
         protected _itemRender:JTEvent = null;
+
         protected ___dataList:any[] = null;
 
         /**

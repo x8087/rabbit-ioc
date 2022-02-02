@@ -3,27 +3,27 @@ module com
     /**
      * 任务基类
      */
-    export abstract class JTTask implements JTITask
+    export abstract class JTTask implements JTIRunnable
     {
-        protected _name:number | string = 0;
+        protected ___id:number | string = 0;
 
         /**
          * 需要重写此方法
          */
-        public abstract run():Promise<any>;
+        public abstract run():any;
 
         public recycle() 
         {
         }
 
-        public get name():number | string
+        public get id():number | string
         {
-            return this._name;
+            return this.___id;
         }
 
-        public set name(value:number | string)
+        public set id(value:number | string)
         {
-            this._name = value;
+            this.___id = value;
         }
     }
 }
