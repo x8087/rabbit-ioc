@@ -41,12 +41,13 @@ module com
             }
         }
 
-        public unlock(key:number | string):void
+        public unlock(...args):void
         {
-            let locker:JTLocker = this.__lockedMap[key] as JTLocker;
+            let key:string = args.shift();
+            let locker:JTILocker = this.__lockedMap[key] as JTILocker;
             if (!locker) return;
             this.remove(key, locker);
-            locker.unlock();
+            locker.unlock(args);
             JTLocker.put(locker);
         }
 
@@ -54,16 +55,17 @@ module com
          * 
          * @param key 
          */
-        public kill(key:any):void
+        public kill(...args):void
         {
-            let locker:JTLocker = this.__lockedMap[key] as JTLocker;
+            let key:string = args.shift();
+            let locker:JTILocker = this.__lockedMap[key] as JTILocker;
             if (!locker) return;
             this.remove(key, locker);
-            locker.kill();
+            locker.kill(args);
             JTLocker.put(locker);
         }
 
-        protected remove(key:number | string, locker:JTLocker):void
+        protected remove(key:number | string, locker:JTILocker):void
         {
             -- this.__lockedCount;
             this.__lockedMap[key] = null;

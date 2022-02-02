@@ -27,9 +27,9 @@ module com
         /**
          * 释放锁
          */
-        public unlock():void
+        public unlock(args:any):void
         {
-            super.unlock();
+            super.unlock(this, args);
             super.clear();
             this._succeedCount ++;
             this._lockedCount ++;
@@ -38,9 +38,9 @@ module com
         /**
          * 强制性解锁--取消锁
          */
-        public kill():void
+        public kill(...args):void
         {
-            super.kill();
+            super.kill(args);
             super.clear();
             this._failCount ++;
             this._lockedCount ++;

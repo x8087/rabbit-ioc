@@ -8,13 +8,13 @@ module com
     export interface JTILocker extends JTIPoolObject
     {
 
-         lock(key?:any):Promise<any>
+         lock(data?:any):Promise<any>
 
          release():void
 
-         unlock(key?:any):void;
+         unlock(args?:any):void;
 
-         kill(key?:any):void
+         kill(args?:any):void
       
          locked:boolean
      

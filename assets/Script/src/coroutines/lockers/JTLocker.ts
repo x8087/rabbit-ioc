@@ -24,11 +24,11 @@ module com
             this.clear();
         }
 
-        public unlock():void
+        public unlock(...args):void
         {
             let succeed:Function = this.__succeed;
             this.__succeed = null;
-            succeed && succeed.apply(this, []);
+            succeed && succeed.apply(this, !args || args.length == 0 ? [] : args);
             succeed = null;
         }
 
@@ -37,11 +37,11 @@ module com
             this.__signal = this.__fail = this.__succeed = null;
         }
 
-        public kill():void
+        public kill(...args):void
         {
             let fail:Function = this.__fail;
             this.__fail = null;
-            fail && fail.apply(this, []);
+            fail && fail.apply(this, !args || args.length == 0 ? [] : args);
             fail = null;
         }
 
@@ -69,11 +69,11 @@ module com
         private static _pool:JTIPool = JTPool.instance(JTLocker);
         public static create():JTILocker
         {
-            let locker:JTILocker = this._pool.get() as JTLocker;
+            let locker:JTILocker = this._pool.get() as JTILocker;
             return locker;
         }
 
-        public static put(locker:JTLocker):void
+        public static put(locker:JTILocker):void
         {
             this._pool.put(locker);
         }
