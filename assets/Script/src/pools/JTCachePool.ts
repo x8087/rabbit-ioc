@@ -7,16 +7,16 @@ module com
     export class JTCachePool<T extends JTIPoolObject> extends JTPool<T>
     {
         protected static _cachePoolMap:Object = {};
-        protected _references:JTLinkedList<T> = null;
+        protected _references:JTSLinkedList<T> = null;
         constructor(cls:any)
         {
             super(cls);
-            this._references = new JTLinkedList();
+            this._references = new JTSLinkedList();
         }
     
         public get():T
         {
-            if (this.__linkedPool.length > 0)
+            if (this.__linkedPool.size > 0)
             {
                 return this.__linkedPool.shift();
             }

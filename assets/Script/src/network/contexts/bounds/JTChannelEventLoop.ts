@@ -7,7 +7,7 @@ module com
         protected __context:JTIChannelContext[] = null;
         protected _contextMap:{[type:string]: JTIChannelContext} = null;
 
-        protected _messageQueue:any[] = null;
+        protected _messageQueue:JTSLinkedList<any> = null;
         /**
          * 消息处理器
          * @param sender 发送者计时器 
@@ -22,7 +22,7 @@ module com
             this._contextMap = {};
             this._timerTask = timerTask;
             this._keepCount = keepCount;
-            this._messageQueue = [];
+            this._messageQueue = new JTSLinkedList()
 
             if (this._timerTask instanceof JTTimer)
             {
@@ -49,12 +49,12 @@ module com
 
         protected onEnterFrame(timer:JTITimerTask):void
         {
-            if (this._messageQueue.length > this._keepCount)
+            if (this._messageQueue.size > this._keepCount)
             {
-                let count:number = this._messageQueue.length - this._keepCount;
+                let count:number = this._messageQueue.size - this._keepCount;
                 this._messageQueue.splice(0, count);//删除前面的消息
             }
-            if (this._messageQueue.length == 0) return;
+            if (this._messageQueue.size == 0) return;
             this.flowMessage(this._messageQueue.shift());
         }
 

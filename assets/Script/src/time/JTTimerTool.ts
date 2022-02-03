@@ -6,7 +6,7 @@ module com
         public static animationTimer:JTTimerTool = null;
         public static logicTimer:JTTimerTool = null;
         private _pause:boolean = false;
-        private _tasks:JTLinkedList<JTITimerTask> = null;
+        private _tasks:JTSLinkedList<JTITimerTask> = null;
         private _currentTime:number = 0;
         private static _frameRate:number = 0;
         private static _frameRateTime:number = 0;
@@ -21,7 +21,7 @@ module com
 
         constructor()
         {
-            this._tasks = new JTLinkedList<JTITimerTask>()
+            this._tasks = new JTSLinkedList<JTITimerTask>()
         }
 
 
@@ -111,7 +111,7 @@ module com
             //     let task:JTITimerTask = this._tasks[i];
             //     task.running && task.updateTick(tick);
             // }
-            let node:JTListNode<JTITimerTask> = this._tasks.head;
+            let node:JTSNode<JTITimerTask> = this._tasks.head;
             while(node)
             {
                 let timer:JTITimerTask = node.value;
@@ -131,14 +131,14 @@ module com
             //         i--;
             //     }
             // }
-            let node:JTListNode<JTITimerTask> = this._tasks.head;
+            let node:JTSNode<JTITimerTask> = this._tasks.head;
             while(node)
             {
                 let timer:JTITimerTask = node.value;
                 if (timer.running) node = node.next;
                 else
                 {
-                    let afterNode:JTListNode<JTITimerTask> = node.next;
+                    let afterNode:JTSNode<JTITimerTask> = node.next;
                     this._tasks.split(node, 1);
                     node = afterNode;
                 }

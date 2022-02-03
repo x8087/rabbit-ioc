@@ -1,23 +1,23 @@
 ///<reference path="JTNode.ts"/>
 module com 
 {
-    export class JTTableNode<T> extends JTListNode<T>
+    export class JTSNode<T> extends JTNode<T>
     {
-        public prev:JTTableNode<T> = null;
+        public next:JTSNode<T> = null;
 
         constructor(data:T)
         {
             super(data);
         }
 
-        
-        public insertAfter(node:JTTableNode<T>):void
+        public insertAfter(node:JTSNode<T>):void
         {
 
         }
 
         public unlink():void
         {
+            this.value = this.next = null;
             // this.value = this.next = this.owner = null;
         }
     }

@@ -1,7 +1,7 @@
-///<reference path="JTLinkedCollection.ts"/>
+///<reference path="JTLinkedList.ts"/>
 module com 
 {
-    export class JTLinkedList<V> extends JTLinkedCollection<JTListNode<V>, V>
+    export class JTSLinkedList<V> extends JTLinkedList<JTSNode<V>, V>
     {
         constructor()
         {
@@ -10,9 +10,9 @@ module com
 
         public join(sep:string): string 
         {
-            if (this._length == 0) return "";
+            if (this._size == 0) return "";
             var __c:string = "";
-            var node:JTListNode<V> = this._head;
+            var node:JTSNode<V> = this._head;
             while (node)
             {
                 __c += node.value + sep;
@@ -24,9 +24,9 @@ module com
 
         public toValues(): V[] 
         {
-            if (this._length == 0) return [];
+            if (this._size == 0) return [];
             let values:V[] = [];
-            var node:JTListNode<V> = this._head;
+            var node:JTSNode<V> = this._head;
             while (node)
             {
                 values.push(node.value);
@@ -38,8 +38,8 @@ module com
         public indexOf(value:V):number
         {
             let index:number = -1;
-            if (this._length == 0) return index;
-            let node:JTListNode<V> = this._head;
+            if (this._size == 0) return index;
+            let node:JTSNode<V> = this._head;
             while(node)
             {
                 index++;
@@ -51,8 +51,8 @@ module com
 
         public contains(value:V):boolean 
         {
-            if (this._length == 0) return false;
-            let node:JTListNode<V> = this._head;
+            if (this._size == 0) return false;
+            let node:JTSNode<V> = this._head;
             while(node)
             {
                  if (node.value == value)  return true;
@@ -61,10 +61,10 @@ module com
             return false;
         }
 
-        public split(node:JTListNode<V>, count:number):V[]
+        public split(node:JTSNode<V>, count:number):V[]
         {
             let values:V[] = [];
-            if (this._length == 0) return values;
+            if (this._size == 0) return values;
             if (this._head == node)
             {
                 return this.splice(0, count);
@@ -76,8 +76,8 @@ module com
         public splice(index:number, count:number):V[]
         {
             let values:V[] = [];
-            if (this._length == 0) return values;
-            let node:JTListNode<V> = this._head;
+            if (this._size == 0) return values;
+            let node:JTSNode<V> = this._head;
             if (index == 0)
             {
                 this._head = this.splices(node, count, values);
@@ -89,7 +89,7 @@ module com
             else
             {
                 let i:number = 0;
-                let start:JTListNode<V> = null;
+                let start:JTSNode<V> = null;
                 while(node)
                 {
                     if (i >= index - 1)
@@ -99,7 +99,7 @@ module com
                         {
                             new Error()
                         }
-                        let end:JTListNode<V>= this.splices(start.next, count, values);
+                        let end:JTSNode<V>= this.splices(start.next, count, values);
                         if (!end)
                         {
                             start.next = null;
@@ -118,15 +118,15 @@ module com
             return values;
         }
 
-        protected splices(node:JTListNode<V>, count:number, values:V[]):JTListNode<V>
+        protected splices(node:JTSNode<V>, count:number, values:V[]):JTSNode<V>
         {
             let currentCount:number = 0;
             while(node)
             {
                 currentCount ++;
-                this._length --;
+                this._size --;
                 values.push(node.value);
-                let v:JTListNode<V> = node;
+                let v:JTSNode<V> = node;
                 node = node.next;
                 v.unlink();
                 if (currentCount == count) return node;
@@ -136,8 +136,8 @@ module com
 
         public clear(): void 
         {
-            if (this._length == 0) return;
-            let node:JTListNode<V> = this._head;
+            if (this._size == 0) return;
+            let node:JTSNode<V> = this._head;
             while(node)
             {
                 node.unlink();
@@ -146,15 +146,15 @@ module com
             this._head = this._tail = null;
         }
 
-        public getIterator():JTIterator 
+        public getIterator():JTIIterator<V>
         {
-            throw new Error("Method not implemented.");
+            return null;
         }
 
         public push(...args:V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode(args[0]);
+            let node:JTSNode<V> = new JTSNode(args[0]);
             if (this._head)
             {
                 this._tail.next = node;
@@ -167,13 +167,13 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(args[i]);
+                    node = new JTSNode(args[i]);
                     this._tail.next = node;
                 }
             }
             this._tail = node;
-            this._length += count;
-            return this._length;
+            this._size += count;
+            return this._size;
         }
 
         public shift():V 
@@ -184,10 +184,10 @@ module com
                 return null;
             }
             let value:V = this._head.value;
-            let node:JTListNode<V> = this._head.next;
+            let node:JTSNode<V> = this._head.next;
             this._head.unlink();
             this._head = node;
-            this._length --;
+            this._size --;
             if (!this._head || !this._head.next) this._tail = this._head; 
             return value
         }
@@ -195,7 +195,7 @@ module com
         public unshift(...args:V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode(args[0]);
+            let node:JTSNode<V> = new JTSNode(args[0]);
             if (this._tail)
             {
                 node.next = this._head;
@@ -208,18 +208,18 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(args[i]);
+                    node = new JTSNode(args[i]);
                     node.next = this._head;
                 }
             }
             this._head = node;
-            this._length += count;
-            return this._length;
+            this._size += count;
+            return this._size;
         }
 
-        public concat(...args):JTICollection<V>
+        public concat(...args):JTILinkedList<V>
         {
-            let linkedList:JTLinkedList<V> = new JTLinkedList<V>();
+            let linkedList:JTSLinkedList<V> = new JTSLinkedList<V>();
             if (this._head && this._tail)
             {
                 linkedList.push(this._head.value);
@@ -239,7 +239,7 @@ module com
             {
                 linkedList.push(values[i]);
             }
-            linkedList["_length"] += count;
+            linkedList["_size"] += count;
             return linkedList;
         }
 
@@ -255,8 +255,8 @@ module com
         public toString():string
         {
             let content:string = "";
-            if (this._length == 0) return;
-            let node:JTListNode<V> = this._head;
+            if (this._size == 0) return;
+            let node:JTSNode<V> = this._head;
             while(node)
             {
                 content += node.toString();

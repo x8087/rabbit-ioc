@@ -22,10 +22,10 @@
 
         protected create():void
         {
-            var list:JTLinkedList<T> = this.__linkedPool;
+            var list:JTSLinkedList<T> = this.__linkedPool;
             var count:number = 0;
             var lines:T[] = [];
-            while(list.length)//检查以前的池对象并重新放入临时对列里
+            while(list.size)//检查以前的池对象并重新放入临时对列里
             {
                 var item:T = list.shift();
                 if (this._fixedCount > count)
@@ -39,7 +39,7 @@
             {
                 var leng:number = this._fixedCount - count;
                 var cls:any = this._cls;
-                list = list.concat(lines) as JTLinkedList<T>
+                list = list.concat(lines) as JTSLinkedList<T>
                 for (var i:number = 0; i < leng; i++)
                 {
                     var item:T = new cls();
@@ -64,7 +64,7 @@
          * */
         public get fullPool():boolean
         {
-            return this._fixedCount == this.__linkedPool.length;
+            return this._fixedCount == this.__linkedPool.size;
         }
 
         public static instance(cls:any, fixedCount:number = 100):JTIFixedPool 

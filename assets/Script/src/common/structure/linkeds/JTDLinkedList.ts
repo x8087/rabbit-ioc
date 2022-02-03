@@ -1,7 +1,7 @@
-///<reference path="JTLinkedCollection.ts"/>
+///<reference path="JTLinkedList.ts"/>
 module com 
 {
-    export class JTLinkedTable<V> extends JTLinkedCollection<JTListNode<V>, V>
+    export class JTDLinkedList<V> extends JTLinkedList<JTSNode<V>, V>
     {
         constructor()
         {
@@ -10,9 +10,9 @@ module com
 
         public join(sep:string):string 
         {
-            if (this._length == 0) return "";
+            if (this._size == 0) return "";
             var __c:string = "";
-            var node:JTListNode<V> = this._head;
+            var node:JTSNode<V> = this._head;
             while (node.next)
             {
                 __c += node.value + sep;
@@ -22,10 +22,10 @@ module com
             return __c;
         }
 
-        public toValues(): V[] 
+        public toValues():V[] 
         {
             let values:V[] = [];
-            var node:JTListNode<V> = this._head;
+            var node:JTSNode<V> = this._head;
             while (node)
             {
                 values.push(node.value);
@@ -37,7 +37,7 @@ module com
         public indexOf(value:V):number
         {
            let index:number = -1;
-           let node:JTListNode<V> = this._head;
+           let node:JTSNode<V> = this._head;
            while(node.next)
            {
                 if (node.value == value)return index;
@@ -48,7 +48,7 @@ module com
 
         public contains(value:V):boolean 
         {
-            let node:JTListNode<V> = this._head;
+            let node:JTSNode<V> = this._head;
             while(node.next)
             {
                  if (node.value == value)return true;
@@ -58,22 +58,22 @@ module com
 
         public clear(): void 
         {
-            let node:JTListNode<V> = this._head;
+            let node:JTSNode<V> = this._head;
             while(node.next)
             {
                 node.unlink();
             }
         }
 
-        public getIterator():JTIterator 
+        public getIterator():JTIIterator<V>
         {
-            throw new Error("Method not implemented.");
+            return null;
         }
 
         public push(...args:V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode(args[0]);
+            let node:JTSNode<V> = new JTSNode(args[0]);
             if (this._head)
             {
                 this._tail.next = node;
@@ -86,29 +86,29 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(args[i]);
+                    node = new JTSNode(args[i]);
                     this._tail.next = node;
                 }
             }
             this._tail = node;
-            this._length += count;
-            return this._length;
+            this._size += count;
+            return this._size;
         }
 
         public shift():V 
         {
             let value:V = this._head.value;
-            let node:JTListNode<V> = this._head.next;
+            let node:JTSNode<V> = this._head.next;
             this._head.unlink();
             this._head = node;
-            this._length --;
+            this._size --;
             return value
         }
 
         public unshift(...args: V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode( args[0]);
+            let node:JTSNode<V> = new JTSNode( args[0]);
             if (this._tail)
             {
                 node.next = this._head;
@@ -121,29 +121,29 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(args[i]);
+                    node = new JTSNode(args[i]);
                     node.next = this._head;
                 }
             }
             this._head = node;
-            this._length += count;
-            return this._length;
+            this._size += count;
+            return this._size;
         }
 
         public pop():V 
         {
             let value:V = this._tail.value;
-            let node:JTListNode<V> = this._tail.next;
+            let node:JTSNode<V> = this._tail.next;
             this._head.unlink();
             this._head = node;
-            this._length --;
+            this._size --;
             return value;
         }
 
         
-        public concat(...args:V[]):JTICollection<V>
+        public concat(...args:V[]):JTILinkedList<V>
         {
-            let linkedList:JTLinkedTable<V> = new JTLinkedTable<V>();
+            let linkedList:JTDLinkedList<V> = new JTDLinkedList<V>();
             linkedList.push(this._head.value);
             linkedList.unshift(this._tail.value);
             let count:number = args.length;
@@ -151,7 +151,7 @@ module com
             {
                 linkedList.push(args[i])
             }
-            linkedList["_length"] = this.length + count;
+            linkedList["_size"] = this.size + count;
             return linkedList;
         }
 
@@ -162,7 +162,7 @@ module com
             {
                 this.push(args[i])
             }
-            this._length += count;
+            this._size += count;
         }
         
     }

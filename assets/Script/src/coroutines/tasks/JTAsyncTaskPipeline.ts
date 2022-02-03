@@ -8,7 +8,7 @@ module com
     {
         protected _counter:JTTaskCounter = JTTaskCounter.create();
 
-        protected _tasks:JTIAsyncTask[] = null;
+        protected _linkedTasks:JTILinkedList<JTIAsyncTask> = null;
 
         protected _factroy:JTIFactory = null;
 
@@ -42,10 +42,10 @@ module com
          * */
         public async run():Promise<any>
         {   
-            this._tasks = this.createTasks();
-            while(this._tasks.length)
+            this._linkedTasks = this.createTasks();
+            while(this._linkedTasks.size)
             {
-                let task:JTIAsyncTask = this._tasks.shift();
+                let task:JTIAsyncTask = this._linkedTasks.shift();
                 task.relevance(this._counter);
                 task.run();
                 await this._counter.lock();
@@ -67,21 +67,21 @@ module com
             this._counter.reset();
             let provider:JTEvent = this._itemRender;
             let render:JTEvent = this._itemRender
-            this.___dataList = this._factroy = this._tasks = this._itemRender = this._itemProvider = null;
+            this.___dataList = this._factroy = this._linkedTasks = this._itemRender = this._itemProvider = null;
             render && JTEvent.put(render);
             provider && JTEvent.put(provider);
         }
         
-        private createTasks():JTIAsyncTask[] 
+        private createTasks():JTILinkedList<JTIAsyncTask>
         {
-            let list:JTIAsyncTask[] = [];
+            let __linkedList:JTSLinkedList<JTIAsyncTask> = new JTSLinkedList();
             let totalCount:number = this._counter.totalCount;
             if (this._itemRender)
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
                     let task:JTIAsyncTask = this._itemRender.runWith([i, this.___dataList[i]]);
-                    list.push(task);
+                    __linkedList.push(task);
                 }
             }
             else if (this._itemProvider)
@@ -89,7 +89,7 @@ module com
                 for (let i:number = 0; i < totalCount; i++)
                 {
                     let task:JTIAsyncTask = this._itemProvider.runWith([i, this.___dataList[i]]);
-                    list.push(task);
+                    __linkedList.push(task);
                 }
             }
             else if (this._factroy)
@@ -97,10 +97,10 @@ module com
                 for (let i:number = 0; i < totalCount; i++)
                 {
                     let task:JTIAsyncTask = this._factroy.produce();
-                    list.push(task);
+                    __linkedList.push(task);
                 }
             }
-            return list;
+            return __linkedList;
         }
 
         /**
