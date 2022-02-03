@@ -4,7 +4,7 @@ module com
     /**
      * 异步事件任务对列
      */
-    export class JTAsyncTaskPipeline extends JTEventDispatcher
+    export class JTAsyncTaskQueue extends JTEventDispatcher
     {
         protected _counter:JTTaskCounter = JTTaskCounter.create();
 
