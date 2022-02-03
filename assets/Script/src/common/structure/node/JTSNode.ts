@@ -10,15 +10,16 @@ module com
             super(data);
         }
 
-        public insertAfter(node:JTSNode<T>):void
+        public insertNext(node:JTDNode<T>):void
         {
-
+            this.next = node;
         }
 
         public unlink():void
         {
-            this.value = this.next = null;
-            // this.value = this.next = this.owner = null;
+            this.next = null;
         }
+
+
     }
 }

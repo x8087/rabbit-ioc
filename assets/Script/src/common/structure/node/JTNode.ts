@@ -11,6 +11,12 @@ module com
 
         public unlink():void
         {
+ 
+        }
+
+        public clear():void
+        {
+            this.unlink();
             this.value = null;
         }
 

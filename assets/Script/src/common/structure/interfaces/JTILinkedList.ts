@@ -11,7 +11,7 @@ module com
 
         unshift(...args:V[]):number;
 
-        concat(...args):JTILinkedList<V>
+        concat(...args):JTICollection<V>
 
         marge(...args):void
 
