@@ -3,18 +3,20 @@ module com
     export class JTNode<T>
     {
         public value:T = null;
-        // public owner:JTICollection<T> = null;
 
-        constructor(owner:JTICollection<T>, data:T)
+        constructor(data:T)
         {
             this.value = data;
-            // this.owner = owner;
         }
 
         public unlink():void
         {
             this.value = null;
-            // this.value = this.owner = null;
+        }
+
+        public toString():string
+        {
+            return JSON.stringify(this.value);
         }
     }
 }

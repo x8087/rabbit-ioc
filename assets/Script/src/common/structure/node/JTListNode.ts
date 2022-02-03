@@ -5,9 +5,9 @@ module com
     {
         public next:JTListNode<T> = null;
 
-        constructor(collection:JTICollection<T>, data:T)
+        constructor(data:T)
         {
-            super(collection, data);
+            super(data);
         }
 
         public insertAfter(node:JTListNode<T>):void

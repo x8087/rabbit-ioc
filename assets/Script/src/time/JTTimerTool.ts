@@ -6,7 +6,7 @@ module com
         public static animationTimer:JTTimerTool = null;
         public static logicTimer:JTTimerTool = null;
         private _pause:boolean = false;
-        private _tasks:JTITimerTask[] = null;
+        private _tasks:JTLinkedList<JTITimerTask> = null;
         private _currentTime:number = 0;
         private static _frameRate:number = 0;
         private static _frameRateTime:number = 0;
@@ -21,7 +21,7 @@ module com
 
         constructor()
         {
-            this._tasks = [];
+            this._tasks = new JTLinkedList<JTITimerTask>()
         }
 
 
@@ -105,23 +105,42 @@ module com
 
         protected updateTicks(tick:number):void
         {
-            let total:number = this._tasks.length;
-            for (let i:number = 0; i < total; i++)
+            // let total:number = this._tasks.length;
+            // for (let i:number = 0; i < total; i++)
+            // {
+            //     let task:JTITimerTask = this._tasks[i];
+            //     task.running && task.updateTick(tick);
+            // }
+            let node:JTListNode<JTITimerTask> = this._tasks.head;
+            while(node)
             {
-                let task:JTITimerTask = this._tasks[i];
-                task.running && task.updateTick(tick);
+                let timer:JTITimerTask = node.value;
+                timer.running && timer.updateTick(tick)
+                node = node.next;
             }
         }
 
         protected updateTasks():void
         {
-            for (let i:number = 0; i < this._tasks.length; i++)
+            // for (let i:number = 0; i < this._tasks.length; i++)
+            // {
+            //     let task:JTITimerTask = this._tasks[i];
+            //     if (!task.running)
+            //     {
+            //         this._tasks.splice(i, 1);
+            //         i--;
+            //     }
+            // }
+            let node:JTListNode<JTITimerTask> = this._tasks.head;
+            while(node)
             {
-                let task:JTITimerTask = this._tasks[i];
-                if (!task.running)
+                let timer:JTITimerTask = node.value;
+                if (timer.running) node = node.next;
+                else
                 {
-                    this._tasks.splice(i, 1);
-                    i--;
+                    let afterNode:JTListNode<JTITimerTask> = node.next;
+                    this._tasks.split(node, 1);
+                    node = afterNode;
                 }
             }
         }

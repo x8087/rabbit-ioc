@@ -5,9 +5,9 @@ module com
     {
         public prev:JTTableNode<T> = null;
 
-        constructor(collection:JTICollection<T>, data:T)
+        constructor(data:T)
         {
-            super(collection, data);
+            super(data);
         }
 
         

@@ -102,6 +102,7 @@ module com
                         let end:JTListNode<V>= this.splices(start.next, count, values);
                         if (!end)
                         {
+                            start.next = null;
                             this._tail = start;
                         }
                         else
@@ -153,7 +154,7 @@ module com
         public push(...args:V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode(this, args[0]);
+            let node:JTListNode<V> = new JTListNode(args[0]);
             if (this._head)
             {
                 this._tail.next = node;
@@ -166,7 +167,7 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(this, args[i]);
+                    node = new JTListNode(args[i]);
                     this._tail.next = node;
                 }
             }
@@ -194,7 +195,7 @@ module com
         public unshift(...args:V[]):number 
         {
             let count:number = args.length;
-            let node:JTListNode<V> = new JTListNode(this, args[0]);
+            let node:JTListNode<V> = new JTListNode(args[0]);
             if (this._tail)
             {
                 node.next = this._head;
@@ -207,7 +208,7 @@ module com
             {
                 for (let i = 1; i < count; i++)
                 {
-                    node = new JTListNode(this, args[i]);
+                    node = new JTListNode(args[i]);
                     node.next = this._head;
                 }
             }
@@ -249,6 +250,19 @@ module com
             {
                 this.push(args[i])
             }
+        }
+
+        public toString():string
+        {
+            let content:string = "";
+            if (this._length == 0) return;
+            let node:JTListNode<V> = this._head;
+            while(node)
+            {
+                content += node.toString();
+                node = node.next;
+            }
+            return content;
         }
         
     }
