@@ -13,7 +13,7 @@ module com
             if (this._length == 0) return "";
             var __c:string = "";
             var node:JTListNode<V> = this._head;
-            while (node.next)
+            while (node)
             {
                 __c += node.value + sep;
                 node = node.next;
@@ -39,21 +39,21 @@ module com
         {
             let index:number = -1;
             if (this._length == 0) return index;
-           let node:JTListNode<V> = this._head;
-           while(node.next)
-           {
+            let node:JTListNode<V> = this._head;
+            while(node)
+            {
+                index++;
                 if (node.value == value)return index;
                 node = node.next;
-                index++;
-           }
-            return index;
+            }
+            return -1;
         }
 
         public contains(value:V):boolean 
         {
             if (this._length == 0) return false;
             let node:JTListNode<V> = this._head;
-            while(node.next)
+            while(node)
             {
                  if (node.value == value)  return true;
                  node = node.next;
@@ -61,15 +61,88 @@ module com
             return false;
         }
 
+        public split(node:JTListNode<V>, count:number):V[]
+        {
+            let values:V[] = [];
+            if (this._length == 0) return values;
+            if (this._head == node)
+            {
+                return this.splice(0, count);
+            }
+            let index:number = this.indexOf(node.value)
+            return this.splice(index, count);
+        }
+
+        public splice(index:number, count:number):V[]
+        {
+            let values:V[] = [];
+            if (this._length == 0) return values;
+            let node:JTListNode<V> = this._head;
+            if (index == 0)
+            {
+                this._head = this.splices(node, count, values);
+                if (!this._head)
+                {
+                    this._head = this._tail = null;
+                }
+            }
+            else
+            {
+                let i:number = 0;
+                let start:JTListNode<V> = null;
+                while(node)
+                {
+                    if (i >= index - 1)
+                    {
+                        start = node;
+                        if (!start.next)
+                        {
+                            new Error()
+                        }
+                        let end:JTListNode<V>= this.splices(start.next, count, values);
+                        if (!end)
+                        {
+                            this._tail = start;
+                        }
+                        else
+                        {
+                            start.next = end;
+                        }
+                        return values;
+                    }
+                    node = node.next;
+                    i++
+                }
+            }
+            return values;
+        }
+
+        protected splices(node:JTListNode<V>, count:number, values:V[]):JTListNode<V>
+        {
+            let currentCount:number = 0;
+            while(node)
+            {
+                currentCount ++;
+                this._length --;
+                values.push(node.value);
+                let v:JTListNode<V> = node;
+                node = node.next;
+                v.unlink();
+                if (currentCount == count) return node;
+            }
+            return null;
+        }
+
         public clear(): void 
         {
             if (this._length == 0) return;
             let node:JTListNode<V> = this._head;
-            while(node.next)
+            while(node)
             {
                 node.unlink();
                 node = node.next;
             }
+            this._head = this._tail = null;
         }
 
         public getIterator():JTIterator 
@@ -104,11 +177,17 @@ module com
 
         public shift():V 
         {
+            if (!this._head) 
+            {
+                this._tail = null;
+                return null;
+            }
             let value:V = this._head.value;
             let node:JTListNode<V> = this._head.next;
             this._head.unlink();
             this._head = node;
             this._length --;
+            if (!this._head || !this._head.next) this._tail = this._head; 
             return value
         }
 

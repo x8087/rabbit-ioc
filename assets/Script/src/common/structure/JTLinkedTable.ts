@@ -140,7 +140,8 @@ module com
             return value;
         }
 
-        public concat(...args:V[]):JTLinkedList<V>
+        
+        public concat(...args:V[]):JTICollection<V>
         {
             let linkedList:JTLinkedTable<V> = new JTLinkedTable<V>();
             linkedList.push(this._head.value);

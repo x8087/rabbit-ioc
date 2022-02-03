@@ -17,7 +17,8 @@ module com
 
         public unlink():void
         {
-            this.value = this.next = this.owner = null;
+            this.value = this.next = null;
+            // this.value = this.next = this.owner = null;
         }
     }
 }

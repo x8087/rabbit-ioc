@@ -10,6 +10,7 @@ module com
             super(collection, data);
         }
 
+        
         public insertAfter(node:JTTableNode<T>):void
         {
 
@@ -17,7 +18,7 @@ module com
 
         public unlink():void
         {
-            this.value = this.next = this.owner = null;
+            // this.value = this.next = this.owner = null;
         }
     }
 }

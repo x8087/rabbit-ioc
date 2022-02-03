@@ -48,8 +48,8 @@ module com
                     break;
                 }
             }
-
-            setInterval(JTTimerTool.actives.bind(this), 0)
+            setInterval(JTTimerTool.actives.bind(this), 10);
+            setInterval(JTTimerTool.updates.bind(this), 40);
         }
 
         public static get frameRate():number
@@ -79,6 +79,13 @@ module com
             this.logicTimer.active();
         }
 
+        public static updates():void
+        {
+            this.defaultTimer.updateTasks();
+            this.animationTimer.updateTasks();
+            this.logicTimer.updateTasks();
+        }
+
         /**
          * 如果要使用优化计时器，需要外部计时器回调函数调用此方法
          */
@@ -93,7 +100,6 @@ module com
             let nowTime:number = JTTimeUtils.runnbleTime;
             let tick:number = nowTime - this._currentTime;
             this.updateTicks(tick);//统一时间，每一计时器任务根据情况做不同的事
-            this.updateTasks();
             this._currentTime = nowTime;
         }
 
@@ -115,7 +121,7 @@ module com
                 if (!task.running)
                 {
                     this._tasks.splice(i, 1);
-                    i --
+                    i--;
                 }
             }
         }

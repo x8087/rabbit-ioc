@@ -1,4 +1,4 @@
-///<reference path="../datas/structure/JTLinkedList.ts"/>
+///<reference path="../common/structure/JTLinkedList.ts"/>
 module com 
 {
     export class JTPool<T extends JTIPoolObject> implements JTIPool
