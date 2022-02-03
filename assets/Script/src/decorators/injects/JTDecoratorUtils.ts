@@ -26,44 +26,44 @@ module com
 		public static bind(cls:any, destroyed:boolean = false):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassInjectAlias = this._bindedMap[name];
-			if (!__class)
+			let _class:JTClassInjectAlias = this._bindedMap[name];
+			if (!_class)
 			{
-				__class = new JTSingletonClassAlias(cls, destroyed);
-				this._bindedMap[name] = __class;
+				_class = new JTSingletonClassAlias(cls, destroyed);
+				this._bindedMap[name] = _class;
 			}
-			return __class;
+			return _class;
 		}
 
 		public static bindPool(poolCls:any, itemCls:any, parameters?:any):JTClassInjectAlias
 		{
 			let name:string = itemCls.name;
-			let __class:JTClassInjectAlias = this._bindedMap[name];
-			if (!__class)
+			let _class:JTClassInjectAlias = this._bindedMap[name];
+			if (!_class)
 			{
-				__class = new JTSingletonPoolAlias(poolCls, itemCls, parameters);
-				this._bindedMap[name] = __class;
+				_class = new JTSingletonPoolAlias(poolCls, itemCls, parameters);
+				this._bindedMap[name] = _class;
 			}
-			return __class;
+			return _class;
 		}
 
 		public static bindTemplate(cls:any, parameters:any):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassInjectAlias = this._bindedMap[name];
-			if (!__class)
+			let _class:JTClassInjectAlias = this._bindedMap[name];
+			if (!_class)
 			{
-				__class = new JTConfigurationAlisa(cls, parameters);
-				this._bindedMap[name] = __class;
+				_class = new JTConfigurationAlisa(cls, parameters);
+				this._bindedMap[name] = _class;
 			}
-			return __class;
+			return _class;
 		}
 
 		public static getClassAlisa(cls:any):JTClassInjectAlias
 		{
 			let name:string = cls.name;
-			let __class:JTClassInjectAlias = this._bindedMap[name];
-			return __class;
+			let _class:JTClassInjectAlias = this._bindedMap[name];
+			return _class;
 		}
 	}
 }

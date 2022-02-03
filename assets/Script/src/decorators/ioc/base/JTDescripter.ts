@@ -5,19 +5,19 @@ module com
 {
 	export abstract class JTDescripter
 	{
-		public ____c:any = null;
-		public __property:string = null;
-		public __elements:JTElementDescripter[] = null;
-		private __className:string = null;
-		protected ___dependencies:Function[] = null;
+		public _class:any = null;
+		public _property:string = null;
+		public _elements:JTElementDescripter[] = null;
+		private _className:string = null;
+		protected _dependencies:Function[] = null;
 
-		constructor(___caller:any, _property?:string)
+		constructor(_cls:any, _property?:string)
 		{
-			this.__elements = [];
-			this.___dependencies = [];
-			this.____c = ___caller;
-			this.__property = _property;
-			this.__className = ___caller["constructor"].name;
+			this._elements = [];
+			this._dependencies = [];
+			this._class = _cls;
+			this._property = _property;
+			this._className = _cls["constructor"].name;
 		}
 
 
@@ -30,7 +30,7 @@ module com
 	 
 		public run(lines?:JTElementDescripter[]):void
 		{
-			if (!lines) lines = this.__elements;
+			if (!lines) lines = this._elements;
 			let total:number = lines.length;
 			for (let i:number = 0; i < total; i++)
 			{
@@ -41,13 +41,13 @@ module com
 
 		public addElement(element:JTElementDescripter):void
 		{
-			let index:number = this.__elements.push(element);	 
-			this.___dependencies[index - 1] = element.runnable;
+			let index:number = this._elements.push(element);	 
+			this._dependencies[index - 1] = element.runnable;
 		}
 
 		public get className():string
 		{
-			return this.__className;
+			return this._className;
 		}
 	}
 }

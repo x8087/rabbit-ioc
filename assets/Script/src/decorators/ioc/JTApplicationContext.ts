@@ -61,7 +61,7 @@ module com
 			this.controller = controller;
 		}
 
-		public static run(__class:any):JTApplicationContext
+		public static run(_class:any):JTApplicationContext
 		{
 			this.classifiedMapping();
 			this.build();

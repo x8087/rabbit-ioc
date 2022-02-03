@@ -27,7 +27,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -39,7 +39,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -51,7 +51,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -63,7 +63,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -75,7 +75,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -87,7 +87,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -107,7 +107,7 @@ module com
     {
         if (___c instanceof JTConfigDescripter)
         {
-            JTApplicationContext.collectToMap(___c.__caller, ___c.__property, ___c.__descripter);
+            JTApplicationContext.collectToMap(___c._class, ___c._property, ___c._descripter);
         }
         else
         {
@@ -125,14 +125,14 @@ module com
         if (changedProperty instanceof JTConfigDescripter)
         {
             let __c:JTConfigDescripter = changedProperty;
-            if (!__c.__descripter) //属性获取时，先修改对属性获取BEAN对象的属性名;
+            if (!__c._descripter) //属性获取时，先修改对属性获取BEAN对象的属性名;
             {
                 // Object.defineProperty(__c.__caller, __c.__property, {});
-                doAutowired(__c.__caller, __c.__property, __c.parameters[0]);
+                doAutowired(__c._class, __c._property, __c.parameters[0]);
             }
             else //方法或者类
             {
-                JTApplicationContext.changed(__c.__property, __c.parameters[0]);
+                JTApplicationContext.changed(__c._property, __c.parameters[0]);
             }
         }
         else
@@ -152,11 +152,11 @@ module com
             let __parameters:any[] = __c.parameters;
             if (__parameters.length > 2)
             {
-                doAutowired(__c.__caller, __c.__property, __parameters[2])
+                doAutowired(__c._class, __c._property, __parameters[2])
             }
             else
             {
-                doAutowired(__c.__caller, __c.__property, __c.__property)
+                doAutowired(__c._class, __c._property, __c._property)
             }
         }
         else

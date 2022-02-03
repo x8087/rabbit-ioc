@@ -33,7 +33,7 @@ module com
 
 		public assembles(lines:any):void 
 		{
-			if (!lines) lines = this.__elements;
+			if (!lines) lines = this._elements;
 			let total:number = lines.length;
 			for (let i:number = 0; i < total; i++)
 			{

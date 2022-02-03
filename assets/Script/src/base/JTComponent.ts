@@ -3,15 +3,15 @@ module com
 {
     export abstract class JTComponent<T extends fgui.GComponent> extends JTEventSignaler implements JTIComponent
     {
-        protected _____ui:T = null;
-        protected ___runClass:any = null;
+        protected _componentUI:T = null;
+        protected _runClass:any = null;
         protected _url:string = null;
         protected _pacakgeName:string = null;
-        protected __classUI:T = null;
-        protected __componentId:string = null;
+        protected _classUI:T = null;
+        protected _componentId:string = null;
         protected _registeredClick:boolean = false;
-        protected __loaded:boolean = false;
-        protected __uiPackage:fgui.UIPackage = null;
+        protected _loaded:boolean = false;
+        protected _uiPackage:fgui.UIPackage = null;
         constructor()
         {
             super();
@@ -24,14 +24,14 @@ module com
                 info("asset already loaded");
                 return;
             }
-            this.__loaded = false;
+            this._loaded = false;
             this._url = url;
-            this.__componentId = id;
+            this._componentId = id;
             this._pacakgeName = this._url.split("/").pop();
-            this.___runClass = runClass;
+            this._runClass = runClass;
             this._registeredClick = registeredClick;
-            this.__uiPackage = fgui.UIPackage.getByName(url);
-            if (!this.__uiPackage)   this.load();
+            this._uiPackage = fgui.UIPackage.getByName(url);
+            if (!this._uiPackage)   this.load();
             else
             {
                 this.loadAssetComplete();
@@ -45,24 +45,24 @@ module com
 
         protected loadAssetComplete():void
         {
-            if (!this.__loaded)
+            if (!this._loaded)
             {
-                this.___runClass && this.___runClass.bindAll();
-                this.__uiPackage = fgui.UIPackage.addPackage(this._url);
-                this._____ui = this.getObject(this.__componentId);
-                this._____ui.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
+                this._runClass && this._runClass.bindAll();
+                this._uiPackage = fgui.UIPackage.addPackage(this._url);
+                this._componentUI = this.getObject(this._componentId);
+                this._componentUI.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
                 JTResizeEvent.registerResize(this);
-                JTPopupManager.center(this._____ui);
-                if (this._registeredClick)  this._____ui.onClick(this.registerMouseClick, this);
+                JTPopupManager.center(this._componentUI);
+                if (this._registeredClick)  this._componentUI.onClick(this.registerMouseClick, this);
             }
             this.locker.unlock();
-            this.__loaded = true;
+            this._loaded = true;
             this.notifyComplete();
         }
 
         public bindUIRelation(parent:fgui.GComponent, type:number):void
         {
-            this.bindRelation(this._____ui, parent, type);
+            this.bindRelation(this._componentUI, parent, type);
         }
 
         public bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void
@@ -72,7 +72,7 @@ module com
         }
         public getObject(id:string):T
         {
-            let _____ui:T = this.__uiPackage.createObject(id) as T;
+            let _____ui:T = this._uiPackage.createObject(id) as T;
             _____ui.setPosition(0, 0);
             return _____ui;
         }
@@ -108,17 +108,17 @@ module com
 
         public get componentUI():T
         {
-            return this._____ui;
+            return this._componentUI;
         }
 
         public get classUI():T
         {
-            return this.__classUI;
+            return this._classUI;
         }
 
         public get runClass():any
         {
-            return this.___runClass;
+            return this._runClass;
         }
 
         public get locker():JTLocker
@@ -128,15 +128,15 @@ module com
 
         public get uiPackage():fairygui.UIPackage
         {
-            return this.__uiPackage;
+            return this._uiPackage;
         }
 
         protected onRemoveFromStage():void
         {
-            this._____ui && this._____ui.off(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this);
-            if (this._registeredClick) this._____ui && this._____ui.offClick(this.onMouseClickHandler, this);
-            this._pacakgeName = this.___runClass = this._url = 
-            this.__classUI = this.__componentId = this.__uiPackage = this._____ui = null;
+            this._componentUI && this._componentUI.off(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this);
+            if (this._registeredClick) this._componentUI && this._componentUI.offClick(this.onMouseClickHandler, this);
+            this._pacakgeName = this._runClass = this._url = 
+            this._classUI = this._componentId = this._uiPackage = this._componentUI = null;
             this.recycle();
         }
     }

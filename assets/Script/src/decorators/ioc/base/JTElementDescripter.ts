@@ -5,63 +5,63 @@ module com
 {
 	export class JTElementDescripter implements JTIPoolObject
 	{
-		private __runnableMethod:Function = null;
-		private ___c:any = null;
-		private __config:JTConfigDescripter = null;
+		private _runnableMethod:Function = null;
+		private _class:any = null;
+		private _config:JTConfigDescripter = null;
 
-		public relevance(__caller:any, runnable:Function,  __config?:JTConfigDescripter):void
+		public relevance(cls:any, runnable:Function,  __config?:JTConfigDescripter):void
 		{
-			this.___c = __caller;
-			this.__runnableMethod = runnable;
-			this.__config = __config;
+			this._class = cls;
+			this._runnableMethod = runnable;
+			this._config = __config;
 		}
 
 		public get runnable():Function
 		{
-			return this.__runnableMethod;
+			return this._runnableMethod;
 		}
 
 		public run():void
 		{
-			this.__runnableMethod &&  this.__runnableMethod.apply(this.___c, [this.__config]);
+			this._runnableMethod &&  this._runnableMethod.apply(this._class, [this._config]);
 		}
 
 		public get config():JTConfigDescripter
 		{
-			return this.__config;
+			return this._config;
 		}
 
 		public get parameters():any[]
 		{
-			return this.__config.parameters;
+			return this._config.parameters;
 		}
 
 		public get className():string
 		{		
-			return this.___c["constructor"].name;
+			return this._class["constructor"].name;
 		}
 
 		public getClassContainer():any
 		{
-			return this.__config.getClass();
+			return this._config.getClass();
 		}
 
 		public get property():string
 		{
-			return this.__config.__property;
+			return this._config._property;
 		}
 
 		public get cls()
 		{
-			return this.___c;
+			return this._class;
 		}
 
 		public recycle() 
 		{
-			this.___c = null;
-			this.__runnableMethod = null;
-			let config:JTConfigDescripter = this.__config;
-			this.__config = null;
+			this._class = null;
+			this._runnableMethod = null;
+			let config:JTConfigDescripter = this._config;
+			this._config = null;
 			config && JTConfigDescripter.put(config);
 			config = null;
 		}
@@ -77,10 +77,10 @@ module com
 			return this._pool;
 		}
 
-		public static create(___caller:any, runnable:Function, __config?:JTConfigDescripter):JTElementDescripter
+		public static create(_class:any, runnable:Function, __config?:JTConfigDescripter):JTElementDescripter
 		{
 			let element:JTElementDescripter = this.pool.get() as JTElementDescripter;
-			element.relevance(___caller, runnable, __config);
+			element.relevance(_class, runnable, __config);
 			return element;
 		}
 

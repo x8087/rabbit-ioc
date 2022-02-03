@@ -5,37 +5,37 @@ module com
 {
 	export class JTConfigDescripter  implements JTIPoolObject
 	{
-		public __caller:any = null;
-		public __property:string = null;
-		public __descripter:any = null;
+		public _class:any = null;
+		public _property:string = null;
+		public _descripter:any = null;
 		public parameters:any[] = null;
 
 		public setup(__caller:any, property:string, descripter:any, parameters?:any[]):void
 		{
-			this.__caller = __caller;
-			this.__property = property;
-			this.__descripter = descripter;
+			this._class = __caller;
+			this._property = property;
+			this._descripter = descripter;
 			this.parameters = parameters;
 		}
 
 		public recycle() 
 		{
 			this.parameters.length = 0;
-			this.parameters = this.__descripter = this.__property = this.__caller = null;
+			this.parameters = this._descripter = this._property = this._class = null;
 		}
 
 		public getClass():any
 		{
-			let _____c:any = null;
-			if (!this.__property)
+			let _cls:any = null;
+			if (!this._property)
 			{
-				_____c = JTClassDescripter;
+				_cls = JTClassDescripter;
 			}
 			else
 			{
-				_____c = this.__descripter ? JTMethodDescripter : JTPropertyDescripter;
+				_cls = this._descripter ? JTMethodDescripter : JTPropertyDescripter;
 			}
-			return _____c
+			return _cls
 		}
 
 		public changeParameters(__paremeters:any):void

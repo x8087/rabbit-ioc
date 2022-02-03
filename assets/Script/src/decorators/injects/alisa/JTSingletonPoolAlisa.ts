@@ -47,7 +47,7 @@ module com
 		{
 			if (!this._instance) 
 			{
-				this._instance = this.___c.instance(this._itemCls, this._parameters);
+				this._instance = this._class.instance(this._itemCls, this._parameters);
 			}
 			return this._instance;
 		}

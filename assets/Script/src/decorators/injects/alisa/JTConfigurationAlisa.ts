@@ -53,17 +53,17 @@ module com
 					{
 						case JTTextLoader.PARSE_BINARY:
 						{
-							loader.parseBinary(data, this.___c);
+							loader.parseBinary(data, this._class);
 							break;
 						}
 						case JTTextLoader.PARSE_STRING:
 						{
-							loader.parseStr(data, this.___c);
+							loader.parseStr(data, this._class);
 							break;
 						}
 						case JTTextLoader.PARSE_ZIP:
 						{
-							loader.parseZip(data, this.___c);
+							loader.parseZip(data, this._class);
 							break;
 						}
 					}

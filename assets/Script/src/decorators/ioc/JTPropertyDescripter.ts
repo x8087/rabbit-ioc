@@ -8,15 +8,15 @@ module com
 	{
 		public assemble(): void 
 		{
-			let autowriedIndex:number = this.___dependencies.indexOf(Autowired);
-			let qualifierIndex:number = this.___dependencies.indexOf(Qualifier);
+			let autowriedIndex:number = this._dependencies.indexOf(Autowired);
+			let qualifierIndex:number = this._dependencies.indexOf(Qualifier);
 			if (qualifierIndex > -1 && autowriedIndex > -1)
 			{
-				let qualifierElement:JTElementDescripter = this.__elements[qualifierIndex];
-				let autowriedElement:JTElementDescripter = this.__elements[autowriedIndex];
+				let qualifierElement:JTElementDescripter = this._elements[qualifierIndex];
+				let autowriedElement:JTElementDescripter = this._elements[autowriedIndex];
 				this.mergeParameter(qualifierElement.parameters, autowriedElement.parameters);
 				JTElementDescripter.put(qualifierElement);
-				this.__elements.splice(qualifierIndex);
+				this._elements.splice(qualifierIndex);
 			}
 		}
 

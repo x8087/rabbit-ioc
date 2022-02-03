@@ -4,14 +4,14 @@ module com
    export class JTUIComponent<T extends fgui.GComponent> extends fgui.GComponent implements JTIComponent
    {
         protected _componentId:string = null;
-        protected ____ui:T = null;
+        protected _componentUI:T = null;
         protected _url:string = null;
-        protected __runClass:any = null;
-        protected __loaded:boolean = false;
+        protected _runClass:any = null;
+        protected _loaded:boolean = false;
         protected _signaler:JTEventSignaler = null;
-        protected __uiPackage:fgui.UIPackage = null;
+        protected _uiPackage:fgui.UIPackage = null;
         protected _registeredClick:boolean = false;
-        protected ___owner:JTIScene = null;
+        protected _owner:JTIScene = null;
         public constructor()
         {
                 super();
@@ -20,12 +20,12 @@ module com
 
         public get uiPackage():fgui.UIPackage
         {
-                return this.__uiPackage
+                return this._uiPackage
         }
 
         public get runClass():any
         {
-                return this.__runClass;
+                return this._runClass;
         }
 
         /**
@@ -43,13 +43,13 @@ module com
                     info("asset already loaded");
                     return;
                 }
-                this.__loaded = false;
+                this._loaded = false;
                 this._url = url;
                 this._componentId = __id;
-                this.__runClass = runClass;
+                this._runClass = runClass;
                 this._registeredClick = registeredClick;
-                this.__uiPackage = fgui.UIPackage.getByName(url);
-                if (!this.__uiPackage)   this.load();
+                this._uiPackage = fgui.UIPackage.getByName(url);
+                if (!this._uiPackage)   this.load();
                 else
                 {
                     this.loadAssetComplete();
@@ -64,28 +64,28 @@ module com
         public setup(owner:JTIScene, __id:string, registeredClick:boolean = true, runClass?:any):void
         {
                 this._componentId = __id;
-                this.__runClass = runClass;
-                this.___owner = owner;
-                this.__uiPackage = this.___owner.uiPackage
+                this._runClass = runClass;
+                this._owner = owner;
+                this._uiPackage = this._owner.uiPackage
                 this._registeredClick = registeredClick;
-                this.__runClass && this.__runClass.bindAll();
+                this._runClass && this._runClass.bindAll();
                 this.buildingUI();
         }
 
         protected buildingUI():void
         {
-                this.____ui = this.__uiPackage.createObject(this._componentId) as T;
+                this._componentUI = this._uiPackage.createObject(this._componentId) as T;
                 this.on(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
-                if (this._registeredClick)  this.____ui.onClick(this.registerMouseClick, this);
+                if (this._registeredClick)  this._componentUI.onClick(this.registerMouseClick, this);
                 this.bindUIRelation(this, fgui.RelationType.Height);
-                this.addChild(this.____ui);
+                this.addChild(this._componentUI);
                 JTResizeEvent.registerResize(this);
                 this.notifyComplete();
         }
 
         public bindUIRelation(parent:fgui.GComponent, type:number):void
         {
-                this.bindRelation(this.____ui, parent, type);
+                this.bindRelation(this._componentUI, parent, type);
         }
 
         public bindRelation(child:fgui.GComponent, parent:fgui.GComponent, type:number):void
@@ -96,9 +96,9 @@ module com
 
         protected loadAssetComplete():void
         {
-               this.__loaded = true;
-               this.__runClass && this.__runClass.bindAll(); 
-               this.__uiPackage = fgui.UIPackage.addPackage(this._url);
+               this._loaded = true;
+               this._runClass && this._runClass.bindAll(); 
+               this._uiPackage = fgui.UIPackage.addPackage(this._url);
                this.buildingUI();
         }
 
@@ -131,12 +131,12 @@ module com
                 this.off(fgui.Event.UNDISPLAY, this.onRemoveFromeStage, this);
                 this.removeChildren();
                 this._signaler && JTEventSignaler.put(this._signaler);
-                this.___owner = this._signaler = this.__runClass = this.____ui = this.__uiPackage = null;
+                this._owner = this._signaler = this._runClass = this._componentUI = this._uiPackage = null;
         }
 
         public get componentUI():T
         {
-                return this.____ui
+                return this._componentUI
         }
 
         recycle() 

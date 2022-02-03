@@ -22,7 +22,7 @@ module com
 
         public get caller():any
         {
-            return this._configDescripter.__caller;
+            return this._configDescripter._class;
         }
 
         public get paramters():any
@@ -32,12 +32,12 @@ module com
 
         public get property():string
         {
-            return this._configDescripter.__property;
+            return this._configDescripter._property;
         }
 
         public get descripter():JTConfigDescripter
         {
-            return this._configDescripter.__descripter;
+            return this._configDescripter._descripter;
         }
     }
 }

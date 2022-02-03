@@ -2,12 +2,12 @@ module com
 {
     export class JTBean
     {
-        public ___caller:any = null;
-        public ___descripter:any = null;
-        public ___instance:any = null;
+        public _class:any = null;
+        public _descripter:any = null;
+        public _instance:any = null;
 
-        public ___sourceProperty:string = null;
-        public ___changedProperty:string = null;
+        public _sourceProperty:string = null;
+        public _changedProperty:string = null;
 
         constructor(paramaters?:any)
         {
@@ -16,19 +16,19 @@ module com
 
         public bind(caller:any, property:string, descripter:any):void
         {
-            this.___caller = caller;
-            this.___descripter = descripter;
-            this.___changedProperty = this.___sourceProperty = property;
+            this._class = caller;
+            this._descripter = descripter;
+            this._changedProperty = this._sourceProperty = property;
         }
 
         public get instance():any
 		{
-			if (!this.___instance) 
+			if (!this._instance) 
 			{
-                let __method:Function = this.___descripter.value;
-				this.___instance = __method.apply(this.___caller, []);
+                let __method:Function = this._descripter.value;
+				this._instance = __method.apply(this._class, []);
 			}
-			return this.___instance;
+			return this._instance;
 		}
     }
 }
