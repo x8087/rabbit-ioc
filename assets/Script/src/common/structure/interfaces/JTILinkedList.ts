@@ -2,7 +2,6 @@ module com
 {
     export interface JTILinkedList<V> extends JTICollection<V>
     {
-
         indexOf(value:V):number
 
         push(...args:V[]):number

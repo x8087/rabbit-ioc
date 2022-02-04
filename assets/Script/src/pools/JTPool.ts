@@ -5,7 +5,7 @@ module com
     {
         private static _poolMap:Object = {};
         protected _cls:any = null;
-        protected __linkedPool:JTSLinkedList<T> = null;
+        protected __linkedPool:JTILinkedList<T> = null;
         protected _totalCount:number = 0;
         constructor(cls:any)
         {

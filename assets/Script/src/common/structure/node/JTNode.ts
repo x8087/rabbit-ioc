@@ -9,17 +9,6 @@ module com
             this.value = data;
         }
 
-        public unlink():void
-        {
- 
-        }
-
-        public clear():void
-        {
-            this.unlink();
-            this.value = null;
-        }
-
         public toString():string
         {
             return JSON.stringify(this.value);

@@ -20,6 +20,11 @@ module com
             this.next = null;
         }
 
+        public clear():void
+        {
+            this.unlink();
+            this.value = null;
+        }
 
     }
 }
