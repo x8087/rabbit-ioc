@@ -1,4 +1,4 @@
-///<reference path="JTLinkedList.ts"/>
+///<reference path="base/JTLinkedList.ts"/>
 module com 
 {
     export class JTDLinkedList<V> extends JTLinkedList<JTDNode<V>, V>

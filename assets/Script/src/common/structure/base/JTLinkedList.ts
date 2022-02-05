@@ -1,5 +1,5 @@
 
-///<reference path="../JTCollection.ts"/>
+///<reference path="./JTCollection.ts"/>
 module com 
 {
     export abstract class JTLinkedList<T extends JTSNode<V>, V> extends JTCollection<V> implements JTILinkedList<V>

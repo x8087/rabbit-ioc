@@ -22,7 +22,7 @@
 
         protected create():void
         {
-            var list:JTSLinkedList<T> = this.__linkedPool;
+            var list:JTILinkedList<T> = this.__linkedPool;
             var count:number = 0;
             var lines:T[] = [];
             while(list.size)//检查以前的池对象并重新放入临时对列里
