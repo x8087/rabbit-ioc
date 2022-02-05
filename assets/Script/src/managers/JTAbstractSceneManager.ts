@@ -6,7 +6,7 @@ module com
 
         public static locker:JTLocker = JTCounter.create();
 
-        private _sceneMap:{[name:string]:any} = null;
+        private static _sceneMap:{[name:string]:any} = {};
         private _hostroys:string[] = null;
 
         private static _instance:JTISceneManager = null;
@@ -14,14 +14,7 @@ module com
         constructor()
         {
             super();
-            this._sceneMap = {};
             this._hostroys = [];
-            // cc.macro.CLEANUP_IMAGE_CACHE = false;
-            // cc.dynamicAtlasManager.enabled = true;
-            // cc.view.setDesignResolutionSize(JTSession.designWidth, JTSession.designHeight, cc.ResolutionPolicy.FIXED_WIDTH);
-            // var size: cc.Size = cc.view.getVisibleSize();
-            // JTSession.stageWidth = size.width;
-            // JTSession.stageHeight = size.height;
         }
 
         public build():void 
@@ -42,15 +35,15 @@ module com
 
         protected registerSceneClassAlias(type:string, cls:any):void 
         {
-            this._sceneMap[type] = cls;
+            JTAbstractSceneManager._sceneMap[type] = cls;
         }
 
         public async changeScene(sceneType:string):Promise<any> 
         {
-            let cls:any = this._sceneMap[sceneType];
+            let cls:any = JTAbstractSceneManager.getSceneClass(sceneType)
             let scene:JTScene<fgui.GComponent> = new cls();
             this._hostroys.push(sceneType);
-            await JTAbstractSceneManager.locker.lock();
+            await JTAbstractSceneManager.lock();
             while (this.layer.numChildren) this._layer.removeChildAt(0);
             this.addChild(scene, fgui.RelationType.Height);
         }
@@ -59,6 +52,11 @@ module com
         {
             scene.bindUIRelation(this.layer, type)
             this.layer.addChild(scene.componentUI);
+        }
+
+        public static async lock()
+        {
+            this.locker.lock();
         }
 
         public back():string
@@ -80,6 +78,16 @@ module com
         public static changeScene(sceneType:string):void
         {
             this._instance.changeScene(sceneType);
+        }
+
+        public static registerToSceneManager(type:string, sceneClass:any):void 
+        {
+            this._sceneMap[type] = sceneClass;
+        }
+
+        public static getSceneClass(sceneType:string):any
+        {
+            return this._sceneMap[sceneType];
         }
 
         public get layer():fgui.GComponent 

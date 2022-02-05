@@ -130,7 +130,6 @@ module com
 		{
 			return this.find(value) != null;
 		}
-		
 
 		public clear():void
 		{

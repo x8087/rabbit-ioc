@@ -3,11 +3,8 @@ module com
     export class JTProtocol implements JTIProtocol
     {
         private _protocols:any[] = null;
-
         private _encrypts:number[] = null;
-
         private _protocolMap:Object = null;
-        
         public static NORMAL:number = 1;
         public static ERROR:number = 0;
 
@@ -18,12 +15,11 @@ module com
             this.build();
         }
 
-        public build(): void 
+        public build():void 
         {
             
    
         }
-
 
         /**
          * 
@@ -56,7 +52,7 @@ module com
             return this._protocolMap[protocol];
         }
 
-        public execute(message: any): void 
+        public execute(message:any):void 
         {
  
         }

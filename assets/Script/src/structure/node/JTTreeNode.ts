@@ -65,11 +65,7 @@ module com
                 c += this.right.count();
             return c;
         }
-        
-        /**
-         * Recursively clears the tree by deleting all child nodes underneath
-         * the node the method is called on.
-         */
+
         public destroy():void
         {
             if (this.left)
@@ -82,17 +78,11 @@ module com
             this.right = null;
         }
         
-        /**
-         * Prints out a string representing the current object.
-         * 
-         * @return A string representing the current object.
-         */
         public toString():string
         {
             return "[BinaryTreeNode, data= " + this.value + "]";
         }
 
-        
         public static preorder<V>(node:JTTreeNode<V>, process:Function):void
         {
             if (!node) return;

@@ -11,7 +11,8 @@ module com
 
         public push(...values:V[]):number
         {
-            for (let i:number = 0; i < values.length; i++)
+            let count:number = values.length;
+            for (let i:number = 0; i < count; i++)
             {
                 let v:V = values[i];
                 this._size = this._list.push(v)

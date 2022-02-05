@@ -228,7 +228,6 @@ module com
 			while (node)
 			{
 				mark = node.prev;
-				
 				if (!node.next)
 				{
 					node.next = node.prev;

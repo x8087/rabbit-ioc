@@ -19,9 +19,9 @@ module com
 
          public static create(protocol:number | string, isWaiting:boolean, security?:string):JTItemProtocol
          {
-               var item:JTItemProtocol = new JTItemProtocol(protocol);
-               item.setup(isWaiting, security);
-               return item;
+            var item:JTItemProtocol = new JTItemProtocol(protocol);
+            item.setup(isWaiting, security);
+            return item;
          }
 
          public get protocol():number | string

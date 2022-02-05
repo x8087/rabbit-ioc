@@ -26,7 +26,7 @@ module com
             if (this._size > 0) 
             {
                 this._size -- ;
-                return this.pop();
+                return this._linkedList.pop();
             }
             return null;
         }
