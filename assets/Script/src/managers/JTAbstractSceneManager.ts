@@ -56,7 +56,7 @@ module com
 
         public static async lock()
         {
-            this.locker.lock();
+           await this.locker.lock();
         }
 
         public back():string

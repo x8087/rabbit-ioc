@@ -8,65 +8,62 @@ module com
             super();
         }
 
+        public get(index:number):JTSNode<V>
+        {
+            let i:number = 0;
+            let node:JTSNode<V> = this.head;
+            while(node)
+            {
+                if (i == index) return node;
+                i ++;
+                node = node.next;
+            }
+            return null;
+        }
+
         public splice(index:number, count:number):V[]
         {
             let values:V[] = [];
             if (this._size == 0) return values;
-            let node:JTSNode<V> = this._head;
+            let start:JTSNode<V> = null;
+            let startHead:JTSNode<V> = null;
             if (index == 0)
             {
-                this._head = this.splices(node, count, values);
-                if (!this._head)
+                start = this._head;
+            }
+            else
+            {
+                startHead = this.get(index - 1);
+                start = startHead.next;
+            }
+            for (let i:number = 0; i < count; i++)
+            {
+                if (!start) break;
+                values.push(start.value);
+                this._size --;
+                start = start.next as JTSNode<V>;
+            }
+            if (!start)
+            {
+                if (!startHead) this._tail = this._head = null;
+                else
                 {
-                    this._head = this._tail = null;
+                    this._tail= startHead;
+                    this._tail.unlink();
                 }
             }
             else
             {
-                let i:number = 0;
-                let start:JTSNode<V> = null;
-                while(node)
+                if (!startHead) 
                 {
-                    if (i >= index - 1)
-                    {
-                        start = node;
-                        if (!start.next)
-                        {
-                            new Error()
-                        }
-                        let end:JTSNode<V>= this.splices(start.next, count, values);
-                        if (!end)
-                        {
-                            start.next = null;
-                            this._tail = start;
-                        }
-                        else
-                        {
-                            start.next = end;
-                        }
-                        return values;
-                    }
-                    node = node.next;
-                    i++
+                    this._head = start;
+                }
+                else
+                {
+                    startHead.next = start;
                 }
             }
             return values;
-        }
-
-        protected splices(node:JTSNode<V>, count:number, values:V[]):JTSNode<V>
-        {
-            let currentCount:number = 0;
-            while(node)
-            {
-                currentCount ++;
-                this._size --;
-                values.push(node.value);
-                let v:JTSNode<V> = node;
-                node = node.next;
-                v.unlink();
-                if (currentCount == count) return node;
-            }
-            return null;
         }
 
         public getIterator():JTIIterator<V>
@@ -120,6 +117,11 @@ module com
 			return null;
         }
 
+
+        /***
+         * 性能十分差。
+         * 建议用shift();因为单向链表没有上一个节点，只有下向节点，不可能逆向循环，如果上强行调用此方法，只有从头开始遍历
+         */
         public pop():V
 		{
 			if (this._tail)

@@ -8,65 +8,58 @@ module com
             super();
         }
 
+        public get(index:number):JTDNode<V>
+        {
+            let i:number = 0;
+            let node:JTDNode<V> = this.head;
+            while(node)
+            {
+                if (i == index) return node;
+                i ++;
+                node = node.next as JTDNode<V>;
+            }
+            return null;
+        }
+
+
         public splice(index:number, count:number):V[]
         {
             let values:V[] = [];
             if (this._size == 0) return values;
-            let node:JTDNode<V> = this._head;
-            if (index == 0)
+            let start:JTDNode<V> = this.get(index) as JTDNode<V>;;
+            let startHead:JTDNode<V> = null;
+            if (index > 0)
             {
-                this._head = this.splices(node, count, values);
-                if (!this._head)
+                startHead = start.prev;
+            }
+            for (let i:number = 0; i < count; i++)
+            {
+                if (!start) break;
+                values.push(start.value);
+                this._size --;
+                start = start.next as JTDNode<V>;
+            }
+            if (!start)
+            {
+                if (!startHead) this._tail = this._head = null;
+                else
                 {
-                    this._head = this._tail = null;
+                    this._tail= startHead;
+                    this._tail.unlink();
                 }
             }
             else
             {
-                let i:number = 0;
-                let start:JTDNode<V> = null;
-                while(node)
+                if (!startHead) 
                 {
-                    if (i >= index - 1)
-                    {
-                        start = node;
-                        if (!start.next)
-                        {
-                            new Error()
-                        }
-                        let end:JTDNode<V>= this.splices(start.next as JTDNode<V>, count, values);
-                        if (!end)
-                        {
-                            start.next = null;
-                            this._tail = start;
-                        }
-                        else
-                        {
-                            start.next = end;
-                        }
-                        return values;
-                    }
-                    node = node.next as JTDNode<V>;
-                    i++
+                    this._head = start;
+                }
+                else
+                {
+                    startHead.next = start;
                 }
             }
             return values;
-        }
-
-        protected splices(node:JTDNode<V>, count:number, values:V[]):JTDNode<V>
-        {
-            let currentCount:number = 0;
-            while(node)
-            {
-                currentCount ++;
-                this._size --;
-                values.push(node.value);
-                let v:JTDNode<V> = node;
-                node = node.next as JTDNode<V>;
-                v.unlink();
-                if (currentCount == count) return node;
-            }
-            return null;
         }
 
         public getIterator():JTIIterator<V>
