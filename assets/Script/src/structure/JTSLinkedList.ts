@@ -146,7 +146,7 @@ module com
             if (this._tail)
             {
                 node.next = this._head;
-                this._head = node.next;
+				this._head = node;
             }
             else
             {
@@ -158,7 +158,7 @@ module com
                 {
                     node = new JTSNode(args[i]);
                     node.next = this._head;
-                    this._head = node.next;
+                    this._head = node;
                 }
             }
             this._size += count;

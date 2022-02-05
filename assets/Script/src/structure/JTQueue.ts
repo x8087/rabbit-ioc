@@ -24,7 +24,7 @@ module com
             if (this._size > 0) 
             {
                 this._size -- ;
-                return this.shift();
+                return this._list.shift();
             }
             return null;
         }
