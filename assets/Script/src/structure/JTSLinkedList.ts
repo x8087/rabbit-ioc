@@ -81,6 +81,7 @@ module com
             if (this._head)
             {
                 this._tail.next = node;
+                this._tail = this._tail.next;
             }
             else
             {
@@ -92,9 +93,10 @@ module com
                 {
                     node = new JTSNode(args[i]);
                     this._tail.next = node;
+                    this._tail = this._tail.next;
                 }
             }
-            this._tail = node;
+        
             this._size += count;
             return this._size;
         }
@@ -144,6 +146,7 @@ module com
             if (this._tail)
             {
                 node.next = this._head;
+                this._head = node.next;
             }
             else
             {
@@ -155,9 +158,9 @@ module com
                 {
                     node = new JTSNode(args[i]);
                     node.next = this._head;
+                    this._head = node.next;
                 }
             }
-            this._head = node;
             this._size += count;
             return this._size;
         }

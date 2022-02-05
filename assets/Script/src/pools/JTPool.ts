@@ -1,24 +1,24 @@
-///<reference path="../common/structure/JTSLinkedList.ts"/>
+///<reference path="../structure/JTStack.ts"/>
 module com 
 {
     export class JTPool<T extends JTIPoolObject> implements JTIPool
     {
         private static _poolMap:Object = {};
         protected _cls:any = null;
-        protected __linkedPool:JTILinkedList<T> = null;
+        protected __stackPool:JTStack<T> = null;
         protected _totalCount:number = 0;
         constructor(cls:any)
         {
             this._cls = cls;
-            this.__linkedPool = new JTSLinkedList();
+            this.__stackPool = new JTStack();
             this._totalCount = 0;
         }
 
         public get():T
         {
-            if (this.__linkedPool.size > 0)
+            if (this.__stackPool.size > 0)
             {
-                return this.__linkedPool.shift();
+                return this.__stackPool.pop();
             }
             this._totalCount ++;
             return new this._cls();
@@ -26,10 +26,10 @@ module com
 
         public put(item:T):void
         {
-            if (item && this.__linkedPool.indexOf(item) == -1)   
+            if (item && this.__stackPool.indexOf(item) == -1)   
             {
                 item.recycle();
-                this.__linkedPool.push(item);
+                this.__stackPool.push(item);
             }
         }
 
@@ -40,7 +40,7 @@ module com
 
         public get size():number
         {
-            return this.__linkedPool.size;
+            return this.__stackPool.size;
         }
 
         public static instance(cls:any):JTIPool 

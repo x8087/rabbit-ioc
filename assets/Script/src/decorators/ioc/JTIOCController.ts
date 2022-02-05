@@ -1,4 +1,4 @@
-///<reference path="../../common/structure/JTDictionary.ts"/>
+///<reference path="../../structure/JTDictionary.ts"/>
 /*
 * name;
 */

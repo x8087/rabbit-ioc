@@ -22,12 +22,12 @@
 
         protected create():void
         {
-            var list:JTILinkedList<T> = this.__linkedPool;
+            var list:JTStack<T> = this.__stackPool;
             var count:number = 0;
             var lines:T[] = [];
             while(list.size)//检查以前的池对象并重新放入临时对列里
             {
-                var item:T = list.shift();
+                var item:T = list.pop();
                 if (this._fixedCount > count)
                 {
                     lines.push(item);
@@ -39,21 +39,20 @@
             {
                 var leng:number = this._fixedCount - count;
                 var cls:any = this._cls;
-                list = list.concat(lines) as JTSLinkedList<T>
+                list = list.concat(lines) as JTStack<T>
                 for (var i:number = 0; i < leng; i++)
                 {
                     var item:T = new cls();
                     list.push(item);
                 }
             }
-           
         }
 
         public get():T
         {
             if (this.size > 0)
             {
-                return this.__linkedPool.shift();
+                return this.__stackPool.pop();
             }
             this.create();
             return this.get();
@@ -64,7 +63,7 @@
          * */
         public get fullPool():boolean
         {
-            return this._fixedCount == this.__linkedPool.size;
+            return this._fixedCount == this.__stackPool.size;
         }
 
         public static instance(cls:any, fixedCount:number = 100):JTIFixedPool 

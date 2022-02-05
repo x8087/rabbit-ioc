@@ -7,18 +7,18 @@ module com
     export class JTCachePool<T extends JTIPoolObject> extends JTPool<T>
     {
         protected static _cachePoolMap:Object = {};
-        protected _references:JTSLinkedList<T> = null;
+        protected _references:JTStack<T> = null;
         constructor(cls:any)
         {
             super(cls);
-            this._references = new JTSLinkedList();
+            this._references = new JTStack();
         }
     
         public get():T
         {
-            if (this.__linkedPool.size > 0)
+            if (this.__stackPool.size > 0)
             {
-                return this.__linkedPool.shift();
+                return this.__stackPool.pop();
             }
             this._totalCount ++;
             var item:T = new this._cls();
@@ -29,6 +29,8 @@ module com
         public recycles(items?:T[]):void
         {
             this._references.concat(items ? items : [])//浅复制
+            if (items)
+                items = this._references.toValues();
             while(items.length)
             {
                 this.put(items.shift())//每一个对象必须调用recycle()方法

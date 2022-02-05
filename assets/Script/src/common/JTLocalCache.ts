@@ -26,7 +26,6 @@ module com
                 this._dataMap = {};
                 this.update();
             }
-
         }
 
         public setObject(key:string, data:any):void

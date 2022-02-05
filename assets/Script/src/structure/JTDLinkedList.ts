@@ -81,6 +81,7 @@ module com
 			if (this._head)
 			{
 				this._tail.insertNext(node);
+                this._tail = this._tail.next as JTDNode<V>;
 			}
 			else
             {
@@ -92,9 +93,9 @@ module com
 				{
 					node = new JTDNode<V>(args[i]);
 					this._tail.insertNext(node);
+                    this._tail = this._tail.next as JTDNode<V>;
 				}
 			}
-            this._tail = this._tail.next as JTDNode<V>;
 			this._size += count;
 			return this._size ;
         }
@@ -140,6 +141,7 @@ module com
 			if (this._tail)
 			{
 				this._head.insertPrev(node);
+                this._head = this._head.prev;
 			}
 			else
             {
@@ -151,9 +153,9 @@ module com
 				{
 					node = new JTDNode<V>(args[i]);
                     this._head.insertPrev(node);
+                    this._head = this._head.prev;
 				}
 			}
-            this._head = this._head.prev;
 			this._size += count;
 			return this._size ;
         }
