@@ -5,7 +5,7 @@ const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json');
 const inject = require('gulp-inject-string');
 const babel = require("gulp-babel");
-
+const publishURL = '/Volumes/Software/workspace/slot/SlotGame1/assets/Script/libs'
 gulp.task('buildJs', () => {
     return tsProject.src()
         .pipe(tsProject())
@@ -15,14 +15,14 @@ gulp.task('buildJs', () => {
         .pipe(inject.replace('var __extends', 'window.__extends'))
         // .pipe(babel())
         // .pipe(minify({ ext: { min: ".min.js" } }))
-        .pipe(gulp.dest('D:/IMChats/IMChatClient/assets/Script/libs'));
+        .pipe(gulp.dest(publishURL));
 })
 
 gulp.task("buildDts", () => {
     return tsProject.src()
         .pipe(tsProject())
         .dts.pipe(inject.append('import c = com;'))
-        .pipe(gulp.dest('D:/IMChats/IMChatClient/assets/Script/libs'));
+        .pipe(gulp.dest(publishURL));
 });
 
 gulp.task("copy", () => {

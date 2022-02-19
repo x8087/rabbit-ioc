@@ -6,8 +6,7 @@ module com
         protected ___pipelineMap:{[channelType:string]: JTIChannelPipeline} = null;
         protected __connects:JTIConnection[] = null;
         protected __size:number = 0;
-        public static WEBSOCKET_CHANNEL:string = "Websocket_Channel";
-        public static HTTP_CHANNEL:string = "Http_Channel";
+
 
         constructor()
         {

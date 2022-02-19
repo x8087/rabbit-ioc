@@ -13,6 +13,9 @@ module com
         protected _channelWrite:JTIChannelWrite = null;
         // protected _encoder:JTIEncoderAdapter = null;
         // protected _decoder:JTIDecoderAdapter = null;
+
+        public static CHANNEL_WEBSOCKET:string = "WebsocketChannel";
+        public static CHANNEL_HTTP:string = "HttpChannel";
         protected _connectUrl:string = null;
 
         constructor(cls:any)
