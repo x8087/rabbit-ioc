@@ -31,7 +31,7 @@ module com
             this._dataList = null;
         }
  
-        public static create(interval:number, loop:number):JTIScheduleTimer
+        public static create(interval:number, loop:number = 0):JTIScheduleTimer
         {
             let timer:JTIScheduleTimer = JTPool.instance(JTScheduleTimer).get() as JTIScheduleTimer;
             timer.setup(interval, loop);

@@ -51,7 +51,7 @@ module com
             this._interval = value;
         }
 
-        public static create(interval:number, loop:number):JTITimer
+        public static create(interval:number, loop:number = 0):JTITimer
         {
             let timer:JTITimer = JTPool.instance(JTTimer).get() as JTITimer;
             timer.setup(interval, loop);
