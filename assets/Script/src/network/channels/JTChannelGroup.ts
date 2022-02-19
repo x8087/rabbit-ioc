@@ -15,7 +15,7 @@ module com
             this.___pipelineMap = {};
         }
 
-        public channelWrite(data: any): void 
+        public channelWrite(data: any):void 
         {
             let count:number = this.__connects.length;
             for (let i:number = 0; i < count; i++) this.__connects[i].channelWrite(data);
