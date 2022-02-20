@@ -15,18 +15,29 @@ module com
             this._interval = interval;
         }
 
-        public loop(interval:number, listener:Function, caller:any):void
+        public loop(interval:number, listener:Function, caller:any, args?:any):void
         {
             this.setup(interval);
-            this.addEventListener(JTTimeEvent.TIMER, listener, caller);
+            this.addEventListener(JTTimeEvent.TIMER, hanlder, this);
             this.start();
+
+
+            function hanlder():void
+            {
+                    listener && listener.apply(caller, Array.isArray(args) ? args : [args])
+            }
         }
 
-        public once(interval:number, listener:Function, caller:any):void
+        public once(interval:number, listener:Function, caller:any, args?:any):void
         {
             this.setup(interval);
-            this.addEventListener(JTTimeEvent.TIMER, listener, caller);
+            this.addEventListener(JTTimeEvent.TIMER, hanlder, this);
             this.start();
+
+            function hanlder():void
+            {
+                    listener && listener.apply(caller, Array.isArray(args) ? args : [args])
+            }
         }
 
         public start():void
