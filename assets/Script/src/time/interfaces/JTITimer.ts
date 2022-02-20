@@ -18,5 +18,6 @@ module com
 
         setup(interval:number, loop:number):void
 
+        loop(interval:number, listener:Function, caller:any):void
     }
 }

@@ -15,6 +15,13 @@ module com
             this._interval = interval;
         }
 
+        public loop(interval:number, listener:Function, caller:any):void
+        {
+                this.setup(interval);
+                this.addEventListener(JTTimeEvent.TIMER, listener, caller);
+                this.start();
+        }
+
         public start():void
         {
              this._running = true;
