@@ -17,15 +17,22 @@ module com
 
         public loop(interval:number, listener:Function, caller:any):void
         {
-                this.setup(interval);
-                this.addEventListener(JTTimeEvent.TIMER, listener, caller);
-                this.start();
+            this.setup(interval);
+            this.addEventListener(JTTimeEvent.TIMER, listener, caller);
+            this.start();
+        }
+
+        public once(interval:number, listener:Function, caller:any):void
+        {
+            this.setup(interval);
+            this.addEventListener(JTTimeEvent.TIMER, listener, caller);
+            this.start();
         }
 
         public start():void
         {
-             this._running = true;
-             JTTimerTool.defaultTimer.addTask(this);
+            this._running = true;
+            JTTimerTool.defaultTimer.addTask(this);
         }
 
         public stop():void

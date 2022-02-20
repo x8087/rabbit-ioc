@@ -92,7 +92,7 @@ module com
                 JTEvent.put(command);
         }
 
-        protected removes():void 
+        public removes():void 
         {
             // this._eventMap.forEach((value, key)=>{
             //         this.removeEvents(key);
