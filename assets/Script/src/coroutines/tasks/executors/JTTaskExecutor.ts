@@ -135,6 +135,11 @@ module com
             return this._taskCounter;
         }
 
+        public get progress():number
+        {
+            return this._taskCounter.progress;
+        }
+
 
     }
 }

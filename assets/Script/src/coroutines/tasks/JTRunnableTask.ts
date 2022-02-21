@@ -8,16 +8,18 @@ module com
     {
         protected _loop:number = 0;
         protected _currentTimes:number = 0;
-        protected _counter:JTILocker = null;
+        protected _locker:JTILocker = null;
+        protected _index:number = 0;
 
         constructor()
         {
             super();
         }
 
-        public relevance(counter:JTILocker):void 
+        public relevance(index:number, counter:JTILocker):void 
         {
-            this._counter = counter;
+            this._index = index;
+            this._locker = counter;
         }
 
         public set loop(value:number)
@@ -37,7 +39,7 @@ module com
 
         protected release():void
         {
-            this._counter.unlock(this._id);
+            this._locker.unlock(this._id);
             this._currentTimes ++;
         }
 
@@ -55,7 +57,7 @@ module com
 
         protected kill():void
         {
-            this._counter.kill(this._id);
+            this._locker.kill(this._id);
         }
 
         public recycle() 
@@ -63,7 +65,7 @@ module com
             super.recycle();
             this._loop = -1;
             this._currentTimes = 0;
-            this._counter = null;
+            this._locker = null;
         }
     }
 }

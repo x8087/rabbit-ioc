@@ -12,10 +12,11 @@ module com
         public async run():Promise<any>
         {   
             super.run();
+            let index:number = 0;
             while(this._linkedTasks.size)
             {
                 let task:JTIRunnableTask = this._linkedTasks.shift();
-                task.relevance(this._taskCounter);
+                task.relevance(index ++, this._taskCounter);
                 task.run();
                 await this._taskCounter.lock();
                 this.dispatch(JTTaskEvent.TASK_PROGRESS, this);

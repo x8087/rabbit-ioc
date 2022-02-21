@@ -15,7 +15,7 @@ module com
 
         public async execute(runnable:JTIRunnableTask)
         {
-            runnable.relevance(this);
+            runnable.relevance(this._currentIndex, this);
             runnable.run();
             await this.tryLock(runnable.id)
         }

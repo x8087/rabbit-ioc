@@ -7,6 +7,6 @@ module com
 {
     export interface JTIRunnableTask extends JTIRunnable
     {
-        relevance(counter:JTILocker):void;
+        relevance(index:number, counter:JTILocker):void;
     }
 }
