@@ -8,7 +8,7 @@ module com
     {
         protected _taskCounter:JTTaskCounter = JTTaskCounter.create();
 
-        protected _linkedTasks:JTILinkedList<JTIRunnableTask> = null;
+        protected _linkedTasks:JTSLinkedList<JTIRunnableTask> = null;
 
         protected _factroy:JTIFactory = null;
 
@@ -58,7 +58,7 @@ module com
             provider && JTHandler.put(provider);
         }
         
-        protected createTasks():JTILinkedList<JTIRunnableTask>
+        protected createTasks():JTSLinkedList<JTIRunnableTask>
         {
             let __linkedList:JTSLinkedList<JTIRunnableTask> = new JTSLinkedList();
             let totalCount:number = this._taskCounter.totalCount;

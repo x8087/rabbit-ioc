@@ -43,7 +43,7 @@ module com
             this._currentTimes ++;
         }
 
-        public done():boolean
+        public isCompleted():boolean
         {
             if (this._loop != 0)
             {
