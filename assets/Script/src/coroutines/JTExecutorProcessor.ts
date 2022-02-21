@@ -5,7 +5,7 @@ module com
      */
     export class JTExecutorProcessor 
     {
-        protected __taskQueue:JTIAsyncTask[] = null;
+        protected __taskQueue:JTIRunnableTask[] = null;
 
         protected __freeQueue:JTProcessor[] = null;
 
@@ -28,14 +28,14 @@ module com
         {
             if (this.__freeQueue.length > 0 && this.__taskQueue.length > 0)
             {
-                let task:JTIAsyncTask = this.__taskQueue.shift();
+                let task:JTIRunnableTask = this.__taskQueue.shift();
                 let processor:JTProcessor = this.__freeQueue.shift();
                 await processor.execute(task);
                 this.__freeQueue.push(processor);
             }
         }
 
-        public execute(task:JTIAsyncTask):void
+        public execute(task:JTIRunnableTask):void
         {
             task.id = (JTTimeUtils.runnbleTime + "|" + Math.random() * 1000000)
             this.__taskQueue.push(task);

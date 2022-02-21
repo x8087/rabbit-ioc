@@ -1,6 +1,6 @@
 module com 
 {
-    export class JTEvent implements JTIPoolObject
+    export class JTHandler implements JTIPoolObject
     {
         private _caller:any = null;
         private _method:Function = null;
@@ -12,7 +12,7 @@ module com
             this._caller = this._method = this._args = null;
         }
 
-        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
+        public setTo(caller:any, method:Function, args?:any, once:Boolean = false):JTHandler
         {
             this._caller =caller;
             this._method = method;
@@ -51,7 +51,7 @@ module com
         /**
         *清理对象引用。
         */
-        public clear():JTEvent
+        public clear():JTHandler
         {
             this._method = this._args = this._caller = null;
             return this;
@@ -84,20 +84,20 @@ module com
         {
             if(!this._pool)
             {
-                this._pool = JTPool.instance(JTEvent);
+                this._pool = JTPool.instance(JTHandler);
             }
             return this._pool;
         }
         
         private static _pool:JTIPool = null;
-        public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTEvent
+        public static create(caller:any, method:Function, args?:any, once:Boolean = false):JTHandler
         {
-            var evt:JTEvent = this.pool.get() as JTEvent;
+            var evt:JTHandler = this.pool.get() as JTHandler;
             evt.setTo(caller, method, args, once);
             return evt;
         }
 
-        public static put(evt:JTEvent):void
+        public static put(evt:JTHandler):void
         {
             this.pool.put(evt)
         }

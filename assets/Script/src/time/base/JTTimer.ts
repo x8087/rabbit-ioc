@@ -15,7 +15,7 @@ module com
             this._interval = interval;
         }
 
-        public loop(interval:number, listener:Function, caller:any, args?:any):void
+        public loop(interval:number,  caller:any, listener:Function, args?:any):void
         {
             this.setup(interval);
             this.addEventListener(JTTimeEvent.TIMER, hanlder, this);
@@ -28,7 +28,7 @@ module com
             }
         }
 
-        public once(interval:number, listener:Function, caller:any, args?:any):void
+        public once(interval:number, caller:any, listener:Function, args?:any):void
         {
             this.setup(interval);
             this.addEventListener(JTTimeEvent.TIMER, hanlder, this);

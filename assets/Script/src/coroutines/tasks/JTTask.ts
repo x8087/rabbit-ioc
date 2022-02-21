@@ -5,7 +5,7 @@ module com
      */
     export abstract class JTTask implements JTIRunnable
     {
-        protected ___id:number | string = 0;
+        protected _id:number | string = 0;
 
         /**
          * 需要重写此方法
@@ -14,16 +14,12 @@ module com
 
         public recycle() 
         {
+            this._id = null;
         }
 
         public get id():number | string
         {
-            return this.___id;
-        }
-
-        public set id(value:number | string)
-        {
-            this.___id = value;
+            return this._id;
         }
     }
 }

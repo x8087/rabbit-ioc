@@ -14,7 +14,7 @@ module com
 
         public addEventListener(key:any, method:Function, caller:any, once?:boolean):void
         {
-            var list:JTEvent[] = this.evtMap[key];//只有在注册的时候调用get方法，注入事件监听时，事件MAP会为null
+            var list:JTHandler[] = this.evtMap[key];//只有在注册的时候调用get方法，注入事件监听时，事件MAP会为null
             if (list)
             {
                 list.forEach(element => 
@@ -31,13 +31,13 @@ module com
                 list = [];
                 this.__evtMap[key] = list;
             }
-            var command:JTEvent = JTEvent.create(caller, method, null, once);
+            var command:JTHandler = JTHandler.create(caller, method, null, once);
             list.push(command);
         }
 
-        public dispatchEvent(key:any, args?:any):any
+        public dispatch(key:any, args?:any):any
         {
-            var list:JTEvent[] = this.evtMap[key];
+            var list:JTHandler[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(command => 
@@ -53,7 +53,7 @@ module com
 
         public removeEventListener(key:any, method:Function, caller:any):void
         {
-            var list:JTEvent[] = this.evtMap[key];
+            var list:JTHandler[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -69,7 +69,7 @@ module com
 
         public removeEvents(key:any):void
         {
-            var list:JTEvent[] = this.evtMap[key];
+            var list:JTHandler[] = this.evtMap[key];
             if (list)
             {
                 list.forEach(element => 
@@ -84,12 +84,12 @@ module com
             }
         }
 
-        protected delete(list:JTEvent[], command:JTEvent):void
+        protected delete(list:JTHandler[], command:JTHandler):void
         {
                 var index:number = list.indexOf(command);
-                var removes:JTEvent[] = list.splice(index, 1);
+                var removes:JTHandler[] = list.splice(index, 1);
                 removes.shift();
-                JTEvent.put(command);
+                JTHandler.put(command);
         }
 
         public removes():void 

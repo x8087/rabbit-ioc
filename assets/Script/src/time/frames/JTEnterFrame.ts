@@ -80,7 +80,7 @@ module com
                 {
                     this._currentTimes ++;
                     this._currentTick -= this._interval;
-                    this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
+                    this.dispatch(JTTimeEvent.ENTER_FRAME, this);
                     if (this._currentTimes >= this._totalTimes)
                     {
                         this._loopTimes ++;
@@ -90,13 +90,13 @@ module com
                             if (this._loopTimes >= this._loop && this._loop != 0)
                             {
                                 this._running = false;
-                                this.dispatchEvent(JTTimeEvent.ENTER_COMPLETE, this);
+                                this.dispatch(JTTimeEvent.ENTER_COMPLETE, this);
                                 break;
                             }
                             else
                             {
                                 this._currentTimes = 0;
-                                this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
+                                this.dispatch(JTTimeEvent.ENTER_LAST_FRAME, this);
                             }
                         }
                     }

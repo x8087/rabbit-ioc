@@ -5,7 +5,7 @@ const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json');
 const inject = require('gulp-inject-string');
 const babel = require("gulp-babel");
-const publishURL = '/Volumes/Software/workspace/slot/SlotGame1/assets/Script/libs'
+const publishURL = '/Volumes/Software/workspace/slot/slot_framework/assets/Script/libs'
 gulp.task('buildJs', () => {
     return tsProject.src()
         .pipe(tsProject())

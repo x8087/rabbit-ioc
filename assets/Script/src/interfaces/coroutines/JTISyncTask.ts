@@ -5,7 +5,7 @@
 */
 module com 
 {
-    export interface JTIRunnableTask extends JTIRunnable
+    export interface JTISyncTask extends JTIRunnable
     {
         relevance(counter:JTILocker):void;
     }

@@ -18,8 +18,8 @@ module com
 
         setup(interval:number, loop:number):void
 
-        loop(interval:number, listener:Function, caller:any, args?:any):void
+        loop(interval:number, caller:any, listener:Function, args?:any):void
 
-        once(interval:number, listener:Function, caller:any, args?:any):void
+        once(interval:number, caller:any, listener:Function, args?:any):void
     }
 }

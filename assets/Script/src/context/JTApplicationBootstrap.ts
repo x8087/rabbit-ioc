@@ -25,7 +25,7 @@ module com
         private _serverLoader:JTTextLoader = null;
         private _serverTemplate:JTServerConfigTemplate = null;
 
-        private __loaderManager:JTAsyncTaskQueue = null;
+        private __loaderManager:JTTaskQueueExecutor = null;
         private _launchConnected:boolean = false;
         private __channelGroup:JTIChannelGroup = null;
 
@@ -134,7 +134,7 @@ module com
          * @param host 服务器域名
          * @param port 服务器端口
          */
-        public conofig(host:string, port:number):JTServerConfigTemplate 
+        public config(host:string, port:number):JTServerConfigTemplate 
         {
             this._serverTemplate = new JTServerConfigTemplate();
             this._serverTemplate.setup(host, port);
@@ -182,18 +182,17 @@ module com
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public preloadAssets(assets:{[url:string]:string}[], createRender?:JTEvent):JTAsyncTaskQueue
+        public preloadAssets(createRender?:JTHandler):JTTaskQueueExecutor
         {
             if (!this.__loaderManager)
             {
-                this.__loaderManager = new JTAsyncTaskQueue();
+                this.__loaderManager = new JTTaskQueueExecutor();
             }
             else
             {
                 this.__loaderManager.reset();
             }
-            this.__loaderManager.dataList = assets;
-            this.__loaderManager.itemRender = createRender;
+            this.__loaderManager.taskProvider = createRender;
             return this.__loaderManager;
         }
 

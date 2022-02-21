@@ -34,13 +34,13 @@ module com
                 {
                     this._currentTimes ++;
                     this._currentTick -= this._interval;
-                    this.dispatchEvent(JTTimeEvent.TIMER, this);
+                    this.dispatch(JTTimeEvent.TIMER, this);
                 }
             }
             if (this._currentTimes >= this._totalTimes && this._totalTimes != 0)
             {
                 this._running = false;
-                this.dispatchEvent(JTTimeEvent.TIMER_COMPLETE, this);
+                this.dispatch(JTTimeEvent.TIMER_COMPLETE, this);
             }
         }
 

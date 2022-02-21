@@ -6,9 +6,9 @@ module com
     export class JTExecutor
     {
        
-        public static cacheTaskExecutor():JTAsyncTaskQueue
+        public static cacheTaskExecutor():JTTaskQueueExecutor
         {
-            return new JTAsyncTaskQueue();
+            return new JTTaskQueueExecutor();
         }
     }
 }

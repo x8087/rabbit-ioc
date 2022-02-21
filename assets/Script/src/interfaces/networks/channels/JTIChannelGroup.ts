@@ -19,6 +19,7 @@ module com
 
         getChannel(type:string):JTIChannel
 
+
         size:number;
     }
     

@@ -11,7 +11,7 @@ module com
 
             updateConfigs(configs:any[]):void;
 
-            conofig(host:string, port:number):JTServerConfigTemplate 
+            config(host:string, port:number):JTServerConfigTemplate 
 
             channelGroup(channelGroup:JTIChannelGroup):JTIChannelGroup;
 

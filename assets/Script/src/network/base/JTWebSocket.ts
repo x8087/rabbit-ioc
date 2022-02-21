@@ -181,7 +181,7 @@ module com
          */
         protected _onOpen(e: any): void {
             this._connected = true;
-            this.dispatchEvent(JTWebSocket.OPEN, e);
+            this.dispatch(JTWebSocket.OPEN, e);
         }
 
         /**
@@ -193,7 +193,7 @@ module com
             if (!msg || !msg.data) return;
             var data: any = msg.data;
             if (this.disableInput && data) {
-                this.dispatchEvent(JTWebSocket.MESSAGE, data);
+                this.dispatch(JTWebSocket.MESSAGE, data);
                 return;
             }
             if (this._input.length > 0 && this._input.bytesAvailable < 1) {
@@ -213,7 +213,7 @@ module com
                 this._addInputPosition = this._input.pos;
                 this._input.pos = pre;
             }
-            this.dispatchEvent(JTWebSocket.MESSAGE, data);
+            this.dispatch(JTWebSocket.MESSAGE, data);
         }
 
         /**
@@ -222,7 +222,7 @@ module com
          */
         protected _onClose(e: any): void {
             this._connected = false;
-            this.dispatchEvent(JTWebSocket.CLOSE, e)
+            this.dispatch(JTWebSocket.CLOSE, e)
         }
 
         /**
@@ -230,7 +230,7 @@ module com
          * 出现异常处理方法。
          */
         protected _onError(e: any): void {
-            this.dispatchEvent(JTWebSocket.ERROR, e)
+            this.dispatch(JTWebSocket.ERROR, e)
         }
 
         /**
@@ -254,7 +254,7 @@ module com
                 }
                 this._output.endian = this.endian;
                 this._output.clear();
-                if (evt) this.dispatchEvent(JTWebSocket.ERROR, evt);
+                if (evt) this.dispatch(JTWebSocket.ERROR, evt);
             }
         }
     }

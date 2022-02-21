@@ -64,14 +64,14 @@ module com
                     }
                     else  this._currentTimes = nowTimes % this._totalTimes;//当循环次数为0是，需要实时计算最后一帧数
                 }
-                this.dispatchEvent(JTTimeEvent.JUMP_FRAME, this);
-                this.dispatchEvent(JTTimeEvent.ENTER_FRAME, this);
-                delayLoops >= 1 && this.dispatchEvent(JTTimeEvent.ENTER_LAST_FRAME, this);
+                this.dispatch(JTTimeEvent.JUMP_FRAME, this);
+                this.dispatch(JTTimeEvent.ENTER_FRAME, this);
+                delayLoops >= 1 && this.dispatch(JTTimeEvent.ENTER_LAST_FRAME, this);
                 if (this._loopTimes >= this._loop && this._loop != 0)
                 {
                     this._currentTick = 0;
                     this._running = false;
-                    this.dispatchEvent(JTTimeEvent.ENTER_COMPLETE, this);
+                    this.dispatch(JTTimeEvent.ENTER_COMPLETE, this);
                 }
                 else
                 {

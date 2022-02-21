@@ -13,7 +13,7 @@ module com
             this._name = name;
         }
 
-        public async execute(runnable:JTIAsyncTask)
+        public async execute(runnable:JTIRunnableTask)
         {
             runnable.relevance(this);
             runnable.run();

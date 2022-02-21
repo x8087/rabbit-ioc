@@ -4,7 +4,7 @@ module com
     {
        frames:any[];
         
-       createFrames:JTEvent;
+       createFrames:JTHandler;
 
        currentItem:any;
     }

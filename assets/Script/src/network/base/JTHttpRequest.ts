@@ -93,7 +93,7 @@ module com
          * @param	e 事件对象。
          */
         protected _onProgress(e:any):void {
-                if (e && e.lengthComputable) this.dispatchEvent(JTHttpRequest.PROGRESS, e.loaded / e.total);
+                if (e && e.lengthComputable) this.dispatch(JTHttpRequest.PROGRESS, e.loaded / e.total);
         }
 
         /**
@@ -138,7 +138,7 @@ module com
         protected error(message:string):void {
                 this.clear();
                 console.warn(this.url, message);
-                this.dispatchEvent(JTHttpRequest.ERROR, message);
+                this.dispatch(JTHttpRequest.ERROR, message);
         }
 
         /**
@@ -160,7 +160,7 @@ module com
                 flag = false;
                 this.error(e.message);
                 }
-                flag && this.dispatchEvent(JTHttpRequest.COMPLETE, this._data instanceof Array ? [this._data] :this._data);
+                flag && this.dispatch(JTHttpRequest.COMPLETE, this._data instanceof Array ? [this._data] :this._data);
         }
 
         static parseXMLFromString:Function = function (value:string):XMLDocument {
