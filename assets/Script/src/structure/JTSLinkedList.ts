@@ -8,19 +8,6 @@ module com
             super();
         }
 
-        public get(index:number):JTSNode<V>
-        {
-            let i:number = 0;
-            let node:JTSNode<V> = this.head;
-            while(node)
-            {
-                if (i == index) return node;
-                i ++;
-                node = node.next;
-            }
-            return null;
-        }
-
         public splice(index:number, count:number):V[]
         {
             let values:V[] = [];

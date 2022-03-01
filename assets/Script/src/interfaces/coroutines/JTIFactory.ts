@@ -7,6 +7,6 @@ module com
 {
     export interface JTIFactory 
     {
-            produce():any
+        produce(type:any):any
     }
 }

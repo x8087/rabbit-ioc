@@ -6,7 +6,7 @@ module com
     export class JTExecutor
     {
        
-        public static cacheTaskExecutor():JTTaskQueueExecutor
+        public static cacheTaskExecutor():JTTaskQueueExecutor<JTIRunnableTask>
         {
             return new JTTaskQueueExecutor();
         }

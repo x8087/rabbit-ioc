@@ -4,11 +4,11 @@ module com
     /**
      * 异步事件任务对列
      */
-    export abstract class JTTaskExecutor extends JTRunnableTask implements JTIEventDispatcher
+    export abstract class JTTaskExecutor<T extends JTIRunnableTask> extends JTRunnableTask implements JTIEventDispatcher
     {
         protected _taskCounter:JTTaskCounter = JTTaskCounter.create();
 
-        protected _linkedTasks:JTSLinkedList<JTIRunnableTask> = null;
+        protected _linkedTasks:JTSLinkedList<T> = null;
 
         protected _factroy:JTIFactory = null;
 
@@ -58,15 +58,15 @@ module com
             provider && JTHandler.put(provider);
         }
         
-        protected createTasks():JTSLinkedList<JTIRunnableTask>
+        protected createTasks():JTSLinkedList<T>
         {
-            let __linkedList:JTSLinkedList<JTIRunnableTask> = new JTSLinkedList();
+            let __linkedList:JTSLinkedList<T> = new JTSLinkedList();
             let totalCount:number = this._taskCounter.totalCount;
             if (this._taskProvider)
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTIRunnableTask = this._taskProvider.runWith([i]);
+                    let task:T = this._taskProvider.runWith([i]);
                     __linkedList.push(task);
                 }
             }
@@ -74,14 +74,14 @@ module com
             {
                 for (let i:number = 0; i < totalCount; i++)
                 {
-                    let task:JTIRunnableTask = this._factroy.produce();
+                    let task:T = this._factroy.produce(i);
                     __linkedList.push(task);
                 }
             }
             return __linkedList;
         }
 
-        public addEventListener(key: any, method: Function, caller: any, once?: boolean): void 
+        public addEventListener(key:any, method: Function, caller: any, once?: boolean): void 
         {
             this._dispatcher.addEventListener(key, method, caller, once);
         }

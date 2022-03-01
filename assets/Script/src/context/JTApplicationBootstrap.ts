@@ -25,7 +25,7 @@ module com
         private _serverLoader:JTTextLoader = null;
         private _serverTemplate:JTServerConfigTemplate = null;
 
-        private __loaderManager:JTTaskQueueExecutor = null;
+        private __loaderManager:JTTaskQueueExecutor<JTIRunnableTask> = null;
         private _launchConnected:boolean = false;
         private __channelGroup:JTIChannelGroup = null;
 
@@ -182,7 +182,7 @@ module com
          * @param createRender 创加加载器的回调函数 ---- 需要继承JTTaskExecutor类
          * @returns 返回任务执行队列
          */
-        public preloadAssets(createRender?:JTHandler):JTTaskQueueExecutor
+        public preloadAssets(createRender?:JTHandler):JTTaskQueueExecutor<JTIRunnableTask>
         {
             if (!this.__loaderManager)
             {

@@ -2,6 +2,11 @@ module com
 {
     export interface JTILinkedList<V> extends JTICollection<V>
     {
+
+        get(index:number):JTNode<V>
+
+        getItem(index:number):V;
+
         indexOf(value:V):number
 
         push(...args:V[]):number

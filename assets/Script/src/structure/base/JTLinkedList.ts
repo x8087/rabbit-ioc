@@ -31,6 +31,26 @@ module com
             return -1;
         }
 
+        public get(index:number):T
+        {
+            let i:number = 0;
+            let node:T = this.head;
+            while(node)
+            {
+                if (i == index) return node;
+                i ++;
+                node = node.next as T;
+            }
+            return null;
+        }
+
+
+        public getItem(index:number):V
+        {
+            let node:JTNode<V> = this.get(index);
+            return node.value;
+        }
+
         /**
          * 在每一个节点加一个字符串
          * @param sep 

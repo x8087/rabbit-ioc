@@ -4,7 +4,7 @@ module com
     /**
      * 异步事件任务对列
      */
-    export class JTScheduleTaskExeuctor extends JTTaskExecutor
+    export class JTScheduleTaskExeuctor<T extends JTIRunnableTask> extends JTTaskExecutor<T>
     {
         /***
          * 启动异步对列
@@ -15,7 +15,7 @@ module com
             let index:number = 0;
             while(this._linkedTasks.size)
             {
-                let task:JTIRunnableTask = this._linkedTasks.shift();
+                let task:T = this._linkedTasks.shift();
                 task.relevance(index ++, this._taskCounter);
                 task.run();
                 await this._taskCounter.lock();
