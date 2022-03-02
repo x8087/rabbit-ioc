@@ -5,32 +5,26 @@ module com
     {
         protected _componentUI:T = null;
         protected _runClass:any = null;
-        protected _url:string = null;
-        protected _pacakgeName:string = null;
         protected _classUI:T = null;
         protected _componentId:string = null;
         protected _registeredClick:boolean = false;
         protected _loaded:boolean = false;
         protected _uiPackage:fgui.UIPackage = null;
+        protected _assetTemplate:JTAssetTemplate = null;
         constructor()
         {
             super();
         }
 
-        protected loadAsset(url:string, id:string, runClass?:any, registeredClick:boolean = true):void
+        protected loadAsset(id:string, runClass?:any, registeredClick:boolean = true):void
         {
-            if (this._url == url && url != null)
-            {
-                info("asset already loaded");
-                return;
-            }
+            let assetTemplate:JTTextureAssetTemplate = JTAbstractTemplateManager.getInstance().getTextureTemplate(id);
+            assets(assetTemplate == null, "cant find id from assetLoader!")
             this._loaded = false;
-            this._url = url;
             this._componentId = id;
-            this._pacakgeName = this._url.split("/").pop();
             this._runClass = runClass;
             this._registeredClick = registeredClick;
-            this._uiPackage = fgui.UIPackage.getByName(url);
+            this._uiPackage = fgui.UIPackage.getByName(this._assetTemplate.getAssetUrl());
             if (!this._uiPackage)   this.load();
             else
             {
@@ -40,7 +34,7 @@ module com
 
         public load():void
         {
-            fgui.UIPackage.loadPackage(this._url, this.loadAssetComplete.bind(this));
+            fgui.UIPackage.loadPackage(this._assetTemplate.getAssetUrl(), this.loadAssetComplete.bind(this));
         }
 
         protected loadAssetComplete():void
@@ -48,7 +42,7 @@ module com
             if (!this._loaded)
             {
                 this._runClass && this._runClass.bindAll();
-                this._uiPackage = fgui.UIPackage.addPackage(this._url);
+                this._uiPackage = fgui.UIPackage.addPackage(this._assetTemplate.getAssetUrl());
                 this._componentUI = this.getObject(this._componentId);
                 this._componentUI.on(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this)
                 JTResizeEvent.registerResize(this);
@@ -135,7 +129,7 @@ module com
         {
             this._componentUI && this._componentUI.off(fgui.Event.UNDISPLAY, this.onRemoveFromStage, this);
             if (this._registeredClick) this._componentUI && this._componentUI.offClick(this.onMouseClickHandler, this);
-            this._pacakgeName = this._runClass = this._url = 
+            this._assetTemplate = this._runClass = 
             this._classUI = this._componentId = this._uiPackage = this._componentUI = null;
             this.recycle();
         }

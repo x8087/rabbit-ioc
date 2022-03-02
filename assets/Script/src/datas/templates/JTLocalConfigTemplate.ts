@@ -8,5 +8,10 @@ module com
                 {
                         super();
                 }
+
+                public static getAssetConfig(id:string):JTLocalConfigTemplate
+                {
+                        return null;
+                }
         }
 }

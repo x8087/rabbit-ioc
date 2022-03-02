@@ -1,4 +1,4 @@
-///<reference path="JTBaseTemplate.ts"/>
+///<reference path="base/JTBaseTemplate.ts"/>
 module com
 {
         export class JTAssetTemplate extends JTBaseTemplate
@@ -8,6 +8,11 @@ module com
                 constructor()
                 {
                         super();
+                }
+
+                public getAssetUrl():string
+                {
+                        return null;
                 }
         }
 }
