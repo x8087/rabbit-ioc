@@ -18,7 +18,8 @@ module com
 
         protected loadAsset(id:string, runClass?:any, registeredClick:boolean = true):void
         {
-            let assetTemplate:JTTextureAssetTemplate = JTAbstractTemplateManager.getInstance().getTextureTemplate(id);
+            let templateInfoManager:JTAbstractTemplateManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_TEMPLATE);
+            let assetTemplate:JTTextureAssetTemplate = templateInfoManager.getTextureTemplate(id);
             assets(assetTemplate == null, "cant find id from assetLoader!")
             this._loaded = false;
             this._componentId = id;

@@ -34,24 +34,9 @@ module com
       
         public  abstract getAssetConfigTemplate(id:string):JTLocalConfigTemplate;
 
-        public static  getInstance():JTAbstractTemplateManager
-        {
-            return null;
-        }
-
-        public static getTextureTemplate(id:string):JTTextureAssetTemplate
-        {
-            return this.getInstance().getTextureTemplate(id);
-        }
-
-        public static getLocalConfigTemplate(type:string):JTLocalConfigTemplate
-        {
-            return this.getInstance().getAssetConfigTemplate(type)
-        }
-
         public static getAssetUrl(type:string, id:string):string
         {
-            let templateInfoManager:JTAbstractTemplateManager = this.getInstance();
+            let templateInfoManager:JTAbstractTemplateManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_TEMPLATE);
             let localConfigTemplate:JTLocalConfigTemplate = templateInfoManager.getAssetConfigTemplate(type);
             let assetTemplate:JTAssetTemplate = templateInfoManager.getTextureTemplate(id) as JTAssetTemplate;
             let url:string = localConfigTemplate.url + "/" + assetTemplate.name;

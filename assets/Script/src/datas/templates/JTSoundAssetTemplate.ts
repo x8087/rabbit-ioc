@@ -10,7 +10,7 @@ module com
 
                 public getAssetUrl():string
                 {
-                        let templateInfoManager:JTAbstractTemplateManager = JTAbstractTemplateManager.getInstance();
+                        let templateInfoManager:JTAbstractTemplateManager = JTApplicationBootstrap.getContext(JTApplicationBootstrap.CONTEXT_TEMPLATE)
                         let localConfig:JTLocalConfigTemplate = templateInfoManager.getAssetConfigTemplate("sound");
                         return localConfig.url + this.name;
                 }
